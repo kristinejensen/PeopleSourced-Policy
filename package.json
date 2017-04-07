@@ -1,0 +1,24 @@
+{
+  "name": "nodefire-attempt2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "test": "nodemon server/app.js"
+  },
+  "author": "PSP-Group",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-route": "^1.6.4",
+    "angularfire": "^2.3.0",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.0",
+    "firebase": "^3.7.5",
+    "firebase-admin": "^4.0.3",
+    "nodemailer": "^3.1.8",
+    "pg": "^6.1.0"
+  }
+}
