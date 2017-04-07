@@ -1,2 +1,6 @@
-<h4 class="text-center">Login to create or access<br>your PSP Profile</h4>
-<button ng-click="lc.logIn()" type="button" name="button" class="btn btn-primary center-block btn-lg">Login</button>
+
+<header>
+  <img src="{{lc.photo}}">{{lc.email}}
+    <button ng-click="lc.login()" ng-show="lc.email === NULL" type="button" name="button"> Login </button>
+    <button ng-click="lc.logout()" ng-hide="lc.email === NULL" type="button" name="button"> Logout </button>
+</header>
