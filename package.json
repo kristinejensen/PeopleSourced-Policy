@@ -1,5 +1,5 @@
 {
-  "name": "nodefire-attempt2",
+  "name": "PSP-Group Project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "start": "node server/app.js",
     "test": "nodemon server/app.js"
   },
-  "author": "PSP-Group",
+  "author": "PSP-Group from Prime Digital Academy",
   "license": "MIT",
   "dependencies": {
     "angular": "^1.6.4",
