@@ -1,36 +1,30 @@
 app.factory('DataFactory', ['$http', function($http){
   // var idea = {list: []};
   // var comments = {list: []};
-  var allUsers = { list : [] };
-
+  var allUsers = {list: []};
 
   init();
 
-//startup functions
+  //startup functions
   function init() {
     getUsers();
   }
 
-
+  //function to display user list on manage users admin view
   function getUsers(){
-    console.log('get users function is being called');
     // var firebaseUser = auth.$getAuth();
     // if(firebaseUser) {
     //   firebaseUser.getToken().then(function(idToken){
-      $http({
-        method: 'GET',
-        url: '/admin/manageUsers'
-        // headers: {          //   id_token: idToken
-        // }
-        }).then(function(response){
-          allUsers.List = response.data;
-          console.log(allUsers.List);
-
-        })
-      }
-
-
-
+    $http({
+      method: 'GET',
+      url: '/admin/manageUsers'
+      // headers: {          //   id_token: idToken
+      // }
+    }).then(function(response){
+      allUsers.list = response.data;
+      console.log(allUsers.list);
+    })
+  }
 
   //
   //
@@ -61,10 +55,7 @@ app.factory('DataFactory', ['$http', function($http){
   //
 
   return {
-//object from DB going to view
     allUsers : allUsers
-
-
   }
 
 }]); // end of app.factory
