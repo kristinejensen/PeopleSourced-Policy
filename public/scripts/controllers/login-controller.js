@@ -26,8 +26,8 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
         // swal("You Are Logged In", "", "success");
         self.photo = firebaseUser.user.photoURL;
         self.email = firebaseUser.user.email;
-          // console.log("Firebase Authenticated as: ", firebaseUser.user.displayName);
-          console.log("Firebase Authenticated as: ", firebaseUser.user.email);
+          console.log("Firebase Authenticated as: ", firebaseUser.user.displayName);
+          // console.log("Firebase Authenticated as: ", firebaseUser.user.email);
     }).catch(function(error) {
         console.log("Authentication failed: ", error);
     });
@@ -44,8 +44,17 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
   };//end of self.deAuthUser()
 
 //new user object from view button click
-  self.addNewUser = function(newUser) {
-    //console.log(newUser)
+  self.addNewUser = function(user) {
+    var firebaseUser = auth.$getAuth();
+    var newUser = {
+      name : firebaseUser.displayName,
+      streetAddress : user.streetAddress,
+      city : user.city,
+      state : user.state,
+      zipCode : user.zipCode,
+      country : user.country,
+      email : firebaseUser.email
+    }
     DataFactory.addNewUser(newUser)
     self.newUser = {}
   }
