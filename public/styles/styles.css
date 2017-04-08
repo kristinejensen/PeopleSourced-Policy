@@ -183,6 +183,7 @@ margin: 0px;
   background-color: #6fa8dc;
   height: 60px;
 }
+
 /* ============================================================================= *
 *           IDEAS CARD                                                           *
 * ============================================================================== */
@@ -230,6 +231,17 @@ margin: 0px;
   outline: none;
 }
 
+.btn-80-blk {
+  width: 80%;
+  background-color: #333333;
+  color: white;
+  margin: 0px;
+  border-radius: 0px;
+  border: none;
+  height: 40px;
+  outline: none;
+}
+
 .cta-home {
   text-align: center;
   margin: 40px;
@@ -262,6 +274,17 @@ margin: 0px;
   color: white !important;
 }
 
+.frmTitle {
+  background-color: #6fa8dc;
+  height: 80px;
+  text-align: center;
+  padding-top: 8px;
+}
+
+.frmTitle, h2{
+  color: white !important;
+}
+
 .dark {
   color: #333333 !important;
 }
@@ -279,6 +302,30 @@ margin-bottom: 30px;
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #B7D4EE;
+}
+
+.basicForm {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: white;
+  border: 1px solid lightgrey;
+}
+
+.lightGrey {
+  background-color: #eeeeee;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 30px;
+}
+
+.addressForm{
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.lightgreyTextArea {
+  background-color: #eeeeee !important;
+  height: 200px;
 }
 
 .btn-cta {
