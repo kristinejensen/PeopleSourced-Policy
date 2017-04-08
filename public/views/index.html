@@ -1,55 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>PSP</title>
-  <script src="../vendors/angular.js" charset="utf-8"></script>
-  <script src="../vendors/angular-route.js" charset="utf-8"></script>
-  <script src="../vendors/angularfire.js" charset="utf-8"></script>
-  <script src="../vendors/firebase.js" charset="utf-8"></script>
-  <script src="../scripts/config.js"></script>
-  <script src="../scripts/client.js"></script>
-  <script src="../scripts/controllers/admin-flagged-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/admin-manage-users-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/admin-reports-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/admin-topics-controller.js" charset="utf-8"></script>
+  <head>
+    <title>PSP</title>
+    <script src="../vendors/angular.js" charset="utf-8"></script>
+    <script src="../vendors/angular-route.js" charset="utf-8"></script>
+    <script src="../vendors/angularfire.js" charset="utf-8"></script>
+    <script src="../vendors/firebase.js" charset="utf-8"></script>
+    <script src="../scripts/config.js"></script>
+    <script src="../scripts/client.js"></script>
+    <script src="../scripts/controllers/admin-flagged-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/admin-manage-users-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/admin-reports-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/admin-topics-controller.js" charset="utf-8"></script>
 
-  <script src="../scripts/controllers/home-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/comment-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/login-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/idea-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/flag-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/subtopic1-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/subtopic2-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/subtopic3-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/subtopic4-controller.js" charset="utf-8"></script>
-  <script src="../scripts/controllers/subtopic5-controller.js" charset="utf-8"></script>
-  <script src="../scripts/factories/admin.factory.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/home-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/comment-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/login-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/idea-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/flag-controller.js" charset="utf-8"></script>
 
-  <script src="../scripts/factories/data.factory.js" charset="utf-8"></script>
-  <script src="../vendors/jquery.js" charset="utf-8"></script>
-  <script src="../vendors/sweetalert2.min.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="../vendors/sweetalert2.css">
-  <link rel="stylesheet" href="../vendors/bootstrap.min.css">
-  <link rel="stylesheet" href="../styles/styles.css">
-</head>
+    <script src="../scripts/controllers/subtopic1-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/subtopic2-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/subtopic3-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/subtopic4-controller.js" charset="utf-8"></script>
+    <script src="../scripts/controllers/subtopic5-controller.js" charset="utf-8"></script>
 
-<body ng-app="ConnectApp">
-  <header> <a href="#!login"> login </a> </header>
-    <div class="jumbotron">
-      <h2 class="display-3 text-center">PSP</h2>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#!home"> Home</a></li>
-        <li><a href="#!subtopic1"> subtopic1 </a></li>
-        <li><a href="#!subtopic2"> subtopic2 </a></li>
-        <li><a href="#!subtopic3"> subtopic3 </a></li>
-        <li><a href="#!subtopic4"> subtopic4 </a></li>
-        <li><a href="#!subtopic5"> subtopic5 </a></li>
-      </ul>
+    <script src="../scripts/factories/admin.factory.js" charset="utf-8"></script>
+
+    <script src="../scripts/factories/data.factory.js" charset="utf-8"></script>
+    <script src="../vendors/jquery.js" charset="utf-8"></script>
+    <script src="../vendors/sweetalert2.min.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="../vendors/sweetalert2.css">
+    <link rel="stylesheet" href="../vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+  </head>
+
+  <body ng-app="ConnectApp">
+    <header ><a href="#!login"> login </a></header>
+
+      <div class="jumbotron">
+        <h2 class="display-3 text-center">PSP</h2>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#!home"> Home</a></li>
+          <li><a href="#!subtopic1"> subtopic1 </a></li>
+          <li><a href="#!subtopic2"> subtopic2 </a></li>
+          <li><a href="#!subtopic3"> subtopic3 </a></li>
+          <li><a href="#!subtopic4"> subtopic4 </a></li>
+          <li><a href="#!subtopic5"> subtopic5 </a></li>
+        </ul>
       </nav>
-  <main ng-view></main>
+    <main ng-view></main>
 
-</body>
-
+  </body>
 </html>

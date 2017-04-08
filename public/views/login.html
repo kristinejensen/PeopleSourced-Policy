@@ -1,6 +1,20 @@
 
 <header>
-  <img src="{{lc.photo}}">{{lc.email}}
+  <img class="authImage" ng-hide="lc.email === NULL" src="{{lc.photo}}">{{lc.email}}
     <button ng-click="lc.login()" ng-show="lc.email === NULL" type="button" name="button"> Login </button>
     <button ng-click="lc.logout()" ng-hide="lc.email === NULL" type="button" name="button"> Logout </button>
 </header>
+
+<div ng-hide="lc.email === NULL">
+  <label for="streetAddress"> Street Address</label>
+  <input ng-model="lc.newUser.streetAddress" type="text" name="streetAddress">
+  <label for="city"> City </label>
+  <input ng-model="lc.newUser.city" type="text" name="city">
+  <label for="state"> State </label>
+  <input ng-model="lc.newUser.state" type="text" name="state">
+  <label for="zipCode"> Zip Code</label>
+  <input ng-model="lc.newUser.zipCode" type="text" name="zipCode">
+  <label for="country"> Country </label>
+  <input ng-model="lc.newUser.country" type="text" name="country">
+  <button ng-click="lc.addNewUser(lc.newUser)"type="button" name="button"></button>
+</div>
