@@ -32,6 +32,25 @@ router.post('/newUser', function (req, res) {
     });//end of .then
 });//end of router.post
 
+//adds new idea to DB
+router.post('/newidea', function (req, res) {
+  var newIdea = req.body;
+  console.log('newIdea: ', newIdea);
+  pool.connect()
+    .then(function (client) {
+      client.query('INSERT INTO ideas (title, description) VALUES ($1, $2)',
+        [newIdea.idea, newIdea.description])
+        .then(function (result) {
+          client.release();
+          res.sendStatus(201);
+        })
+        .catch(function (err) {
+          console.log('error on INSERT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.post
+
 
 // //check auth user to admin rights
 //   router.get("/admin", function(req, res){

@@ -9,6 +9,7 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', function(DataF
 
   self.addNewIdea = function(newIdea) {
     console.log(newIdea);
+    DataFactory.addNewIdea(newIdea);
     self.newIdea = {};
   }
 

@@ -4,7 +4,6 @@ app.factory('DataFactory', ['$http', function($http){
 //add new user to DB from button click
 function addNewUser(newUser){
   firebase.auth().currentUser.getToken().then(function(idToken) {
-      //adds blank to database from input view inputs
         $http({
           method: 'POST',
           url: '/login/newUser',
@@ -16,6 +15,27 @@ function addNewUser(newUser){
           // notyf.confirm('Blank Submitted For Approval');
           swal("User Added To Database", "", "success");
           self.newUser = {};
+        }).catch(function(error) {
+          swal("Values Are Incorrect", "Try Again!", "error");
+          console.log('error authenticating', error);
+        });
+      });//end of firebase.auth()
+}//end of addNewUser()
+
+//add new idea to DB from button click
+function addNewIdea(newIdea){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+        $http({
+          method: 'POST',
+          url: '/login/newIdea',
+          data: newIdea,
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          // notyf.confirm('Blank Submitted For Approval');
+          swal("Idea Added To Database", "", "success");
+          self.newIdea = {};
         }).catch(function(error) {
           swal("Values Are Incorrect", "Try Again!", "error");
           console.log('error authenticating', error);
@@ -55,7 +75,8 @@ function addNewUser(newUser){
   return {
 //new user object from add address button click
     addNewUser : addNewUser,
-
+//new idea object from idea button click
+    addNewIdea : addNewIdea
   }
 
 }]); // end of app.factory
