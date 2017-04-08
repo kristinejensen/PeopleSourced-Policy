@@ -1,27 +1,29 @@
 app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
+
   var self = this;
 
 //notyf must have
   // var notyf = new Notyf();
-
 //google authenticate bellow
   var auth = $firebaseAuth();
-
 //redirection after login
   function loginView() {
     $location.path('/login');
   }
-
 //redirection after logout
   function logoutView() {
     $location.path('/home');
+  }
+//redirection to admin view
+  function adminView() {
+    $location.path('/admin');
   }
 
 //user google login authentication
   self.login = function() {
         console.log("login clicked");
     auth.$signInWithPopup("google").then(function(firebaseUser) {
-//redirects to login view      
+//redirects to login view
       loginView();
         // notyf.confirm('You Are Logged In');
         // swal("You Are Logged In", "", "success");
@@ -39,7 +41,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
           console.log("logout clicked");
     auth.$signOut().then(function() {
 //redirects back to home view
-      logoutView()
+      logoutView();
         // swal("You've Logged Out!", "", "success");
           console.log('Logging the user out!');
     });
@@ -52,18 +54,19 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
 //creating a new variable with input data and firebase data
     var newUser = {
       name : firebaseUser.displayName,
-      streetAddress : user.streetAddress,
+      street : user.street,
       city : user.city,
       state : user.state,
       zipCode : user.zipCode,
       country : user.country,
       email : firebaseUser.email
     }
+    console.log(newUser);
     DataFactory.addNewUser(newUser);
-    self.user = {}
+    self.user = {};
 //redirects back to home view after submission
-    logoutView()
+    logoutView();
   }
 
 
-}]);//enf of app.controller()
+}]);//end of app.controller()
