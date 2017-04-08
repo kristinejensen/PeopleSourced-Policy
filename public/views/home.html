@@ -3,26 +3,31 @@
 *        ABOVE SUBTOPIC NAVIGATION                                              *
 * ============================================================================= */
 -->
-<div class = 'topicContainer container'>
+<div class = "container">
   <div id="mainTopic" class="row">
     <!--//MAIN TOPIC TITLE AND DESCRIPTION//-->
-    <div class="col-md-7">
+    <div id="topicText" class="col-md-7">
       <h1>MAIN TOPIC TITLE</h1>
       <p>here is some text that will be associated with the main topic.</p>
     </div>
-    <!--//TOP-SIDE CALL TO ACTION//-->
-    <div class="col-md-5 callToAction">
+    <!--//TOP-SIDE CALL TO ACTION ON MOBILE/SMALL SCREEN//-->
+    <div class="mobileCTA visible-xs-block">
+      <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
+      <button class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+    </div>
+    <!--//TOP-SIDE CALL TO ACTION ON MEDIUM AND LARGE SCREEN//-->
+    <div class="visible-md-block visible-lg-block visible-xl-block  col-md-5 callToAction">
       <div class="ctaTitle">
         <h2><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
       </div>
       <div>
         <form class="ctaForm" align="center" action="index.html" method="post">
           <select name="Subtopics">
-            <option value="volvo">Subtopic 1</option>
-            <option value="saab">Subtopic 2</option>
-            <option value="fiat">Subtopic 3</option>
-            <option value="audi">Subtopic 4</option>
-            <option value="audi">Subtopic 5</option>
+            <option value="subtopic1">Subtopic 1</option>
+            <option value="subtopic2">Subtopic 2</option>
+            <option value="subtopic3">Subtopic 3</option>
+            <option value="subtopic4">Subtopic 4</option>
+            <option value="subtopic5">Subtopic 5</option>
           </select>
           <input type="text" name="" value="" placeholder="Title">
           <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
@@ -50,39 +55,33 @@
   <!--//IDEACARDS SECTION//-->
   <div class = 'container'>
     <h4 class="text-center">DISCOVER SOME OF THE HOTTEST IDEAS</h4>
-    <div class="row">
-      <div class="col-md-6 col-xs-12 singleCardContainer">
+    <div class="row container">
+      <div class="col-md-5 col-xs-12 singleCardContainer">
         <h2>Here is where the IDEA card will go.</h2>
       </div>
-      <div class="col-md-6 col-xs-12 singleCardContainer">
+      <div class="col-md-2 col-xs-0"></div>
+      <div class="col-md-5 col-xs-12 singleCardContainer">
         <h2>Here is where the IDEA card will go.</h2>
       </div>
     </div>
-    <!--//CALL TO ACTION//-->
-    <div class="cta-home row">
+
+
+
+    <!--//CALL TO ACTION MOBILE/SMALL SCREEN//-->
+    <div class="mobileCTA visible-xs-block">
+      <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
+      <button class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+    </div>
+
+    <!--//CALL TO ACTION MEDIUM AND LARGE SCREEN//-->
+    <div class="cta-home row visible-md-block visible-lg-block visible-xl-block">
       <div class="col-md-6 col-xs-12">
-        <h3>HAVE AN IDEA?</h3>
+        <h3 class="light">HAVE AN IDEA?</h3>
       </div>
       <div class="col-md-6 col-xs-12">
-        <button type="button" class="btn-nav" name="button">START A CONVERSATION</button>
+        <button type="button" class="btn-100" name="button">START A CONVERSATION</button>
       </div>
     </div>
 
-      <div
-        class="italic"
-        ng-class="{red: hover}"
-        ng-mouseenter="hover = true"
-        ng-mouseleave="hover = false">
-          Test 1 2 3.
-      </div>
-      <br>
-
-      <div
-        class="italic"
-        ng-class="{red: hover}"
-        ng-mouseenter="hover = true"
-        ng-mouseleave="hover = false">
-          Test 1 2 3.
-      </div>
 
   </div>

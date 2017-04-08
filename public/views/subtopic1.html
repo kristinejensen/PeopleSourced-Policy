@@ -1,1 +1,119 @@
-<h1>subtopic 1 page</h1>
+
+<!--
+/* ============================================================================ *
+*        SUBTOPIC NAVIGATION                                                    *
+* ============================================================================= */
+-->
+<div ng-include="'/views/templates/subtopicNav.html'"></div>
+<!--
+/* ============================================================================ *
+*         SUBTOPIC TITLE AND DESCRIPTION                                        *
+* ============================================================================= */
+-->
+<div class = "greybackground">
+  <div class = "container">
+    <div class="row subTopic">
+      <!--//SUBTOPIC TITLE AND DESCRIPTION//-->
+      <div id="topicText" class="col-md-7">
+        <h1>SUBTOPIC 1 TITLE</h1>
+        <p>here is some text that will be associated with the subtopic.</p>
+      </div>
+      <!--
+      /* ============================================================================ *
+      *         TOP SIDE CALL TO ACTION                                               *
+      * ============================================================================= */
+    -->
+    <!--CALL TO ACTION ON MOBILE/SMALL SCREEN//-->
+    <div class="mobileCTA visible-xs-block">
+      <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
+      <button class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+    </div>
+    <!--//CALL TO ACTION ON MEDIUM AND LARGE SCREEN//-->
+    <div class="visible-md-block visible-lg-block visible-xl-block  col-md-5 callToAction">
+
+      <div class="ctaTitle">
+        <h2><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
+      </div>
+
+      <div>
+        <form class="ctaForm" align="center" action="index.html" method="post">
+          <select name="Subtopics">
+            <option value="subtopic1">Subtopic 1</option>
+            <option value="subtopic2">Subtopic 2</option>
+            <option value="subtopic3">Subtopic 3</option>
+            <option value="subtopic4">Subtopic 4</option>
+            <option value="subtopic5">Subtopic 5</option>
+          </select>
+          <input type="text" name="" value="" placeholder="Title">
+          <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
+          <button class = "btn-cta" type="button" name="button">Add Your Idea!</button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!--
+/* ============================================================================= *
+*        FILTER                                                                  *
+* ============================================================================== */
+-->
+
+<!-- NOTE: FILTER ALIGNMENT IS WEIRD -->
+
+<div class=" container">
+  <form class="filterIdeas" align="left" action="index.html" method="post">
+  <select name="Subtopics" class="filterIdeas">
+    <option value="placeholder">Filter Ideas By:</option>
+    <option value="mostRecent">Most Recent</option>
+    <option value="mostLiked">Most Liked</option>
+    <option value="mostLoved">Most Loved</option>
+    <option value="mostComments">Most Comments</option>
+  </select>
+</form>
+</div>
+<!--
+/* ============================================================================= *
+*        BELOW SUBTOPIC NAVIGATION                                               *
+* ============================================================================== */
+-->
+
+<div class = 'cardContainer '>
+  <!--//IDEACARDS SECTION//-->
+  <div class = 'container'>
+    <div class="row container">
+      <div class="col-md-5 col-xs-12 singleCardContainer">
+        <h2>Here is where the IDEA card will go.</h2>
+      </div>
+      <div class="col-md-2 col-xs-0"></div>
+      <div class="col-md-5 col-xs-12 singleCardContainer">
+        <h2>Here is where the IDEA card will go.</h2>
+      </div>
+    </div>
+
+
+
+    <!--//CALL TO ACTION MOBILE/SMALL SCREEN//-->
+    <div class="mobileCTA visible-xs-block">
+      <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
+      <button class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+    </div>
+
+    <!--//CALL TO ACTION MEDIUM AND LARGE SCREEN//-->
+    <div class="cta-home row visible-md-block visible-lg-block visible-xl-block">
+      <div class="col-md-6 col-xs-12">
+        <h3 class="light">HAVE AN IDEA?</h3>
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <button type="button" class="btn-100" name="button">START A CONVERSATION</button>
+      </div>
+    </div>
+
+    <div id="cta_container">
+      <div id="stickyCTA">
+      </div>
+  </div>
+
+  </div>
