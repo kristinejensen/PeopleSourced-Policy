@@ -33,6 +33,42 @@ router.post('/newUser', function (req, res) {
 });//end of router.post
 
 
+// //check auth user to admin rights
+//   router.get("/admin", function(req, res){
+//     pg.connect(connectionString, function(err, client, done){
+//       var userEmail = req.decodedToken.email;
+//       // Check the user's level of permision based on their email
+//       client.query('SELECT admin FROM users WHERE email=$1', [userEmail], function(err, clearanceLevelQueryResult){
+//         done();
+//         if(err){
+//           console.log('Error COMPLETING clearance_level query task', err);
+//           res.sendStatus(500);
+//         }else{
+//           pg.connect(connectionString, function(err, client, done){
+//             if(clearanceLevelQueryResult.rowCount === 0) {
+//               // If the user is not in the database, return a forbidden error status
+//               console.log('No user found with that email. Have you added this person to the database? Email: ', req.decodedToken.email);
+//               res.sendStatus(403);
+//             } else {
+//               var clearanceLevel = clearanceLevelQueryResult.rows[0].clearance_level;
+//               // Based on the clearance level of the individual, give them access to different information
+//               client.query('SELECT * FROM users WHERE admin=="true"', [admin], function(err, results){
+//                 if(err){
+//                   console.log('Error COMPLETING secret_information query task', error);
+//                   res.sendStatus(500);
+//                 }else{
+//                   // return all of the results where a specific user has permission
+//                   res.send(results.rows);
+//                   console.log(results.rows);
+//                 }
+//               });//end of client.query()
+//             }
+//           // done();
+//         });//end of pg.connect()
+//         }
+//       });//end of client.query()
+//     });//end of pg.connect()
+//   });//end of router.get()
 
 
 
