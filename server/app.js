@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var decoder = require('./modules/decoder');
 var login = require('./routes/login');
 var data = require('./routes/data');
+var favicon = require('serve-favicon')
 var list_data = require('./routes/list_data');
 // var search = require('./routes/search');
 var portDecision = process.env.PORT || 3000;
@@ -15,7 +16,7 @@ app.get('/', function(req, res){
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
-
+app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 app.use(decoder.token);
 //
 /* Whatever you do below this is protected by your authentication. */
