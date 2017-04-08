@@ -21,6 +21,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
   self.login = function() {
         console.log("login clicked");
     auth.$signInWithPopup("google").then(function(firebaseUser) {
+//redirects to login view      
       loginView();
         // notyf.confirm('You Are Logged In');
         // swal("You Are Logged In", "", "success");
@@ -37,6 +38,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
   self.logout = function() {
           console.log("logout clicked");
     auth.$signOut().then(function() {
+//redirects back to home view
       logoutView()
         // swal("You've Logged Out!", "", "success");
           console.log('Logging the user out!');
@@ -45,7 +47,9 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
 
 //new user object from view button click
   self.addNewUser = function(user) {
+//brings in firebase data to function
     var firebaseUser = auth.$getAuth();
+//creating a new variable with input data and firebase data
     var newUser = {
       name : firebaseUser.displayName,
       streetAddress : user.streetAddress,
@@ -55,8 +59,10 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
       country : user.country,
       email : firebaseUser.email
     }
-    DataFactory.addNewUser(newUser)
-    self.newUser = {}
+    DataFactory.addNewUser(newUser);
+    self.user = {}
+//redirects back to home view after submission
+    logoutView()
   }
 
 
