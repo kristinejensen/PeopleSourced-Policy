@@ -1,10 +1,7 @@
 
 <main>
-  <select class="" name="">
-    <option value=""> wards </option>
-    <option value=""> city </option>
-    <option value=""> state </option>
-    <option value=""> address </option>
+  <select>
+    <option ng-repeat="subtopic in ic.subTopicObject.list" value="{{subtopic.title}}"> {{subtopic.title}} </option>
   </select>
   <div>
     <label for="idea"> Idea </label>
@@ -16,3 +13,4 @@
   </div>
     <button ng-click="ic.addNewIdea(ic.newIdea)" type="button"> Add Idea </button>
 </main>
+{{ic.subTopicObject}}

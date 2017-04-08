@@ -16,6 +16,9 @@ app.get('/', function(req, res){
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
+app.use('/data', data);
+
+
 /* Whatever you do below this is protected by your authentication. */
 app.use(decoder.token);
 

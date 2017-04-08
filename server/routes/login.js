@@ -52,6 +52,13 @@ router.post('/newidea', function (req, res) {
 });//end of router.post
 
 
+
+
+
+
+
+
+
 // //check auth user to admin rights
 //   router.get("/admin", function(req, res){
 //     pg.connect(connectionString, function(err, client, done){

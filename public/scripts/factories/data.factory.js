@@ -1,5 +1,14 @@
-app.factory('DataFactory', ['$http', function($http){
+app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
 
+
+var subTopicObject = { list:[] }
+
+//calls startup functions
+init()
+
+function init() {
+  getSubTopics()
+}
 
 //add new user to DB from button click
 function addNewUser(newUser){
@@ -43,6 +52,20 @@ function addNewIdea(newIdea){
       });//end of firebase.auth()
 }//end of addNewUser()
 
+function getSubTopics() {
+    $http({
+      method: 'GET',
+      url: '/data/getSubTopics'
+    }).then(function(response) {
+      //console.log("getBlanks Request: ", response.data);
+      subTopicObject.list = response.data;
+    });
+}//end of getSubTopics()
+
+
+
+
+
 // //checks for admin rights
 // function getAdmin() {
 //   auth.$onAuthStateChanged(function(firebaseUser){
@@ -76,7 +99,9 @@ function addNewIdea(newIdea){
 //new user object from add address button click
     addNewUser : addNewUser,
 //new idea object from idea button click
-    addNewIdea : addNewIdea
+    addNewIdea : addNewIdea,
+//sends subtopics to add idea view
+    subTopicObject : subTopicObject
   }
 
 }]); // end of app.factory
