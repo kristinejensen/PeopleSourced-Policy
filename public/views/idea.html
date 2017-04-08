@@ -1,1 +1,18 @@
-<h1>idea view works</h1>
+
+<main>
+  <select class="" name="">
+    <option value=""> wards </option>
+    <option value=""> city </option>
+    <option value=""> state </option>
+    <option value=""> address </option>
+  </select>
+  <div>
+    <label for="idea"> Idea </label>
+    <input ng-model="ic.newIdea.idea" type="text" name="idea">
+  </div>
+  <div>
+    <label for="description"> Description </label>
+    <input ng-model="ic.newIdea.description" type="text" name="description">
+  </div>
+    <button ng-click="ic.addNewIdea(ic.newIdea)" type="button"> Add Idea </button>
+</main>

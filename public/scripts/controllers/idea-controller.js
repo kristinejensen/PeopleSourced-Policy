@@ -7,4 +7,9 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', function(DataF
     $location.path('/home');
   }
 
+  self.addNewIdea = function(newIdea) {
+    console.log(newIdea);
+    self.newIdea = {};
+  }
+
 }]);
