@@ -2,6 +2,8 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
 
   var self = this;
   var auth = $firebaseAuth();
+  var firebaseUser = auth.$getAuth();
+
   self.subTopicObject = DataFactory.subTopicObject;
 
 //redirect to home view
