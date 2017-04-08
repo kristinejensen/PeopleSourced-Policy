@@ -21,7 +21,6 @@ router.get('/comments', function(req, res){
   });
 });
 
-//populates volunteer profile with cause data on page load
 router.get('/idea', function(req, res){
   var userEmail = req.decodedToken.email;
   pg.connect(connectionString, function (err, client, done) {
@@ -36,6 +35,5 @@ router.get('/idea', function(req, res){
     });
   });
 });
-//
 
 module.exports = router;

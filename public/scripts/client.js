@@ -57,6 +57,15 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'CommentConnectController',
     controllerAs: 'ccc'
   })
+  .when('/admin-manage-users', {
+    templateUrl: 'views/admin-manage-users.html',
+    controller: 'AdminManageUsersController',
+    controllerAs: 'amuc'
+  })
+  .otherwise({
+    redirectTo: 'home'
+  })
+}]); // end of app.config
 
 
 //only the /admin-flagged section has been changed.
@@ -68,11 +77,6 @@ app.config(['$routeProvider', function($routeProvider) {
   //   controller: 'SubtopicOneController',
   //   controllerAs: 'st3c'
   // })
-  // .when('/admin-manage-users', {
-  //   templateUrl: 'views/subtopic4.html',
-  //   controller: 'SubtopicOneController',
-  //   controllerAs: 'st4c'
-  // })
   // .when('/admin-reports', {
   //   templateUrl: 'views/subtopic5.html',
   //   controller: 'SubtopicOneController',
@@ -83,11 +87,3 @@ app.config(['$routeProvider', function($routeProvider) {
   //   controller: 'CommentConnectController',
   //   controllerAs: 'ccc'
   // })
-
-
-
-
-  .otherwise({
-    redirectTo: 'home'
-  })
-}]); // end of app.config
