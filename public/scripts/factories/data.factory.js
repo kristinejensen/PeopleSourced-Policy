@@ -1,22 +1,48 @@
 app.factory('DataFactory', ['$http', function($http){
   var idea = {list: []};
   var comments = {list: []};
-  var users = {details: {}};
+  var users = {list : {}};
 
 
 
-  function getIdea(){
+  // function getIdea(){
+  //
+  //       $http({
+  //         method: 'GET',
+  //         url: '/pspData/idea'
+  //       }).then(function(response){
+  //         idea.list = response.data;
+  //       })
+  // };
 
+init();
+//startup functions
+function init() {
+  getUsers();
+}
+  getUsers();
+
+  function getUsers(){
+    console.log('get users function is being called');
+    // var firebaseUser = auth.$getAuth();
+    // if(firebaseUser) {
+    //   firebaseUser.getToken().then(function(idToken){
         $http({
           method: 'GET',
-          url: '/pspData/idea'
+          url: '/admin/manageUsers'
+          // headers: {
+          //   id_token: idToken
+          // }
         }).then(function(response){
-          idea.list = response.data;
+          users.List = response.data;
+          console.log(users.List);
         })
-  };
+      }
 
 
-  // 
+
+
+  //
   //
   //
   //   self.sendEmail = function(){

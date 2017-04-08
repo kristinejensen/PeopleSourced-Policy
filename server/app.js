@@ -16,11 +16,13 @@ app.get('/', function(req, res){
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-app.use(decoder.token);
+
 
 app.use('/admin', admin);
 
 /* Whatever you do below this is protected by your authentication. */
+app.use(decoder.token);
+
 
 app.use('/login', login);
 app.use('/data', data);
