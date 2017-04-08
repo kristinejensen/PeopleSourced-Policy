@@ -6,7 +6,7 @@ var decoder = require('./modules/decoder');
 var login = require('./routes/login');
 var data = require('./routes/data');
 var list_data = require('./routes/list_data');
-var search = require('./routes/search');
+// var search = require('./routes/search');
 var portDecision = process.env.PORT || 3000;
 
 app.get('/', function(req, res){
@@ -20,8 +20,8 @@ app.use(decoder.token);
 //
 /* Whatever you do below this is protected by your authentication. */
 
-app.use('/login', login);
-app.use('/data', data);
+// app.use('/login', login);
+// app.use('/data', data);
 
 app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);
