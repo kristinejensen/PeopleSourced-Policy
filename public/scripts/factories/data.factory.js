@@ -1,6 +1,6 @@
 app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
 
-
+//containers
 var subTopicObject = { list:[] }
 
 //calls startup functions
@@ -13,43 +13,43 @@ function init() {
 //add new user to DB from button click
 function addNewUser(newUser){
   firebase.auth().currentUser.getToken().then(function(idToken) {
-        $http({
-          method: 'POST',
-          url: '/login/newUser',
-          data: newUser,
-          headers: {
-            id_token: idToken
-          }
-        }).then(function(response){
-          // notyf.confirm('Blank Submitted For Approval');
-          swal("User Added To Database", "", "success");
-          self.newUser = {};
-        }).catch(function(error) {
-          swal("Values Are Incorrect", "Try Again!", "error");
-          console.log('error authenticating', error);
-        });
-      });//end of firebase.auth()
+    $http({
+      method: 'POST',
+      url: '/login/newUser',
+      data: newUser,
+      headers: {
+        id_token: idToken
+      }
+    }).then(function(response){
+      // notyf.confirm('Blank Submitted For Approval');
+      swal("User Added To Database", "", "success");
+      self.newUser = {};
+    }).catch(function(error) {
+      swal("Values Are Incorrect", "Try Again!", "error");
+      console.log('error authenticating', error);
+    });
+  });//end of firebase.auth()
 }//end of addNewUser()
 
 //add new idea to DB from button click
 function addNewIdea(newIdea){
   firebase.auth().currentUser.getToken().then(function(idToken) {
-        $http({
-          method: 'POST',
-          url: '/login/newIdea',
-          data: newIdea,
-          headers: {
-            id_token: idToken
-          }
-        }).then(function(response){
-          // notyf.confirm('Blank Submitted For Approval');
-          swal("Idea Added To Database", "", "success");
-          self.newIdea = {};
-        }).catch(function(error) {
-          swal("Values Are Incorrect", "Try Again!", "error");
-          console.log('error authenticating', error);
-        });
-      });//end of firebase.auth()
+    $http({
+      method: 'POST',
+      url: '/login/newIdea',
+      data: newIdea,
+      headers: {
+        id_token: idToken
+      }
+    }).then(function(response){
+      // notyf.confirm('Blank Submitted For Approval');
+      swal("Idea Added To Database", "", "success");
+      self.newIdea = {};
+    }).catch(function(error) {
+      swal("Values Are Incorrect", "Try Again!", "error");
+      console.log('error authenticating', error);
+    });
+  });//end of firebase.auth()
 }//end of addNewUser()
 
 function getSubTopics() {
@@ -57,7 +57,6 @@ function getSubTopics() {
       method: 'GET',
       url: '/data/getSubTopics'
     }).then(function(response) {
-      //console.log("getBlanks Request: ", response.data);
       subTopicObject.list = response.data;
     });
 }//end of getSubTopics()
