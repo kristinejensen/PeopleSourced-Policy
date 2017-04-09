@@ -1,43 +1,8 @@
 <h3>Manage Users</h3>
-<table>
-  <tr>
-    <th>User Name</th>
-    <th>User Email</th>
-    <th>Ward</th>
-    <th>Flags</th>
-    <th>Delete User</th>
-  </tr>
-  <tr>
-    <td>Test</td>
-    <td>Test</td>
-    <td>Test</td>
-    <td>Test</td>
-    <td>Test</td>
-  </tr>
-  <tr>
-    <td>Test</td>
-    <td>Test</td>
-    <td>Test</td>
-    <td>Test</td>
-    <td>Test</td>
-  </tr>
-</table>
 
-{{amuc}}
-
-<!-- <label>New Task Name</label>
-<input ng-model="tc.newTask.taskName">
-<button ng-click="tc.addTask()">Add Task</button>
-<div ng-repeat="task in tc.taskList.list" ng-class="{complete: task.status, active: !task.status}" class="row col-xs-12"> -->
-  <!-- {{task.name}} and the id number is {{task.id}} -->
-  <!-- <span class="col-xs-6">{{task}} the status is {{task.status}}</span>
-  <span class="col-xs-3" ng-hide="task.status">
-    <button ng-click="tc.completeTask(task.id)" class="btn btn-primary">Complete</button>
-  </span>
-  <span class="col-xs-3" ng-show="task.status">
-    <button ng-click="tc.uncompleteTask(task.id)" class="btn btn-info">This shouldn't be complete</button>
-  </span>
-  <span class="col-xs-3">
-    <button ng-click="tc.deleteTask(task.id)" class="btn btn-danger">Delete</button>
-  </span>
-</div> -->
+<div ng-repeat="user in amuc.allUsers.list">
+  {{user.name}}
+  {{user.email}}
+  {{user.ward}}
+  <button ng-click="amuc.deleteUser(user.id)" class="btn btn-danger btn-xs">Delete</button>
+</div>

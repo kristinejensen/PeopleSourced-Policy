@@ -26,6 +26,23 @@ app.factory('DataFactory', ['$http', function($http){
     })
   }
 
+  //function to delete user from manage users admin view
+  function deleteUser(userId){
+    console.log('the delete user button was clicked');
+    console.log('the targeted user id is:', userId);
+    // var firebaseUser = auth.$getAuth();
+    // if(firebaseUser) {
+    //   firebaseUser.getToken().then(function(idToken){
+    $http({
+      method: 'DELETE',
+      url: '/admin/deleteUser' + userId
+      // headers: {          //   id_token: idToken
+      // }
+    }).then(function(response){
+      console.log('user successfull deleted from database');
+    })
+  }
+
   //
   //
   //
@@ -55,7 +72,8 @@ app.factory('DataFactory', ['$http', function($http){
   //
 
   return {
-    allUsers : allUsers
+    allUsers : allUsers,
+    deleteUser: deleteUser
   }
 
 }]); // end of app.factory

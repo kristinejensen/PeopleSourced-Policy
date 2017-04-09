@@ -4,4 +4,8 @@ app.controller('AdminManageUsersController', ['$http', '$location', 'DataFactory
 
   self.allUsers = DataFactory.allUsers
 
+  self.deleteUser = function(userId) {
+     DataFactory.deleteUser(userId);
+   }
+
 }]); //end of controller
