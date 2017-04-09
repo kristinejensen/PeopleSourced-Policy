@@ -306,7 +306,7 @@ margin-bottom: 30px;
 
 .basicForm {
   padding-top: 40px;
-  padding-bottom: 40px;
+  padding-bottom: 90px;
   background-color: white;
   border: 1px solid lightgrey;
 }
@@ -316,6 +316,10 @@ margin-bottom: 30px;
   margin-top: 10px;
   margin-bottom: 10px;
   height: 30px;
+}
+
+.selector100{
+  width: 80% !important;
 }
 
 .addressForm{

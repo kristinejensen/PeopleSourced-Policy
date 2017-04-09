@@ -1,0 +1,37 @@
+
+<!--
+/* ============================================================================ *
+*        SUBTOPIC NAVIGATION                                                    *
+* ============================================================================= */
+-->
+<div ng-include="'/views/templates/subtopicNav.html'"></div>
+<!--
+/* ============================================================================ *
+*         ADD IDEAS FORM                                                      *
+* ============================================================================= */
+-->
+<div class = "greybackground">
+  <div class = "container">
+    <div class="row addressForm">
+      <div class="frmTitle">
+        <h2><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Add an Idea</h2>
+      </div>
+      <div>
+        <form class="basicForm" align="center" action="index.html" method="post">
+          <p>Share Your Idea With Others In Minneapolis</p>
+          <select class="selector100" name="Subtopics">
+            <option value="subtopic1">Related Topic</option>
+            <option value="subtopic1">Subtopic 1</option>
+            <option value="subtopic2">Subtopic 2</option>
+            <option value="subtopic3">Subtopic 3</option>
+            <option value="subtopic4">Subtopic 4</option>
+            <option value="subtopic5">Subtopic 5</option>
+          </select>
+          <input class="lightGrey" type="text" name="" value="" placeholder="Idea">
+          <textarea class="lightgreyTextArea" name="comment" placeholder="Description..."form="usrform"></textarea><br>
+          <button class = "btn-80-blk" type="button" name="button">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
