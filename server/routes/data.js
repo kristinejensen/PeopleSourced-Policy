@@ -29,6 +29,22 @@ router.get('/getSubTopics', function (req, res) {
     });//end of .then
 });//end of router.get
 
+//gets all ideas for all subtopic views (will need to specify for each view)
+router.get('/subtopicIdeas', function (req, res) {
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT * FROM ideas")
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
+
 
 
 
