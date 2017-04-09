@@ -58,9 +58,8 @@ app.config(['$routeProvider', function($routeProvider) {
     controllerAs: 'ccc'
   })
 
-
-//only the /admin-flagged section has been changed.
-// IMPORTANT be sure to change templateURL, controller, and controllerAs
+  //only the /admin-flagged section has been changed.
+  // IMPORTANT be sure to change templateURL, controller, and controllerAs
 
 
   // .when('/admin-flagged', {
@@ -83,9 +82,6 @@ app.config(['$routeProvider', function($routeProvider) {
   //   controller: 'CommentConnectController',
   //   controllerAs: 'ccc'
   // })
-
-
-
 
   .otherwise({
     redirectTo: 'home'
