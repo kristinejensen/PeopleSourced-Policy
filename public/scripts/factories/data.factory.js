@@ -33,14 +33,14 @@ app.factory('DataFactory', ['$http', function($http){
     // var firebaseUser = auth.$getAuth();
     // if(firebaseUser) {
     //   firebaseUser.getToken().then(function(idToken){
-    $http({
-      method: 'DELETE',
-      url: '/admin/deleteUser' + userId
-      // headers: {          //   id_token: idToken
-      // }
-    }).then(function(response){
-      console.log('user successfull deleted from database');
-    })
+  //   $http({
+  //     method: 'DELETE',
+  //     url: '/admin/deleteUser' + userId
+  //     // headers: {          //   id_token: idToken
+  //     // }
+  //   }).then(function(response){
+  //     console.log('user successfull deleted from database');
+  //   })
   }
 
   //
