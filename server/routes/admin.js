@@ -2,6 +2,17 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var connectionString = require('../modules/database-config');
+var config = {
+  database: 'solo',
+  host: 'localhost',
+  port: 5432,
+  max: 10,
+  idleTimeoutMillis: 30000
+};
+
+//pool / pg constructor function
+var pool = new pg.Pool(config);
+
 
 
 //request to get all users for manage users admin view
@@ -9,7 +20,7 @@ router.get('/manageUsers', function(req, res){
   console.log('manage users route hit');
   // var userEmail = req.decodedToken.email;
   pg.connect(connectionString, function (err, client, done) {
-    client.query('SELECT DISTINCT users.id, name, email, address, ward FROM users JOIN ideas_flags ON ideas_flags.user_id=users.id;', function(err, result){
+    client.query('SELECT * FROM users;', function(err, result){
       done();
       if(err){
         ('Error completing manage users query', err);
@@ -25,7 +36,7 @@ router.get('/manageUsers', function(req, res){
 
 //request to delete user from manage users admin view
 router.delete('/deleteUser/:id', function(req, res) {
-  var userIdToDelete = req.params.id;
+  var userId = req.params.id;
   console.log('hit delete route');
   console.log('here is the id to delete ->', userIdToDelete);
   // pg.connect(function(err, client, done) {
@@ -45,6 +56,8 @@ router.delete('/deleteUser/:id', function(req, res) {
   //     });
   //   }
   // });
-});
 
 module.exports = router;
+
+
+//SELECT DISTINCT users.id, name, email, address, ward FROM users JOIN ideas_flags ON ideas_flags.user_id=users.id;
