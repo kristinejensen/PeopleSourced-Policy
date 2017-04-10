@@ -7,6 +7,7 @@ var subtopicIdeas2 = { list:[] };
 var subtopicIdeas3 = { list:[] };
 var subtopicIdeas4 = { list:[] };
 var subtopicIdeas5 = { list:[] };
+var commentsObject = { list:[] };
 
 //calls startup functions
 init();
@@ -14,6 +15,7 @@ init();
 function init() {
   getSubTopics();
   getSubtopicIdeas();
+  getComments();
 }
 
 //add new user to DB from login view button click
@@ -171,6 +173,16 @@ function addFlag(subtopicIdeas){
   });//end of firebase.auth()
 }//end of addNewUser()
 
+//gets all comments for comment view
+function getComments() {
+    $http({
+      method: 'GET',
+      url: '/data/comments'
+    }).then(function(response) {
+      commentsObject.list = response.data;
+    });
+}//end of getComments()
+
 //adds loved/idea to DB
 function addComment(newComment){
   firebase.auth().currentUser.getToken().then(function(idToken) {
@@ -183,6 +195,7 @@ function addComment(newComment){
       }
     }).then(function(response){
       // notyf.confirm('Blank Submitted For Approval');
+      getComments();
       swal("Loved Added To Database", "", "success");
       self.addComment = {};
     }).catch(function(error) {
@@ -190,7 +203,7 @@ function addComment(newComment){
       console.log('error authenticating', error);
     });
   });//end of firebase.auth()
-}//end of addNewUser()
+}//end of addComment()
 
 
 
@@ -219,7 +232,9 @@ function addComment(newComment){
 //adds flag to comment at DB
     addFlag : addFlag,
 //adds comment to DB
-    addComment : addComment
+    addComment : addComment,
+//gets comments to comment view
+    commentsObject : commentsObject
   }
 
 }]); // end of app.factory

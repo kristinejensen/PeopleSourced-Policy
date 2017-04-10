@@ -3,6 +3,8 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   var self = this;
   var auth = $firebaseAuth();
 
+  self.commentsObject = DataFactory.commentsObject;
+
 //adds idea like to DB
   self.addLiked = function() {
     console.log("addLiked button clicked");
