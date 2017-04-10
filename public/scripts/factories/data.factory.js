@@ -21,18 +21,6 @@ app.factory('DataFactory', ['$http', function($http){
     })
   }
 
-  //function to delete user from manage users admin view
-  function deleteUser(userId){
-    console.log('the delete user button was clicked');
-    console.log('the targeted user id is:', userId);
-    $http({
-      method: 'DELETE',
-      url: '/admin/deleteUser' + userId
-    }).then(function(response){
-      console.log('user successfull deleted from database');
-    })
-  }
-
   //
   //
   //
@@ -62,8 +50,7 @@ app.factory('DataFactory', ['$http', function($http){
   //
 
   return {
-    allUsers : allUsers,
-    deleteUser: deleteUser
+    allUsers : allUsers
   }
 
 }]); // end of app.factory

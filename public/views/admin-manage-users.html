@@ -4,5 +4,6 @@
   {{user.name}}
   {{user.email}}
   {{user.ward}}
-  <button ng-click="amuc.deleteUser(user.id)" class="btn btn-danger btn-xs">Delete</button>
+  {{user.active}}
+  <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs">Deactivate</button>
 </div>
