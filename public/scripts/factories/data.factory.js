@@ -171,7 +171,27 @@ function addFlag(subtopicIdeas){
   });//end of firebase.auth()
 }//end of addNewUser()
 
-
+//left off here.  Finish 
+//adds loved/idea to DB
+function addComment(subtopicIdeas){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'POST',
+      url: '/login/addLoved',
+      data: subtopicIdeas,
+      headers: {
+        id_token: idToken
+      }
+    }).then(function(response){
+      // notyf.confirm('Blank Submitted For Approval');
+      swal("Loved Added To Database", "", "success");
+      self.subtopicIdeas = {};
+    }).catch(function(error) {
+      swal("Values Are Incorrect", "Try Again!", "error");
+      console.log('error authenticating', error);
+    });
+  });//end of firebase.auth()
+}//end of addNewUser()
 
 
 
@@ -198,7 +218,9 @@ function addFlag(subtopicIdeas){
 //adds loved to comment at DB
     addLoved : addLoved,
 //adds flag to comment at DB
-    addFlag : addFlag
+    addFlag : addFlag,
+//adds comment to DB
+    addComment : addComment
   }
 
 }]); // end of app.factory

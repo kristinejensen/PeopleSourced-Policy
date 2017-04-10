@@ -3,9 +3,31 @@ app.controller('Subtopic3Controller', ['DataFactory', '$firebaseAuth','$http', '
   var self = this;
 
   self.subtopicIdeas3 = DataFactory.subtopicIdeas3;
+
 //redirect to add idea view
   self.createIdea = function() {
     $location.path('/idea');
+  }
+
+//add liked button click
+  self.addLiked = function(subtopicIdeas) {
+    console.log('Liked clicked: ', subtopicIdeas)
+    DataFactory.addLike;
+  }
+//add loved button click
+  self.addLoved = function(subtopicIdeas) {
+    console.log('Loved clicked: ', subtopicIdeas)
+    DataFactory.addLoved;
+  }
+//get moreComments button click
+  self.moreComments = function() {
+    console.log('comments clicked');
+    $location.path('/comment');
+  }
+//add flag button click
+  self.addFlag = function(subtopicIdeas) {
+    console.log('Flagged clicked: ', subtopicIdeas)
+    DataFactory.addFlag;
   }
 
 

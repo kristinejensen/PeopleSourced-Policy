@@ -21,7 +21,8 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
   }
 //get moreComments button click
   self.moreComments = function() {
-    console.log('comments clicked')
+    console.log('comments clicked');
+    $location.path('/comment');
   }
 //add flag button click
   self.addFlag = function(subtopicIdeas) {
