@@ -57,8 +57,8 @@ router.post('/addLiked', function (req, res) {
   console.log('addLiked: ', addLiked);
   pool.connect()
     .then(function (client) {
-      client.query('INSERT INTO ideas (title, description) VALUES ($1, $2)',
-        [newIdea.idea, newIdea.description])
+      client.query('INSERT INTO ideas_likes (user_id, idea_id) VALUES ($1, $2)',
+        [addLiked.idea, newIdea.subtopics_id])
         .then(function (result) {
           client.release();
           res.sendStatus(201);
