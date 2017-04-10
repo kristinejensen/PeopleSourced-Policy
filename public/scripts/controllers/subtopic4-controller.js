@@ -2,6 +2,8 @@ app.controller('Subtopic4Controller', ['DataFactory', '$firebaseAuth','$http', '
 
   var self = this;
 
+  self.subtopicIdeas4 = DataFactory.subtopicIdeas4;
+  
 //redirect to add idea view
   self.createIdea = function() {
     $location.path('/idea');

@@ -2,7 +2,7 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
 
   var self = this;
 
-  self.subtopicIdeas = DataFactory.subtopicIdeas;
+  self.subtopicIdeas1 = DataFactory.subtopicIdeas1;
 
 //redirect to add idea view
   self.createIdea = function() {

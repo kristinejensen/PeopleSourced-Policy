@@ -2,7 +2,11 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
 
 //containers
 var subTopicObject = { list:[] };
-var subtopicIdeas = { list:[] };
+var subtopicIdeas1 = { list:[] };
+var subtopicIdeas2 = { list:[] };
+var subtopicIdeas3 = { list:[] };
+var subtopicIdeas4 = { list:[] };
+var subtopicIdeas5 = { list:[] };
 
 //calls startup functions
 init();
@@ -55,7 +59,7 @@ function addNewIdea(newIdea){
   });//end of firebase.auth()
 }//end of addNewUser()
 
-//adds subtopics to idea view select element
+//adds subtopics1 to idea view select element
 function getSubTopics() {
     $http({
       method: 'GET',
@@ -65,15 +69,44 @@ function getSubTopics() {
     });
 }//end of getSubTopics()
 
+
 //adds ideas to subtopic views
 function getSubtopicIdeas() {
     $http({
       method: 'GET',
-      url: '/data/subtopicIdeas'
+      url: '/data/subtopicIdeas1'
     }).then(function(response) {
-      subtopicIdeas.list = response.data;
+      subtopicIdeas1.list = response.data;
     });
-}//end of getSubTopics()
+
+    $http({
+      method: 'GET',
+      url: '/data/subtopicIdeas2'
+    }).then(function(response) {
+      subtopicIdeas2.list = response.data;
+    });
+
+    $http({
+      method: 'GET',
+      url: '/data/subtopicIdeas3'
+    }).then(function(response) {
+      subtopicIdeas3.list = response.data;
+    });
+
+    $http({
+      method: 'GET',
+      url: '/data/subtopicIdeas4'
+    }).then(function(response) {
+      subtopicIdeas4.list = response.data;
+    });
+
+    $http({
+      method: 'GET',
+      url: '/data/subtopicIdeas5'
+    }).then(function(response) {
+      subtopicIdeas5.list = response.data;
+    });
+}//end of getSubTopicIdeas()
 
 //adds liked/idea to DB
 function addLiked(subtopicIdeas){
@@ -150,8 +183,16 @@ function addFlag(subtopicIdeas){
     addNewIdea : addNewIdea,
 //sends current subtopics to add idea view option element
     subTopicObject : subTopicObject,
-//adds ideas to subtopic views
-    subtopicIdeas : subtopicIdeas,
+//adds ideas to subtopic1 view
+    subtopicIdeas1 : subtopicIdeas1,
+//adds ideas to subtopic2 view
+    subtopicIdeas2 : subtopicIdeas2,
+//adds ideas to subtopic3 view
+    subtopicIdeas3 : subtopicIdeas3,
+//adds ideas to subtopic4 view
+    subtopicIdeas4 : subtopicIdeas4,
+//adds ideas to subtopic5 view
+    subtopicIdeas5 : subtopicIdeas5,
 //adds liked to comment at DB
     addLiked : addLiked,
 //adds loved to comment at DB
