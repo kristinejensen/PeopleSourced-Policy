@@ -5,6 +5,7 @@ var connectionString = require('../modules/database-config');
 
 
 
+
 router.get('/comments', function(req, res){
   var userEmail = req.decodedToken.email;
   pg.connect(connectionString, function (err, client, done) {

@@ -2,6 +2,17 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var connectionString = require('../modules/database-config');
+var config = {
+  database: 'solo',
+  host: 'localhost',
+  port: 5432,
+  max: 10,
+  idleTimeoutMillis: 30000
+};
+
+//pool / pg constructor function
+var pool = new pg.Pool(config);
+
 
 
 //request to get all users for manage users admin view
@@ -25,29 +36,28 @@ router.get('/manageUsers', function(req, res){
 
 //request to delete user from manage users admin view
 router.delete('/deleteUser/:id', function(req, res) {
-  var userIdToDelete = req.params.id;
+  var userId = req.params.id;
   console.log('hit delete route');
-  console.log('here is the id to delete ->', userIdToDelete);
+  console.log('here is the id to delete ->', userId);
 
   // db query
   // DELETE FROM task WHERE id=7
-  pool.connect(function(err, client, done) {
-    if(err){
-      console.log(err);
-      res.sendStatus(500);
-    }else{
-      client.query('DELETE FROM task WHERE id=$1;',
-        [taskToDeleteId], function(err, result) {
-          done();
-          if(err){
-            console.log(err);
-            res.sendStatus(500); // the world exploded
-          }else{
-            res.sendStatus(200);
-          }
+router.delete('/deleteUser/:id', function(req, res) {
+  var userId = req.params.id;
+  pool.connect()
+    .then(function (client) {
+      client.query('DELETE FROM users WHERE id=$1:',
+        [userId])
+        .then(function (result) {
+          client.release();
+          res.sendStatus(200);
+      })
+      .catch(function (err) {
+          console.log('error on Delete', err);
+          res.sendStatus(500);
       });
-    }
   });
+});
 });
 
 
