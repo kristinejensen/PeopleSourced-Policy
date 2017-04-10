@@ -5,5 +5,5 @@
   {{user.email}}
   {{user.ward}}
   {{user.active}}
-  <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs">Deactivate</button>
+  <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs" ng-show="user.active">Deactivate</button>
 </div>
