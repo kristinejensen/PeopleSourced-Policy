@@ -45,6 +45,7 @@ function addNewIdea(newIdea){
       }
     }).then(function(response){
       // notyf.confirm('Blank Submitted For Approval');
+      getSubtopicIdeas();
       swal("Idea Added To Database", "", "success");
       self.newIdea = {};
     }).catch(function(error) {
@@ -75,19 +76,19 @@ function getSubtopicIdeas() {
 }//end of getSubTopics()
 
 //adds liked/idea to DB
-function addLiked(newUser){
+function addLiked(subtopicIdeas){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
       method: 'POST',
-      url: '/login/newUser',
-      data: newUser,
+      url: '/login/addLiked',
+      data: subtopicIdeas,
       headers: {
         id_token: idToken
       }
     }).then(function(response){
       // notyf.confirm('Blank Submitted For Approval');
       swal("Liked Added To Database", "", "success");
-      self.newUser = {};
+      self.subtopicIdeas = {};
     }).catch(function(error) {
       swal("Values Are Incorrect", "Try Again!", "error");
       console.log('error authenticating', error);
@@ -96,19 +97,19 @@ function addLiked(newUser){
 }//end of addNewUser()
 
 //adds loved/idea to DB
-function addLoved(newUser){
+function addLoved(subtopicIdeas){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
       method: 'POST',
-      url: '/login/newUser',
-      data: newUser,
+      url: '/login/addLoved',
+      data: subtopicIdeas,
       headers: {
         id_token: idToken
       }
     }).then(function(response){
       // notyf.confirm('Blank Submitted For Approval');
       swal("Loved Added To Database", "", "success");
-      self.newUser = {};
+      self.subtopicIdeas = {};
     }).catch(function(error) {
       swal("Values Are Incorrect", "Try Again!", "error");
       console.log('error authenticating', error);
@@ -117,25 +118,51 @@ function addLoved(newUser){
 }//end of addNewUser()
 
 //adds flag/idea to DB
-function addFlag(newUser){
+function addFlag(subtopicIdeas){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
       method: 'POST',
-      url: '/login/newUser',
-      data: newUser,
+      url: '/login/addFlag',
+      data: subtopicIdeas,
       headers: {
         id_token: idToken
       }
     }).then(function(response){
       // notyf.confirm('Blank Submitted For Approval');
       swal("flag Added To Database", "", "success");
-      self.newUser = {};
+      self.subtopicIdeas = {};
     }).catch(function(error) {
       swal("Values Are Incorrect", "Try Again!", "error");
       console.log('error authenticating', error);
     });
   });//end of firebase.auth()
 }//end of addNewUser()
+
+
+
+
+
+
+  return {
+//new user object from add address button click
+    addNewUser : addNewUser,
+//new idea object from idea button click
+    addNewIdea : addNewIdea,
+//sends current subtopics to add idea view option element
+    subTopicObject : subTopicObject,
+//adds ideas to subtopic views
+    subtopicIdeas : subtopicIdeas,
+//adds liked to comment at DB
+    addLiked : addLiked,
+//adds loved to comment at DB
+    addLoved : addLoved,
+//adds flag to comment at DB
+    addFlag : addFlag
+  }
+
+}]); // end of app.factory
+
+
 
 
 // //checks for admin rights
@@ -162,26 +189,3 @@ function addFlag(newUser){
 //     }
 //   });//end of auth.$onAuthStateChanged
 // }//end of getAdmin()
-
-
-
-
-
-  return {
-//new user object from add address button click
-    addNewUser : addNewUser,
-//new idea object from idea button click
-    addNewIdea : addNewIdea,
-//sends current subtopics to add idea view option element
-    subTopicObject : subTopicObject,
-//adds ideas to subtopic views
-    subtopicIdeas : subtopicIdeas,
-//adds liked to comment at DB
-    addLiked : addLiked,
-//adds loved to comment at DB
-    addLoved : addLoved,
-//adds flag to comment at DB
-    addFlag : addFlag
-  }
-
-}]); // end of app.factory

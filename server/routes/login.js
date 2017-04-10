@@ -51,6 +51,62 @@ router.post('/newidea', function (req, res) {
     });//end of .then
 });//end of router.post
 
+//adds liked to DB
+router.post('/addLiked', function (req, res) {
+  var addLiked = req.body;
+  console.log('addLiked: ', addLiked);
+  pool.connect()
+    .then(function (client) {
+      client.query('INSERT INTO ideas (title, description) VALUES ($1, $2)',
+        [newIdea.idea, newIdea.description])
+        .then(function (result) {
+          client.release();
+          res.sendStatus(201);
+        })
+        .catch(function (err) {
+          console.log('error on INSERT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.post
+
+//adds loved to DB
+router.post('/addLoved', function (req, res) {
+  var addLoved = req.body;
+  console.log('addLoved: ', addLoved);
+  pool.connect()
+    .then(function (client) {
+      client.query('INSERT INTO ideas (title, description) VALUES ($1, $2)',
+        [newIdea.idea, newIdea.description])
+        .then(function (result) {
+          client.release();
+          res.sendStatus(201);
+        })
+        .catch(function (err) {
+          console.log('error on INSERT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.post
+
+//adds flagged to DB
+router.post('/addFlag', function (req, res) {
+  var addFlag = req.body;
+  console.log('addFlag: ', addFlag);
+  pool.connect()
+    .then(function (client) {
+      client.query('INSERT INTO ideas (title, description) VALUES ($1, $2)',
+        [newIdea.idea, newIdea.description])
+        .then(function (result) {
+          client.release();
+          res.sendStatus(201);
+        })
+        .catch(function (err) {
+          console.log('error on INSERT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.post
 
 
 

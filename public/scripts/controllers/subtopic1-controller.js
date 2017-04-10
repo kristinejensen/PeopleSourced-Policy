@@ -10,13 +10,13 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
   }
 
 //add liked button click
-  self.addLiked = function() {
-    console.log('Liked clicked')
+  self.addLiked = function(subtopicIdeas) {
+    console.log('Liked clicked: ', subtopicIdeas)
     DataFactory.addLike;
   }
 //add loved button click
-  self.addLoved = function() {
-    console.log('Loved clicked')
+  self.addLoved = function(subtopicIdeas) {
+    console.log('Loved clicked: ', subtopicIdeas)
     DataFactory.addLoved;
   }
 //get moreComments button click
@@ -24,17 +24,10 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
     console.log('comments clicked')
   }
 //add flag button click
-  self.addFlag = function() {
-    console.log('Flagged clicked')
-    DataFactory.addflag;
+  self.addFlag = function(subtopicIdeas) {
+    console.log('Flagged clicked: ', subtopicIdeas)
+    DataFactory.addFlag;
   }
-
-
-
-
-
-
-
 
 
 
