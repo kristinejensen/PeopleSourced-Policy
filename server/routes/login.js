@@ -108,6 +108,25 @@ router.post('/addFlag', function (req, res) {
     });//end of .then
 });//end of router.post
 
+//adds comments to DB
+router.post('/addComment', function (req, res) {
+  var newComment = req.body;
+  console.log('newComment: ', newComment);
+  pool.connect()
+    .then(function (client) {
+      client.query('INSERT INTO comments (description, idea_id, user_id) VALUES ($1, $2, $3)',
+        [newComment.description, newComment.idea_id, newComment.user_id])
+        .then(function (result) {
+          client.release();
+          res.sendStatus(201);
+        })
+        .catch(function (err) {
+          console.log('error on INSERT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.post
+
 
 
 

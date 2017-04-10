@@ -171,21 +171,20 @@ function addFlag(subtopicIdeas){
   });//end of firebase.auth()
 }//end of addNewUser()
 
-//left off here.  Finish 
 //adds loved/idea to DB
-function addComment(subtopicIdeas){
+function addComment(newComment){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
       method: 'POST',
-      url: '/login/addLoved',
-      data: subtopicIdeas,
+      url: '/login/addComment',
+      data: newComment,
       headers: {
         id_token: idToken
       }
     }).then(function(response){
       // notyf.confirm('Blank Submitted For Approval');
       swal("Loved Added To Database", "", "success");
-      self.subtopicIdeas = {};
+      self.addComment = {};
     }).catch(function(error) {
       swal("Values Are Incorrect", "Try Again!", "error");
       console.log('error authenticating', error);
