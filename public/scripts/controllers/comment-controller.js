@@ -6,18 +6,18 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.commentsObject = DataFactory.commentsObject;
 
 //adds idea like to DB
-  self.addLiked = function() {
-    console.log("addLiked button clicked");
-  }
-//adds idea loved to DB
-  self.addLoved = function() {
-    console.log("addLoved button clicked");
+  self.addLiked = function(comments) {
+    console.log("addLiked button clicked:", comments.id);
   }
 //adds idea flag to DB
   self.addFlag = function() {
     console.log("addFlag button clicked");
   }
-
+//add comment to comment to DB
+  self.commentRedirect = function() {
+    console.log('button click');
+    $location.url('/comment');
+  }
 //adds new comment to DB
   self.addComment = function(newComment) {
     console.log(newComment);
