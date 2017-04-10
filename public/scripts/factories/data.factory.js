@@ -12,14 +12,9 @@ app.factory('DataFactory', ['$http', function($http){
 
   //function to display user list on manage users admin view
   function getUsers(){
-    // var firebaseUser = auth.$getAuth();
-    // if(firebaseUser) {
-    //   firebaseUser.getToken().then(function(idToken){
     $http({
       method: 'GET',
       url: '/admin/manageUsers'
-      // headers: {          //   id_token: idToken
-      // }
     }).then(function(response){
       allUsers.list = response.data;
       console.log(allUsers.list);
@@ -30,14 +25,9 @@ app.factory('DataFactory', ['$http', function($http){
   function deleteUser(userId){
     console.log('the delete user button was clicked');
     console.log('the targeted user id is:', userId);
-    // var firebaseUser = auth.$getAuth();
-    // if(firebaseUser) {
-    //   firebaseUser.getToken().then(function(idToken){
     $http({
       method: 'DELETE',
       url: '/admin/deleteUser' + userId
-      // headers: {          //   id_token: idToken
-      // }
     }).then(function(response){
       console.log('user successfull deleted from database');
     })

@@ -16,8 +16,6 @@ app.get('/', function(req, res){
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-
-
 app.use('/admin', admin);
 
 /* Whatever you do below this is protected by your authentication. */

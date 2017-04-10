@@ -28,10 +28,7 @@ router.delete('/deleteUser/:id', function(req, res) {
   var userIdToDelete = req.params.id;
   console.log('hit delete route');
   console.log('here is the id to delete ->', userIdToDelete);
-
-  // // db query
-  // // DELETE FROM task WHERE id=7
-  // pool.connect(function(err, client, done) {
+  // pg.connect(function(err, client, done) {
   //   if(err){
   //     console.log(err);
   //     res.sendStatus(500);
@@ -49,6 +46,5 @@ router.delete('/deleteUser/:id', function(req, res) {
   //   }
   // });
 });
-
 
 module.exports = router;
