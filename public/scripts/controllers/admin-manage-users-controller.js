@@ -1,6 +1,6 @@
 app.controller('AdminManageController', ['$firebaseAuth','$http', '$location', function($firebaseAuth, $http, $location){
   var self = this;
-  var auth = $firebaseAuth();
+  // var auth = $firebaseAuth();
   //
   // self.logIn = function(){
   //   auth.$signInWithPopup("google").then(function(firebaseUser) {

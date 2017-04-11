@@ -13,7 +13,7 @@
 }
 
 .greybackground {
-  background-color: #eeeeee;
+  background-color: #eeeeee !important;
 }
 
 .topicText{
@@ -175,6 +175,15 @@ background-color: #333333;
 
 .col-xs-5ths {
   width: 20%;
+  float: left;
+}
+
+.col-md-5s {
+  width: 10%;
+  float: left;
+}
+.col-md-5m {
+  width: 35%;
   float: left;
 }
 
@@ -362,6 +371,20 @@ input, textarea, select {
 select {
   background-color: #333333;
   color: white;
+}
+
+.options {
+    background-color: #333333;
+    color: white;
+
+}
+
+.cardContainer .options .col2 > li {
+  height: 50%;
+}
+.cardContainer .options .col2 > li:last-child {
+  top: auto;
+  bottom: 0;
 }
 
 

@@ -17,6 +17,12 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'IdeaController',
     controllerAs: 'ic'
   })
+//test view, remove before merge
+  .when('/test', {
+    templateUrl: 'views/test.html',
+    controller: 'HomeController',
+    controllerAs: 'hc'
+  })
   .when('/flag', {
     templateUrl: 'views/flag.html',
     controller: 'FlagController',

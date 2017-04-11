@@ -1,0 +1,121 @@
+<!--
+/* ============================================================================= *
+*        ABOVE SUBTOPIC NAVIGATION                                              *
+* ============================================================================= */
+-->
+<div class = "container">
+  <div id="mainTopic" class="row">
+    <!--//MAIN TOPIC TITLE AND DESCRIPTION//-->
+    <div class="col-md-7 topicText">
+      <h1>MAIN TOPIC TITLE</h1>
+      <p>here is some text that will be associated with the main topic.</p>
+    </div>
+    <!--//TOP-SIDE CALL TO ACTION ON MOBILE/SMALL SCREEN//-->
+    <div class="mobileCTA visible-xs-block">
+      <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
+      <button class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+    </div>
+    <!--//TOP-SIDE CALL TO ACTION ON MEDIUM AND LARGE SCREEN//-->
+    <div class="visible-md-block visible-lg-block visible-xl-block  col-md-5 callToAction">
+      <div class="ctaTitle">
+        <h2><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
+      </div>
+      <div>
+        <form class="ctaForm" align="center" action="index.html" method="post">
+          <select name="Subtopics">
+            <option value="subtopic1">Subtopic 1</option>
+            <option value="subtopic2">Subtopic 2</option>
+            <option value="subtopic3">Subtopic 3</option>
+            <option value="subtopic4">Subtopic 4</option>
+            <option value="subtopic5">Subtopic 5</option>
+          </select>
+          <input type="text" name="" value="" placeholder="Title">
+          <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
+          <button class = "btn-cta" type="button" name="button">Add Your Idea!</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!--
+/* ============================================================================= *
+*        SUBTOPIC NAVIGATION                                                    *
+* ============================================================================= */
+-->
+<div ng-include="'/views/templates/subtopicNav.html'"></div>
+
+<!--
+/* ============================================================================= *
+*        BELOW SUBTOPIC NAVIGATION                                                    *
+* ============================================================================= */
+-->
+<div class="greyBackground">
+  <div class = 'cardContainer row'>
+    <div class="singleCard col-md-4">
+
+      <div class="card_content">
+        <h2>Here is where the title of the idea will go.</h2>
+        <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <div class="author_content">
+          <div class ="author_img col-xl-3 col-md-3">
+            <p>IMAGE</p>
+          </div>
+          <div class="author_info cole-xl 9 col-md-9">
+            <h4>Author Name</h4>
+            <h5>Ward x</h5>
+          </div>
+        </div>
+      </div>
+      <div class="spacer">
+      </div>
+      <div class="love_like row">
+          <ul>
+            <div class="col-md-6 actionBtn">
+              <li class="like">
+                <span>LIKE</span>
+              </li>
+            </div>
+            <div class="col-md-6 actionBtn">
+              <li class="love">
+                <span>LOVE</span>
+              </li>
+            </div>
+          </ul>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="singleCard col-md-4">
+
+      <div class="card_content">
+        <h2>Here is where the title of the idea will go.</h2>
+        <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <div class="author_content">
+          <div class ="author_img col-xl-3 col-md-3">
+            <p>IMAGE</p>
+          </div>
+          <div class="author_info cole-xl 9 col-md-9">
+            <h4>Author Name</h4>
+            <h5>Ward x</h5>
+          </div>
+        </div>
+      </div>
+      <div class="spacer">
+      </div>
+      <div class="love_like row">
+          <ul>
+            <div class="col-md-6 actionBtn">
+              <li class="like">
+                <span>LIKE</span>
+              </li>
+            </div>
+            <div class="col-md-6 actionBtn">
+              <li class="love">
+                <span>LOVE</span>
+              </li>
+            </div>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
