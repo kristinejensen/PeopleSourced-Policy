@@ -1,6 +1,6 @@
 <h1>login view</h1>
 <header>
-  <img class="authImage" ng-hide="lc.email === NULL" src="{{lc.photo}}">{{lc.email}}
+  <img class="authImage" ng-hide="lc.email === NULL" src="{{lc.photo}}"><span> {{lc.email}} </span>
     <button ng-click="lc.login()" ng-show="lc.email === NULL" type="button" name="button"> Login </button>
     <button ng-click="lc.logout()" ng-hide="lc.email === NULL" type="button" name="button"> Logout </button>
 </header>
