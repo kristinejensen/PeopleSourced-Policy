@@ -2,6 +2,7 @@ app.factory('DataFactory', ['$http', function($http){
   // var idea = {list: []};
   // var comments = {list: []};
   var allUsers = {list: []};
+  var ideaFlags = {};
 
   init();
 
@@ -11,7 +12,7 @@ app.factory('DataFactory', ['$http', function($http){
   }
 
   //function to display user list on manage users admin view
-  function getUsers(){
+  function getUsers() {
     $http({
       method: 'GET',
       url: '/admin/manageUsers'
@@ -21,6 +22,7 @@ app.factory('DataFactory', ['$http', function($http){
     })
   }
 
+//function to deactivate user profile
   function deactivateUser(userId) {
     swal({
       title: 'Deactivate User',
@@ -45,6 +47,18 @@ app.factory('DataFactory', ['$http', function($http){
       });
     })
   }
+
+  //function to display flag total
+  // function getIdeaFlags(userId) {
+  //   console.log('get idea flags function is being called');
+  //   $http({
+  //     method: 'GET',
+  //     url: '/admin/manageUsers' + userId
+  //   }).then(function(response){
+  //     allUsers.list = response.data;
+  //     console.log(allUsers.list);
+  //   })
+  // }
 
   //
   //
