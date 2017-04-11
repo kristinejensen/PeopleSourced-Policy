@@ -19,6 +19,17 @@ app.factory('DataFactory', ['$http', function($http){
     }).then(function(response){
       allUsers.list = response.data;
       console.log(allUsers.list);
+      for (var i = 0; i < allUsers.list.length; i++) {
+        if(allUsers.list[i].ideas_flags_count == null){
+          allUsers.list[i].ideas_flags_count = 0;
+        }
+        if(allUsers.list[i].comments_flags_count == null){
+          allUsers.list[i].comments_flags_count = 0;
+        }
+        if(allUsers.list[i].subflags_count == null){
+          allUsers.list[i].subflags_count = 0;
+        }
+      }
     })
   }
 
@@ -48,17 +59,6 @@ app.factory('DataFactory', ['$http', function($http){
     })
   }
 
-  //function to display flag total
-  // function getIdeaFlags(userId) {
-  //   console.log('get idea flags function is being called');
-  //   $http({
-  //     method: 'GET',
-  //     url: '/admin/manageUsers' + userId
-  //   }).then(function(response){
-  //     allUsers.list = response.data;
-  //     console.log(allUsers.list);
-  //   })
-  // }
 
   //
   //
