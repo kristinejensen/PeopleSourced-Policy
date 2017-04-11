@@ -1,72 +1,81 @@
 app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
 
-  var self = this;
+ var self = this;
 
 //notyf must have
-  // var notyf = new Notyf();
+ // var notyf = new Notyf();
 //google authenticate bellow
-  var auth = $firebaseAuth();
+ var auth = $firebaseAuth();
 //redirection after login
-  function loginView() {
-    $location.path('/login');
-  }
+ function loginView() {
+   $location.path('/login');
+ }
 //redirection after logout
-  function logoutView() {
-    $location.path('/home');
-  }
+ function logoutView() {
+   $location.path('/home');
+ }
 //redirection to admin view
-  function adminView() {
-    $location.path('/admin');
-  }
+ function adminView() {
+   $location.path('/admin');
+ }
 
 //user google login authentication
-  self.login = function() {
-        console.log("login clicked");
-    auth.$signInWithPopup("google").then(function(firebaseUser) {
+ self.login = function() {
+       console.log("login clicked");
+   auth.$signInWithPopup("google").then(function(firebaseUser) {
 //redirects to login view
-      loginView();
-        // notyf.confirm('You Are Logged In');
-        // swal("You Are Logged In", "", "success");
-        self.photo = firebaseUser.user.photoURL;
-        self.email = firebaseUser.user.email;
-          console.log("Firebase Authenticated as: ", firebaseUser.user.displayName);
-          // console.log("Firebase Authenticated as: ", firebaseUser.user.email);
-    }).catch(function(error) {
-        console.log("Authentication failed: ", error);
-    });
-  };//end of self.authUser()
+     loginView();
+       // notyf.confirm('You Are Logged In');
+       // swal("You Are Logged In", "", "success");
+       self.photo = firebaseUser.user.photoURL;
+       self.email = firebaseUser.user.email;
+         console.log("Firebase Authenticated as: ", firebaseUser.user.displayName);
+         // console.log("Firebase Authenticated as: ", firebaseUser.user.email);
+   }).catch(function(error) {
+       console.log("Authentication failed: ", error);
+   });
+ };//end of self.authUser()
 
 //user google logout de-authedicate
-  self.logout = function() {
-          console.log("logout clicked");
-    auth.$signOut().then(function() {
+ self.logout = function() {
+         console.log("logout clicked");
+   auth.$signOut().then(function() {
 //redirects back to home view
-      logoutView();
-        // swal("You've Logged Out!", "", "success");
-          console.log('Logging the user out!');
-    });
-  };//end of self.deAuthUser()
+     logoutView();
+       // swal("You've Logged Out!", "", "success");
+         console.log('Logging the user out!');
+   });
+ };//end of self.deAuthUser()
 
 //new user object from view button click
-  self.addNewUser = function(user) {
+ self.addNewUser = function(user) {
 //brings in firebase data to function
-    var firebaseUser = auth.$getAuth();
+   var firebaseUser = auth.$getAuth();
+
+  //  JSON.stringify(user)
+  //  console.log("stringify: ", user)
 //creating a new variable with input data and firebase data
-    var newUser = {
-      name : firebaseUser.displayName,
-      street : user.street,
-      city : user.city,
-      state : user.state,
-      zipCode : user.zipCode,
-      country : user.country,
-      email : firebaseUser.email
-    }
-    console.log(newUser);
-    DataFactory.addNewUser(newUser);
-    self.user = {};
+   // var newUser = {
+   //   name : firebaseUser.displayName,
+   //   street : user.street,
+   //   city : user.city,
+   //   state : user.state,
+   //   zipCode : user.zipCode,
+   //   email : firebaseUser.email
+   // }
+
+   var newUser = {
+     name : firebaseUser.displayName,
+     address : user.street + " " + user.city + " , " + user.state + " " + user.zipCode,
+     email : firebaseUser.email
+   }
+
+   console.log(newUser);
+   DataFactory.addNewUser(newUser);
+   self.user = {};
 //redirects back to home view after submission
-    logoutView();
-  }
+   logoutView();
+ }
 
 
 }]);//end of app.controller()
