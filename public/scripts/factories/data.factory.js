@@ -21,6 +21,31 @@ app.factory('DataFactory', ['$http', function($http){
     })
   }
 
+  function deactivateUser(userId) {
+    swal({
+      title: 'Deactivate User',
+      text: "Are you sure you want to deactivate this user?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, I\'m sure'
+    }).then(function() {
+      $http({
+        method: 'PUT',
+        url: '/admin/deactivateUser/' + userId
+      }).then(function(response) {
+        console.log('user marked as inactive');
+        swal(
+          'Success',
+          'The user has been deactivated.',
+          'success'
+        )
+        init();
+      });
+    })
+  }
+
   //
   //
   //
@@ -50,7 +75,8 @@ app.factory('DataFactory', ['$http', function($http){
   //
 
   return {
-    allUsers : allUsers
+    allUsers: allUsers,
+    deactivateUser: deactivateUser
   }
 
 }]); // end of app.factory

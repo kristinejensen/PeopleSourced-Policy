@@ -1,16 +1,10 @@
 app.controller('AdminManageUsersController', ['$http', '$location', 'DataFactory', function($http, $location, DataFactory){
   var self = this;
 
-  self.allUsers = DataFactory.allUsers
+  self.allUsers = DataFactory.allUsers;
 
   self.deactivateUser = function(userId) {
-    console.log('deactivate button clicked');
-    $http({
-      method: 'PUT',
-      url: '/admin/deactivateUser/' + userId
-    }).then(function(response) {
-      console.log('user marked as inactive');
-    });
-  }
+   DataFactory.deactivateUser(userId);
+ };
 
 }]); //end of controller

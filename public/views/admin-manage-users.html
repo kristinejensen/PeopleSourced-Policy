@@ -1,9 +1,8 @@
 <h3>Manage Users</h3>
 
 <div ng-repeat="user in amuc.allUsers.list">
-  {{user.name}}
-  {{user.email}}
-  {{user.ward}}
-  {{user.active}}
+  <span ng-show="user.active">{{user.name}}</span>
+  <span ng-show="user.active">{{user.email}}</span>
+  <span ng-show="user.active">{{user.ward}}</span>
   <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs" ng-show="user.active">Deactivate</button>
 </div>
