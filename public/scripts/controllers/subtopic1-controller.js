@@ -8,7 +8,7 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
   self.createIdea = function() {
     $location.path('/idea');
   }
-
+  
 //get moreComments button click
   self.moreComments = function() {
     console.log('comments clicked');
