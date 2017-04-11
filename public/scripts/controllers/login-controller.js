@@ -64,7 +64,8 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
     var newUser = {
       name : firebaseUser.displayName,
       address : user.street + " " + user.city + " , " + user.state + " " + user.zipCode,
-      email : firebaseUser.email
+      email : firebaseUser.email,
+      word : ""
     }
 
     console.log(newUser);

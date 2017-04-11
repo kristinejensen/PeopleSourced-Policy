@@ -1,15 +1,15 @@
 app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
 
 //containers
-var subTopicObject = { list:[] };
-var subtopicIdeas1 = { list:[] };
-var subtopicIdeas2 = { list:[] };
-var subtopicIdeas3 = { list:[] };
-var subtopicIdeas4 = { list:[] };
-var subtopicIdeas5 = { list:[] };
-var commentsObject = { list:[] };
+var subTopicObject = { list : [] };
+var subtopicIdeas1 = { list : [] };
+var subtopicIdeas2 = { list : [] };
+var subtopicIdeas3 = { list : [] };
+var subtopicIdeas4 = { list : [] };
+var subtopicIdeas5 = { list : [] };
+var commentsObject = { list : [] };
 
-//calls startup functions
+//calls functions at startup
 init();
 
 function init() {
@@ -157,7 +157,7 @@ function addComment(newComment){
     }).then(function(response){
       // notyf.confirm('Blank Submitted For Approval');
       getComments();
-      swal("Loved Added To Database", "", "success");
+      swal("Comment Added To Database", "", "success");
       self.addComment = {};
     }).catch(function(error) {
       swal("Values Are Incorrect", "Try Again!", "error");
