@@ -19,8 +19,8 @@ router.post('/newUser', function (req, res) {
   console.log('newUser: ', newUser);
   pool.connect()
     .then(function (client) {
-      client.query('INSERT INTO users (name, street, city, state, zipCode, country, email) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-        [newUser.name, newUser.street, newUser.city, newUser.state, newUser.zipCode, newUser.country, newUser.email])
+      client.query('INSERT INTO users (name, address, email) VALUES ($1, $2, $3)',
+        [newUser.name, newUser.address, newUser.email])
         .then(function (result) {
           client.release();
           res.sendStatus(201);
@@ -127,13 +127,6 @@ router.post('/addComment', function (req, res) {
     });//end of .then
 });//end of router.post
 
-
-
-
-
-
-
-
 // //check auth user to admin rights
 //   router.get("/admin", function(req, res){
 //     pg.connect(connectionString, function(err, client, done){
@@ -177,3 +170,11 @@ router.post('/addComment', function (req, res) {
 
 
 module.exports = router;
+
+
+
+
+
+
+//client.query('INSERT INTO users (name, street, city, state, zipCode, country, email) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+//  [newUser.name, newUser.street, newUser.city, newUser.state, newUser.zipCode, newUser.country, newUser.email])

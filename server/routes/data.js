@@ -33,7 +33,7 @@ router.get('/getSubTopics', function (req, res) {
 router.get('/subtopicIdeas1', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM subtopics WHERE title='subtopic 1'")
+      client.query("SELECT * FROM ideas")
         .then(function (result) {
           client.release();
           res.send(result.rows);
