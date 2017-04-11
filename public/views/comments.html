@@ -5,9 +5,9 @@
   <h3> IDEA (dynamic) </h3>
   <div> Idea description (dynamic) </div>
   <div> Author (dynamic) </div>
-  <button ng-click="cc.addLiked()" type="button" name="button"> Like </button>
-  <button ng-click="cc.addLoved()" type="button" name="button"> Love </button>
-  <button ng-click="cc.addFlag()" type="button" name="button"> Flag </button>
+  <!-- <button ng-click="cc.addLiked()" type="button" name="button"> Like </button> -->
+  <!-- <button ng-click="cc.addLoved()" type="button" name="button"> Love </button> -->
+  <!-- <button ng-click="cc.addFlag()" type="button" name="button"> Flag </button> -->
 </div>
 
 <!-- comment submission about main idea -->
@@ -19,9 +19,9 @@
 <!-- dynamic comments table -->
 <table>
   <td ng-repeat="comments in cc.commentsObject.list">
-    <button ng-click="cc.addLiked(comments)" type="button" name="Liked"> Liked </button>
+    <!-- <button ng-click="cc.addLiked(comments)" type="button" name="Liked"> Liked </button> -->
     <button ng-click="cc.commentRedirect()" type="button" name="Comments"> Comments </button>
-    <button ng-click="cc.addFlag()" type="button" name="Flag"> Flag </button>
+    <!-- <button ng-click="cc.addFlag()" type="button" name="Flag"> Flag </button> -->
       <div class=""> Description: {{comments.description}} </div>
       <div class=""> Author: {{comments.name}} </div>
   </td>
