@@ -110,69 +110,6 @@ function getSubtopicIdeas() {
     });
 }//end of getSubTopicIdeas()
 
-//adds liked/idea to DB
-function addLiked(subtopicIdeas){
-  firebase.auth().currentUser.getToken().then(function(idToken) {
-    $http({
-      method: 'POST',
-      url: '/login/addLiked',
-      data: subtopicIdeas,
-      headers: {
-        id_token: idToken
-      }
-    }).then(function(response){
-      // notyf.confirm('Blank Submitted For Approval');
-      swal("Liked Added To Database", "", "success");
-      self.subtopicIdeas = {};
-    }).catch(function(error) {
-      swal("Values Are Incorrect", "Try Again!", "error");
-      console.log('error authenticating', error);
-    });
-  });//end of firebase.auth()
-}//end of addNewUser()
-
-//adds loved/idea to DB
-function addLoved(subtopicIdeas){
-  firebase.auth().currentUser.getToken().then(function(idToken) {
-    $http({
-      method: 'POST',
-      url: '/login/addLoved',
-      data: subtopicIdeas,
-      headers: {
-        id_token: idToken
-      }
-    }).then(function(response){
-      // notyf.confirm('Blank Submitted For Approval');
-      swal("Loved Added To Database", "", "success");
-      self.subtopicIdeas = {};
-    }).catch(function(error) {
-      swal("Values Are Incorrect", "Try Again!", "error");
-      console.log('error authenticating', error);
-    });
-  });//end of firebase.auth()
-}//end of addNewUser()
-
-//adds flag/idea to DB
-function addFlag(subtopicIdeas){
-  firebase.auth().currentUser.getToken().then(function(idToken) {
-    $http({
-      method: 'POST',
-      url: '/login/addFlag',
-      data: subtopicIdeas,
-      headers: {
-        id_token: idToken
-      }
-    }).then(function(response){
-      // notyf.confirm('Blank Submitted For Approval');
-      swal("flag Added To Database", "", "success");
-      self.subtopicIdeas = {};
-    }).catch(function(error) {
-      swal("Values Are Incorrect", "Try Again!", "error");
-      console.log('error authenticating', error);
-    });
-  });//end of firebase.auth()
-}//end of addNewUser()
-
 //gets all comments for comment view
 function getComments() {
     $http({
@@ -225,12 +162,6 @@ function addComment(newComment){
     subtopicIdeas4 : subtopicIdeas4,
 //adds ideas to subtopic5 view
     subtopicIdeas5 : subtopicIdeas5,
-//adds liked to comment at DB
-    addLiked : addLiked,
-//adds loved to comment at DB
-    addLoved : addLoved,
-//adds flag to comment at DB
-    addFlag : addFlag,
 //adds comment to DB
     addComment : addComment,
 //gets comments to comment view

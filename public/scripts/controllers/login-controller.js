@@ -51,9 +51,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
   self.addNewUser = function(user) {
 //brings in firebase data to function
     var firebaseUser = auth.$getAuth();
-
-    JSON.stringify(user)
-    console.log("stringify: ", user)
 //creating a new variable with input data and firebase data
     // var newUser = {
     //   name : firebaseUser.displayName,
@@ -63,7 +60,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
     //   zipCode : user.zipCode,
     //   email : firebaseUser.email
     // }
-
+//creating a new variable with input data and firebase data
     var newUser = {
       name : firebaseUser.displayName,
       address : user.street + " " + user.city + " , " + user.state + " " + user.zipCode,
