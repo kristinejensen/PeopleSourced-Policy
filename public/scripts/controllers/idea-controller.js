@@ -16,12 +16,14 @@ var userMatchObject = DataFactory.userMatchObject.list;
 //function adds new idea to DB
   self.addNewIdea = function(idea) {
     var firebaseUser = auth.$getAuth();
+//container to loop id's through
     var id = "";
+//loops through all users email to find correct id
       for (var i = 0; i < userMatchObject.length; i++) {
         if (userMatchObject[i].email == firebaseUser.email) {
           var id = userMatchObject[i].id;
         }
-        console.log("user id: ", id)
+        // console.log("user id: ", id)
       };//end of for loop
 
 //name and email is added to object
@@ -33,7 +35,7 @@ var userMatchObject = DataFactory.userMatchObject.list;
       description : idea.description,
       id : id
     }
-    console.log("newIdea: ",newIdea);
+    // console.log("newIdea: ",newIdea);
 //sents object to factory
     DataFactory.addNewIdea(newIdea);
 //empties inputs on submit
