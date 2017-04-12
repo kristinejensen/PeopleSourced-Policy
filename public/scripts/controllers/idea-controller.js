@@ -15,6 +15,7 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
 var userMatchObject = DataFactory.userMatchObject.list;
 //function adds new idea to DB
   self.addNewIdea = function(idea) {
+//sources firebaseUser in the function  
     var firebaseUser = auth.$getAuth();
 //container to loop id's through
     var id = "";
