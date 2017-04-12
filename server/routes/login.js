@@ -40,8 +40,8 @@ router.post('/newidea', function (req, res) {
   console.log('newIdea: ', newIdea);
   pool.connect()
     .then(function (client) {
-      client.query('INSERT INTO ideas (title, description, subtopics_id) VALUES ($1, $2, $3)',//, $4  , users_email
-        [newIdea.title, newIdea.description, newIdea.subtopicId])//, newIdea.email
+      client.query('INSERT INTO ideas (title, description, subtopics_id, users_id) VALUES ($1, $2, $3, $4)',
+        [newIdea.title, newIdea.description, newIdea.subtopicId, newIdea.id])
         .then(function (result) {
           client.release();
           res.sendStatus(201);
