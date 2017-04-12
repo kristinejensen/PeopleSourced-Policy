@@ -1,9 +1,9 @@
 app.factory('DataFactory', ['$http', function($http){
-  // var idea = {list: []};
-  // var comments = {list: []};
+
   var allUsers = {list: []};
   var filterList = {list: []};
   var userFilter = {};
+  var userResults = {list: []};
 
   init();
 
@@ -61,7 +61,7 @@ app.factory('DataFactory', ['$http', function($http){
     })
   }
 
-  //function to filter user search on admin filter users view
+  //function to filter user search on admin manage users view
   function filterUsers() {
     $http({
       method: 'GET',
@@ -72,11 +72,29 @@ app.factory('DataFactory', ['$http', function($http){
     })
   }
 
+  //function to search users on admin manage users view
+  function searchUsers() {
+    $http({
+      method: 'GET',
+      url: '/admin/searchUsers',
+      headers: {
+        searchString: userFilter.searchString,
+        filter: userFilter.filter.filter
+      }
+    }).then(function(response){
+      allUsers.list = response.data;
+      console.log(allUsers.list);
+    })
+  }
+
 
   return {
     allUsers: allUsers,
     deactivateUser: deactivateUser,
-    filterList: filterList
+    filterList: filterList,
+    searchUsers: searchUsers,
+    userFilter: userFilter,
+    userResults: userResults
   }
 
 }]); // end of app.factory

@@ -98,5 +98,4 @@ CREATE TABLE user_filter (
 INSERT INTO user_filter (id, filter)
 VALUES(1, 'name'),
 (2, 'email'),
-(3, 'ward'),
-(4, 'active');
+(3, 'ward');

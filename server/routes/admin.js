@@ -58,4 +58,51 @@ router.get('/filterUsers', function (req, res) {
   });
 });
 
+//queries database for matching users on admin manage users view
+router.get('/searchUsers', function (req, res) {
+  var userSearch = req.headers
+  var newSearchString = "%" + req.headers.searchstring + "%";
+  console.log(newSearchString);
+  if(req.headers.filter == 'User Name'){
+    pool.connect(function (err, client, done) {
+      client.query("SELECT * FROM users WHERE name ILIKE $1;", [newSearchString], function (err, result) {
+        done();
+        if (err) {
+          console.log('Error completing user search query', err);
+          res.sendStatus(500);
+        } else {
+          res.send(result.rows);
+          console.log(result.rows);
+        }
+      });
+    });
+  } else if(req.headers.filter == 'User Email'){
+    pool.connect(function (err, client, done) {
+      client.query("SELECT * FROM users WHERE email ILIKE $1;", [newSearchString], function (err, result) {
+        done();
+        if (err) {
+          console.log('Error completing user search query', err);
+          res.sendStatus(500);
+        } else {
+          res.send(result.rows);
+          console.log(result.rows);
+        }
+      });
+    });
+  }else{
+    pool.connect(function (err, client, done) {
+      client.query("SELECT * FROM users WHERE ward ILIKE $1;", [newSearchString], function (err, result) {
+        done();
+        if (err) {
+          console.log('Error completing user search query', err);
+          res.sendStatus(500);
+        } else {
+          res.send(result.rows);
+          console.log(result.rows);
+        }
+      });
+    });
+  }
+});
+
 module.exports = router;
