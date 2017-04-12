@@ -94,27 +94,24 @@ var voterInfo={};
 
 router.post('/newUser', function (req, res) {
  var newUser = req.body;
- console.log('newUser: ', newUser.address);
+ // console.log('newUser: ', newUser.address);
 
  civicInfo.voterInfo(
-   { address:newUser.address}, function callback (error, data) {
-     console.log('here');
-     console.log("error", error);
-     console.log("++++++++++++++++++data");
-
+   { address: newUser.address}, function callback (error, data) {
+    //  console.log("error", error);
+    //  console.log("++++++++++++++++++data",data);
+newUser.ward = "other";
 for (var i = 0; i <= 14; i++) {
-  if (data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ]== defined) {
-  newUser.ward = data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ];
-  }
-  if (i== 14) {
-  newUser.ward = "other"
+  // console.log(typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ]);
+  if (typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ] !== 'undefined') {
+  newUser.ward = "ward " + (i);
   }
 }
-  });
 
+console.log(newUser);
  pool.connect()
    .then(function (client) {
-     client.query('INSERT INTO users (name, address, email) VALUES ($1, $2, $3, $4)',
+     client.query('INSERT INTO users (name, address, email, ward) VALUES ($1, $2, $3, $4)',
        [newUser.name, newUser.address, newUser.email, newUser.ward])
        .then(function (result) {
          client.release();
@@ -127,7 +124,7 @@ for (var i = 0; i <= 14; i++) {
    });//end of .then
 });//end of router.post
 
-
+  });
 
 
 // //check auth user to admin rights

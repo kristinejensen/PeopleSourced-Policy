@@ -9,14 +9,14 @@ var subtopicIdeas4 = { list:[] };
 var subtopicIdeas5 = { list:[] };
 var commentsObject = { list:[] };
 
-//calls startup functions
-init();
-//
-// function init() {
-//   getSubTopics();
-//   getSubtopicIdeas();
-//   getComments();
-// }
+// calls startup functions
+// init();
+// //
+// // function init() {
+// //   getSubTopics();
+// //   getSubtopicIdeas();
+// //   getComments();
+// // }
 
 //add new user to DB from login view button click
 function addNewUser(newUser){
