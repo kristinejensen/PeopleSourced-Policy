@@ -1,4 +1,4 @@
-app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
+app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
 //CHRIS’S CODE STARTS HERE
 
   var self = this;
@@ -19,7 +19,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
   function adminView() {
     $location.path('/admin');
   }
-
 //user google login authentication
   self.login = function() {
         console.log("login clicked");
@@ -54,15 +53,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
   self.addNewUser = function(user) {
 //brings in firebase data to function
     var firebaseUser = auth.$getAuth();
-//creating a new variable with input data and firebase data
-    // var newUser = {
-    //   name : firebaseUser.displayName,
-    //   street : user.street,
-    //   city : user.city,
-    //   state : user.state,
-    //   zipCode : user.zipCode,
-    //   email : firebaseUser.email
-    // }
 //creating a new variable with input data and firebase data
     var newUser = {
       name : firebaseUser.displayName,
