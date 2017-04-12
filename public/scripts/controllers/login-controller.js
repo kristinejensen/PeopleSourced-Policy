@@ -2,6 +2,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
 
  var self = this;
 
+self.message= "hey there"
 //notyf must have
  // var notyf = new Notyf();
 //google authenticate bellow
@@ -40,6 +41,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
  self.logout = function() {
          console.log("logout clicked");
    auth.$signOut().then(function() {
+    //  self.user = something in user factory .user
 //redirects back to home view
      logoutView();
        // swal("You've Logged Out!", "", "success");

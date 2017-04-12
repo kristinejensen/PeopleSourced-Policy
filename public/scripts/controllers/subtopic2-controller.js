@@ -2,20 +2,4 @@ app.controller('Subtopic2Controller', ['DataFactory', '$http' , function(DataFac
   var self = this;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }]);
