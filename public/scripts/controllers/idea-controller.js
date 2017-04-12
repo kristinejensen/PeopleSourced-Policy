@@ -12,10 +12,20 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
   }
 
 //function adds new idea to DB
-  self.addNewIdea = function(newIdea) {
-    console.log(newIdea);
+  self.addNewIdea = function(idea) {
+    var firebaseUser = auth.$getAuth();
+    
+    var newIdea = {
+      name : firebaseUser.displayName,
+      email : firebaseUser.email,
+      subtopicId : idea.subtopicId,
+      title : idea.title,
+      description : idea.description
+    }
+
+    console.log();
     DataFactory.addNewIdea(newIdea);
-    self.newIdea = {};
+    self.idea = {};
     homeView();
     // if (subtopicTitle == "subtopic 1") {
     //   $location.path('/subtopic1');

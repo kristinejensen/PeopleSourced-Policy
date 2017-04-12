@@ -33,7 +33,7 @@ router.get('/getSubTopics', function (req, res) {
 router.get('/subtopicIdeas1', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas")
+      client.query("SELECT * FROM ideas WHERE subtopics_id=1")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -49,7 +49,7 @@ router.get('/subtopicIdeas1', function (req, res) {
 router.get('/subtopicIdeas2', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas")
+      client.query("SELECT * FROM ideas WHERE subtopics_id=2")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -65,7 +65,7 @@ router.get('/subtopicIdeas2', function (req, res) {
 router.get('/subtopicIdeas3', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas")
+      client.query("SELECT * FROM ideas WHERE subtopics_id=3")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -81,7 +81,7 @@ router.get('/subtopicIdeas3', function (req, res) {
 router.get('/subtopicIdeas4', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas")
+      client.query("SELECT * FROM ideas WHERE subtopics_id=4")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -97,7 +97,7 @@ router.get('/subtopicIdeas4', function (req, res) {
 router.get('/subtopicIdeas5', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas")
+      client.query("SELECT * FROM ideas WHERE subtopics_id=5")
         .then(function (result) {
           client.release();
           res.send(result.rows);

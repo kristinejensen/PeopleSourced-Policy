@@ -1,16 +1,16 @@
 
 <h3>add idea view</h3>
 <main class="ideaMain">
-  <select ng-model="ic.newIdea.subtopicTitle">
-    <option ng-repeat="subtopic in ic.subTopicObject.list" value="{{subtopic.title}}"> {{subtopic.title}} </option>
+  <select ng-model="ic.idea.subtopicId">
+    <option ng-repeat="subtopic in ic.subTopicObject.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
   </select>
   <div>
     <label for="idea"> Idea </label>
-    <input ng-model="ic.newIdea.idea" type="text" name="idea">
+    <input ng-model="ic.idea.title" type="text" name="idea">
   </div>
   <div>
     <label for="description"> Description </label>
-    <input ng-model="ic.newIdea.description" type="text" name="description">
+    <input ng-model="ic.idea.description" type="text" name="description">
   </div>
-    <button ng-click="ic.addNewIdea(ic.newIdea)" type="button"> Add Idea </button>
+    <button ng-click="ic.addNewIdea(ic.idea)" type="button"> Add Idea </button>
 </main>

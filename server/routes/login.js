@@ -38,8 +38,8 @@ router.post('/newidea', function (req, res) {
   console.log('newIdea: ', newIdea);
   pool.connect()
     .then(function (client) {
-      client.query('INSERT INTO ideas (title, description) VALUES ($1, $2)',
-        [newIdea.idea, newIdea.description])
+      client.query('INSERT INTO ideas (title, description, subtopics_id) VALUES ($1, $2, $3)',//, users_email
+        [newIdea.title, newIdea.description, newIdea.subtopicId])//, newIdea.email
         .then(function (result) {
           client.release();
           res.sendStatus(201);
@@ -119,5 +119,9 @@ module.exports = router;
 
 
 
-//client.query('INSERT INTO users (name, street, city, state, zipCode, country, email) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-//  [newUser.name, newUser.street, newUser.city, newUser.state, newUser.zipCode, newUser.country, newUser.email])
+
+
+
+
+
+// SELECT * FROM ideas FULL OUTER JOIN subtopics on ideas.subtopics_id=subtopics.id;
