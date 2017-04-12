@@ -10,6 +10,7 @@ var subtopicIdeas3 = { list : [] };
 var subtopicIdeas4 = { list : [] };
 var subtopicIdeas5 = { list : [] };
 var commentsObject = { list : [] };
+var userMatchObject = { list : [] };
 
 //calls functions at startup
 init();
@@ -18,32 +19,9 @@ function init() {
   getSubTopics();
   getSubtopicIdeas();
   getComments();
+  getUserMatch();
 }
 
-// //checks for admin rights
-// function getAdmin() {
-//   auth.$onAuthStateChanged(function(firebaseUser){
-// //firebaseUser will be null if not logged in
-//     if(firebaseUser) {
-// //This is where we make our call to our server
-//       firebaseUser.getToken().then(function(idToken){
-//         $http({
-//           method: 'GET',
-//           url: '/login/admin',
-//           headers: {
-//             id_token: idToken
-//           }
-//         }).then(function(response){
-//           var secretUser = response.data;
-//         });
-//       });
-//     } else {
-//       console.log('Not logged in or not authorized.');
-//       var secretData = [];
-//       console.log("secretData: ", secretData);
-//     }
-//   });//end of auth.$onAuthStateChanged
-// }//end of getAdmin()
 
 //add new user to DB from login view button click
 function addNewUser(newUser){
@@ -168,8 +146,14 @@ function addComment(newComment){
   });//end of firebase.auth()
 }//end of addComment()
 
-
-
+function getUserMatch() {
+    $http({
+      method: 'GET',
+      url: '/data/getUserMatch'
+    }).then(function(response) {
+      userMatchObject.list = response.data;
+    });
+}//end of getAllUsers()
 
   return {
 //new user object from add address button click
@@ -191,9 +175,42 @@ function addComment(newComment){
 //adds comment to DB
     addComment : addComment,
 //gets comments to comment view
-    commentsObject : commentsObject
+    commentsObject : commentsObject,
+//checks user for axisting account at login
+    getUserMatch : getUserMatch,
+//all existing users object
+    userMatchObject : userMatchObject
+
   }
 
 
 //CHRIS’S CODE ENDS HERE
 }]); // end of app.factory
+
+
+
+
+// //checks for admin rights
+// function getAdmin() {
+//   auth.$onAuthStateChanged(function(firebaseUser){
+// //firebaseUser will be null if not logged in
+//     if(firebaseUser) {
+// //This is where we make our call to our server
+//       firebaseUser.getToken().then(function(idToken){
+//         $http({
+//           method: 'GET',
+//           url: '/login/admin',
+//           headers: {
+//             id_token: idToken
+//           }
+//         }).then(function(response){
+//           var secretUser = response.data;
+//         });
+//       });
+//     } else {
+//       console.log('Not logged in or not authorized.');
+//       var secretData = [];
+//       console.log("secretData: ", secretData);
+//     }
+//   });//end of auth.$onAuthStateChanged
+// }//end of getAdmin()

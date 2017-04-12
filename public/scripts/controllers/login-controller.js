@@ -1,12 +1,17 @@
 app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
 //CHRIS’S CODE STARTS HERE
 
+//google authenticate bellow
+  var auth = $firebaseAuth();
   var self = this;
+//object to verify if user exsists in DB (need to finish)
+  var userMatchObject = DataFactory.userMatchObject.list;
+
+  console.log("userMatchObject: ", userMatchObject);
 
 //notyf must have
   // var notyf = new Notyf();
-//google authenticate bellow
-  var auth = $firebaseAuth();
+
 //redirection after login
   function loginView() {
     $location.path('/login');
@@ -21,31 +26,43 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
   }
 //user google login authentication
   self.login = function() {
-        console.log("login clicked");
-    auth.$signInWithPopup("google").then(function(firebaseUser) {
+//call function at factory to get existing user id and email
+    DataFactory.getUserMatch();
+      auth.$signInWithPopup("google").then(function(firebaseUser) {
+
 //redirects to login view
       loginView();
         // notyf.confirm('You Are Logged In');
         // swal("You Are Logged In", "", "success");
 //adds user google photo to view
-        self.photo = firebaseUser.user.photoURL;
+      self.photo = firebaseUser.user.photoURL;
 //adds user google email to view
-        self.email = firebaseUser.user.email;
-          console.log("Firebase Authenticated as: ", firebaseUser.user.displayName);
-          // console.log("Firebase Authenticated as: ", firebaseUser.user.email);
-    }).catch(function(error) {
+      self.email = firebaseUser.user.email;
+//checks DB for exsisting users and then desides redirect
+      var userMatchObject = DataFactory.userMatchObject.list;
+        for (var i = 0; i <userMatchObject.length; i++) {
+          // console.log(userMatchObject[i])
+          if (userMatchObject[i].email == firebaseUser.user.email) {
+          logoutView()
+        } else {
+          loginView()
+        }
+      };//end of for loop
+
+
+      }).catch(function(error) {
         console.log("Authentication failed: ", error);
     });
-  };//end of self.authUser()
+  };//end of self.login()
 
 //user google logout de-authedicate
   self.logout = function() {
-          console.log("logout clicked");
+          // console.log("logout clicked");
     auth.$signOut().then(function() {
 //redirects back to home view
       logoutView();
         // swal("You've Logged Out!", "", "success");
-          console.log('Logging the user out!');
+          // console.log('Logging the user out!');
     });
   };//end of self.deAuthUser()
 
@@ -60,7 +77,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       email : firebaseUser.email,
       word : ""
     }
-    console.log(newUser);
+
 //sends object to DB
     DataFactory.addNewUser(newUser);
 //empties inputs after submission

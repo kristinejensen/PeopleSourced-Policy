@@ -127,5 +127,22 @@ router.get('/comments', function (req, res) {
     });//end of .then
 });//end of router.get
 
+//gets all users login view
+router.get('/getUserMatch', function (req, res) {
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT id, email FROM users")
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
+
+
 //CHRIS’S CODE ENDS HERE
 module.exports = router;
