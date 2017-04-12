@@ -284,7 +284,7 @@ background-color: #333333;
 
 }
 
-.ctaTitle, h2{
+.ctaTitle > h2{
   color: white !important;
 }
 
@@ -406,4 +406,79 @@ select {
     width: 20%;
     float: left;
   }
+}
+
+/* ============================================================================= *
+*           USERS TABLE                                                          *
+* ============================================================================== */
+
+table {
+  width: 90%;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+tr {
+  height: 40px;
+}
+
+tr:nth-child(even){
+  background-color: #eeeeee;
+}
+
+th {
+  background-color: #666666;
+  color: white;
+  text-align: center;
+}
+
+.searchInput{
+  height: 40px;
+  border: 1px solid #eeeeee;
+  background-color: #F5F5F5	;
+}
+
+.btn-src {
+  height: 40px;
+  color: white;
+  background-color: #333333;
+  border: none;
+  width: 100px;
+}
+
+.btn-src:hover {
+  height: 40px;
+  color: white;
+  background-color: #6fa8dc;
+  border: none;
+  width: 100px;
+}
+
+/* ============================================================================= *
+*           DATA                                                                 *
+* ============================================================================== */
+
+.col-md-3 > select {
+  margin-top: 5px !important;
+  width: 80% !important;
+}
+
+
+.btn-flt {
+  height: 40px;
+  color: white;
+  border-radius: 5px;
+  background-color: #6fa8dc;
+  border: none;
+  width: 70%;
+}
+
+.btn-flt:hover {
+  height: 40px;
+  color: white;
+  border-radius: 5px;
+  background-color: #333333;
+  border: none;
+  width: 70%;
 }

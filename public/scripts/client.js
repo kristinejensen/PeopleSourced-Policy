@@ -17,12 +17,6 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'IdeaController',
     controllerAs: 'ic'
   })
-//test view, remove before merge
-  .when('/test', {
-    templateUrl: 'views/test.html',
-    controller: 'HomeController',
-    controllerAs: 'hc'
-  })
   .when('/flag', {
     templateUrl: 'views/flag.html',
     controller: 'FlagController',
@@ -63,33 +57,37 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'CommentConnectController',
     controllerAs: 'ccc'
   })
+  .when('/admin-manage-users', {
+    templateUrl: 'views/admin-views/admin-manage-users.html',
+    controller: 'AdminManageUsersController',
+    controllerAs: 'amuc'
+  })
+  .when('/admin-flags', {
+    templateUrl: 'views/admin-views/admin-flags.html',
+    controller: 'AdminFlaggedController',
+    controllerAs: 'afc'
+  })
+  .when('/admin-reports', {
+    templateUrl: 'views/admin-views/admin-reports.html',
+    controller: 'AdminReportsController',
+    controllerAs: 'arc'
+  })
+  .when('/admin-topics', {
+    templateUrl: 'views/admin-views/admin-topics.html',
+    controller: 'AdminTopicsController',
+    controllerAs: 'atc'
+  })
 
-  //only the /admin-flagged section has been changed.
-  // IMPORTANT be sure to change templateURL, controller, and controllerAs
 
+  //test view, remove before merge
+  .when('/test', {
+    templateUrl: 'views/test.html',
+    controller: 'HomeController',
+    controllerAs: 'hc'
+  })
 
-  // .when('/admin-flagged', {
-  //   templateUrl: 'views/subtopic3.html',
-  //   controller: 'SubtopicOneController',
-  //   controllerAs: 'st3c'
-  // })
-  // .when('/admin-manage-users', {
-  //   templateUrl: 'views/subtopic4.html',
-  //   controller: 'SubtopicOneController',
-  //   controllerAs: 'st4c'
-  // })
-  // .when('/admin-reports', {
-  //   templateUrl: 'views/subtopic5.html',
-  //   controller: 'SubtopicOneController',
-  //   controllerAs: 'st5c'
-  // })
-  // .when('/admin-topics', {
-  //   templateUrl: 'views/comment.html',
-  //   controller: 'CommentConnectController',
-  //   controllerAs: 'ccc'
-  // })
 
   .otherwise({
     redirectTo: 'home'
   })
-}]); // end of app.config
+}]);
