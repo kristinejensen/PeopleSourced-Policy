@@ -482,3 +482,7 @@ th {
   border: none;
   width: 70%;
 }
+
+.search-bar {
+  padding-bottom: 30px;
+}
