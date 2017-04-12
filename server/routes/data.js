@@ -127,7 +127,7 @@ router.get('/comments', function (req, res) {
     });//end of .then
 });//end of router.get
 
-//gets all users login view
+//gets all users to compare at login view if in the system
 router.get('/getUserMatch', function (req, res) {
   pool.connect()
     .then(function (client) {
