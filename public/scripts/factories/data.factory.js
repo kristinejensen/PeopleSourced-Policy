@@ -1,4 +1,6 @@
 app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
+//CHRIS’S CODE STARTS HERE
+
 
 //containers
 var subTopicObject = { list : [] };
@@ -192,4 +194,6 @@ function addComment(newComment){
     commentsObject : commentsObject
   }
 
+
+//CHRIS’S CODE ENDS HERE
 }]); // end of app.factory

@@ -1,4 +1,5 @@
 app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
+//CHRIS’S CODE STARTS HERE
 
   var self = this;
 
@@ -27,7 +28,9 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
       loginView();
         // notyf.confirm('You Are Logged In');
         // swal("You Are Logged In", "", "success");
+//adds user google photo to view
         self.photo = firebaseUser.user.photoURL;
+//adds user google email to view
         self.email = firebaseUser.user.email;
           console.log("Firebase Authenticated as: ", firebaseUser.user.displayName);
           // console.log("Firebase Authenticated as: ", firebaseUser.user.email);
@@ -67,13 +70,14 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth','$http', '$loc
       email : firebaseUser.email,
       word : ""
     }
-
     console.log(newUser);
+//sends object to DB
     DataFactory.addNewUser(newUser);
+//empties inputs after submission
     self.user = {};
 //redirects back to home view after submission
     logoutView();
   }
 
-
+//CHRIS’S CODE ENDS HERE
 }]);//end of app.controller()

@@ -1,9 +1,11 @@
 app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', function(DataFactory, $firebaseAuth, $location) {
+//CHRIS’S CODE STARTS HERE
 
   var self = this;
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
 
+//current subtopics for select option
   self.subTopicObject = DataFactory.subTopicObject;
 
 //redirect to home view
@@ -14,7 +16,7 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
 //function adds new idea to DB
   self.addNewIdea = function(idea) {
     var firebaseUser = auth.$getAuth();
-    
+//name and email is added to object
     var newIdea = {
       name : firebaseUser.displayName,
       email : firebaseUser.email,
@@ -22,24 +24,14 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
       title : idea.title,
       description : idea.description
     }
-
-    console.log();
+//sents object to factory
     DataFactory.addNewIdea(newIdea);
+//empties inputs on submit
     self.idea = {};
+//redirect after submit
     homeView();
-    // if (subtopicTitle == "subtopic 1") {
-    //   $location.path('/subtopic1');
-    // } else if (subtopicTitle == "subtopic 2") {
-    //   $location.path('/subtopic2');
-    // } else if (subtopicTitle == "subtopic 3") {
-    //   $location.path('/subtopic3');
-    // } else if (subtopicTitle == "subtopic 4") {
-    //   $location.path('/subtopic4');
-    // } else if (subtopicTitle == "subtopic 5") {
-    //   $location.path('/subtopic4');
-    // } else {
-    //   $location.path('/home');
-    // }
+
   };//end of addNewIdea()
 
+//CHRIS’S CODE ENDS HERE
 }]);//end of app.controller()

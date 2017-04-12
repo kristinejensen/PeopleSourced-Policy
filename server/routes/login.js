@@ -1,3 +1,5 @@
+//CHRIS’S CODE STARTS HERE
+
 var express = require('express');
 var router = express.Router();
 var pg = require('pg');
@@ -32,7 +34,7 @@ router.post('/newUser', function (req, res) {
     });//end of .then
 });//end of router.post
 
-//adds new idea to DB
+//adds new idea to DB (need to get query to add id or email)
 router.post('/newidea', function (req, res) {
   var newIdea = req.body;
   console.log('newIdea: ', newIdea);
@@ -109,19 +111,6 @@ router.post('/addComment', function (req, res) {
 
 
 
-
-
-
 module.exports = router;
 
-
-
-
-
-
-
-
-
-
-
-// SELECT * FROM ideas FULL OUTER JOIN subtopics on ideas.subtopics_id=subtopics.id;
+//CHRIS’S CODE ENDS HERE
