@@ -12,7 +12,7 @@ var favicon = require('serve-favicon')
 var admin = require('./routes/admin');
 var login = require('./routes/login');
 var data = require('./routes/data');
-// var list_data = require('./routes/list_data');
+var list_data = require('./routes/list_data');
 // var search = require('./routes/search');
 
 //Serve HTML
@@ -23,6 +23,7 @@ app.get('/', function(req, res){
 //Serve Static Files
 app.use(express.static('public'));
 app.use(bodyParser.json());
+
 app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 
 //Routes
@@ -33,6 +34,8 @@ app.use('/admin', admin);
 //Auth
 app.use(decoder.token);
 /* Whatever is below this is protected by authentication. */
+
+app.use('/login', login);
 
 
 
