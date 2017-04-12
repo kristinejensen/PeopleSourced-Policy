@@ -2,7 +2,8 @@ app.factory('DataFactory', ['$http', function($http){
   // var idea = {list: []};
   // var comments = {list: []};
   var allUsers = {list: []};
-  var userFilter = {list: []};
+  var filterList = {list: []};
+  var userFilter = {};
 
   init();
 
@@ -66,8 +67,8 @@ app.factory('DataFactory', ['$http', function($http){
       method: 'GET',
       url: '/admin/filterUsers'
     }).then(function(response){
-      userFilter.list = response.data;
-      console.log(userFilter.list);
+      filterList.list = response.data;
+      console.log(filterList.list);
     })
   }
 
@@ -75,7 +76,7 @@ app.factory('DataFactory', ['$http', function($http){
   return {
     allUsers: allUsers,
     deactivateUser: deactivateUser,
-    userFilter: userFilter
+    filterList: filterList
   }
 
 }]); // end of app.factory

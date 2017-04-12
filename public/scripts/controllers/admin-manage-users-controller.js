@@ -7,6 +7,6 @@ app.controller('AdminManageUsersController', ['$http', '$location', 'DataFactory
    DataFactory.deactivateUser(userId);
  };
 
- self.userFilter = DataFactory.userFilter;
+ self.filterList = DataFactory.filterList;
 
 }]); //end of controller

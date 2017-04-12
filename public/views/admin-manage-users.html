@@ -3,7 +3,7 @@
 <label for="userSearch">Search Users</label>
 <input type="text" name="userSearch">
 
-<select ng-model="amuc.userFilter" ng-options="item as item.filter for item in amuc.userFilter.list"></select>
+<select ng-model="amuc.userFilter" ng-options="item as item.filter for item in amuc.filterList.list"></select>
 
 <div ng-repeat="user in amuc.allUsers.list">
   <span ng-show="user.active">{{user.name}}</span>
