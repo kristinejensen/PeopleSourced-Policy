@@ -1,5 +1,10 @@
 <h3>Manage Users</h3>
 
+<label for="userSearch">Search Users</label>
+<input type="text" name="userSearch">
+
+<select ng-model="amuc.userFilter" ng-options="item as item.filter for item in amuc.userFilter.list"></select>
+
 <div ng-repeat="user in amuc.allUsers.list">
   <span ng-show="user.active">{{user.name}}</span>
   <span ng-show="user.active">{{user.email}}</span>

@@ -86,3 +86,17 @@ CREATE TABLE users (
   ward VARCHAR(80),
   admin BOOLEAN DEFAULT false
 );
+
+ALTER TABLE users
+ADD active BOOLEAN DEFAULT true;
+
+CREATE TABLE user_filter (
+  id SERIAL PRIMARY KEY,
+  filter VARCHAR(80) NOT NULL
+);
+
+INSERT INTO user_filter (id, filter)
+VALUES(1, 'name'),
+(2, 'email'),
+(3, 'ward'),
+(4, 'active');

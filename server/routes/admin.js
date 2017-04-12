@@ -27,11 +27,28 @@ router.get('/manageUsers', function(req, res){
 //function to deactive user
 router.put('/deactivateUser/:id', function(req, res) {
   var userToDeactivateId = req.params.id;
-  pool.connect( function (err, client, done) {
+  pool.connect(function (err, client, done) {
     client.query('UPDATE users SET active=false WHERE id=$1;',[userToDeactivateId], function(err, result){
       done();
       if(err){
         ('Error deactivating user', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows);
+        console.log(result.rows);
+      }
+    });
+  });
+});
+
+//populates user filter on admin manage users view
+router.get('/filterUsers', function (req, res) {
+  console.log('filter users route is being hit');
+  pool.connect(function (err, client, done) {
+    client.query('SELECT * FROM user_filter', function (err, result) {
+      done();
+      if (err) {
+        console.log('Error completing user filter query', err);
         res.sendStatus(500);
       } else {
         res.send(result.rows);
