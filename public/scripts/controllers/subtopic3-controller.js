@@ -17,20 +17,4 @@ app.controller('Subtopic3Controller', ['DataFactory', '$firebaseAuth','$http', '
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }]);

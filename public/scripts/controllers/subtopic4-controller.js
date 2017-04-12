@@ -19,16 +19,4 @@ app.controller('Subtopic4Controller', ['DataFactory', '$firebaseAuth','$http', '
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 }]);

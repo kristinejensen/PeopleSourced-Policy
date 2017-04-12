@@ -6,4 +6,6 @@ self.createIdea = function () {
   $location.url('/idea');
 }
 
+
+
 }]);
