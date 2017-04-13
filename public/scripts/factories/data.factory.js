@@ -11,6 +11,7 @@ var subtopicIdeas4 = { list : [] };
 var subtopicIdeas5 = { list : [] };
 var commentsObject = { list : [] };
 var userMatchObject = { list : [] };
+var userNameIdObject = { list : [] };
 
 //calls functions at startup
 init();
@@ -20,6 +21,7 @@ function init() {
   getSubtopicIdeas();
   getComments();
   getUserMatch();
+  getUserNameId();
 }
 
 
@@ -155,6 +157,16 @@ function getUserMatch() {
     });
 }//end of getAllUsers()
 
+//gets all users name's and id's for idea and comment view
+function getUserNameId() {
+    $http({
+      method: 'GET',
+      url: '/data/getUserNameId'
+    }).then(function(response) {
+      userNameIdObject.list = response.data;
+    });
+}//end of getSubTopics()
+
   return {
 //new user object from add address button click
     addNewUser : addNewUser,
@@ -179,7 +191,9 @@ function getUserMatch() {
 //checks user for axisting account at login
     getUserMatch : getUserMatch,
 //all existing users object
-    userMatchObject : userMatchObject
+    userMatchObject : userMatchObject,
+//all users id and name for idea and comment views
+    userNameIdObject : userNameIdObject
 
   }
 

@@ -15,6 +15,22 @@ var config = {
 //pool / pg constructor function
 var pool = new pg.Pool(config);
 
+//gets all users name and id for idea and comment view
+router.get('/getUserNameId', function (req, res) {
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT id, name FROM users")
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
+
 //gets all subtopics for add idea view
 router.get('/getSubTopics', function (req, res) {
   pool.connect()
@@ -35,7 +51,7 @@ router.get('/getSubTopics', function (req, res) {
 router.get('/subtopicIdeas1', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas WHERE subtopics_id=1")
+      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE subtopics_id=1")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -51,7 +67,7 @@ router.get('/subtopicIdeas1', function (req, res) {
 router.get('/subtopicIdeas2', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas WHERE subtopics_id=2")
+      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE subtopics_id=2")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -67,7 +83,7 @@ router.get('/subtopicIdeas2', function (req, res) {
 router.get('/subtopicIdeas3', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas WHERE subtopics_id=3")
+      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE subtopics_id=3")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -83,7 +99,7 @@ router.get('/subtopicIdeas3', function (req, res) {
 router.get('/subtopicIdeas4', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas WHERE subtopics_id=4")
+      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE subtopics_id=4")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -99,7 +115,7 @@ router.get('/subtopicIdeas4', function (req, res) {
 router.get('/subtopicIdeas5', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas WHERE subtopics_id=5")
+      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE subtopics_id=5")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -142,6 +158,8 @@ router.get('/getUserMatch', function (req, res) {
         });
     });//end of .then
 });//end of router.get
+
+
 
 
 //CHRIS’S CODE ENDS HERE

@@ -5,17 +5,19 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
 
-//current subtopics for select option
-  self.subTopicObject = DataFactory.subTopicObject;
-
 //redirect to home view
   function homeView() {
     $location.path('/home');
   }
+
+//current subtopics for select option
+  self.subTopicObject = DataFactory.subTopicObject;
+
+//all user email and id
 var userMatchObject = DataFactory.userMatchObject.list;
 //function adds new idea to DB
   self.addNewIdea = function(idea) {
-//sources firebaseUser in the function  
+//sources firebaseUser in the function
     var firebaseUser = auth.$getAuth();
 //container to loop id's through
     var id = "";
@@ -36,14 +38,12 @@ var userMatchObject = DataFactory.userMatchObject.list;
       description : idea.description,
       id : id
     }
-    // console.log("newIdea: ",newIdea);
 //sents object to factory
     DataFactory.addNewIdea(newIdea);
 //empties inputs on submit
     self.idea = {};
 //redirect after submit
     homeView();
-
   };//end of addNewIdea()
 
 //CHRIS’S CODE ENDS HERE
