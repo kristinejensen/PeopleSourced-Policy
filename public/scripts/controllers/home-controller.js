@@ -5,10 +5,10 @@ app.controller('HomeController', ['DataFactory', '$firebaseAuth', '$location', f
 
 //redirect to add adea view
 self.createIdea = function () {
-//redirect after submission  
+//redirect after submission
   $location.url('/idea');
 }
 
 
 //CHRIS’S CODE ENDS HERE
-}]);
+}]);//end of app.controller()

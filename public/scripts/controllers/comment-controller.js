@@ -6,16 +6,13 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
 //shows all comments from BD to view
   self.commentsObject = DataFactory.commentsObject;
-
 //add comment to comment to DB
   self.commentRedirect = function() {
-    console.log('button click');
 //redirect after submission
     $location.url('/comment');
   }
 //adds new comment to DB
   self.addComment = function(newComment) {
-    console.log(newComment);
 //sents comment from view to DB
     DataFactory.addComment(newComment);
 //empties inputs after submission

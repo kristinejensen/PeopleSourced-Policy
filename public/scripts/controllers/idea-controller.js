@@ -9,7 +9,6 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
   function homeView() {
     $location.path('/home');
   }
-
 //current subtopics for select option
   self.subTopicObject = DataFactory.subTopicObject;
 
