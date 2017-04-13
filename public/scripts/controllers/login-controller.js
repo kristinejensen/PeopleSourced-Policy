@@ -28,11 +28,9 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
 
 //user google login authentication
   self.login = function() {
-
 //call function at factory to get existing user id and email
     DataFactory.getUserMatch();
       auth.$signInWithPopup("google").then(function(firebaseUser) {
-
 //redirects to login view
       loginView();
         // notyf.confirm('You Are Logged In');
@@ -41,19 +39,17 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       self.photo = firebaseUser.user.photoURL;
 //adds user google email to view
       self.email = firebaseUser.user.email;
+//object contains all users
+        var userMatchObject = DataFactory.userMatchObject.list;
 //checks DB for exsisting users and then desides redirect
-      var userMatchObject = DataFactory.userMatchObject.list;
-
-        for (var i = 0; i <userMatchObject.length; i++) {
-          console.log("userMatchObject : ", userMatchObject[i])
-          if (userMatchObject[i].email == firebaseUser.user.email) {
-          logoutView()
-        } else {
-          loginView()
-        }
-      };//end of for loop
-
-
+          for (var i = 0; i <userMatchObject.length; i++) {
+            console.log("userMatchObject : ", userMatchObject[i])
+            if (userMatchObject[i].email == firebaseUser.user.email) {
+              logoutView();
+            } else {
+              loginView();
+            }
+          };//end of for loop
       }).catch(function(error) {
         console.log("Authentication failed: ", error);
     });
@@ -82,7 +78,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       photo : firebaseUser.photoURL,
       word : ""
     }
-console.log();
+
 //sends object to DB
     DataFactory.addNewUser(newUser);
 //empties inputs after submission
