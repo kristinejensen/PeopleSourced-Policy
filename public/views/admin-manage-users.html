@@ -7,11 +7,12 @@
 
 
 <div ng-repeat="user in amuc.allUsers.list">
-  <span ng-show="user.active">{{user.name}}</span>
-  <span ng-show="user.active">{{user.email}}</span>
-  <span ng-show="user.active">Ward: {{user.ward}}</span>
-  <span ng-show="user.active">Ideas Flags: {{user.ideas_flags_count}}</span>
-  <span ng-show="user.active">Comments Flags: {{user.comments_flags_count}}</span>
-  <span ng-show="user.active">Subcomments Flags: {{user.subflags_count}}</span>
+  <span>{{user.name}}</span>
+  <span>{{user.email}}</span>
+  <span>Ward: {{user.ward}}</span>
+  <span>Ideas Flags: {{user.ideas_flags_count}}</span>
+  <span>Comments Flags: {{user.comments_flags_count}}</span>
+  <span>Subcomments Flags: {{user.subflags_count}}</span>
   <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs" ng-show="user.active">Deactivate</button>
+  <button ng-click="amuc.reactivateUser(user.id)" class="btn btn-primary btn-xs" ng-hide="user.active">Reactivate</button>
 </div>

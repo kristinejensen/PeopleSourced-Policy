@@ -24,7 +24,7 @@ router.get('/manageUsers', function(req, res){
   });
 });
 
-//function to deactive user
+//function to deactivate user
 router.put('/deactivateUser/:id', function(req, res) {
   var userToDeactivateId = req.params.id;
   pool.connect(function (err, client, done) {
@@ -32,6 +32,23 @@ router.put('/deactivateUser/:id', function(req, res) {
       done();
       if(err){
         ('Error deactivating user', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows);
+        console.log(result.rows);
+      }
+    });
+  });
+});
+
+//function to reactivate user
+router.put('/reactivateUser/:id', function(req, res) {
+  var userToReactivateId = req.params.id;
+  pool.connect(function (err, client, done) {
+    client.query('UPDATE users SET active=true WHERE id=$1;',[userToReactivateId], function(err, result){
+      done();
+      if(err){
+        ('Error reactivating user', err);
         res.sendStatus(500);
       } else {
         res.send(result.rows);

@@ -61,6 +61,29 @@ app.factory('DataFactory', ['$http', function($http){
     })
   }
 
+  //function to reactivate user profile
+  function reactivateUser(userId) {
+    console.log('reactivate user button clicked');
+    console.log(userId);
+    swal({
+      title: 'Reactivate User',
+      text: "Are you sure you want to reactivate this user?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, I\'m sure'
+    }).then(function() {
+      $http({
+        method: 'PUT',
+        url: '/admin/reactivateUser/' + userId
+      }).then(function(response) {
+        console.log('user marked as active');
+        init();
+      });
+    })
+  }
+
   //function to filter user search on admin manage users view
   function filterUsers() {
     $http({
@@ -91,6 +114,7 @@ app.factory('DataFactory', ['$http', function($http){
   return {
     allUsers: allUsers,
     deactivateUser: deactivateUser,
+    reactivateUser: reactivateUser,
     filterList: filterList,
     searchUsers: searchUsers,
     userFilter: userFilter,

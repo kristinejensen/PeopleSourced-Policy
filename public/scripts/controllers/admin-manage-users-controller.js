@@ -4,15 +4,19 @@ app.controller('AdminManageUsersController', ['$http', '$location', 'DataFactory
   self.allUsers = DataFactory.allUsers;
 
   self.deactivateUser = function(userId) {
-   DataFactory.deactivateUser(userId);
- };
+    DataFactory.deactivateUser(userId);
+  };
 
- self.filterList = DataFactory.filterList;
+  self.reactivateUser = function(userId) {
+    DataFactory.reactivateUser(userId);
+  };
 
- self.searchUsers = DataFactory.searchUsers;
+  self.filterList = DataFactory.filterList;
 
- self.userFilter = DataFactory.userFilter;
+  self.searchUsers = DataFactory.searchUsers;
 
- self.userResults = DataFactory.userResults;
+  self.userFilter = DataFactory.userFilter;
+
+  self.userResults = DataFactory.userResults;
 
 }]); //end of controller
