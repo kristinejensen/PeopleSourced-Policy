@@ -3,8 +3,6 @@ var router = express.Router();
 var pool = require('../modules/database-config');
 
 
-
-
 router.get('/comments', function(req, res){
   var userEmail = req.decodedToken.email;
   pool.connect(function (err, client, done) {

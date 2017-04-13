@@ -1,6 +1,6 @@
 app.controller('IdeaController', ['DataFactory', '$routeParams', '$http', function(DataFactory, $routeParams, $http) {
   var self = this;
-  var self = this;
+  
   // var auth = $firebaseAuth();
   //
   //

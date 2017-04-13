@@ -24,10 +24,11 @@ router.get('/manageUsers', function(req, res){
   });
 });
 
+
 //function to deactivate user
 router.put('/deactivateUser/:id', function(req, res) {
   var userToDeactivateId = req.params.id;
-  pool.connect(function (err, client, done) {
+  pool.connect( function (err, client, done) {
     client.query('UPDATE users SET active=false WHERE id=$1;',[userToDeactivateId], function(err, result){
       done();
       if(err){

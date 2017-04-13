@@ -1,22 +1,22 @@
-app.controller('AdminManageUsersController', ['$http', '$location', 'DataFactory', function($http, $location, DataFactory){
+app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactory', function($http, $location, AdminFactory){
   var self = this;
 
-  self.allUsers = DataFactory.allUsers;
+  self.allUsers = AdminFactory.allUsers;
 
   self.deactivateUser = function(userId) {
-    DataFactory.deactivateUser(userId);
+    AdminFactory.deactivateUser(userId);
   };
 
   self.reactivateUser = function(userId) {
-    DataFactory.reactivateUser(userId);
+    AdminFactory.reactivateUser(userId);
   };
 
-  self.filterList = DataFactory.filterList;
+  self.filterList = AdminFactory.filterList;
 
-  self.searchUsers = DataFactory.searchUsers;
+  self.searchUsers = AdminFactory.searchUsers;
 
-  self.userFilter = DataFactory.userFilter;
+  self.userFilter = AdminFactory.userFilter;
 
-  self.userResults = DataFactory.userResults;
+  self.userResults = AdminFactory.userResults;
 
 }]); //end of controller
