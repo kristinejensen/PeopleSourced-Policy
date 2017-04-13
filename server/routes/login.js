@@ -21,8 +21,8 @@ router.post('/newUser', function (req, res) {
   console.log('newUser: ', newUser);
   pool.connect()
     .then(function (client) {
-      client.query('INSERT INTO users (name, address, email) VALUES ($1, $2, $3)',
-        [newUser.name, newUser.address, newUser.email])
+      client.query('INSERT INTO users (name, address, email, photo) VALUES ($1, $2, $3, $4)',
+        [newUser.name, newUser.address, newUser.email, newUser.photo])
         .then(function (result) {
           client.release();
           res.sendStatus(201);

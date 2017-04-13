@@ -24,8 +24,11 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
   function adminView() {
     $location.path('/admin');
   }
+  var firebaseUser = auth.$getAuth();
+
 //user google login authentication
   self.login = function() {
+
 //call function at factory to get existing user id and email
     DataFactory.getUserMatch();
       auth.$signInWithPopup("google").then(function(firebaseUser) {
@@ -40,8 +43,9 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       self.email = firebaseUser.user.email;
 //checks DB for exsisting users and then desides redirect
       var userMatchObject = DataFactory.userMatchObject.list;
+
         for (var i = 0; i <userMatchObject.length; i++) {
-          // console.log(userMatchObject[i])
+          console.log("userMatchObject : ", userMatchObject[i])
           if (userMatchObject[i].email == firebaseUser.user.email) {
           logoutView()
         } else {
@@ -75,9 +79,10 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       name : firebaseUser.displayName,
       address : user.street + " " + user.city + ", " + user.state + " " + user.zipCode,
       email : firebaseUser.email,
+      photo : firebaseUser.photoURL,
       word : ""
     }
-
+console.log();
 //sends object to DB
     DataFactory.addNewUser(newUser);
 //empties inputs after submission
