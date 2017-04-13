@@ -51,11 +51,6 @@ app.factory('AdminFactory', ['$http', function($http){
         url: '/admin/deactivateUser/' + userId
       }).then(function(response) {
         console.log('user marked as inactive');
-        swal(
-          'Success',
-          'The user has been deactivated.',
-          'success'
-        )
         init();
       });
     })
@@ -107,6 +102,17 @@ app.factory('AdminFactory', ['$http', function($http){
     }).then(function(response){
       allUsers.list = response.data;
       console.log(allUsers.list);
+      for (var i = 0; i < allUsers.list.length; i++) {
+        if(allUsers.list[i].ideas_flags_count == null){
+          allUsers.list[i].ideas_flags_count = 0;
+        }
+        if(allUsers.list[i].comments_flags_count == null){
+          allUsers.list[i].comments_flags_count = 0;
+        }
+        if(allUsers.list[i].subflags_count == null){
+          allUsers.list[i].subflags_count = 0;
+        }
+      }
     })
   }
 
