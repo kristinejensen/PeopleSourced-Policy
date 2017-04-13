@@ -10,7 +10,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.commentRedirect = function() {
 //redirect after submission
     $location.url('/comment');
-  }
+  }//end of self.commentRedirect()
 //adds new comment to DB
   self.addComment = function(newComment) {
 //sents comment from view to DB
@@ -19,7 +19,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     self.newComment = {};
 //redirect after submission
     $location.url('/home');
-  }
+  }//end of self.addComment()
 
 //CHRIS’S CODE ENDS HERE
 }]);//end of app.controller()

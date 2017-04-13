@@ -7,7 +7,7 @@ app.controller('HomeController', ['DataFactory', '$firebaseAuth', '$location', f
 self.createIdea = function () {
 //redirect after submission
   $location.url('/idea');
-}
+}//end of self.createIdea()
 
 
 //CHRIS’S CODE ENDS HERE

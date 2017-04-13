@@ -8,10 +8,9 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
 //redirect to home view
   function homeView() {
     $location.path('/home');
-  }
+  }//end of homeView()
 //current subtopics for select option
   self.subTopicObject = DataFactory.subTopicObject;
-
 //all user email and id
 var userMatchObject = DataFactory.userMatchObject.list;
 //function adds new idea to DB
