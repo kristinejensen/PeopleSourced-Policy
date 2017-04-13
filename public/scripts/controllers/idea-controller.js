@@ -25,10 +25,8 @@ var userMatchObject = DataFactory.userMatchObject.list;
       for (var i = 0; i < userMatchObject.length; i++) {
         if (userMatchObject[i].email == firebaseUser.email) {
           var id = userMatchObject[i].id;
-        }
-        // console.log("user id: ", id)
+        }//end of if
       };//end of for loop
-
 //name and email is added to object
     var newIdea = {
       name : firebaseUser.displayName,

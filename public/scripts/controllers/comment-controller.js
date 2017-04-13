@@ -3,7 +3,8 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
   var self = this;
   var auth = $firebaseAuth();
-// shows all comments from BD to view
+
+//shows all comments from BD to view
   self.commentsObject = DataFactory.commentsObject;
 
 //add comment to comment to DB
@@ -17,7 +18,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     console.log(newComment);
 //sents comment from view to DB
     DataFactory.addComment(newComment);
-//empties inputs after submission    
+//empties inputs after submission
     self.newComment = {};
 //redirect after submission
     $location.url('/home');

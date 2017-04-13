@@ -84,5 +84,6 @@ CREATE TABLE users (
   email VARCHAR(100) NOT NULL,
   address VARCHAR(2500) NOT NULL,
   ward VARCHAR(80),
-  admin BOOLEAN DEFAULT false
+  admin BOOLEAN DEFAULT false,
+  photo VARCHAR(80)
 );

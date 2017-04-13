@@ -20,9 +20,8 @@ function init() {
   getSubtopicIdeas();
   getComments();
   getUserMatch();
-  
-}
 
+}
 
 //add new user to DB from login view button click
 function addNewUser(newUser){

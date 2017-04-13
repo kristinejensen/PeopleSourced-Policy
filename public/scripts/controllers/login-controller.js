@@ -7,8 +7,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
 //object to verify if user exsists in DB (need to finish)
   var userMatchObject = DataFactory.userMatchObject.list;
 
-  console.log("userMatchObject: ", userMatchObject);
-
 //notyf must have
   // var notyf = new Notyf();
 
@@ -25,7 +23,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
     $location.path('/admin');
   }
   var firebaseUser = auth.$getAuth();
-
 //user google login authentication
   self.login = function() {
 //call function at factory to get existing user id and email
@@ -33,8 +30,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       auth.$signInWithPopup("google").then(function(firebaseUser) {
 //redirects to login view
       loginView();
-        // notyf.confirm('You Are Logged In');
-        // swal("You Are Logged In", "", "success");
 //adds user google photo to view
       self.photo = firebaseUser.user.photoURL;
 //adds user google email to view
@@ -43,7 +38,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
         var userMatchObject = DataFactory.userMatchObject.list;
 //checks DB for exsisting users and then desides redirect
           for (var i = 0; i <userMatchObject.length; i++) {
-            console.log("userMatchObject : ", userMatchObject[i])
             if (userMatchObject[i].email == firebaseUser.user.email) {
               logoutView();
             } else {
@@ -52,20 +46,16 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
           };//end of for loop
       }).catch(function(error) {
         console.log("Authentication failed: ", error);
-    });
+    });//end of .catch
   };//end of self.login()
-
 //user google logout de-authedicate
   self.logout = function() {
           // console.log("logout clicked");
     auth.$signOut().then(function() {
 //redirects back to home view
       logoutView();
-        // swal("You've Logged Out!", "", "success");
-          // console.log('Logging the user out!');
-    });
+    });//end of auth.$signOut()
   };//end of self.deAuthUser()
-
 //new user object from view button click
   self.addNewUser = function(user) {
 //brings in firebase data to function
@@ -78,7 +68,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       photo : firebaseUser.photoURL,
       word : ""
     }
-
 //sends object to DB
     DataFactory.addNewUser(newUser);
 //empties inputs after submission

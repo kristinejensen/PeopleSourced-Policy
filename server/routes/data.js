@@ -159,8 +159,5 @@ router.get('/getUserMatch', function (req, res) {
     });//end of .then
 });//end of router.get
 
-
-
-
 //CHRIS’S CODE ENDS HERE
 module.exports = router;

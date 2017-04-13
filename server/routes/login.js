@@ -14,7 +14,6 @@ var config = {
 
 //pool / pg constructor function
 var pool = new pg.Pool(config);
-
 //adds new user to DB
 router.post('/newUser', function (req, res) {
   var newUser = req.body;

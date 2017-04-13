@@ -11,25 +11,22 @@ var list_data = require('./routes/list_data');
 var search = require('./routes/search');
 var portDecision = process.env.PORT || 3000;
 
+//static files
 app.get('/', function(req, res){
   res.sendFile(path.resolve('./public/views/index.html'));
 });
-
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
 app.use('/data', data);
 
-
 /* Whatever you do below this is protected by your authentication. */
 app.use(decoder.token);
 
 app.use('/login', login);
-
-
+//listening port
 app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);
 });
-
 
 //CHRIS’S CODE ENDS HERE
