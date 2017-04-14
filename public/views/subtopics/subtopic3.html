@@ -29,19 +29,14 @@
 
           <div>
             <form class="ctaForm" align="center" action="index.html" method="post">
-              <select name="Subtopics">
-                <option value="subtopic1">Subtopic 1</option>
-                <option value="subtopic2">Subtopic 2</option>
-                <option value="subtopic3">Subtopic 3</option>
-                <option value="subtopic4">Subtopic 4</option>
-                <option value="subtopic5">Subtopic 5</option>
+              <select ng-model="st3c.idea.subtopicId">
+                <option ng-repeat="subtopic in st3c.subTopicObject.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
               </select>
-              <input type="text" name="" value="" placeholder="Title">
-              <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
-              <button class = "btn-cta" type="button" name="button">Add Your Idea!</button>
+              <input ng-model="st3c.idea.title" type="text" name="" value="" placeholder="Title">
+              <textarea ng-model="st3c.idea.description" name="comment" placeholder="Description..."form="usrform"></textarea><br>
+              <button ng-click="st3c.addNewIdea(st3c.idea)" class = "btn-cta" type="button" name="button">Add Your Idea!</button>
             </form>
           </div>
-
         </div>
       </div>
       <!--
@@ -81,18 +76,43 @@
 *        IDEAS CARDS                                                             *
 * ============================================================================== */
 -->
-<div class = 'cardContainer '>
-  <!--//IDEACARDS SECTION//-->
+
+<div class = 'cardContainer'>
   <div class = 'container'>
+    <!--//IDEACARDS SECTION//-->
     <div class="row container">
-      <div class="col-md-5 col-xs-12 singleCardContainer">
-        <h2>Here is where the IDEA card will go.</h2>
+      <!-- START NG REPEAT BELOW HERE -->
+      <div ng-repeat="subtopicIdeas in st3c.subtopicIdeas3.list" class="singleCard cardCenter col-md-5">
+        <div class="card_content">
+          <h2>Title: {{subtopicIdeas.title}} </h2>
+          <p> Description: {{subtopicIdeas.description}} </p>
+          <div class="author_content">
+            <div class ="author_img col-xl-3 col-md-3">
+              <p> <img ng-src="{{subtopicIdeas.photo}}"></p>
+            </div>
+            <div class="author_info cole-xl 9 col-md-9">
+              <h4> {{subtopicIdeas.name}} </h4>
+              <h5> {{subtopicIdeas.ward}} </h5>
+            </div>
+          </div>
+        </div>
+        <div class="love_like row">
+          <ul>
+            <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
+              <li class="like">
+                <span> LIKE </span>
+              </li>
+            </div>
+            <div class="col-md-6 col-xs-6 actionBtn">
+              <li class="love">
+                <span> LOVE </span>
+              </li>
+            </div>
+          </ul>
+        </div>
+        <button ng-click="st3c.moreComments()" type="button" name="Comments"> Comments </button>
       </div>
-      <div class="col-md-2 col-xs-0"></div>
-      <div class="col-md-5 col-xs-12 singleCardContainer">
-        <h2>Here is where the IDEA card will go.</h2>
-      </div>
-    </div>
+
 
     <!--
     /* ============================================================================= *
@@ -105,7 +125,7 @@
       <h3 class="light">HAVE AN IDEA?</h3>
     </div>
     <div class="col-md-6 col-xs-12">
-      <button type="button" class="btn-100" name="button">START A CONVERSATION</button>
+      <button ng-click="st3c.createIdea()" type="button" class="btn-100" name="button">START A CONVERSATION</button>
     </div>
   </div>
   <!--//CALL TO ACTION MOBILE/SMALL SCREEN//-->
@@ -116,6 +136,5 @@
         Create an Idea</h4>
       </div>
     </div>
-
   </div>
 </div>

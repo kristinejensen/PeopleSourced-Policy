@@ -1,3 +1,4 @@
+<!--  -->
 <!--
 /* ============================================================================= *
 *        ABOVE SUBTOPIC NAVIGATION                                              *
@@ -13,7 +14,7 @@
     <!--//TOP-SIDE CALL TO ACTION ON MOBILE/SMALL SCREEN//-->
     <div class="mobileCTA visible-xs-block">
       <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
-      <button class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+      <button ng-click="hc.createIdea()" class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
     </div>
     <!--//TOP-SIDE CALL TO ACTION ON MEDIUM AND LARGE SCREEN//-->
     <div class="visible-md-block visible-lg-block visible-xl-block  col-md-5 callToAction">
@@ -22,22 +23,21 @@
       </div>
       <div>
         <form class="ctaForm" align="center" action="index.html" method="post">
-          <select name="Subtopics">
-            <option value="subtopic1">Subtopic 1</option>
-            <option value="subtopic2">Subtopic 2</option>
-            <option value="subtopic3">Subtopic 3</option>
-            <option value="subtopic4">Subtopic 4</option>
-            <option value="subtopic5">Subtopic 5</option>
+          <select ng-model="hc.idea.subtopicId">
+            <option ng-repeat="subtopic in hc.subTopicObject.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
           </select>
-          <input type="text" name="" value="" placeholder="Title">
-          <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
-          <button class = "btn-cta" type="button" name="button">Add Your Idea!</button>
+          <input ng-model="hc.idea.title" type="text" name="" value="" placeholder="Title">
+          <textarea ng-model="hc.idea.description" name="comment" placeholder="Description..."form="usrform"></textarea><br>
+          <button ng-click="hc.addNewIdea(hc.idea)" class = "btn-cta" type="button" name="button">Add Your Idea!</button>
         </form>
       </div>
     </div>
   </div>
-
 </div>
+
+
+
+
 <!--
 /* ============================================================================= *
 *        SUBTOPIC NAVIGATION                                                    *
@@ -125,7 +125,7 @@
     <!--//CALL TO ACTION MOBILE/SMALL SCREEN//-->
     <div class="mobileCTA visible-xs-block">
       <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
-      <button class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+      <button ng-click="hc.createIdea()" class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
     </div>
 
     <!--//CALL TO ACTION MEDIUM AND LARGE SCREEN//-->
@@ -134,7 +134,7 @@
         <h3 class="light">HAVE AN IDEA?</h3>
       </div>
       <div class="col-md-6 col-xs-12">
-        <button type="button" class="btn-100" name="button">START A CONVERSATION</button>
+        <button ng-click="hc.createIdea()" type="button" class="btn-100" name="button">START A CONVERSATION</button>
       </div>
     </div>
 

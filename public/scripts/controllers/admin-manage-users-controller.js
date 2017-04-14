@@ -1,6 +1,7 @@
 app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactory', function($http, $location, AdminFactory){
   var self = this;
 
+
   self.allUsers = AdminFactory.allUsers;
 
   self.deactivateUser = function(userId) {

@@ -64,4 +64,5 @@ app.controller('FlagController', ['$firebaseAuth', '$http', '$location', 'DataFa
   // self.idea = DataFactory.idea;
   // self.comments = DataFactory.comments;
 
+
 }]);

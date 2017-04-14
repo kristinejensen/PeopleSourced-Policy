@@ -1,12 +1,24 @@
 app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
 
-  var subTopicObject = { list:[] };
-  var subtopicIdeas1 = { list:[] };
-  var subtopicIdeas2 = { list:[] };
-  var subtopicIdeas3 = { list:[] };
-  var subtopicIdeas4 = { list:[] };
-  var subtopicIdeas5 = { list:[] };
-  var commentsObject = { list:[] };
+//containers
+var subTopicObject = { list : [] };
+var subtopicIdeas1 = { list : [] };
+var subtopicIdeas2 = { list : [] };
+var subtopicIdeas3 = { list : [] };
+var subtopicIdeas4 = { list : [] };
+var subtopicIdeas5 = { list : [] };
+var commentsObject = { list : [] };
+var userMatchObject = { list : [] };
+
+//calls functions at startup
+init();
+
+function init() {
+  getSubTopics();
+  getSubtopicIdeas();
+  getComments();
+  getUserMatch();
+}
 
   //add new user to DB from login view button click
   function addNewUser(newUser){
@@ -61,7 +73,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
     });
   }//end of getSubTopics()
 
-
   //adds ideas to subtopic views
   function getSubtopicIdeas() {
     $http({
@@ -98,117 +109,111 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
     }).then(function(response) {
       subtopicIdeas5.list = response.data;
     });
-  }//end of getSubTopicIdeas()
-
-  //adds liked/idea to DB
-  function addLiked(subtopicIdeas){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
-        method: 'POST',
-        url: '/login/addLiked',
-        data: subtopicIdeas,
-        headers: {
-          id_token: idToken
-        }
-      }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        swal("Liked Added To Database", "", "success");
-        self.subtopicIdeas = {};
-      }).catch(function(error) {
-        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
-        console.log('error authenticating', error);
-      });
-    });//end of firebase.auth()
-  }//end of addNewUser()
-
-  //adds loved/idea to DB
-  function addLoved(subtopicIdeas){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
-        method: 'POST',
-        url: '/login/addLoved',
-        data: subtopicIdeas,
-        headers: {
-          id_token: idToken
-        }
-      }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        swal("Loved Added To Database", "", "success");
-        self.subtopicIdeas = {};
-      }).catch(function(error) {
-        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
-        console.log('error authenticating', error);
-      });
-    });//end of firebase.auth()
-  }//end of addNewUser()
-
-  //adds flag/idea to DB
-  function addFlag(subtopicIdeas){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
-        method: 'POST',
-        url: '/login/addFlag',
-        data: subtopicIdeas,
-        headers: {
-          id_token: idToken
-        }
-      }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        swal("flag Added To Database", "", "success");
-        self.subtopicIdeas = {};
-      }).catch(function(error) {
-        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
-        console.log('error authenticating', error);
-      });
-    });//end of firebase.auth()
-  }//end of addNewUser()
+}//end of getSubTopicIdeas()
 
   //gets all comments for comment view
   function getComments() {
     $http({
       method: 'GET',
-      url: '/data/comments'
+      url: '/data/allComments'
     }).then(function(response) {
       commentsObject.list = response.data;
     });
   }//end of getComments()
 
-  //adds loved/idea to DB
-  function addComment(newComment){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
-        method: 'POST',
-        url: '/login/addComment',
-        data: newComment,
-        headers: {
-          id_token: idToken
-        }
-      }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        getComments();
-        swal("Loved Added To Database", "", "success");
-        self.addComment = {};
-      }).catch(function(error) {
-        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
-        console.log('error authenticating', error);
-      });
-    });//end of firebase.auth()
-  }//end of addComment()
+//adds loved/idea to DB
+function addComment(newComment){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'POST',
+      url: '/login/addComment',
+      data: newComment,
+      headers: {
+        id_token: idToken
+      }
+    }).then(function(response){
+      // notyf.confirm('Blank Submitted For Approval');
+      getComments();
+      swal("Comment Added To Database", "", "success");
+      self.addComment = {};
+    }).catch(function(error) {
+      swal("Values Are Incorrect", "Try Again!", "error");
+      console.log('error authenticating', error);
+    });
+  });//end of firebase.auth()
+}//end of addComment()
+
+function getUserMatch() {
+    $http({
+      method: 'GET',
+      url: '/data/getUserMatch'
+    }).then(function(response) {
+      userMatchObject.list = response.data;
+    });
+}//end of getAllUsers()
+
 
   return {
-    addNewUser: addNewUser,
-    addNewIdea: addNewIdea,
-    subTopicObject: subTopicObject,
-    subtopicIdeas1: subtopicIdeas1,
-    subtopicIdeas2: subtopicIdeas2,
-    subtopicIdeas3: subtopicIdeas3,
-    subtopicIdeas4: subtopicIdeas4,
-    subtopicIdeas5: subtopicIdeas5,
-    addLiked: addLiked,
-    addLoved: addLoved,
-    addFlag: addFlag,
-    addComment: addComment,
-    commentsObject: commentsObject,
+//new user object from add address button click
+    addNewUser : addNewUser,
+//new idea object from idea button click
+    addNewIdea : addNewIdea,
+//sends current subtopics to add idea view option element
+    subTopicObject : subTopicObject,
+//adds ideas to subtopic1 view
+    subtopicIdeas1 : subtopicIdeas1,
+//adds ideas to subtopic2 view
+    subtopicIdeas2 : subtopicIdeas2,
+//adds ideas to subtopic3 view
+    subtopicIdeas3 : subtopicIdeas3,
+//adds ideas to subtopic4 view
+    subtopicIdeas4 : subtopicIdeas4,
+//adds ideas to subtopic5 view
+    subtopicIdeas5 : subtopicIdeas5,
+//adds comment to DB
+    addComment : addComment,
+//gets comments to comment view
+    commentsObject : commentsObject,
+//checks user for axisting account at login
+    getUserMatch : getUserMatch,
+//all existing users object
+    userMatchObject : userMatchObject,
+
   }
 
 }]); // end of app.factory
+
+
+
+
+
+
+
+
+
+
+
+// //checks for admin rights
+// function getAdmin() {
+//   auth.$onAuthStateChanged(function(firebaseUser){
+// //firebaseUser will be null if not logged in
+//     if(firebaseUser) {
+// //This is where we make our call to our server
+//       firebaseUser.getToken().then(function(idToken){
+//         $http({
+//           method: 'GET',
+//           url: '/login/admin',
+//           headers: {
+//             id_token: idToken
+//           }
+//         }).then(function(response){
+//           var secretUser = response.data;
+//         });
+//       });
+//     } else {
+//       console.log('Not logged in or not authorized.');
+//       var secretData = [];
+//       console.log("secretData: ", secretData);
+//     }
+//   });//end of auth.$onAuthStateChanged
+// }//end of getAdmin()
