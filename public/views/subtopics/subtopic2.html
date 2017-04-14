@@ -30,19 +30,14 @@
 
           <div>
             <form class="ctaForm" align="center" action="index.html" method="post">
-              <select name="Subtopics">
-                <option value="subtopic1">Subtopic 1</option>
-                <option value="subtopic2">Subtopic 2</option>
-                <option value="subtopic3">Subtopic 3</option>
-                <option value="subtopic4">Subtopic 4</option>
-                <option value="subtopic5">Subtopic 5</option>
+              <select ng-model="st2c.idea.subtopicId">
+                <option ng-repeat="subtopic in st2c.subTopicObject.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
               </select>
-              <input type="text" name="" value="" placeholder="Title">
-              <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
-              <button class = "btn-cta" type="button" name="button">Add Your Idea!</button>
+              <input ng-model="st2c.idea.title" type="text" name="" value="" placeholder="Title">
+              <textarea ng-model="st2c.idea.description" name="comment" placeholder="Description..."form="usrform"></textarea><br>
+              <button ng-click="st2c.addNewIdea(st2c.idea)" class = "btn-cta" type="button" name="button">Add Your Idea!</button>
             </form>
           </div>
-
         </div>
       </div>
       <!--
@@ -83,21 +78,6 @@
 * ============================================================================== */
 -->
 
-<!-- <div class="subtopicDiv">
-  <h3> subtopic 2 (dynamic) </h3>
-  <button ng-click="st2c.createIdea()" type="button" name="button"> Create A New Idea </button>
-</div>
-
-<table class="subtopicDiv" >
-  <td ng-repeat="subtopicIdeas in st2c.subtopicIdeas2.list">
-    <button ng-click="st2c.moreComments()" type="button" name="Comments"> Comments </button>
-    <div class=""> Title: {{subtopicIdeas.title}} </div>
-    <div class=""> Description: {{subtopicIdeas.description}} </div>
-    <div class=""> Author: <img ng-src="{{subtopicIdeas.photo}}" class="authImage"> {{subtopicIdeas.name}} </div>
-  </td>
-</table> -->
-
-
 <div class = 'cardContainer'>
   <div class = 'container'>
     <!--//IDEACARDS SECTION//-->
@@ -134,23 +114,6 @@
         <button ng-click="st2c.moreComments()" type="button" name="Comments"> Comments </button>
       </div>
 
-
-
-
-
-<!-- <div class = 'cardContainer '> -->
-  <!--//IDEACARDS SECTION//-->
-  <!-- <div class = 'container'>
-    <div class="row container">
-      <div class="col-md-5 col-xs-12 singleCardContainer">
-        <h2>Here is where the IDEA card will go.</h2>
-      </div>
-      <div class="col-md-2 col-xs-0"></div>
-      <div class="col-md-5 col-xs-12 singleCardContainer">
-        <h2>Here is where the IDEA card will go.</h2>
-      </div>
-    </div> -->
-
     <!--
     /* ============================================================================= *
     *        CALL TO ACTION                                                          *
@@ -162,7 +125,7 @@
       <h3 class="light">HAVE AN IDEA?</h3>
     </div>
     <div class="col-md-6 col-xs-12">
-      <button type="button" class="btn-100" name="button">START A CONVERSATION</button>
+      <button ng-click="st2c.createIdea()" type="button" class="btn-100" name="button">START A CONVERSATION</button>
     </div>
   </div>
   <!--//CALL TO ACTION MOBILE/SMALL SCREEN//-->
@@ -173,6 +136,5 @@
         Create an Idea</h4>
       </div>
     </div>
-
   </div>
 </div>

@@ -1,26 +1,4 @@
 
-<!-- <h1> comments </h1>
-
-<div>
-  <h3> IDEA (dynamic) </h3>
-  <div> Idea description (dynamic) </div>
-  <div> Author (dynamic) </div>
-</div> -->
-
-<!-- comment submission about main idea -->
-<!-- <div>
-  <input ng-model="cc.newComment.description" type="text" placeholder="Leave a comment...">
-  <button ng-click="cc.addComment(cc.newComment)" type="button"> Submit Comment </button>
-</div>
-
-<table>
-  <td ng-repeat="comments in cc.commentsObject.list">
-    <button ng-click="cc.commentRedirect()" type="button" name="Comments"> Comments </button>
-      <div class=""> Description: {{comments.description}} </div>
-      <div class=""> Author: {{comments.name}} </div>
-  </td>
-</table>
- -->
 
 
 <!--
@@ -85,8 +63,9 @@
       <div class="commentArea">
         <div class="col-md-2 col-lg-2"></div>
         <div class="col-md-10 col-lg-10">
-          <textarea style="border: 1px solid lightgrey; display: block; margin-left: auto; margin-right: auto;" placeholder="Comment..." name="name" rows="8" cols="80"></textarea>
+          <textarea ng-model="cc.newComment.description" style="border: 1px solid lightgrey; display: block; margin-left: auto; margin-right: auto;" placeholder="Comment..." name="name" rows="8" cols="80"></textarea>
         </div>
+        <button ng-click="cc.addComment(cc.newComment)" type="button"> Submit Comment </button>
       </div>
 
       <div class="commentDiv">
@@ -143,15 +122,39 @@
 *        IDEAS CARDS                                                             *
 * ============================================================================== */
 -->
+
+<!-- <h1> comments </h1>
+
+<div>
+  <h3> IDEA (dynamic) </h3>
+  <div> Idea description (dynamic) </div>
+  <div> Author (dynamic) </div>
+</div> -->
+
+<!-- comment submission about main idea -->
+<!-- <div>
+  <input ng-model="cc.newComment.description" type="text" placeholder="Leave a comment...">
+  <button ng-click="cc.addComment(cc.newComment)" type="button"> Submit Comment </button>
+</div>
+
+<table>
+  <td ng-repeat="comments in cc.commentsObject.list">
+    <button ng-click="cc.commentRedirect()" type="button" name="Comments"> Comments </button>
+      <div class=""> Description: {{comments.description}} </div>
+      <div class=""> Author: {{comments.name}} </div>
+  </td>
+</table>
+ -->
+
 <div class = 'cardContainer'>
   <div class = 'container'>
     <!--//IDEACARDS SECTION//-->
     <div class="row container">
       <!-- START NG REPEAT BELOW HERE -->
-      <div class="singleCard cardCenter col-md-5">
+      <div ng-repeat="comments in cc.commentsObject.list" class="singleCard cardCenter col-md-5">
         <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <h2> Description: {{comments.description}} </h2>
+          <p> Author: {{comments.name}} </p>
           <div class="author_content">
             <div class ="author_img col-xl-3 col-md-3">
               <p>IMAGE</p>
@@ -178,156 +181,6 @@
         </div>
       </div>
 
-      <div class="singleCard cardCenter col-md-5">
-        <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="author_content">
-            <div class ="author_img col-xl-3 col-md-3">
-              <p>IMAGE</p>
-            </div>
-            <div class="author_info cole-xl 9 col-md-9">
-              <h4>Author Name</h4>
-              <h5>Ward x</h5>
-            </div>
-          </div>
-        </div>
-        <div class="love_like row">
-          <ul>
-            <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
-              <li class="like">
-                <span>LIKE</span>
-              </li>
-            </div>
-            <div class="col-md-6 col-xs-6 actionBtn">
-              <li class="love">
-                <span>LOVE</span>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-
-      <div class="singleCard cardCenter col-md-5">
-        <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="author_content">
-            <div class ="author_img col-xl-3 col-md-3">
-              <p>IMAGE</p>
-            </div>
-            <div class="author_info cole-xl 9 col-md-9">
-              <h4>Author Name</h4>
-              <h5>Ward x</h5>
-            </div>
-          </div>
-        </div>
-        <div class="love_like row">
-          <ul>
-            <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
-              <li class="like">
-                <span>LIKE</span>
-              </li>
-            </div>
-            <div class="col-md-6 col-xs-6 actionBtn">
-              <li class="love">
-                <span>LOVE</span>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-
-      <div class="singleCard cardCenter col-md-5">
-        <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="author_content">
-            <div class ="author_img col-xl-3 col-md-3">
-              <p>IMAGE</p>
-            </div>
-            <div class="author_info cole-xl 9 col-md-9">
-              <h4>Author Name</h4>
-              <h5>Ward x</h5>
-            </div>
-          </div>
-        </div>
-        <div class="love_like row">
-          <ul>
-            <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
-              <li class="like">
-                <span>LIKE</span>
-              </li>
-            </div>
-            <div class="col-md-6 col-xs-6 actionBtn">
-              <li class="love">
-                <span>LOVE</span>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-
-      <div class="singleCard cardCenter col-md-5">
-        <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="author_content">
-            <div class ="author_img col-xl-3 col-md-3">
-              <p>IMAGE</p>
-            </div>
-            <div class="author_info cole-xl 9 col-md-9">
-              <h4>Author Name</h4>
-              <h5>Ward x</h5>
-            </div>
-          </div>
-        </div>
-        <div class="love_like row">
-          <ul>
-            <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
-              <li class="like">
-                <span>LIKE</span>
-              </li>
-            </div>
-            <div class="col-md-6 col-xs-6 actionBtn">
-              <li class="love">
-                <span>LOVE</span>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-
-      <div class="singleCard cardCenter col-md-5">
-        <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="author_content">
-            <div class ="author_img col-xl-3 col-md-3">
-              <p>IMAGE</p>
-            </div>
-            <div class="author_info cole-xl 9 col-md-9">
-              <h4>Author Name</h4>
-              <h5>Ward x</h5>
-            </div>
-          </div>
-        </div>
-        <div class="love_like row">
-          <ul>
-            <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
-              <li class="like">
-                <span>LIKE</span>
-              </li>
-            </div>
-            <div class="col-md-6 col-xs-6 actionBtn">
-              <li class="love">
-                <span>LOVE</span>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-    </div>
 
     <!--
     /* ============================================================================= *

@@ -29,19 +29,14 @@
 
           <div>
             <form class="ctaForm" align="center" action="index.html" method="post">
-              <select name="Subtopics">
-                <option value="subtopic1">Subtopic 1</option>
-                <option value="subtopic2">Subtopic 2</option>
-                <option value="subtopic3">Subtopic 3</option>
-                <option value="subtopic4">Subtopic 4</option>
-                <option value="subtopic5">Subtopic 5</option>
+              <select ng-model="st3c.idea.subtopicId">
+                <option ng-repeat="subtopic in st3c.subTopicObject.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
               </select>
-              <input type="text" name="" value="" placeholder="Title">
-              <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
-              <button class = "btn-cta" type="button" name="button">Add Your Idea!</button>
+              <input ng-model="st3c.idea.title" type="text" name="" value="" placeholder="Title">
+              <textarea ng-model="st3c.idea.description" name="comment" placeholder="Description..."form="usrform"></textarea><br>
+              <button ng-click="st3c.addNewIdea(st3c.idea)" class = "btn-cta" type="button" name="button">Add Your Idea!</button>
             </form>
           </div>
-
         </div>
       </div>
       <!--
@@ -82,27 +77,12 @@
 * ============================================================================== */
 -->
 
-<!-- <div class="subtopicDiv">
-  <h3> subtopic 3 (dynamic) </h3>
-  <button ng-click="st3c.createIdea()" type="button" name="button"> Create A New Idea </button>
-</div>
-
-<table class="subtopicDiv" >
-  <td ng-repeat="subtopicIdeas in st3c.subtopicIdeas3.list">
-    <button ng-click="st3c.moreComments()" type="button" name="Comments"> Comments </button>
-    <div class=""> Title: {{subtopicIdeas.title}} </div>
-    <div class=""> Description: {{subtopicIdeas.description}} </div>
-    <div class=""> Author: <img ng-src="{{subtopicIdeas.photo}}" class="authImage"> {{subtopicIdeas.name}} </div>
-  </td>
-</table> -->
-
-
-<div ng-repeat="subtopicIdeas in st3c.subtopicIdeas3.list" class = 'cardContainer'>
+<div class = 'cardContainer'>
   <div class = 'container'>
     <!--//IDEACARDS SECTION//-->
     <div class="row container">
       <!-- START NG REPEAT BELOW HERE -->
-      <div class="singleCard cardCenter col-md-5">
+      <div ng-repeat="subtopicIdeas in st3c.subtopicIdeas3.list" class="singleCard cardCenter col-md-5">
         <div class="card_content">
           <h2>Title: {{subtopicIdeas.title}} </h2>
           <p> Description: {{subtopicIdeas.description}} </p>
@@ -156,6 +136,5 @@
         Create an Idea</h4>
       </div>
     </div>
-
   </div>
 </div>

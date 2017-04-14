@@ -1,7 +1,6 @@
 app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactory', function($http, $location, AdminFactory){
   var self = this;
 
-  var auth = $firebaseAuth();
 
   self.allUsers = AdminFactory.allUsers;
 

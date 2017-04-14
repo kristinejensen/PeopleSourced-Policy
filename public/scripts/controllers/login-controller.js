@@ -4,6 +4,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
 //google authenticate bellow
   var auth = $firebaseAuth();
   var self = this;
+
 //object to verify if user exsists in DB (need to finish)
   var userMatchObject = DataFactory.userMatchObject.list;
 

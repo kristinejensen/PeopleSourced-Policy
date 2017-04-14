@@ -115,7 +115,7 @@ function init() {
   function getComments() {
     $http({
       method: 'GET',
-      url: '/data/comments'
+      url: '/data/allComments'
     }).then(function(response) {
       commentsObject.list = response.data;
     });
