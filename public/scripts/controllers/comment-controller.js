@@ -1,5 +1,5 @@
 app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', function($firebaseAuth, $http, $location, DataFactory){
-//CHRIS’S CODE STARTS HERE
+
 
   var self = this;
   var auth = $firebaseAuth();
@@ -20,6 +20,9 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 //redirect after submission
     $location.url('/home');
   }//end of self.addComment()
+  self.createIdea = function() {
+  //redirect after submission
+    $location.path('/idea');
+  }
 
-//CHRIS’S CODE ENDS HERE
 }]);//end of app.controller()

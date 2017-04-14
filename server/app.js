@@ -6,6 +6,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var decoder = require('./modules/decoder');
 var portDecision = process.env.PORT || 3000;
+
 //Serving favicon
 var favicon = require('serve-favicon')
 

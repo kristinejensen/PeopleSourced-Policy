@@ -144,7 +144,6 @@ router.get('/getUserMatch', function (req, res) {
     });//end of .then
 });//end of router.get
 
-/////////////////RESOLVE///////////////////
 router.get('/comments', function(req, res){
   var userEmail = req.decodedToken.email;
   pool.connect(function (err, client, done) {
@@ -161,7 +160,6 @@ router.get('/comments', function(req, res){
   });
 });
 
-/////////////////RESOLVE///////////////////
 //gets all coments for comment view
 router.get('/allComments', function (req, res) {
   pool.connect()
