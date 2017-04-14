@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var decoder = require('./modules/decoder');
 var portDecision = process.env.PORT || 3000;
 //Serving favicon
-// var favicon = require('serve-favicon')
+var favicon = require('serve-favicon')
 
 //Routes
 var login = require('./routes/login');
@@ -24,9 +24,9 @@ app.use(bodyParser.json());
 
 app.use('/admin', admin);
 app.use('/data', data);
-// app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
-/* Whatever you do below this is protected by your authentication. */
+app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 
+/* Whatever you do below this is protected by your authentication. */
 app.use(decoder.token);
 
 app.use('/login', login);

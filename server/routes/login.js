@@ -20,23 +20,23 @@ var config = {
 //pool / pg constructor function
 var pool = new pg.Pool(config);
 //adds new user to DB
-router.post('/newUser', function (req, res) {
-  var newUser = req.body;
-  console.log('newUser: ', newUser);
-  pool.connect()
-    .then(function (client) {
-      client.query('INSERT INTO users (name, address, email, photo) VALUES ($1, $2, $3, $4)',
-        [newUser.name, newUser.address, newUser.email, newUser.photo])
-        .then(function (result) {
-          client.release();
-          res.sendStatus(201);
-        })
-        .catch(function (err) {
-          console.log('error on INSERT', err);
-          res.sendStatus(500);
-        });
-    });//end of .then
-});//end of router.post
+// router.post('/newUser', function (req, res) {
+//   var newUser = req.body;
+//   console.log('newUser: ', newUser);
+//   pool.connect()
+//     .then(function (client) {
+//       client.query('INSERT INTO users (name, address, email, photo) VALUES ($1, $2, $3, $4)',
+//         [newUser.name, newUser.address, newUser.email, newUser.photo])
+//         .then(function (result) {
+//           client.release();
+//           res.sendStatus(201);
+//         })
+//         .catch(function (err) {
+//           console.log('error on INSERT', err);
+//           res.sendStatus(500);
+//         });
+//     });//end of .then
+// });//end of router.post
 
 //adds new idea to DB (need to get query to add id or email)
 router.post('/newidea', function (req, res) {
