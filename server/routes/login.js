@@ -1,4 +1,4 @@
-//CHRIS’S CODE STARTS HERE
+
 
 var express = require('express');
 var router = express.Router();
@@ -6,9 +6,6 @@ var pg = require('pg');
 var pool = require('../modules/database-config');
 var google = require('googleapis');
 var civicInfo = require("civic-info")({apiKey: 'AIzaSyDmMib1-iMC4PwQZcnsKUa4vnB00l0sAfU'});
-var user = {};
-var voterInfo={};
-// var connectionString = require('../modules/database-config');
 var config = {
   database: 'psp_database',
   host: 'localhost',
@@ -17,26 +14,11 @@ var config = {
   idleTimeoutMillis: 30000
 };//end of config
 
+var user = {};
+var voterInfo = {};
+
 //pool / pg constructor function
 var pool = new pg.Pool(config);
-//adds new user to DB
-// router.post('/newUser', function (req, res) {
-//   var newUser = req.body;
-//   console.log('newUser: ', newUser);
-//   pool.connect()
-//     .then(function (client) {
-//       client.query('INSERT INTO users (name, address, email, photo) VALUES ($1, $2, $3, $4)',
-//         [newUser.name, newUser.address, newUser.email, newUser.photo])
-//         .then(function (result) {
-//           client.release();
-//           res.sendStatus(201);
-//         })
-//         .catch(function (err) {
-//           console.log('error on INSERT', err);
-//           res.sendStatus(500);
-//         });
-//     });//end of .then
-// });//end of router.post
 
 //adds new idea to DB (need to get query to add id or email)
 router.post('/newidea', function (req, res) {
@@ -74,7 +56,7 @@ router.post('/addComment', function (req, res) {
           res.sendStatus(500);
         });
     });//end of .then
-});//end of router.post
+  });//end of router.post
 
 router.post('/newUser', function (req, res) {
  var newUser = req.body;
@@ -87,11 +69,9 @@ newUser.ward = "other";
 for (var i = 0; i <= 14; i++) {
   // console.log(typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ]);
   if (typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ] !== 'undefined') {
-  newUser.ward = "ward " + (i);
-  }
-}
-
-console.log(newUser);
+    newUser.ward = "ward " + (i);
+  }//end of if
+}//end of for loop
  pool.connect()
    .then(function (client) {
      client.query('INSERT INTO users (name, address, email, ward, photo) VALUES ($1, $2, $3, $4, $5)',
@@ -104,11 +84,9 @@ console.log(newUser);
          console.log('error on INSERT', err);
          res.sendStatus(500);
        });
-   });//end of .then
+    });//end of .then
+  });//end of civicinfo
 });//end of router.post
-
-});
-
 
 module.exports = router;
 
