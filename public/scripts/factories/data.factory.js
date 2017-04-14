@@ -1,6 +1,4 @@
 app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
-//CHRIS’S CODE STARTS HERE
-
 
 //containers
 var subTopicObject = { list : [] };
@@ -20,64 +18,63 @@ function init() {
   getSubtopicIdeas();
   getComments();
   getUserMatch();
-
 }
 
-//add new user to DB from login view button click
-function addNewUser(newUser){
-  firebase.auth().currentUser.getToken().then(function(idToken) {
-    $http({
-      method: 'POST',
-      url: '/login/newUser',
-      data: newUser,
-      headers: {
-        id_token: idToken
-      }
-    }).then(function(response){
-      // notyf.confirm('Blank Submitted For Approval');
-      swal("User Added To Database", "", "success");
-      self.newUser = {};
-    }).catch(function(error) {
-      swal("Values Are Incorrect", "Try Again!", "error");
-      console.log('error authenticating', error);
-    });
-  });//end of firebase.auth()
-}//end of addNewUser()
+  //add new user to DB from login view button click
+  function addNewUser(newUser){
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method: 'POST',
+        url: '/login/newUser',
+        data: newUser,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response){
+        // notyf.confirm('Blank Submitted For Approval');
+        swal("User Added To Database", "", "success");
+        self.newUser = {};
+      }).catch(function(error) {
+        swal("Sorry, we couldn't process your address.", "Try Again!", "error");
+        console.log('error authenticating', error);
+      });
+    });//end of firebase.auth()
+  }//end of addNewUser()
 
-//add new idea to DB from button click from idea view
-function addNewIdea(newIdea){
-  firebase.auth().currentUser.getToken().then(function(idToken) {
-    $http({
-      method: 'POST',
-      url: '/login/newIdea',
-      data: newIdea,
-      headers: {
-        id_token: idToken
-      }
-    }).then(function(response){
-      // notyf.confirm('Blank Submitted For Approval');
-      getSubtopicIdeas();
-      swal("Idea Added To Database", "", "success");
-      self.newIdea = {};
-    }).catch(function(error) {
-      swal("Values Are Incorrect", "Try Again!", "error");
-      console.log('error authenticating', error);
-    });
-  });//end of firebase.auth()
-}//end of addNewUser()
+  //add new idea to DB from button click from idea view
+  function addNewIdea(newIdea){
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method: 'POST',
+        url: '/login/newIdea',
+        data: newIdea,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response){
+        // notyf.confirm('Blank Submitted For Approval');
+        getSubtopicIdeas();
+        swal("Idea Added To Database", "", "success");
+        self.newIdea = {};
+      }).catch(function(error) {
+        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
+        console.log('error authenticating', error);
+      });
+    });//end of firebase.auth()
+  }//end of addNewUser()
 
-//adds subtopics1 to idea view select element
-function getSubTopics() {
+  //adds subtopics1 to idea view select element
+  function getSubTopics() {
     $http({
       method: 'GET',
       url: '/data/getSubTopics'
     }).then(function(response) {
       subTopicObject.list = response.data;
     });
-}//end of getSubTopics()
+  }//end of getSubTopics()
 
-//adds ideas to subtopic views
-function getSubtopicIdeas() {
+  //adds ideas to subtopic views
+  function getSubtopicIdeas() {
     $http({
       method: 'GET',
       url: '/data/subtopicIdeas1'
@@ -114,15 +111,15 @@ function getSubtopicIdeas() {
     });
 }//end of getSubTopicIdeas()
 
-//gets all comments for comment view
-function getComments() {
+  //gets all comments for comment view
+  function getComments() {
     $http({
       method: 'GET',
       url: '/data/comments'
     }).then(function(response) {
       commentsObject.list = response.data;
     });
-}//end of getComments()
+  }//end of getComments()
 
 //adds loved/idea to DB
 function addComment(newComment){
@@ -184,9 +181,14 @@ function getUserMatch() {
 
   }
 
-
-//CHRIS’S CODE ENDS HERE
 }]); // end of app.factory
+
+
+
+
+
+
+
 
 
 

@@ -2,6 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
+// var pool = require('../modules/database-config');
 var pg = require('pg');
 // var connectionString = require('../modules/database-config');
 var config = {
@@ -127,6 +128,40 @@ router.get('/subtopicIdeas5', function (req, res) {
     });//end of .then
 });//end of router.get
 
+//gets all users to compare at login view if in the system
+router.get('/getUserMatch', function (req, res) {
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT id, email FROM users")
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
+
+/////////////////RESOLVE///////////////////
+// router.get('/comments', function(req, res){
+//   var userEmail = req.decodedToken.email;
+//   pool.connect(function (err, client, done) {
+//     client.query('SELECT * FROM comments JOIN idea ON idea.id=comments.idea_id WHERE email=$1;', [userEmail], function(err, result){
+//       done();
+//       if(err){
+//         ('Error completing get comments on page load query', err);
+//         res.sendStatus(500);
+//       } else {
+//         res.send(result.rows[0]);
+//         console.log(result.rows[0]);
+//       }
+//     });
+//   });
+// });
+
+/////////////////RESOLVE///////////////////
 //gets all coments for comment view
 router.get('/comments', function (req, res) {
   pool.connect()
@@ -143,21 +178,21 @@ router.get('/comments', function (req, res) {
     });//end of .then
 });//end of router.get
 
-//gets all users to compare at login view if in the system
-router.get('/getUserMatch', function (req, res) {
-  pool.connect()
-    .then(function (client) {
-      client.query("SELECT id, email FROM users")
-        .then(function (result) {
-          client.release();
-          res.send(result.rows);
-        })
-        .catch(function (err) {
-          console.log('error on SELECT', err);
-          res.sendStatus(500);
-        });
-    });//end of .then
-});//end of router.get
+router.get('/idea', function(req, res){
+  var userEmail = req.decodedToken.email;
+  pool.connect(function (err, client, done) {
+    client.query('SELECT * FROM idea;', [userEmail], function(err, result){
+      done();
+      if(err){
+        ('Error completing get causes on page load query', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows);
+      }
+    });
+  });
+});
+
 
 //CHRIS’S CODE ENDS HERE
 module.exports = router;

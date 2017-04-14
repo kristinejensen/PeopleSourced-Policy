@@ -1,6 +1,5 @@
-<!-- CHRIS’S CODE STARTS HERE -->
 
-<h3>add idea view</h3>
+<!-- <h3>add idea view</h3>
 <main class="ideaMain">
   <select ng-model="ic.idea.subtopicId">
     <option ng-repeat="subtopic in ic.subTopicObject.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
@@ -14,6 +13,35 @@
     <input ng-model="ic.idea.description" type="text" name="description">
   </div>
     <button ng-click="ic.addNewIdea(ic.idea)" type="button"> Add Idea </button>
-</main>
+</main> -->
 
-<!-- CHRIS’S CODE ENDS HERE -->
+<!-- /* ============================================================================ *
+*        SUBTOPIC NAVIGATION                                                    *
+* ============================================================================= */ -->
+
+<div ng-include="'/views/templates/subtopicNav.html'"></div>
+
+<!-- /* ============================================================================ *
+*         ADD IDEAS FORM                                                      *
+* ============================================================================= */ -->
+
+<div class = "greybackground">
+  <div class = "container">
+    <div class="row addressForm">
+      <div class="frmTitle">
+        <h2><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Add an Idea</h2>
+      </div>
+      <div>
+        <form class="basicForm" align="center" action="index.html" method="post">
+          <p>Share Your Idea With Others In Minneapolis</p>
+          <select ng-model="ic.idea.subtopicId" class="selector100" name="Subtopics">
+            <option ng-repeat="subtopic in ic.subTopicObject.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
+          </select>
+          <input ng-model="ic.idea.title" class="lightGrey" type="text" name="" value="" placeholder="Idea">
+          <textarea ng-model="ic.idea.description" class="lightgreyTextArea" name="comment" placeholder="Description..."form="usrform"></textarea><br>
+          <button ng-click="ic.addNewIdea(ic.idea)" class = "btn-80-blk" type="button" name="button">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

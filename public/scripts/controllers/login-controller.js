@@ -7,17 +7,18 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
 //object to verify if user exsists in DB (need to finish)
   var userMatchObject = DataFactory.userMatchObject.list;
 
+self.message= "hey there"
 //notyf must have
   // var notyf = new Notyf();
 
 //redirection after login
-  function loginView() {
-    $location.path('/login');
-  }
+ function loginView() {
+   $location.path('/login');
+ }
 //redirection after logout
-  function logoutView() {
-    $location.path('/home');
-  }
+ function logoutView() {
+   $location.path('/home');
+ }
 //redirection to admin view
   function adminView() {
     $location.path('/admin');
@@ -56,11 +57,14 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       logoutView();
     });//end of auth.$signOut()
   };//end of self.deAuthUser()
+
 //new user object from view button click
-  self.addNewUser = function(user) {
+ self.addNewUser = function(user) {
 //brings in firebase data to function
-    var firebaseUser = auth.$getAuth();
+   var firebaseUser = auth.$getAuth();
+
 //creating a new variable with input data and firebase data
+
     var newUser = {
       name : firebaseUser.displayName,
       address : user.street + " " + user.city + ", " + user.state + " " + user.zipCode,
@@ -73,8 +77,8 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
 //empties inputs after submission
     self.user = {};
 //redirects back to home view after submission
-    logoutView();
-  }
+   logoutView();
+ }
 
 //CHRIS’S CODE ENDS HERE
 }]);//end of app.controller()

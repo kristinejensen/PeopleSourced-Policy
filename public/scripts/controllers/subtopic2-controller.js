@@ -1,5 +1,5 @@
+
 app.controller('Subtopic2Controller', ['DataFactory', '$firebaseAuth','$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
-//CHRIS’S CODE STARTS HERE
 
   var self = this;
 
@@ -15,5 +15,4 @@ app.controller('Subtopic2Controller', ['DataFactory', '$firebaseAuth','$http', '
     $location.path('/comment');
   }
 
-//CHRIS’S CODE ENDS HERE
 }]);//end of app.controller()
