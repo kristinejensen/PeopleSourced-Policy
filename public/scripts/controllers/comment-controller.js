@@ -9,7 +9,6 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
 //add comment to comment to DB
   self.commentRedirect = function() {
-
 //redirect after submission
     $location.url('/comment');
   }//end of self.commentRedirect()
