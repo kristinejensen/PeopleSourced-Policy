@@ -94,8 +94,8 @@ for (var i = 0; i <= 14; i++) {
 console.log(newUser);
  pool.connect()
    .then(function (client) {
-     client.query('INSERT INTO users (name, address, email, ward) VALUES ($1, $2, $3, $4)',
-       [newUser.name, newUser.address, newUser.email, newUser.ward])
+     client.query('INSERT INTO users (name, address, email, ward, photo) VALUES ($1, $2, $3, $4, $5)',
+       [newUser.name, newUser.address, newUser.email, newUser.ward, newUser.photo])
        .then(function (result) {
          client.release();
          res.sendStatus(201);
