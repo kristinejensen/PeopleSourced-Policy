@@ -27,30 +27,10 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'CommentController',
     controllerAs: 'cc'
   })
-  .when('/subtopic1', {
-    templateUrl: 'views/subtopics/subtopic1.html',
-    controller: 'Subtopic1Controller',
-    controllerAs: 'st1c'
-  })
-  .when('/subtopic2', {
-    templateUrl: 'views/subtopics/subtopic2.html',
-    controller: 'Subtopic2Controller',
-    controllerAs: 'st2c'
-  })
-  .when('/subtopic3', {
-    templateUrl: 'views/subtopics/subtopic3.html',
-    controller: 'Subtopic3Controller',
-    controllerAs: 'st3c'
-  })
-  .when('/subtopic4', {
-    templateUrl: 'views/subtopics/subtopic4.html',
-    controller: 'Subtopic4Controller',
-    controllerAs: 'st4c'
-  })
-  .when('/subtopic5', {
-    templateUrl: 'views/subtopics/subtopic5.html',
-    controller: 'Subtopic5Controller',
-    controllerAs: 'st5c'
+  .when('/subtopics', {
+    templateUrl: 'views/subtopics/subtopics.html',
+    controller: 'SubtopicController',
+    controllerAs: 'stc'
   })
   .when('/views/:id', {
     templateUrl: 'views/comment.html',
@@ -77,16 +57,6 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'AdminTopicsController',
     controllerAs: 'atc'
   })
-
-
-  //test view, remove before merge
-  .when('/test', {
-    templateUrl: 'views/test.html',
-    controller: 'HomeController',
-    controllerAs: 'hc'
-  })
-
-
   .otherwise({
     redirectTo: 'home'
   })

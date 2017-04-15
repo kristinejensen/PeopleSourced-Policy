@@ -1,0 +1,121 @@
+<!--
+/* ============================================================================= *
+*        ADMIN  NAVIGATION                                                       *
+* ============================================================================= */
+-->
+<div ng-include="'/views/templates/adminNav.html'"></div>
+<!--
+/* ============================================================================= *
+*        ADMIN FORMS                                                            *
+* ============================================================================= */
+-->
+<div style="background-color:#F8F8F8; padding-top: 30px; padding-bottom: 15px">
+  <div class="container" style="padding-top:40px; padding-bottom:40px; background-color: white; border: 1px solid #eeeeee;d">
+    <h2 style="text-align:center; padding-top: 30px; padding-bottom: 30px;">Add New Topics and Sub-Topics</h2>
+    <!--
+    /* ============================================================================= *
+    *        MAIN TOPIC                                                              *
+    * ============================================================================= */
+  -->
+<div class = "row" style="padding-top: 35px;">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="ctaTitle">
+      <h2 style="padding-left: 30px; text-align: left; background-color: #333333;">Main Topic</h2>
+    </div>
+    <div>
+      <form align="left" class="adminTopic" action="index.html" method="post" style="background-color: #B7D4EE;">
+        <input ng-model="atc.mainTopicTitle" placeholder="Topic Title" type="text" name="" value=""></input>
+        <textarea ng-model="atc.mainTopicDesc" placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
+        <button ng-click="atc.updateTopic(atc.mainTopicTitle, atc.mainTopicDesc)" class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-2">{{atc.message}}</div>
+</div>
+<!--
+/* ============================================================================= *
+*       SUB-TOPICS                                                               *
+* ============================================================================= */
+-->
+<!-- FIRST ROW -->
+<div class="row" style="padding-top: 35px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-5">
+    <div class="ctaTitle">
+      <h2 style="padding-left: 30px; text-align: left; background-color: #333333;">Sub-Topic 1</h2>
+    </div>
+    <div>
+      <form align="left" class="adminTopic" action="index.html" method="post" style="background-color: #B7D4EE;">
+        <input placeholder="Topic Title" type="text" name="" value=""></input>
+        <textarea placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
+        <button class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="ctaTitle">
+      <h2 style="padding-left: 30px; text-align: left; background-color: #333333;">Sub-Topic 2</h2>
+    </div>
+    <div>
+      <form align="left" class="adminTopic" action="index.html" method="post" style="background-color: #B7D4EE;">
+        <input placeholder="Topic Title" type="text" name="" value=""></input>
+        <textarea placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
+        <button class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<!-- SECOND ROW -->
+<div class="row" style="padding-top: 35px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-5">
+    <div class="ctaTitle">
+      <h2 style="padding-left: 30px; text-align: left; background-color: #333333;">Sub-Topic 3</h2>
+    </div>
+    <div>
+      <form align="left" class="adminTopic" action="index.html" method="post" style="background-color: #B7D4EE;">
+        <input placeholder="Topic Title" type="text" name="" value=""></input>
+        <textarea placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
+        <button class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="ctaTitle">
+      <h2 style="padding-left: 30px; text-align: left; background-color: #333333;">Sub-Topic 4</h2>
+    </div>
+    <div>
+      <form align="left" class="adminTopic" action="index.html" method="post" style="background-color: #B7D4EE;">
+        <input placeholder="Topic Title" type="text" name="" value=""></input>
+        <textarea placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
+        <button class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<!-- THIRD ROW -->
+<div class="row" style="padding-top: 35px;">
+  <div class="col-md-1"></div>
+  <div class="col-md-5">
+    <div class="ctaTitle">
+      <h2 style="padding-left: 30px; text-align: left; background-color: #333333;">Sub-Topic 5</h2>
+    </div>
+    <div>
+      <form align="left" class="adminTopic" action="index.html" method="post" style="background-color: #B7D4EE;">
+        <input placeholder="Topic Title" type="text" name="" value=""></input>
+        <textarea placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
+        <button class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-5"></div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+
+
+</div>
+</div>

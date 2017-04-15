@@ -1,7 +1,7 @@
 <!--
 /* ============================================================================= *
-*        ABOVE SUBTOPIC NAVIGATION                                              *
-* ============================================================================= */
+*        ABOVE SUBTOPIC NAVIGATION                                               *
+* ============================================================================== */
 -->
 <div class = "container">
   <div id="mainTopic" class="row">
@@ -13,7 +13,7 @@
     <!--//TOP-SIDE CALL TO ACTION ON MOBILE/SMALL SCREEN//-->
     <div class="mobileCTA visible-xs-block">
       <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
-      <button class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+      <button onclick="location.href='#!idea'" class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
     </div>
     <!--//TOP-SIDE CALL TO ACTION ON MEDIUM AND LARGE SCREEN//-->
     <div class="visible-md-block visible-lg-block visible-xl-block  col-md-5 callToAction">
@@ -31,7 +31,7 @@
           </select>
           <input type="text" name="" value="" placeholder="Title">
           <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
-          <button class = "btn-cta" type="button" name="button">Add Your Idea!</button>
+          <button onclick="location.href='#!idea'" class = "btn-cta" type="button" name="button">Add Your Idea!</button>
         </form>
       </div>
     </div>
@@ -40,15 +40,15 @@
 </div>
 <!--
 /* ============================================================================= *
-*        SUBTOPIC NAVIGATION                                                    *
-* ============================================================================= */
+*        SUBTOPIC NAVIGATION                                                     *
+* ============================================================================== */
 -->
 <div ng-include="'/views/templates/subtopicNav.html'"></div>
 
 <!--
 /* ============================================================================= *
-*        BELOW SUBTOPIC NAVIGATION                                                    *
-* ============================================================================= */
+*        BELOW SUBTOPIC NAVIGATION                                               *
+* ============================================================================== */
 -->
 
 <div class = 'cardContainer greyBackground' style="margin:0px;">
@@ -125,7 +125,7 @@
     <!--//CALL TO ACTION MOBILE/SMALL SCREEN//-->
     <div class="mobileCTA visible-xs-block">
       <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
-      <button class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+      <button onclick="location.href='#!idea'" class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
     </div>
 
     <!--//CALL TO ACTION MEDIUM AND LARGE SCREEN//-->
@@ -134,7 +134,7 @@
         <h3 class="light">HAVE AN IDEA?</h3>
       </div>
       <div class="col-md-6 col-xs-12">
-        <button type="button" class="btn-100" name="button">START A CONVERSATION</button>
+        <button onclick="location.href='#!idea'" type="button" class="btn-100" name="button">START A CONVERSATION</button>
       </div>
     </div>
 

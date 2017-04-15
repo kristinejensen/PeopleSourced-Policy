@@ -10,6 +10,7 @@ var favicon = require('serve-favicon')
 
 //Routes
 var admin = require('./routes/admin');
+var adminTopics = require('./routes/admin-topics');
 var login = require('./routes/login');
 var data = require('./routes/data');
 var list_data = require('./routes/list_data');
@@ -28,6 +29,8 @@ app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 
 //Routes
 app.use('/admin', admin);
+app.use('/admin-topics', adminTopics);
+
 // app.use('/login', login);
 // app.use('/data', data);
 

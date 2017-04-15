@@ -24,7 +24,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
       url: '/admin/manageUsers'
     }).then(function(response){
       allUsers.list = response.data;
-      console.log(allUsers.list);
+      // console.log(allUsers.list);
     })
   }
 

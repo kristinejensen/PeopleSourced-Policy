@@ -1,7 +1,8 @@
 app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', function($firebaseAuth, $http, $location, DataFactory){
 
   var self = this;
-  var auth = $firebaseAuth();
+
+  // var auth = $firebaseAuth();
 
   // auth.$onAuthStateChanged(getUser);
   //
@@ -29,6 +30,11 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
 
   //ARRI'S CODE STARTS HERE
+  self.showComment = false;
+
+  self.showCommentArea = function(){
+    self.showComment = true;
+  }
 
   //ARRI'S CODE ENDS HERE
 
@@ -45,17 +51,17 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   //KRIS'S CODE ENDS HERE
 
   // function that logs user out on button click
-  self.logOut = function(){
-    auth.$signOut().then(function(){
-      console.log('Logging the user out!');
-      self.redirectHome();
-    });
-  };
-
-  // function to redirect user to home page after logout
-  self.redirectHome = function(){
-    $location.url('/home');
-  }
+  // self.logOut = function(){
+  //   auth.$signOut().then(function(){
+  //     console.log('Logging the user out!');
+  //     self.redirectHome();
+  //   });
+  // };
+  //
+  // // function to redirect user to home page after logout
+  // self.redirectHome = function(){
+  //   $location.url('/home');
+  // }
 
   //accesses information from public API
 
