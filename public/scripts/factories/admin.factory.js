@@ -8,7 +8,9 @@ app.factory('AdminFactory', ['$http', function($http){
   //***************************************//
   //         UPDATE CURRENT TOPIC          //
   //***************************************//
-  var mainTopic = null;
+  var mainTopic = {list: []};
+
+  console.log('admin factory main topic before', mainTopic);
 
   findActiveTopic();
 
@@ -29,7 +31,8 @@ app.factory('AdminFactory', ['$http', function($http){
       url: '/admin-topics/findActiveTopic'
     }).then(function(response){
       console.log('WHAT IS THIS', response.data[0]);
-      mainTopic = response.data[0];
+      mainTopic.list = response.data[0];
+      console.log('admin factory main topic in http', mainTopic);
     });
   }
   //***************************************//
@@ -48,7 +51,7 @@ app.factory('AdminFactory', ['$http', function($http){
   //***************************************//
 
   // findActiveSubTopics();
-  // 
+  //
   // self.updateSubTopic = function(title, description, id){
   //   console.log('was clicked');
   //   var subTopic = {title: title, description: description, id: id}
@@ -83,7 +86,8 @@ app.factory('AdminFactory', ['$http', function($http){
   return {
     //
     mainTopic : mainTopic,
-    updateTopic : updateTopic
+    updateTopic : updateTopic,
+    findActiveTopic : findActiveTopic,
     //
   }
 

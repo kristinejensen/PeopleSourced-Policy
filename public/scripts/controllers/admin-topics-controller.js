@@ -1,4 +1,4 @@
-app.controller('AdminTopicsController', ['$http', '$location', function($http, $location){
+app.controller('AdminTopicsController', ['$http', '$location', 'AdminFactory', function($http, $location, AdminFactory){
   const self = this;
   console.log('admintopicscontroller working');
 
@@ -12,28 +12,12 @@ app.controller('AdminTopicsController', ['$http', '$location', function($http, $
   //         UPDATE CURRENT TOPIC          //
   //***************************************//
 
-  findActiveTopic();
+  self.mainTopic = AdminFactory.mainTopic;
 
-  self.updateTopic = function(title, description, id){
-    var mainTopic = {title: title, description: description, id: id}
-    $http({
-      method: 'PUT',
-      url: '/admin-topics/updateActiveTopic',
-      data: mainTopic
-    }).then(function(response) {
-      findActiveTopic();
-    })//Ends GET http
-  }//Update topic function
+  self.updateTopic = function(title, description, id) {
+   AdminFactory.updateTopic(title, description, id);
+ };
 
-  function findActiveTopic(){
-    $http({
-      method:'GET',
-      url: '/admin-topics/findActiveTopic'
-    }).then(function(response){
-      console.log('WHAT IS THIS', response.data[0]);
-      self.mainTopic = response.data[0];
-    });
-  }
   //***************************************//
   //        SET NEW CURRENT TOPIC          //
   //***************************************//

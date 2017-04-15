@@ -25,9 +25,9 @@
     </div>
     <div>
       <form align="left" class="adminTopic" action="index.html" method="post" style="background-color: #B7D4EE;">
-        <input ng-model="atc.mainTopic.title" placeholder="Topic Title" type="text" name="" value=""></input>
-        <textarea ng-model="atc.mainTopic.description" placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
-        <button ng-click="atc.updateTopic(atc.mainTopic.title, atc.mainTopic.description, atc.mainTopic.id)" class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
+        <input ng-model="atc.mainTopic.list.title" placeholder="Topic Title" type="text" name="" value=""></input>
+        <textarea ng-model="atc.mainTopic.list.description" placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
+        <button ng-click="atc.updateTopic(atc.mainTopic.list.title, atc.mainTopic.list.description, atc.mainTopic.list.id)" class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
       </form>
     </div>
   </div>
