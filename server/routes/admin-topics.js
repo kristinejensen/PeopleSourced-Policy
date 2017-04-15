@@ -9,61 +9,39 @@ var pool = require('../modules/database-config');
 //*******************//
 
 router.get('/findActiveTopic', function(req, res){
-  console.log('FIND admin-topics route hit');
   var title = req.headers.title
   var description = req.headers.description;
-  console.log(title, description);
   pool.connect( function (err, client, done) {
     client.query('SELECT * FROM main_topics WHERE active = true;', function(err, result){
       done();
       if(err){
-        console.log('Error completing find active topic query', err);
+        console.log('Error finding main topic from the database.', err);
         res.sendStatus(500);
       } else {
         res.send(result.rows);
         console.log(result.rows);
-      }//ends else
-    });//ends client.query
-  });//ends pool.connect
-});//ends router.get
-
+      }
+    });
+  });
+});
 
 router.put('/updateActiveTopic', function(req, res){
   console.log('admin-topics route hit');
-  var title = req.headers.title
-  var description = req.headers.description;
-  // var userEmail = req.decodedToken.email;
+  var mainTopic = {title: req.body.title, description: req.body.description, id: req.body.id};
   pool.connect( function (err, client, done) {
-    client.query('SELECT * FROM main_topics WHERE active = true;', function(err, result){
+    client.query('UPDATE main_topics SET title = $1, description = $2 WHERE id = $3;',
+    [mainTopic.title, mainTopic.description, mainTopic.id], function(err, result){
       done();
       if(err){
-        console.log('Error completing find active topic query', err);
+        console.log('Error updating main topic', err);
         res.sendStatus(500);
       } else {
-        //If an active topic exists, update it.
-        if (result.rows[0] !== undefined){
-          var activeTopicId = result.rows[0].id;
-          console.log('Active Topic ID: ', result.rows[0].id);
-          client.query('UPDATE main_topics SET title = $1, description = $2 WHERE id = $3;',
-          [title, description ,activeTopicId], function(err, result){
-            done();
-            if(err){
-              console.log('Error updating topic', err);
-              res.sendStatus(500);
-            } else {
-              res.send(result.rows);
-              console.log(result.rows);
-            }
-          });
-          //if an active topic does not exist,
-        } else {
-          res.send('There is no current Topic.');
-          console.log('There is no current Topic.');
-        }//ends else
-      }//ends else
-    });//ends client.query
-  });//ends pool.connect
-});//ends router.get
+        res.send(result.rows);
+        console.log(result.rows);
+      }
+    });
+  });
+});
 
 //*******************//
 //                   //
@@ -72,35 +50,33 @@ router.put('/updateActiveTopic', function(req, res){
 //*******************//
 
 router.get('/findActiveSubTopics', function(req, res){
-  console.log('FIND admin-topics route hit');
-  var title = req.headers.title
-  var description = req.headers.description;
-  console.log(title, description);
   pool.connect( function (err, client, done) {
+    //First find the active Topic, then find all subTopics that are a part of this main topic.
+    //This acts as one extra layer of security, I could consider removing it.
     client.query('SELECT id FROM main_topics WHERE active = true;', function(err, result){
       done();
       if(err){
-        console.log('Error completing find active topic query', err);
+        console.log('Error finding an active Main Topic for Subtopic Query', err);
         res.sendStatus(500);
       } else {
         activeMainTopicID = result.rows[0].id;
         pool.connect(function(err, client, done){
-          client.query('SELECT * FROM subtopics WHERE main_id = $1 AND active = true ORDER BY id ASC;',
+          //Limit Query to 5 as an extra layer of security to ensure the site styling doesn't break.
+          client.query('SELECT * FROM subtopics WHERE main_id = $1 AND active = true ORDER BY id ASC LIMIT 5;',
           [activeMainTopicID], function(err, result){
             done();
             if(err){
-              console.log('Error completing find active topic query', err);
+              console.log('Error finding all active subtopics', err);
               res.sendStatus(500);
             } else {
               res.send(result.rows);
-              console.log('here are the subtopics that are active');
             }
           })
         })
-      }//ends else
-    });//ends client.query
-  });//ends pool.connect
-});//ends router.get
+      }
+    });
+  });
+});
 
 router.put('/updateActiveSubTopics', function(req, res) {
   var subtopic = {title: req.body.title, description: req.body.description, id: req.body.id};

@@ -1,42 +1,89 @@
 app.factory('AdminFactory', ['$http', function($http){
-  //==============================//
-  // Adding or Updating Topics    //
-  //==============================//
+  //*******************//
+  //                   //
+  //    MAIN TOPIC     //
+  //                   //
+  //*******************//
 
-//find active topic and update with the id of the active topic.
-//if no active topic, create a new topic.
+  //***************************************//
+  //         UPDATE CURRENT TOPIC          //
+  //***************************************//
+  var mainTopic = null;
 
-//subtopic array?
+  findActiveTopic();
 
-// subTopics = { list: [subtopic1: '', subtopic2: '', subtopic3: '', subtopic4: '', subtopic5: ''] }
+  function updateTopic(title, description, id){
+    var mainTopic = {title: title, description: description, id: id}
+    $http({
+      method: 'PUT',
+      url: '/admin-topics/updateActiveTopic',
+      data: mainTopic
+    }).then(function(response) {
+      findActiveTopic();
+    })//Ends GET http
+  }//Update topic function
 
-// function updateTopic(){
-//
-// //check database to see if there is a current/active topic
-//   //If there is a current/active topic, update it
-//   //If there is NOT a current topic, create one with this data and set it as active
-//
-//   mainTopic = {
-//     self.mainTopicTitle = '',
-//     self.mainTopicDesc = '',
-//   }
-//
-//
-//   $http({
-//     method: 'GET',
-//     url: '/admin-topics/findCurrentTopic'
-//   }).then(function(response) {
-//     console.log(response);
-//   });
-// }
-  //==============================//
-  //             API              //
-  //==============================//
+  function findActiveTopic(){
+    $http({
+      method:'GET',
+      url: '/admin-topics/findActiveTopic'
+    }).then(function(response){
+      console.log('WHAT IS THIS', response.data[0]);
+      mainTopic = response.data[0];
+    });
+  }
+  //***************************************//
+  //        SET NEW CURRENT TOPIC          //
+  //***************************************//
+
+
+  //*******************//
+  //                   //
+  //    SUB TOPICS     //
+  //                   //
+  //*******************//
+
+  //***************************************//
+  //        UPDATE CURRENT SUBTOPICS       //
+  //***************************************//
+
+  // findActiveSubTopics();
+  // 
+  // self.updateSubTopic = function(title, description, id){
+  //   console.log('was clicked');
+  //   var subTopic = {title: title, description: description, id: id}
+  //   //Find the active subtopic that matches the id.
+  //   $http({
+  //     method: 'PUT',
+  //     url: '/admin-topics/updateActiveSubTopics',
+  //     data: subTopic
+  //   }).then(function(response) {
+  //     console.log(response);
+  //     findActiveSubTopics();
+  //   })//Ends GET http
+  // }//Update topic function
+  //
+  // function findActiveSubTopics(){
+  //   $http({
+  //     method:'GET',
+  //     url: '/admin-topics/findActiveSubTopics'
+  //   }).then(function(response){
+  //     self.subtopicsArray = response.data;
+  //   });
+  // }
+  //***************************************//
+  //       SET NEW CURRENT SUBTOPICS       //
+  //***************************************//
+
+
+
+  //***************************************//
+  //                  API                  //
+  //***************************************//
   return {
     //
-    // addTopic : addTopic,
-    // //
-    // updateTopic : updateTopic,
+    mainTopic : mainTopic,
+    updateTopic : updateTopic
     //
   }
 

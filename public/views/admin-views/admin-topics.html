@@ -25,22 +25,19 @@
     </div>
     <div>
       <form align="left" class="adminTopic" action="index.html" method="post" style="background-color: #B7D4EE;">
-        <input ng-model="atc.mainTopicTitle" placeholder="Topic Title" type="text" name="" value=""></input>
-        <textarea ng-model="atc.mainTopicDesc" placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
-        <button ng-click="atc.updateTopic(atc.mainTopicTitle, atc.mainTopicDesc)" class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
+        <input ng-model="atc.mainTopic.title" placeholder="Topic Title" type="text" name="" value=""></input>
+        <textarea ng-model="atc.mainTopic.description" placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
+        <button ng-click="atc.updateTopic(atc.mainTopic.title, atc.mainTopic.description, atc.mainTopic.id)" class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
       </form>
     </div>
   </div>
-  <div class="col-md-2">{{atc.message}}</div>
+  <div class="col-md-2"></div>
 </div>
 <!--
 /* ============================================================================= *
 *       SUB-TOPICS                                                               *
 * ============================================================================= */
 -->
-<!-- FIRST ROW -->
-
-  <!-- <div class="col-md-1"></div> -->
   <div ng-repeat="subTopic in atc.subtopicsArray" class="col-md-6" style="padding-bottom: 35px;">
     <div class="ctaTitle">
       <h2 style="padding-left: 30px; text-align: left; background-color: #333333;">Sub-Topic {{$index +1}}</h2>
