@@ -1,4 +1,3 @@
-
 <!--
 /* ============================================================================ *
 *        SUBTOPIC NAVIGATION                                                    *
@@ -13,7 +12,6 @@
 <div class = "greybackground">
   <div class = "container">
     <div class="row subTopic">
-
       <div class="visible-md-block visible-lg-block visible-xl-block">
         <!--//SUBTOPIC TITLE AND DESCRIPTION//-->
         <div class="col-md-7 col-lg-7 topicText">
@@ -29,19 +27,14 @@
 
           <div>
             <form class="ctaForm" align="center" action="index.html" method="post">
-              <select name="Subtopics">
-                <option value="subtopic1">Subtopic 1</option>
-                <option value="subtopic2">Subtopic 2</option>
-                <option value="subtopic3">Subtopic 3</option>
-                <option value="subtopic4">Subtopic 4</option>
-                <option value="subtopic5">Subtopic 5</option>
+              <select ng-model="st1c.idea.subtopicId">
+                <option ng-repeat="subtopic in st1c.subTopicObject.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
               </select>
-              <input type="text" name="" value="" placeholder="Title">
-              <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
-              <button class = "btn-cta" type="button" name="button">Add Your Idea!</button>
+              <input ng-model="st1c.idea.title" type="text" name="" value="" placeholder="Title">
+              <textarea ng-model="st1c.idea.description" name="comment" placeholder="Description..."form="usrform"></textarea><br>
+              <button ng-click="st1c.addNewIdea(st1c.idea)" class = "btn-cta" type="button" name="button">Add Your Idea!</button>
             </form>
           </div>
-
         </div>
       </div>
       <!--
@@ -81,6 +74,7 @@
 *        IDEAS CARDS                                                             *
 * ============================================================================== */
 -->
+
 <div class = 'cardContainer'>
   <div class = 'container'>
     <!--//IDEACARDS SECTION//-->
@@ -147,16 +141,17 @@
       </div>
 
       <div class="singleCard cardCenter col-md-5">
+      <div ng-repeat="subtopicIdeas in st1c.subtopicIdeas1.list" class="singleCard cardCenter col-md-5">
         <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <h2>Title: {{subtopicIdeas.title}} </h2>
+          <p> Description: {{subtopicIdeas.description}} </p>
           <div class="author_content">
             <div class ="author_img col-xl-3 col-md-3">
-              <p>IMAGE</p>
+              <p> <img ng-src="{{subtopicIdeas.photo}}"></p>
             </div>
             <div class="author_info cole-xl 9 col-md-9">
-              <h4>Author Name</h4>
-              <h5>Ward x</h5>
+              <h4> {{subtopicIdeas.name}} </h4>
+              <h5> {{subtopicIdeas.ward}} </h5>
             </div>
           </div>
         </div>
@@ -164,108 +159,18 @@
           <ul>
             <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
               <li class="like">
-                <span>LIKE</span>
+                <span> LIKE </span>
               </li>
             </div>
             <div class="col-md-6 col-xs-6 actionBtn">
               <li class="love">
-                <span>LOVE</span>
+                <span> LOVE </span>
               </li>
             </div>
           </ul>
         </div>
+        <button ng-click="st1c.moreComments()" type="button" name="Comments"> Comments </button>
       </div>
-
-      <div class="singleCard cardCenter col-md-5">
-        <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="author_content">
-            <div class ="author_img col-xl-3 col-md-3">
-              <p>IMAGE</p>
-            </div>
-            <div class="author_info cole-xl 9 col-md-9">
-              <h4>Author Name</h4>
-              <h5>Ward x</h5>
-            </div>
-          </div>
-        </div>
-        <div class="love_like row">
-          <ul>
-            <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
-              <li class="like">
-                <span>LIKE</span>
-              </li>
-            </div>
-            <div class="col-md-6 col-xs-6 actionBtn">
-              <li class="love">
-                <span>LOVE</span>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-
-      <div class="singleCard cardCenter col-md-5">
-        <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="author_content">
-            <div class ="author_img col-xl-3 col-md-3">
-              <p>IMAGE</p>
-            </div>
-            <div class="author_info cole-xl 9 col-md-9">
-              <h4>Author Name</h4>
-              <h5>Ward x</h5>
-            </div>
-          </div>
-        </div>
-        <div class="love_like row">
-          <ul>
-            <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
-              <li class="like">
-                <span>LIKE</span>
-              </li>
-            </div>
-            <div class="col-md-6 col-xs-6 actionBtn">
-              <li class="love">
-                <span>LOVE</span>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-
-      <div class="singleCard cardCenter col-md-5">
-        <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="author_content">
-            <div class ="author_img col-xl-3 col-md-3">
-              <p>IMAGE</p>
-            </div>
-            <div class="author_info cole-xl 9 col-md-9">
-              <h4>Author Name</h4>
-              <h5>Ward x</h5>
-            </div>
-          </div>
-        </div>
-        <div class="love_like row">
-          <ul>
-            <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
-              <li class="like">
-                <span>LIKE</span>
-              </li>
-            </div>
-            <div class="col-md-6 col-xs-6 actionBtn">
-              <li class="love">
-                <span>LOVE</span>
-              </li>
-            </div>
-          </ul>
-        </div>
-      </div>
-    </div>
 
     <!--
     /* ============================================================================= *
@@ -278,7 +183,7 @@
       <h3 class="light">HAVE AN IDEA?</h3>
     </div>
     <div class="col-md-6 col-xs-12">
-      <button type="button" class="btn-100" name="button">START A CONVERSATION</button>
+      <button ng-click="st1c.createIdea()" type="button" class="btn-100" name="button"> START A CONVERSATION </button>
     </div>
   </div>
   <!--//CALL TO ACTION MOBILE/SMALL SCREEN//-->

@@ -7,12 +7,23 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
   var subtopicIdeas4 = { list:[] };
   var subtopicIdeas5 = { list:[] };
   var commentsObject = { list:[] };
+  var userMatchObject = { list : [] };
   var userTally = {};
   var ideasTally = {};
   var commentsTally = {};
   var likesTally = {};
 
+  //calls functions at startup
+  init();
   getTallyInfo();
+
+  function init() {
+    getSubTopics();
+    getSubtopicIdeas();
+    getComments();
+    getUserMatch();
+  }
+
 
   //add new user to DB from login view button click
   function addNewUser(newUser){
@@ -66,7 +77,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
       subTopicObject.list = response.data;
     });
   }//end of getSubTopics()
-
 
   //adds ideas to subtopic views
   function getSubtopicIdeas() {
@@ -165,13 +175,14 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
         console.log('error authenticating', error);
       });
     });//end of firebase.auth()
-  }//end of addNewUser()
+  }//end of getSubTopicIdeas
+
 
   //gets all comments for comment view
   function getComments() {
     $http({
       method: 'GET',
-      url: '/data/comments'
+      url: '/data/allComments'
     }).then(function(response) {
       commentsObject.list = response.data;
     });
@@ -190,15 +201,23 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
       }).then(function(response){
         // notyf.confirm('Blank Submitted For Approval');
         getComments();
-        swal("Loved Added To Database", "", "success");
+        swal("Comment Added To Database", "", "success");
         self.addComment = {};
       }).catch(function(error) {
-        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
+        swal("Values Are Incorrect", "Try Again!", "error");
         console.log('error authenticating', error);
       });
     });//end of firebase.auth()
   }//end of addComment()
 
+  function getUserMatch() {
+    $http({
+      method: 'GET',
+      url: '/data/getUserMatch'
+    }).then(function(response) {
+      userMatchObject.list = response.data;
+    });
+  }//end of getAllUsers()
 
   //function to display tallies on home page
   function getTallyInfo() {
@@ -234,19 +253,44 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
     ideasTally: ideasTally,
     commentsTally: commentsTally,
     likesTally: likesTally,
-    addNewUser: addNewUser,
-    addNewIdea: addNewIdea,
-    subTopicObject: subTopicObject,
-    subtopicIdeas1: subtopicIdeas1,
-    subtopicIdeas2: subtopicIdeas2,
-    subtopicIdeas3: subtopicIdeas3,
-    subtopicIdeas4: subtopicIdeas4,
-    subtopicIdeas5: subtopicIdeas5,
-    addLiked: addLiked,
-    addLoved: addLoved,
-    addFlag: addFlag,
-    addComment: addComment,
-    commentsObject: commentsObject
+    addNewUser : addNewUser,
+    addNewIdea : addNewIdea,
+    subTopicObject : subTopicObject,
+    subtopicIdeas1 : subtopicIdeas1,
+    subtopicIdeas2 : subtopicIdeas2,
+    subtopicIdeas3 : subtopicIdeas3,
+    subtopicIdeas4 : subtopicIdeas4,
+    subtopicIdeas5 : subtopicIdeas5,
+    addComment : addComment,
+    commentsObject : commentsObject,
+    getUserMatch : getUserMatch,
+    userMatchObject : userMatchObject,
   }
 
 }]); // end of app.factory
+
+
+// //checks for admin rights
+// function getAdmin() {
+//   auth.$onAuthStateChanged(function(firebaseUser){
+// //firebaseUser will be null if not logged in
+//     if(firebaseUser) {
+// //This is where we make our call to our server
+//       firebaseUser.getToken().then(function(idToken){
+//         $http({
+//           method: 'GET',
+//           url: '/login/admin',
+//           headers: {
+//             id_token: idToken
+//           }
+//         }).then(function(response){
+//           var secretUser = response.data;
+//         });
+//       });
+//     } else {
+//       console.log('Not logged in or not authorized.');
+//       var secretData = [];
+//       console.log("secretData: ", secretData);
+//     }
+//   });//end of auth.$onAuthStateChanged
+// }//end of getAdmin()

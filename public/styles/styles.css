@@ -494,3 +494,18 @@ th {
 .search-bar {
   padding-bottom: 30px;
 }
+
+/*home view add idea div*/
+.haveIdeaHome {
+  text-align: center;
+}
+
+/*subtopic div element*/
+.subtopicDiv {
+  text-align: center;
+}
+
+/*idea main element*/
+.ideaMain {
+  text-align: center;
+}
