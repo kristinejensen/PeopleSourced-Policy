@@ -1,6 +1,6 @@
 <!--
 /* ============================================================================= *
-*        ABOVE SUBTOPIC NAVIGATION                                              *
+*        ABOVE TALLY DIV NAVIGATION                                              *
 * ============================================================================= */
 -->
 <div class = "container">
@@ -38,6 +38,33 @@
   </div>
 
 </div>
+
+<!--
+/* ============================================================================= *
+*        TALLY DIV                                                    *
+* ============================================================================= */
+-->
+<div id="tallyDiv" class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <p>Users:</p>
+      <span>{{hc.userTally.count.count}}</span>
+    </div>
+    <div class="col-md-3">
+      <p>Ideas Shared:</p>
+      <span>{{hc.ideasTally.count.count}}</span>
+    </div>
+    <div class="col-md-3">
+      <p>Comments:</p>
+      <span>{{hc.commentsTally.count.sumcount}}</span>
+    </div>
+    <div class="col-md-3">
+      <p>Likes:</p>
+      <span>{{hc.likesTally.count.sumcount}}</span>
+    </div>
+  </div>
+</div>
+
 <!--
 /* ============================================================================= *
 *        SUBTOPIC NAVIGATION                                                    *

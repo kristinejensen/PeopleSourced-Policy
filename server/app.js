@@ -24,6 +24,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 
 app.use('/admin', admin);
+app.use('/data', data);
 
 /* Whatever you do below this is protected by your authentication. */
 app.use(decoder.token);
@@ -32,7 +33,7 @@ app.use(decoder.token);
 app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 
 app.use('/login', login);
-app.use('/data', data);
+
 
 app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);

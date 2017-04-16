@@ -7,6 +7,12 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
   var subtopicIdeas4 = { list:[] };
   var subtopicIdeas5 = { list:[] };
   var commentsObject = { list:[] };
+  var userTally = {};
+  var ideasTally = {};
+  var commentsTally = {};
+  var likesTally = {};
+
+  getTallyInfo();
 
   //add new user to DB from login view button click
   function addNewUser(newUser){
@@ -70,7 +76,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
     }).then(function(response) {
       subtopicIdeas1.list = response.data;
     });
-
     $http({
       method: 'GET',
       url: '/data/subtopicIdeas2'
@@ -101,12 +106,11 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
   }//end of getSubTopicIdeas()
 
   //adds liked/idea to DB
-  function addLiked(subtopicIdeas){
+  function addLiked(ideaId){
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
-        url: '/login/addLiked',
-        data: subtopicIdeas,
+        url: '/login/addLike' + ideaId,
         headers: {
           id_token: idToken
         }
@@ -195,7 +199,41 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
     });//end of firebase.auth()
   }//end of addComment()
 
+
+  //function to display tallies on home page
+  function getTallyInfo() {
+    $http({
+      method: 'GET',
+      url: '/data/userTally'
+    }).then(function(response){
+      userTally.count = response.data;
+    });
+    $http({
+      method: 'GET',
+      url: '/data/ideasTally'
+    }).then(function(response){
+      ideasTally.count = response.data;
+    });
+    $http({
+      method: 'GET',
+      url: '/data/commentsTally'
+    }).then(function(response){
+      commentsTally.count = response.data;
+    });
+    $http({
+      method: 'GET',
+      url: '/data/likesTally'
+    }).then(function(response){
+      likesTally.count = response.data;
+    });
+  } // end of getTallyInfo function
+
+
   return {
+    userTally: userTally,
+    ideasTally: ideasTally,
+    commentsTally: commentsTally,
+    likesTally: likesTally,
     addNewUser: addNewUser,
     addNewIdea: addNewIdea,
     subTopicObject: subTopicObject,
@@ -208,7 +246,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
     addLoved: addLoved,
     addFlag: addFlag,
     addComment: addComment,
-    commentsObject: commentsObject,
+    commentsObject: commentsObject
   }
 
 }]); // end of app.factory
