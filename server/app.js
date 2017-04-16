@@ -1,5 +1,3 @@
-
-
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -25,6 +23,7 @@ app.use(bodyParser.json());
 
 app.use('/admin', admin);
 app.use('/data', data);
+
 app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 
 /* Whatever you do below this is protected by your authentication. */

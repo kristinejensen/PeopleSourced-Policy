@@ -1,20 +1,7 @@
-//CHRIS’S CODE STARTS HERE
-
 var express = require('express');
 var router = express.Router();
-// var pool = require('../modules/database-config');
 var pg = require('pg');
-// var connectionString = require('../modules/database-config');
-var config = {
-  database: 'psp_database',
-  host: 'localhost',
-  port: 5432,
-  max: 10,
-  idleTimeoutMillis: 30000
-};//end of config
 
-//pool / pg constructor function
-var pool = new pg.Pool(config);
 
 //gets all users name and id for idea and comment view
 router.get('/getUserNameId', function (req, res) {
@@ -191,6 +178,63 @@ router.get('/idea', function(req, res){
   });
 });
 
+router.get('/userTally', function(req, res){
+  pool.connect(function (err, client, done) {
+    client.query('SELECT COUNT (*) FROM users;', function(err, result){
+      done();
+      if(err){
+        ('Error completing user tally query', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows[0]);
+      }
+    });
+  });
+});
 
-//CHRIS’S CODE ENDS HERE
+router.get('/ideasTally', function(req, res){
+  pool.connect(function (err, client, done) {
+    client.query('SELECT COUNT (*) FROM ideas;', function(err, result){
+      done();
+      if(err){
+        ('Error completing ideas tally query', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows[0]);
+      }
+    });
+  });
+});
+
+router.get('/commentsTally', function(req, res){
+  console.log('commments tally route hit');
+  pool.connect(function (err, client, done) {
+    client.query('SELECT (SELECT COUNT(*) FROM comments) + (SELECT COUNT(*) FROM subcomments) AS SumCount;', function(err, result){
+      done();
+      if(err){
+        ('Error completing comments tally query', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows[0]);
+        console.log(result.rows[0]);
+      }
+    });
+  });
+});
+
+router.get('/likesTally', function(req, res){
+  pool.connect(function (err, client, done) {
+    client.query('SELECT (SELECT COUNT(*) FROM sublikes) + (SELECT COUNT(*) FROM ideas_likes) + (SELECT COUNT(*) FROM comments_likes) AS SumCount;', function(err, result){
+      done();
+      if(err){
+        ('Error completing likes tally query', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows[0]);
+        console.log(result.rows[0]);
+      }
+    });
+  });
+});
+
 module.exports = router;
