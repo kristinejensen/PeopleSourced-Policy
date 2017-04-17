@@ -1,8 +1,11 @@
-app.controller('NavCtrl', ['$firebaseAuth', '$http', '$location', 'DataFactory', function($firebaseAuth, $http, $location, DataFactory){
+app.controller('NavCtrl', ['$firebaseAuth', '$http', '$location', 'TopicsFactory', function($firebaseAuth, $http, $location, TopicsFactory){
 
   var self = this;
 
-      this.isActive = function (viewLocation) { 
+  self.subTopic = TopicsFactory.subTopic;
+
+
+      this.isActive = function (viewLocation) {
           return viewLocation === $location.path();
       };
 

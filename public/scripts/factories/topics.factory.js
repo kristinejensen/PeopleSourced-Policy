@@ -80,15 +80,15 @@ app.factory('TopicsFactory', ['$http', function($http){
 
   findActiveSubTopics();
 
-  findSpecificSubTopic();
+  // findSpecificSubTopic(id);
 
-  function findSpecificSubTopic(){
+  function findSpecificSubTopic(id){
     $http({
       method:'GET',
       url: '/public/findSpecificSubTopic',
       // headers: id
     }).then(function(response){
-      subTopic.list = response.data;
+      specificSubTopic.list = response.data;
     });
   }
 
@@ -185,6 +185,8 @@ app.factory('TopicsFactory', ['$http', function($http){
     updateUpcomingSubTopic : updateUpcomingSubTopic,
     //adding a new upcoming sub topic
     addUpcomingSubTopic : addUpcomingSubTopic,
+    //find subtopic for subtopic page
+    findSpecificSubTopic : findSpecificSubTopic,
   }
 
 }]); // end of app.factory

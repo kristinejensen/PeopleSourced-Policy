@@ -2,11 +2,15 @@ app.controller('SubtopicsController', ['TopicsFactory', '$http', '$routeParams' 
   var self = this;
 
   self.subTopic = TopicsFactory.subTopic;
+  self.specificSubTopic = TopicsFactory.specificSubTopic;
 
-  // $route.current.templateUrl = '/subtopic/' + $routeParams.name + ".html";
 
-  // self.subTopic = TopicsFactory.subTopic($routeParams.id);
+  findSpecificSubTopic($routeParams.id);
 
-  self.subTopic = TopicsFactory.getSubTopic($routeParams.id);
+  function findSpecificSubTopic(id){
+    TopicsFactory.findSpecificSubTopic(id);
+  }
+
+  // self.thisSubTopic = TopicsFactory.findSpecificSubTopic($routeParams.id);
 
 }]);
