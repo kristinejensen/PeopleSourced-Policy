@@ -75,4 +75,18 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
   }//end of getAllUsers()
 
 
+  getIdeaChart();
+  function getIdeaChart() {
+    $http({
+      method: 'GET',
+      url: '/data/ideaChart'
+    }).then(function(response) {
+      for (var i = 0; i < response.data.length; i++) {
+        wardChart.push(response.data[i].ward);
+        countChart.push(response.data[i].count)
+      }
+
+});
+};
+
 }]);
