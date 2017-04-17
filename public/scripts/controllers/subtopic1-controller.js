@@ -4,6 +4,12 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
   var firebaseUser = auth.$getAuth();
   var self = this;
 
+  self.addLike = function(ideaId) {
+    DataFactory.addLike(ideaId);
+  };
+
+  self.likes = DataFactory.likes;
+
 //populates select options
   self.subTopicObject = DataFactory.subTopicObject;
 //displays specific subtopic ideas to view

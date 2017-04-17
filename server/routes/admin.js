@@ -6,8 +6,6 @@ var pool = require('../modules/database-config');
 
 //request to get all users for manage users admin view
 router.get('/manageUsers', function(req, res){
-  console.log('manage users route hit');
-  // var userEmail = req.decodedToken.email;
   pool.connect( function (err, client, done) {
     client.query('WITH ideas_flags_count_temp_table AS (SELECT users.id AS user_id, COUNT(users.id) AS ideas_flags_count FROM ideas_flags JOIN users ON ideas_flags.user_id=users.id GROUP BY users.id),' +
     'comments_flags_count_temp_table AS (SELECT users.id AS user_id, COUNT(users.id) AS comments_flags_count FROM comments_flags JOIN users ON comments_flags.user_id=users.id GROUP BY users.id),' +
@@ -62,7 +60,6 @@ router.put('/reactivateUser/:id', function(req, res) {
 
 //populates user filter on admin manage users view
 router.get('/filterUsers', function (req, res) {
-  console.log('filter users route is being hit');
   pool.connect(function (err, client, done) {
     client.query('SELECT * FROM user_filter', function (err, result) {
       done();
