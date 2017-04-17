@@ -49,4 +49,10 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
     homeView();
   }//end of self.createIdea()
 
+  //get moreComments button click
+    self.moreComments = function() {
+      console.log('comments clicked');
+      $location.path('/comment');
+    }
+
 }]);//end of app.controller()
