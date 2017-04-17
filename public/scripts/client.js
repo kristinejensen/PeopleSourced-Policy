@@ -27,9 +27,9 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'CommentController',
     controllerAs: 'cc'
   })
-  .when('/subtopics', {
-    templateUrl: 'views/subtopics/subtopics.html',
-    controller: 'SubtopicController',
+  .when('/subtopics/:id', {
+    templateUrl: 'views/subtopics.html',
+    controller: 'SubtopicsController',
     controllerAs: 'stc'
   })
   .when('/views/:id', {

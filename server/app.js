@@ -14,6 +14,7 @@ var adminTopics = require('./routes/admin-topics');
 var login = require('./routes/login');
 var data = require('./routes/data');
 var list_data = require('./routes/list_data');
+var public = require('./routes/public');
 // var search = require('./routes/search');
 
 //Serve HTML
@@ -29,6 +30,7 @@ app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 
 //Routes
 app.use('/admin', admin);
+app.use('/public', public);
 app.use('/admin-topics', adminTopics);
 
 // app.use('/login', login);

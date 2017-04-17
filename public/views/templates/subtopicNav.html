@@ -4,24 +4,12 @@
 * ============================================================================= */
 -->
 
-<div id="subtopicNav" class="row visible-sm-block visible-md-block visible-lg-block" data-spy="affix" data-offset-top="130">
+<div ng-controller="HomeController as hc" id="subtopicNav" class="row visible-sm-block visible-md-block visible-lg-block" data-spy="affix" data-offset-top="130">
   <div class="col-md-2 col-sm-2">
     <button onclick="location.href='#!'" type="button" class="btn-nav">Home</button>
   </div>
-  <div class="col-md-2 col-sm-2">
-    <button onclick="location.href='#!subtopic1'" type="button" class="btn-nav">Subtopic 1</button>
-  </div>
-  <div class="col-md-2 col-sm-2">
-    <button onclick="location.href='#!subtopic2'" type="button" class="btn-nav">Subtopic 2</button>
-  </div>
-  <div class="col-md-2 col-sm-2">
-    <button onclick="location.href='#!subtopic3'" type="button" class="btn-nav">Subtopic 3</button>
-  </div>
-  <div class="col-md-2 col-sm-2">
-    <button onclick="location.href='#!subtopic4'" type="button" class="btn-nav">Subtopic 4</button>
-  </div>
-  <div class="col-md-2 col-sm-2">
-    <button onclick="location.href='#!subtopic5'" type="button" class="btn-nav">Subtopic 5</button>
+  <div ng-repeat="subtopic in hc.subTopic.list" class="col-md-2 col-sm-2">
+    <button onclick="location.href='#!subtopics/{{subtopic.id}'" type="button" class="btn-nav">Subtopic {{$index + 1}}</button>
   </div>
 </div>
 
@@ -43,19 +31,11 @@
         </button>
         <a class="navbar-brand pull left" style="color: white;">Select a Subtopic</a>
       </div>
-      <div style="margin-top: 0px !important; padding-top: 0px !important;"id="navbar" class="navbar-collapse collapse">
+      <div ng-controller="HomeController as hc" style="margin-top: 0px !important; padding-top: 0px !important;"id="navbar" class="navbar-collapse collapse">
         <ul style="margin-top: 0px !important; padding-top: 0px !important;"class="nav navbar-nav">
           <li><a href="#!" style="color: white;">Home</a>
           </li>
-          <li><a href="#!subtopic1" style="color: white;">Subtopic 1</a>
-          </li>
-          <li><a href="#!subtopic2" style="color: white;">Subtopic 2</a>
-          </li>
-          <li><a href="#!subtopic3" style="color: white;">Subtopic 3</a>
-          </li>
-          <li><a href="#!subtopic4" style="color: white;">Subtopic 4</a>
-          </li>
-          <li><a href="#!subtopic5" style="color: white;">Subtopic 5</a>
+          <li ng-repeat="subtopic in hc.subTopic.list"><a href="#!subtopics/{{subtopic.id}}" style="color: white;">Subtopic {{$index + 1}}</a>
           </li>
         </ul>
       </div>

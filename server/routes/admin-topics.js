@@ -8,21 +8,21 @@ var pool = require('../modules/database-config');
 //                                         //
 //*****************************************//
 
-router.get('/findActiveTopic', function(req, res){
-  var title = req.headers.title
-  var description = req.headers.description;
-  pool.connect( function (err, client, done) {
-    client.query('SELECT * FROM main_topics WHERE active = true;', function(err, result){
-      done();
-      if(err){
-        console.log('Error finding main topic from the database.', err);
-        res.sendStatus(500);
-      } else {
-        res.send(result.rows);
-      }
-    });
-  });
-});
+// router.get('/findActiveTopic', function(req, res){
+//   var title = req.headers.title
+//   var description = req.headers.description;
+//   pool.connect( function (err, client, done) {
+//     client.query('SELECT * FROM main_topics WHERE active = true;', function(err, result){
+//       done();
+//       if(err){
+//         console.log('Error finding main topic from the database.', err);
+//         res.sendStatus(500);
+//       } else {
+//         res.send(result.rows);
+//       }
+//     });
+//   });
+// });
 
 router.put('/updateActiveTopic', function(req, res){
   var mainTopic = {title: req.body.title, description: req.body.description, id: req.body.id};
@@ -153,12 +153,7 @@ router.get('/findUpcomingSubTopics', function(req, res){
         console.log('Error finding all upcoming subtopics', err);
         res.sendStatus(500);
       } else {
-        if (result.rowCount < 5){
-          console.log('not enough subtopics!!');
           res.send(result.rows);
-        } else{
-          res.send(result.rows);
-        }
       }
     });
   });

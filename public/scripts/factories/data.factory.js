@@ -1,5 +1,7 @@
 
 app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
+
+  //Start Kris' Code
   //containers
   var subTopicObject = { list:[] };
   var subtopicIdeas1 = { list:[] };
@@ -240,9 +242,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
       });
     });//end of firebase.auth()
   }//end of addComment()
-
-
-
+  //End Kris' Code
 
   return {
     //new user object from add address button click
@@ -271,7 +271,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
     addComment : addComment,
     //gets comments to comment view
     commentsObject : commentsObject,
-
     allUsers: allUsers,
     deactivateUser: deactivateUser
   }

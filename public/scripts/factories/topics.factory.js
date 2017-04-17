@@ -20,7 +20,7 @@ app.factory('TopicsFactory', ['$http', function($http){
   function findActiveTopic(){
     $http({
       method:'GET',
-      url: '/admin-topics/findActiveTopic'
+      url: '/public/findActiveTopic'
     }).then(function(response){
       mainTopic.list = response.data[0];
     });
@@ -76,8 +76,21 @@ app.factory('TopicsFactory', ['$http', function($http){
   //           UPDATE CURRENT SUBTOPICS          //
   //*********************************************//
   var subTopic = {list: []};
+  var specificSubTopic = {list: []};
 
   findActiveSubTopics();
+
+  findSpecificSubTopic();
+
+  function findSpecificSubTopic(){
+    $http({
+      method:'GET',
+      url: '/public/findSpecificSubTopic',
+      // headers: id
+    }).then(function(response){
+      subTopic.list = response.data;
+    });
+  }
 
   function updateSubTopic(title, description, id){
     var subTopic = {title: title, description: description, id: id}

@@ -1,12 +1,19 @@
-app.controller('HomeController', ['$http', '$location', function($http, $location){
+app.controller('HomeController', ['$http', '$location', 'TopicsFactory', function($http, $location, TopicsFactory){
   var self = this;
+  self.message = 'hey what is up';
 
-self.redirectLogin = function () {
-  $location.url('/login');
-}
+//begin arri's code
+  self.mainTopic = TopicsFactory.mainTopic;
+  self.subTopic = TopicsFactory.subTopic;
 
-self.redirectIdea = function () {
-  $location.url('/idea');
-}
+//end arri's code
+
+  self.redirectLogin = function () {
+    $location.url('/login');
+  }
+
+  self.redirectIdea = function () {
+    $location.url('/idea');
+  }
 
 }]);
