@@ -76,21 +76,19 @@ app.factory('TopicsFactory', ['$http', function($http){
   //           UPDATE CURRENT SUBTOPICS          //
   //*********************************************//
   var subTopic = {list: []};
-  var specificSubTopic = {list: []};
 
   findActiveSubTopics();
 
-  // findSpecificSubTopic(id);
-
-  function findSpecificSubTopic(id){
-    $http({
-      method:'GET',
-      url: '/public/findSpecificSubTopic',
-      // headers: id
-    }).then(function(response){
-      specificSubTopic.list = response.data;
-    });
-  }
+  // function findSpecificSubTopic(id){
+  //   $http({
+  //     method:'GET',
+  //     url: '/public/findSpecificSubTopic',
+  //     // headers: id
+  //   }).then(function(response){
+  //     specificSubTopic.list = response.data;
+  //     console.log('Specific Subtopic at factory in http: ', specificSubTopic);
+  //   });
+  // }
 
   function updateSubTopic(title, description, id){
     var subTopic = {title: title, description: description, id: id}
@@ -185,8 +183,6 @@ app.factory('TopicsFactory', ['$http', function($http){
     updateUpcomingSubTopic : updateUpcomingSubTopic,
     //adding a new upcoming sub topic
     addUpcomingSubTopic : addUpcomingSubTopic,
-    //find subtopic for subtopic page
-    findSpecificSubTopic : findSpecificSubTopic,
-  }
+    }
 
 }]); // end of app.factory

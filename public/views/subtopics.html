@@ -17,8 +17,8 @@
       <div class="visible-md-block visible-lg-block visible-xl-block">
         <!--//SUBTOPIC TITLE AND DESCRIPTION//-->
         <div class="col-md-7 col-lg-7 topicText">
-          <h1>UHM OKAY?</h1>
-          <p>WHYYYYYY</p>
+          <h1>{{stc.subTopic.list[stc.index - 1].title}}</h1>
+          <p>{{stc.subTopic.list[stc.index - 1].description}}</p>
         </div>
         <!--//CALL TO ACTION ON MEDIUM AND LARGE SCREEN//-->
         <div class="col-md-5 col-lg-5 callToAction">
@@ -29,12 +29,9 @@
 
           <div>
             <form class="ctaForm" align="center" action="index.html" method="post">
-              <select name="Subtopics">
-                <option value="subtopic1">Subtopic 1</option>
-                <option value="subtopic2">Subtopic 2</option>
-                <option value="subtopic3">Subtopic 3</option>
-                <option value="subtopic4">Subtopic 4</option>
-                <option value="subtopic5">Subtopic 5</option>
+              <select>
+                <option>Choose a Topic</option>
+                <option ng-repeat="subtopic in stc.subTopic.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
               </select>
               <input type="text" name="" value="" placeholder="Title">
               <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
@@ -52,8 +49,8 @@
     <div class="visible-xs-block">
       <div class="col-xs-1"></div>
       <div class="col-xs-10 topicText">
-        <h1>SUBTOPIC 1 TITLE</h1>
-        <p>here is some text that will be associated with the subtopic.</p>
+        <h1>{{stc.subTopic.list[stc.index - 1].title}}</h1>
+        <p>{{stc.subTopic.list[stc.index - 1].description}}</p>
       </div>
       <div class="col-xs-1"></div>
     </div>

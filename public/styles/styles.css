@@ -575,3 +575,32 @@ th {
   background-color: #666666;
   color: white;
 }
+
+.sub-nav:hover {
+  background-color: #666666 !important;
+  display: inline-block;
+}
+
+.sub-nav > li:hover{
+  background-color: #666666 !important;
+}
+
+.sub-nav:hover > li:hover{
+  background-color: #666666 !important;
+}
+
+.sub-nav:hover > li {
+  height: 60px;
+  style: none;
+  background-color: #666666 !important;
+
+}
+
+.sub-nav > li {
+  height: 60px;
+  style: none;
+  line-height: 60px;
+  list-style-type: none;
+  text-align: center;
+  cursor: pointer;
+}
