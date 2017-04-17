@@ -8,6 +8,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
 //shows all comments from BD to view
   self.commentsObject = DataFactory.commentsObject;
+  self.allSubcommentsObject = DataFactory.allSubcommentsObject;
 
 //add comment to comment to DB
   self.commentRedirect = function() {
@@ -44,9 +45,3 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   }//end of addNewSubComment()
 
 }]);//end of app.controller()
-
-
-
-
-
-// req.decodedToken.userSQLId: , req.decodedToken

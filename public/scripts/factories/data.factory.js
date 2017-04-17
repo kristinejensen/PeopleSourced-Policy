@@ -9,6 +9,7 @@ var subtopicIdeas4 = { list : [] };
 var subtopicIdeas5 = { list : [] };
 var commentsObject = { list : [] };
 var userMatchObject = { list : [] };
+var allSubcommentsObject = { list : [] };
 
 //calls functions at startup
 init();
@@ -18,6 +19,7 @@ function init() {
   getSubtopicIdeas();
   getComments();
   getUserMatch();
+  getAllSubcomments();
 }
 
   //add new user to DB from login view button click
@@ -143,6 +145,7 @@ function addComment(newComment){
   });//end of firebase.auth()
 }//end of addComment()
 
+//get users to pull id when an idea is Submitted
 function getUserMatch() {
     $http({
       method: 'GET',
@@ -164,7 +167,7 @@ function addNewSubComment(newSubComment){
       }
     }).then(function(response){
       // notyf.confirm('Blank Submitted For Approval');
-      // getComments();
+      getAllSubcomments();
       swal("Comment Added To Database", "", "success");
       self.newSubComment = {};
     }).catch(function(error) {
@@ -173,6 +176,19 @@ function addNewSubComment(newSubComment){
     });
   });//end of firebase.auth()
 }//end of addComment()
+
+//gets all subcomments for comments view
+function getAllSubcomments() {
+    $http({
+      method: 'GET',
+      url: '/data/allSubcomments'
+    }).then(function(response) {
+      allSubcommentsObject.list = response.data;
+    });
+}//end of getAllUsers()
+
+
+
 
 
   return {
@@ -201,7 +217,9 @@ function addNewSubComment(newSubComment){
 //all existing users object
     userMatchObject : userMatchObject,
 //adds sub-comments to DB
-    addNewSubComment : addNewSubComment
+    addNewSubComment : addNewSubComment,
+//adds sub-comments to view
+    allSubcommentsObject : allSubcommentsObject
 
   }
 

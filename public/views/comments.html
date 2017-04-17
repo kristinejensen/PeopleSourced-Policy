@@ -127,11 +127,11 @@
 *         SUB COMMENT BOX                                                       *
 * ============================================================================= */
 -->
-<div class="commentDiv">
+<div ng-repeat="subcomments in cc.allSubcommentsObject.list" class="commentDiv">
   <div class="col-md-2 col-lg-2"></div>
   <div class="col-md-9 col-lg-9 topicText" style="padding-bottom: 0px !important;">
     <div class="card_content" style="padding-bottom: 0px; !important">
-      <p>Integer vulputate urna pharetra tellus mattis, vel placerat leo blandit. Quisque vitae nunc sed ex euismod ornare at ac tortor. In hac habitasse platea dictumst. Morbi ut nisl vehicula, lobortis justo sit amet, tincidunt massa. Aliquam tellus mi, sodales vitae pharetra sit amet, posuere id elit. Nunc consequat nunc et turpis posuere, id suscipit velit tristique.</p>
+      <p>{{subcomments.description}}</p>
     </div>
     <div class="author_content">
       <div class ="author_img col-xl-3 col-md-3">
