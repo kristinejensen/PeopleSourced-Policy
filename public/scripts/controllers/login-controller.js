@@ -65,7 +65,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
     var firebaseUser = auth.$getAuth();
 
     //creating a new variable with input data and firebase data
-
     var newUser = {
       name : firebaseUser.displayName,
       address : user.street + " " + user.city + ", " + user.state + " " + user.zipCode,
@@ -75,6 +74,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
     }
     //sends object to DB
     DataFactory.addNewUser(newUser);
+    
     //empties inputs after submission
     self.user = {};
     //redirects back to home view after submission

@@ -60,7 +60,7 @@ router.post('/addComment', function (req, res) {
 
 router.post('/newUser', function (req, res) {
  var newUser = req.body;
- // console.log('newUser: ', newUser.address);
+ console.log('newUser: ', newUser);
  civicInfo.voterInfo(
    { address: newUser.address}, function callback (error, data) {
     //  console.log("error", error);
@@ -89,7 +89,7 @@ for (var i = 0; i <= 14; i++) {
 });//end of router.post
 
 //adds new sub-comment to DB
-router.post('/addNewSubComment', function (req, res) {
+router.post('/addNewSubcomment', function (req, res) {
   var newSubComment = req.body;
   var token = req.params; //this is were im stuck!!
   console.log('token: ', token);
