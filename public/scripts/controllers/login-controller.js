@@ -31,7 +31,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
     DataFactory.getUserMatch();
     auth.$signInWithPopup("google").then(function(firebaseUser) {
       // //redirects to login view
-      // loginView();
+      loginView();
       //adds user google photo to view
       self.photo = firebaseUser.user.photoURL;
       //adds user google email to view
