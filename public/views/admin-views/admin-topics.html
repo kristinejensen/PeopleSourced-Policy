@@ -113,6 +113,7 @@
   </div>
   <div class="col-md-2"></div>
 </div>
+
 <!--
 /* ============================================================================= *
 *       SUB-TOPICS                                                               *
@@ -126,7 +127,8 @@
       <form align="left" class="adminTopic" action="index.html" method="post" style="background-color: #B7D4EE;">
         <input ng-model="subTopic.title" placeholder="Topic Title" type="text" name="" value=""></input>
         <textarea ng-model="subTopic.description" placeholder="Description" name="name" rows="8" cols="80"></textarea><br>
-        <button ng-click="atc.updateUpcomingSubTopic(subTopic.title, subTopic.description, subTopic.id)" class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
+        <button ng-show="!subTopic.noSubTopic" ng-click="atc.updateUpcomingSubTopic(subTopic.title, subTopic.description, subTopic.id)" class="btn-admin" style="text-align: right;" type="button" name="button">Save</button>
+        <button ng-show="subTopic.noSubTopic" ng-click="atc.addUpcomingSubTopic(subTopic.title, subTopic.description)" class="btn-admin" style="text-align: right;" type="button" name="button">Add</button>
       </form>
     </div>
   </div>

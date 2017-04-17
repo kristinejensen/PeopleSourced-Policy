@@ -4,8 +4,8 @@ CREATE TABLE main_topics (
   id SERIAL PRIMARY KEY,
   title VARCHAR(80),
   description VARCHAR(10000),
-  active boolean,
-  upcoming boolean
+  active boolean DEFAULT false,
+  upcoming boolean DEFAULT false
 );
 
 CREATE TABLE subtopics (
@@ -13,8 +13,8 @@ CREATE TABLE subtopics (
   title VARCHAR(80),
   description VARCHAR(10000),
   main_id integer REFERENCES main_topics
-  active boolean,
-  upcoming boolean
+  active boolean DEFAULT false,
+  upcoming boolean DEFAULT false
 );
 
 CREATE TABLE ideas (

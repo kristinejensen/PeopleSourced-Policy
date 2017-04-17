@@ -1,27 +1,27 @@
-app.controller('AdminTopicsController', ['$http', '$location', 'AdminFactory', function($http, $location, AdminFactory){
+app.controller('AdminTopicsController', ['$http', '$location', 'TopicsFactory', function($http, $location, TopicsFactory){
   const self = this;
 
   //********************************************//
   //         UPDATE CURRENT MAIN TOPIC          //
   //********************************************//
-  self.mainTopic = AdminFactory.mainTopic;
+  self.mainTopic = TopicsFactory.mainTopic;
 
   self.updateTopic = function(title, description, id) {
-    AdminFactory.updateTopic(title, description, id);
+    TopicsFactory.updateTopic(title, description, id);
   };
 
   //********************************************//
   //        UPDATE UPCOMING MAIN TOPIC          //
   //********************************************//
-  self.upcomingMainTopic = AdminFactory.upcomingMainTopic;
-  self.noUpcomingTopic = AdminFactory.noUpcomingTopic;
+  self.upcomingMainTopic = TopicsFactory.upcomingMainTopic;
+  self.noUpcomingTopic = TopicsFactory.noUpcomingTopic;
 
   self.updateUpcomingTopic = function(title, description, id) {
-    AdminFactory.updateUpcomingTopic(title, description, id);
+    TopicsFactory.updateUpcomingTopic(title, description, id);
   };
 
   self.addUpcomingTopic = function(title, description) {
-    AdminFactory.addUpcomingTopic(title, description);
+    TopicsFactory.addUpcomingTopic(title, description);
   };
 
   //********************************************//
@@ -32,25 +32,33 @@ app.controller('AdminTopicsController', ['$http', '$location', 'AdminFactory', f
   //*********************************************//
   //           UPDATE CURRENT SUBTOPICS          //
   //*********************************************//
-  self.subTopic = AdminFactory.subTopic;
+  self.subTopic = TopicsFactory.subTopic;
 
   self.updateSubTopic = function(title, description, id) {
-    AdminFactory.updateSubTopic(title, description, id);
+    TopicsFactory.updateSubTopic(title, description, id);
   };
   //*********************************************//
   //           UPDATE UPCOMING SUBTOPICS         //
   //*********************************************//
-  self.upcomingSubTopic = AdminFactory.upcomingSubTopic;
+  self.upcomingSubTopic = TopicsFactory.upcomingSubTopic;
 
   self.updateUpcomingSubTopic = function(title, description, id) {
-    AdminFactory.updateUpcomingSubTopic(title, description, id);
+    TopicsFactory.updateUpcomingSubTopic(title, description, id);
   };
+
+  self.addUpcomingSubTopic = function(title, description) {
+    TopicsFactory.addUpcomingSubTopic(title, description);
+  };
+
 
   //*********************************************//
   //          SET NEW CURRENT SUBTOPICS          //
   //*********************************************//
 
 
+  //*********************************************//
+  //                CHANGE VIEWS                 //
+  //*********************************************//
   self.update = true;
 
   self.updateView = function(){

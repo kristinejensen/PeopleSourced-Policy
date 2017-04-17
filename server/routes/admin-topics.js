@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 var pool = require('../modules/database-config');
 
-//*******************//
-//                   //
-//    MAIN TOPIC     //
-//                   //
-//*******************//
+//*****************************************//
+//                                         //
+//               MAIN TOPIC                //
+//                                         //
+//*****************************************//
 
 router.get('/findActiveTopic', function(req, res){
   var title = req.headers.title
@@ -16,6 +16,22 @@ router.get('/findActiveTopic', function(req, res){
       done();
       if(err){
         console.log('Error finding main topic from the database.', err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows);
+      }
+    });
+  });
+});
+
+router.put('/updateActiveTopic', function(req, res){
+  var mainTopic = {title: req.body.title, description: req.body.description, id: req.body.id};
+  pool.connect( function (err, client, done) {
+    client.query('UPDATE main_topics SET title = $1, description = $2 WHERE id = $3;',
+    [mainTopic.title, mainTopic.description, mainTopic.id], function(err, result){
+      done();
+      if(err){
+        console.log('Error updating main topic', err);
         res.sendStatus(500);
       } else {
         res.send(result.rows);
@@ -40,25 +56,7 @@ router.get('/findUpcomingTopic', function(req, res){
   });
 });
 
-router.put('/updateActiveTopic', function(req, res){
-  console.log('admin-topics route hit');
-  var mainTopic = {title: req.body.title, description: req.body.description, id: req.body.id};
-  pool.connect( function (err, client, done) {
-    client.query('UPDATE main_topics SET title = $1, description = $2 WHERE id = $3;',
-    [mainTopic.title, mainTopic.description, mainTopic.id], function(err, result){
-      done();
-      if(err){
-        console.log('Error updating main topic', err);
-        res.sendStatus(500);
-      } else {
-        res.send(result.rows);
-      }
-    });
-  });
-});
-
 router.put('/updateUpcomingTopic', function(req, res){
-  console.log('admin-topics route hit');
   var mainTopic = {title: req.body.title, description: req.body.description, id: req.body.id};
   pool.connect( function (err, client, done) {
     client.query('UPDATE main_topics SET title = $1, description = $2, upcoming = true WHERE id = $3;',
@@ -75,7 +73,6 @@ router.put('/updateUpcomingTopic', function(req, res){
 });
 
 router.put('/addUpcomingTopic', function(req, res){
-  console.log('poopsock', req.body);
   var mainTopic = {title: req.body.title, description: req.body.description};
   console.log('what is main topic?: ', mainTopic);
   pool.connect( function (err, client, done) {
@@ -92,11 +89,11 @@ router.put('/addUpcomingTopic', function(req, res){
   });
 });
 
-//*******************//
-//                   //
-//    SUB TOPICS     //
-//                   //
-//*******************//
+//*****************************************//
+//                                         //
+//               SUB TOPICS                //
+//                                         //
+//*****************************************//
 
 router.get('/findActiveSubTopics', function(req, res){
   pool.connect( function (err, client, done) {
@@ -156,35 +153,81 @@ router.get('/findUpcomingSubTopics', function(req, res){
         console.log('Error finding all upcoming subtopics', err);
         res.sendStatus(500);
       } else {
-        if (result.rows.length < 5){
+        if (result.rowCount < 5){
           console.log('not enough subtopics!!');
-          // while (result.rows.length < 5) {
-          //   result.rows.push();
-          // }
-          // res.send();
+          res.send(result.rows);
         } else{
           res.send(result.rows);
         }
       }
-    });//ends client.query
-  });//Ends pool.connect
-});//Ends router.get
+    });
+  });
+});
 
+router.put('/updateUpcomingSubTopics', function(req, res) {
+  var subtopic = {title: req.body.title, description: req.body.description, id: req.body.id};
+  pool.connect( function (err, client, done) {
+    client.query('UPDATE subtopics SET title = $1, description = $2 WHERE id=$3;',
+    [subtopic.title, subtopic.description, subtopic.id], function(err, result){
+      done();
+      if(err){
+        console.log('Error updating upcoming subtopics user', err);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(201);
+      }
+    });
+  });
+});
 
-//
-// router.put('/updateUpcomingSubTopics', function(req, res) {
-//   var subtopic = {title: req.body.title, description: req.body.description, id: req.body.id};
+router.post('/addUpcomingSubTopics', function(req, res) {
+  var subtopic = {title: req.body.title, description: req.body.description};
+  pool.connect( function (err, client, done) {
+    client.query('SELECT id FROM main_topics WHERE upcoming = true;', function(err, result){
+      done();
+      if(err){
+        console.log('Error updating upcoming subtopics user', err);
+        res.sendStatus(500);
+      } else {
+        var upcomingMainTopicId = result.rows[0].id;
+        client.query('INSERT INTO subtopics (title, description, upcoming, main_id) VALUES ($1, $2, true, $3);',
+        [subtopic.title, subtopic.description, upcomingMainTopicId], function(err, result){
+          done();
+          if(err){
+            console.log('Error updating upcoming subtopics user', err);
+            res.sendStatus(500);
+          } else {
+            res.send(201);
+          }
+        });
+      }
+    });
+  });
+});
+
+// router.put('/addUpcomingSubTopics', function(req, res) {
+//   var subtopic = {title: req.body.title, description: req.body.description};
 //   pool.connect( function (err, client, done) {
-//     client.query('UPDATE subtopics SET title = $1, description = $2 WHERE id=$3;',
-//     [subtopic.title, subtopic.description, subtopic.id], function(err, result){
+//     client.query('SELECT id FROM main_topics WHERE upcoming = true;'), function (err, result){
 //       done();
 //       if(err){
 //         console.log('Error updating upcoming subtopics user', err);
 //         res.sendStatus(500);
 //       } else {
-//         res.sendStatus(201);
+//         console.log('RESULT?: ', result.rows.id);
+//         var upcomingMainTopicId = result;
+//         // client.query('INSERT INTO subtopics (title, description, upcoming, main_id) VALUES ($1, $2, true, $3);',
+//         // [subtopic.title, subtopic.description, upcomingMainTopicId], function(err, result){
+//         //   done();
+//         //   if(err){
+//         //     console.log('Error updating upcoming subtopics user', err);
+//         //     res.sendStatus(500);
+//         //   } else {
+//         //     res.sendStatus(201);
+//         //   }
+//         // });
 //       }
-//     });
+//     }
 //   });
 // });
 
