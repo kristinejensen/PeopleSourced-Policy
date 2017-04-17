@@ -1,65 +1,64 @@
 app.controller('AdminTopicsController', ['$http', '$location', 'AdminFactory', function($http, $location, AdminFactory){
   const self = this;
-  console.log('admintopicscontroller working');
 
-  //*******************//
-  //                   //
-  //    MAIN TOPIC     //
-  //                   //
-  //*******************//
-
-  //***************************************//
-  //         UPDATE CURRENT TOPIC          //
-  //***************************************//
-
+  //********************************************//
+  //         UPDATE CURRENT MAIN TOPIC          //
+  //********************************************//
   self.mainTopic = AdminFactory.mainTopic;
 
   self.updateTopic = function(title, description, id) {
-   AdminFactory.updateTopic(title, description, id);
- };
+    AdminFactory.updateTopic(title, description, id);
+  };
 
-  //***************************************//
-  //        SET NEW CURRENT TOPIC          //
-  //***************************************//
+  //********************************************//
+  //        UPDATE UPCOMING MAIN TOPIC          //
+  //********************************************//
+  self.upcomingMainTopic = AdminFactory.upcomingMainTopic;
+  self.noUpcomingTopic = AdminFactory.noUpcomingTopic;
+
+  self.updateUpcomingTopic = function(title, description, id) {
+    AdminFactory.updateUpcomingTopic(title, description, id);
+  };
+
+  self.addUpcomingTopic = function(title, description) {
+    AdminFactory.addUpcomingTopic(title, description);
+  };
+
+  //********************************************//
+  //        SET NEW CURRENT MAIN TOPIC          //
+  //********************************************//
 
 
-  //*******************//
-  //                   //
-  //    SUB TOPICS     //
-  //                   //
-  //*******************//
+  //*********************************************//
+  //           UPDATE CURRENT SUBTOPICS          //
+  //*********************************************//
+  self.subTopic = AdminFactory.subTopic;
 
-  //***************************************//
-  //        UPDATE CURRENT SUBTOPICS       //
-  //***************************************//
+  self.updateSubTopic = function(title, description, id) {
+    AdminFactory.updateSubTopic(title, description, id);
+  };
+  //*********************************************//
+  //           UPDATE UPCOMING SUBTOPICS         //
+  //*********************************************//
+  self.upcomingSubTopic = AdminFactory.upcomingSubTopic;
 
-  findActiveSubTopics();
+  self.updateUpcomingSubTopic = function(title, description, id) {
+    AdminFactory.updateUpcomingSubTopic(title, description, id);
+  };
 
-  self.updateSubTopic = function(title, description, id){
-    console.log('was clicked');
-    var subTopic = {title: title, description: description, id: id}
-    //Find the active subtopic that matches the id.
-    $http({
-      method: 'PUT',
-      url: '/admin-topics/updateActiveSubTopics',
-      data: subTopic
-    }).then(function(response) {
-      console.log(response);
-      findActiveSubTopics();
-    })//Ends GET http
-  }//Update topic function
+  //*********************************************//
+  //          SET NEW CURRENT SUBTOPICS          //
+  //*********************************************//
 
-  function findActiveSubTopics(){
-    $http({
-      method:'GET',
-      url: '/admin-topics/findActiveSubTopics'
-    }).then(function(response){
-      self.subtopicsArray = response.data;
-    });
+
+  self.update = true;
+
+  self.updateView = function(){
+    self.update = true;
   }
-  //***************************************//
-  //       SET NEW CURRENT SUBTOPICS       //
-  //***************************************//
 
+  self.newTriView = function(){
+    self.update = false;
+  }
 
 }]);
