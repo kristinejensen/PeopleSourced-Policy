@@ -34,5 +34,10 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
      console.log("button clicked");
      self.showComment = true;
    }
+//left off here
+   self.addSubComment = function(newSubComment){
+     console.log("newSubComment :", newSubComment);
+     DataFactory.addNew
+   }
 
 }]);//end of app.controller()

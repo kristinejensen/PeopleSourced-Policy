@@ -53,4 +53,5 @@ app.controller('Subtopic2Controller', ['DataFactory', '$firebaseAuth','$http', '
     homeView();
   }//end of self.createIdea()
 
+
 }]);//end of app.controller()

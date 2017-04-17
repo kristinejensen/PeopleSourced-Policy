@@ -63,7 +63,7 @@ function init() {
     });//end of firebase.auth()
   }//end of addNewUser()
 
-  //adds subtopics1 to idea view select element
+  //adds subtopics to idea view select element
   function getSubTopics() {
     $http({
       method: 'GET',
