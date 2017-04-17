@@ -12,16 +12,18 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
   var ideasTally = {};
   var commentsTally = {};
   var likesTally = {};
+  var likes = {};
 
   //calls functions at startup
   init();
-  getTallyInfo();
 
   function init() {
     getSubTopics();
     getSubtopicIdeas();
     getComments();
     getUserMatch();
+    getTallyInfo();
+    getLikes();
   }
 
 
@@ -114,26 +116,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
       subtopicIdeas5.list = response.data;
     });
   }//end of getSubTopicIdeas()
-
-  //adds liked/idea to DB
-  function addLiked(ideaId){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
-        method: 'POST',
-        url: '/login/addLike' + ideaId,
-        headers: {
-          id_token: idToken
-        }
-      }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        swal("Liked Added To Database", "", "success");
-        self.subtopicIdeas = {};
-      }).catch(function(error) {
-        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
-        console.log('error authenticating', error);
-      });
-    });//end of firebase.auth()
-  }//end of addNewUser()
 
   //adds loved/idea to DB
   function addLoved(subtopicIdeas){
@@ -247,12 +229,41 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
     });
   } // end of getTallyInfo function
 
+  function getLikes() {
+    $http({
+      method: 'GET',
+      url: '/data/getLikes'
+    }).then(function(response) {
+      likes.count = response.data;
+      console.log(likes.count);
+    });
+  }
+
+  //adds like to DB
+  function addLike(ideaId){
+    console.log(ideaId);
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method: 'POST',
+        url: '/data/addLike/' + ideaId,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response){
+        console.log(response);
+      }).catch(function(error) {
+        console.log('error adding like to database', error);
+      });
+    });
+  }
 
   return {
     userTally: userTally,
     ideasTally: ideasTally,
     commentsTally: commentsTally,
     likesTally: likesTally,
+    likes: likes,
+    addLike: addLike,
     addNewUser : addNewUser,
     addNewIdea : addNewIdea,
     subTopicObject : subTopicObject,

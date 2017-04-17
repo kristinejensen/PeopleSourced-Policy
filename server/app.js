@@ -21,8 +21,9 @@ app.get('/', function(req, res){
 app.use(express.static('public'));
 app.use(bodyParser.json());
 
-app.use('/admin', admin);
 app.use('/data', data);
+app.use('/admin', admin);
+
 
 app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 
@@ -30,6 +31,7 @@ app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 app.use(decoder.token);
 
 app.use('/login', login);
+
 
 app.listen(portDecision, function(){
   console.log("Listening on port: ", portDecision);
