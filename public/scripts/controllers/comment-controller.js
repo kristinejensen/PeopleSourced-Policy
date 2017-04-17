@@ -3,6 +3,8 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
   var self = this;
   var auth = $firebaseAuth();
+  var firebaseUser = auth.$getAuth();
+
 
 //shows all comments from BD to view
   self.commentsObject = DataFactory.commentsObject;
@@ -27,17 +29,24 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 //redirect after submission
     $location.path('/idea');
   }
-
+//shows and hides sun-comment text area
   self.showComment = false;
-
-   self.showCommentArea = function(){
-     console.log("button clicked");
-     self.showComment = true;
-   }
-//left off here
-   self.addSubComment = function(newSubComment){
-     console.log("newSubComment :", newSubComment);
-     DataFactory.addNew
-   }
+//sub-comment button click function
+  self.showCommentArea = function(){
+    console.log("button clicked");
+    self.showComment = true;
+  }
+//button click to add new sub-comment
+  self.addNewSubComment = function(newSubComment, req){
+//empties sub-comment text area on submit
+    self.newSubComment = {};
+    DataFactory.addNewSubComment(newSubComment);
+  }//end of addNewSubComment()
 
 }]);//end of app.controller()
+
+
+
+
+
+// req.decodedToken.userSQLId: , req.decodedToken

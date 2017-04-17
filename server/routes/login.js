@@ -20,7 +20,7 @@ var voterInfo = {};
 //pool / pg constructor function
 var pool = new pg.Pool(config);
 
-//adds new idea to DB (need to get query to add id or email)
+//adds new idea to DB
 router.post('/newidea', function (req, res) {
   var newIdea = req.body;
   console.log('newIdea: ', newIdea);
@@ -86,6 +86,25 @@ for (var i = 0; i <= 14; i++) {
        });
     });//end of .then
   });//end of civicinfo
+});//end of router.post
+
+//adds new sub-comment to DB
+router.post('/addNewSubComment', function (req, res) {
+  var newSubComment = req.body;
+  console.log('newSubComment: ', newSubComment);
+  pool.connect()
+    .then(function (client) {
+      client.query('INSERT INTO subcomments (description) VALUES ($1)',
+        [newSubComment.description])
+        .then(function (result) {
+          client.release();
+          res.sendStatus(201);
+        })
+        .catch(function (err) {
+          console.log('error on INSERT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
 });//end of router.post
 
 module.exports = router;

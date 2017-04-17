@@ -152,6 +152,28 @@ function getUserMatch() {
     });
 }//end of getAllUsers()
 
+//adds loved/idea to DB
+function addNewSubComment(newSubComment){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'POST',
+      url: '/login/addNewSubComment',
+      data: newSubComment,
+      headers: {
+        id_token: idToken
+      }
+    }).then(function(response){
+      // notyf.confirm('Blank Submitted For Approval');
+      // getComments();
+      swal("Comment Added To Database", "", "success");
+      self.newSubComment = {};
+    }).catch(function(error) {
+      swal("Values Are Incorrect", "Try Again!", "error");
+      console.log('error authenticating', error);
+    });
+  });//end of firebase.auth()
+}//end of addComment()
+
 
   return {
 //new user object from add address button click
@@ -178,6 +200,8 @@ function getUserMatch() {
     getUserMatch : getUserMatch,
 //all existing users object
     userMatchObject : userMatchObject,
+//adds sub-comments to DB
+    addNewSubComment : addNewSubComment
 
   }
 
