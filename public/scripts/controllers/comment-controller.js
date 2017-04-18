@@ -24,12 +24,13 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   }//end of self.commentRedirect()
 
 //adds new comment to DB (need to add firebase id into the line below)
-  self.addComment = function(addComment) {
-    newComment = {
-      description : addComment.description,
-      idea_id : subtopicIdea.id,
-      // user_id : need to put the firebase id in here when that works
-    }
+  self.addComment = function(comment) {
+    console.log('comment: ',comment);
+    var newComment = {
+            description : comment.description,
+            idea_id : subtopicIdea.id,
+            // user_id : need to put the firebase id in here when that works
+          }
 
 //sents comment from view to DB
     DataFactory.addComment(newComment);
@@ -43,17 +44,25 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 //redirect after submission
     $location.path('/idea');
   }
+
 //shows and hides sun-comment text area
   self.showComment = false;
 //sub-comment button click function
   self.showCommentArea = function(){
     self.showComment = true;
   }
-//button click to add new sub-comment
-  self.addNewSubComment = function(newSubComment, req){
+
+//button click to add new sub-comment (need to add firebase id into the line below)
+  self.addNewSubComment = function(subComment){
+    console.log('subComment: ',subComment);
 //empties sub-comment text area on submit
-    self.newSubComment = {};
+  var newSubComment = {
+          description : subComment.description,
+          comment_id : subtopicIdea.id,
+          // user_id : need to put the firebase id in here when that works
+        }
     DataFactory.addNewSubComment(newSubComment);
+    self.newSubComment = {};
   }//end of addNewSubComment()
 
 }]);//end of app.controller()

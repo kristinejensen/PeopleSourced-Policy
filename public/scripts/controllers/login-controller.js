@@ -1,5 +1,4 @@
 app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
-  //CHRIS’S CODE STARTS HERE
 
   //google authenticate bellow
   var auth = $firebaseAuth();
@@ -24,6 +23,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
   function adminView() {
     $location.path('/admin');
   }
+
   var firebaseUser = auth.$getAuth();
   //user google login authentication
   self.login = function() {
@@ -50,6 +50,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       console.log("Authentication failed: ", error);
     });//end of .catch
   };//end of self.login()
+
   //user google logout de-authedicate
   self.logout = function() {
     // console.log("logout clicked");
@@ -84,5 +85,4 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
     logoutView();
   }
 
-  //CHRIS’S CODE ENDS HERE
 }]);//end of app.controller()
