@@ -10,7 +10,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.commentsObject = DataFactory.commentsObject;
   self.allSubcommentsObject = DataFactory.allSubcommentsObject;
   self.getIdeaIdObject = DataFactory.getIdeaIdObject;
-console.log('getIdeaIdObject:',self.getIdeaIdObject);
+
 //two lines below do data request to DB for specific idea ID
   var subtopicIdea = $routeParams;
   DataFactory.getIdeaId(subtopicIdea);
@@ -23,7 +23,13 @@ console.log('getIdeaIdObject:',self.getIdeaIdObject);
   }//end of self.commentRedirect()
 
 //adds new comment to DB
-  self.addComment = function(newComment) {
+  self.addComment = function(addComment) {
+
+    newComment = {
+      description : addComment.description,
+      idea_id : subtopicIdea.id,
+      // user_id : need to put the firebase id in here when that works
+    }
 //sents comment from view to DB
     DataFactory.addComment(newComment);
 //empties inputs after submission
@@ -40,7 +46,6 @@ console.log('getIdeaIdObject:',self.getIdeaIdObject);
   self.showComment = false;
 //sub-comment button click function
   self.showCommentArea = function(){
-    console.log("button clicked");
     self.showComment = true;
   }
 //button click to add new sub-comment
