@@ -1,4 +1,4 @@
-app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
+app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '$location', '$routeParams', function(DataFactory, $firebaseAuth, $http, $location, $routeParams){
 
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
@@ -50,9 +50,9 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
   }//end of self.createIdea()
 
   //get moreComments button click
-    self.moreComments = function() {
-      console.log('comments clicked');
-      $location.path('/comment');
+    self.moreComments = function(subtopicIdeas) {
+      console.log(subtopicIdeas);
+      $location.path('/comment/ + subtopicIdeas.id');
     }
 
 }]);//end of app.controller()

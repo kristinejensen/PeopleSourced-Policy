@@ -110,7 +110,7 @@
             </div>
           </ul>
         </div>
-        <button ng-click="st1c.moreComments()" type="button" name="Comments"> Comment </button>
+        <button ng-click="st1c.moreComments(subtopicIdeas)" type="button" name="Comments"> Comment </button>
       </div>
 
     <!--
@@ -131,7 +131,7 @@
   <div id="cta_container" class="visible-xs-block">
     <div id="stickyCTA">
       <h4 class="light">
-        <i class="ctaIcon fa-fw fa fa-plus-circle fa-2x" style=" vertical-align: middle;"aria-hidden="true"></i>
+        <i ng-click="st1c.createIdea()" class="ctaIcon fa-fw fa fa-plus-circle fa-2x" style=" vertical-align: middle;"aria-hidden="true"></i>
         Create an Idea</h4>
       </div>
     </div>
