@@ -1,7 +1,7 @@
 <!--
 /* ============================================================================= *
-*        ABOVE SUBTOPIC NAVIGATION                                               *
-* ============================================================================== */
+*        ABOVE TALLY DIV AND NAVIGATION                                          *
+* ============================================================================= */
 -->
 <div class = "container">
   <div id="mainTopic" class="row">
@@ -13,7 +13,7 @@
     <!--//TOP-SIDE CALL TO ACTION ON MOBILE/SMALL SCREEN//-->
     <div class="mobileCTA visible-xs-block">
       <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
-      <button onclick="location.href='#!idea'" class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+      <button ng-click="hc.createIdea()" class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
     </div>
     <!--//TOP-SIDE CALL TO ACTION ON MEDIUM AND LARGE SCREEN//-->
     <div class="visible-md-block visible-lg-block visible-xl-block  col-md-5 callToAction">
@@ -27,18 +27,43 @@
             <option ng-repeat="subtopic in hc.subTopic.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
           </select>
           <input type="text" name="" value="" placeholder="Title">
-          <textarea name="comment" placeholder="Description..."form="usrform"></textarea><br>
-          <button onclick="location.href='#!idea'" class = "btn-cta" type="button" name="button">Add Your Idea!</button>
+          <textarea ng-model="hc.idea.description" name="comment" placeholder="Description..."form="usrform"></textarea><br>
+          <button ng-click="hc.addNewIdea(hc.idea)" class = "btn-cta" type="button" name="button">Add Your Idea!</button>
         </form>
       </div>
     </div>
   </div>
-
 </div>
 <!--
 /* ============================================================================= *
-*        SUBTOPIC NAVIGATION                                                     *
-* ============================================================================== */
+*                   TALLY DIV                                                    *
+* ============================================================================= */
+-->
+<div id="tallyDiv">
+  <div class="row" style="text-align: center; padding-top: 35px;">
+    <div class="col-md-3 col-xs-3" style="border: 1px solid black; padding-top: 10px; padding-bottom: 10px;">
+      <p>Users</p>
+      <span>{{hc.userTally.count.count}}</span>
+    </div>
+    <div class="col-md-3 col-xs-3" style="border: 1px solid black; padding-top: 10px; padding-bottom: 10px;">
+      <p>Ideas</p>
+      <span>{{hc.ideasTally.count.count}}</span>
+    </div>
+    <div class="col-md-3 col-xs-3" style="border: 1px solid black; padding-top: 10px; padding-bottom: 10px;">
+      <p>Comments</p>
+      <span>{{hc.commentsTally.count.sumcount}}</span>
+    </div>
+    <div class="col-md-3 col-xs-3" style="border: 1px solid black; padding-top: 10px; padding-bottom: 10px;">
+      <p>Likes</p>
+      <span>{{hc.likesTally.count.sumcount}}</span>
+    </div>
+  </div>
+</div>
+
+<!--
+/* ============================================================================= *
+*        SUBTOPIC NAVIGATION                                                    *
+* ============================================================================= */
 -->
 <div ng-include="'/views/templates/subtopicNav.html'"></div>
 
@@ -117,12 +142,14 @@
 
     </div>
 
-
-
     <!--//CALL TO ACTION MOBILE/SMALL SCREEN//-->
     <div class="mobileCTA visible-xs-block">
       <h2 class="dark"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
+<!-- <<<<<<< HEAD
       <button onclick="location.href='#!idea'" class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+======= -->
+      <button ng-click="hc.createIdea()" class = "btn-80" type="button" name="button">START A CONVERSATION!</button>
+<!-- >>>>>>> develop -->
     </div>
 
     <!--//CALL TO ACTION MEDIUM AND LARGE SCREEN//-->
@@ -131,9 +158,11 @@
         <h3 class="light">HAVE AN IDEA?</h3>
       </div>
       <div class="col-md-6 col-xs-12">
+<!-- <<<<<<< HEAD
         <button onclick="location.href='#!idea'" type="button" class="btn-100" name="button">START A CONVERSATION</button>
+======= -->
+        <button ng-click="hc.createIdea()" type="button" class="btn-100" name="button">START A CONVERSATION</button>
+<!-- >>>>>>> develop -->
       </div>
     </div>
-
-
   </div>

@@ -9,7 +9,7 @@
     <li><a ng-href="#!" type="button" class="btn-nav" style="color: white;">Home</a></li>
   </div>
   <div ng-repeat="subtopic in nc.subTopic.list" class="col-md-2 col-sm-2 sub-nav">
-    <li><a ng-href="#!subtopics/{{subtopic.id}}" type="button" class="btn-nav">Subtopic {{$index + 1}}</a></li>
+    <li><a ng-href="#!subtopics/{{subtopic.id}}" type="button" class="btn-nav">{{subtopic.title}}</a></li>
   </div>
 </div>
 
@@ -35,7 +35,7 @@
         <ul style="margin-top: 0px !important; padding-top: 0px !important;"class="nav navbar-nav">
           <li><a href="#!" style="color: white;">Home</a>
           </li>
-          <li ng-repeat="subtopic in nc.subTopic.list"><a ng-href="#!subtopics/{{subtopic.id}}" style="color: white;">Subtopic {{$index + 1}}</a>
+          <li ng-repeat="subtopic in nc.subTopic.list"><a ng-href="#!subtopics/{{subtopic.id}}" style="color: white;">{{subtopic.title}}d</a>
           </li>
         </ul>
       </div>

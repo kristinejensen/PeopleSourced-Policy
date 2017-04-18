@@ -9,6 +9,7 @@
 *        MANAGE USERS                                                            *
 * ============================================================================= */
 -->
+
 <div style="background-color:#F8F8F8; padding-top: 30px; padding-bottom: 30px">
   <div class="container" style="padding-top:40px; padding-bottom:40px; background-color: white; border: 1px solid #eeeeee;d">
     <!-- Heading -->
@@ -16,18 +17,13 @@
     <!-- Filter/Search Bar -->
     <div class = "search-bar" align="center">
       <div class="col-md-6">
-        <input class="searchInput" placeholder"Search User by Name"></input>
+        <input ng-model="amuc.userFilter.searchString" class="searchInput" placeholder"Search users"></input>
       </div>
       <div class="col-md-3">
-        <select name="Subtopics">
-          <option value="placeholder">Filter By</option>
-          <option value="subtopic2">User Name</option>
-          <option value="subtopic3">User Email</option>
-          <option value="subtopic4">Ward</option>
-        </select>
+        <select ng-model="amuc.userFilter.filter" ng-options="item as item.filter for item in amuc.filterList.list"><option value="" ng-show="false"></option></select>
       </div>
       <div class="col-md-3">
-        <button class="btn-src" style>Search</button>
+        <button ng-click="amuc.searchUsers()" class="btn-src" style>Search</button>
       </div>
     </div>
     <!-- Users Table -->
@@ -41,95 +37,18 @@
         <th>Sub-Comments Flags</th>
         <th>Activate/Deactivate</th>
       </tr>
-      <!-- <tr ng-repeat="user in amuc.allUsers.list"> -->
-      <tr>
-        <td>user.name</td>
-        <td>user.email</td>
-        <td>user.ward</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>
-          <button class="btn btn-danger btn-xs">Deactivate</button>
-          <!-- <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs" ng-show="user.active">Deactivate</button> -->
+      <tr ng-repeat="user in amuc.allUsers.list">
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.ward}}</td>
+        <td>{{user.ideas_flags_count}}</td>
+        <td>{{user.comments_flags_count}}</td>
+        <td>{{user.subflags_count}}</td>
+        <td ng-show="user.active">
+          <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs">Deactivate</button>
         </td>
-      </tr>
-      <!-- <tr ng-repeat="user in amuc.allUsers.list"> -->
-      <tr>
-        <td>user.name</td>
-        <td>user.email</td>
-        <td>user.ward</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>
-          <button class="btn btn-danger btn-xs">Deactivate</button>
-          <!-- <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs" ng-show="user.active">Deactivate</button> -->
-        </td>
-      </tr>
-      <!-- <tr ng-repeat="user in amuc.allUsers.list"> -->
-      <tr>
-        <td>user.name</td>
-        <td>user.email</td>
-        <td>user.ward</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>
-          <button class="btn btn-danger btn-xs">Deactivate</button>
-          <!-- <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs" ng-show="user.active">Deactivate</button> -->
-        </td>
-      </tr>
-      <!-- <tr ng-repeat="user in amuc.allUsers.list"> -->
-      <tr>
-        <td>user.name</td>
-        <td>user.email</td>
-        <td>user.ward</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>
-          <button class="btn btn-danger btn-xs">Deactivate</button>
-          <!-- <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs" ng-show="user.active">Deactivate</button> -->
-        </td>
-      </tr>
-      <!-- <tr ng-repeat="user in amuc.allUsers.list"> -->
-      <tr>
-        <td>user.name</td>
-        <td>user.email</td>
-        <td>user.ward</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>
-          <button class="btn btn-danger btn-xs">Deactivate</button>
-          <!-- <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs" ng-show="user.active">Deactivate</button> -->
-        </td>
-      </tr>
-      <!-- <tr ng-repeat="user in amuc.allUsers.list"> -->
-      <tr>
-        <td>user.name</td>
-        <td>user.email</td>
-        <td>user.ward</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>
-          <button class="btn btn-danger btn-xs">Deactivate</button>
-          <!-- <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs" ng-show="user.active">Deactivate</button> -->
-        </td>
-      </tr>
-      <!-- <tr ng-repeat="user in amuc.allUsers.list"> -->
-      <tr>
-        <td>user.name</td>
-        <td>user.email</td>
-        <td>user.ward</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>Flags TBD</td>
-        <td>
-          <button class="btn btn-danger btn-xs">Deactivate</button>
-          <!-- <button ng-click="amuc.deactivateUser(user.id)" class="btn btn-danger btn-xs" ng-show="user.active">Deactivate</button> -->
+        <td ng-hide="user.active">
+          <button ng-click="amuc.reactivateUser(user.id)" class="btn btn-primary btn-xs">Reactivate</button>
         </td>
       </tr>
     </table>

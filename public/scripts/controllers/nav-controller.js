@@ -4,10 +4,8 @@ app.controller('NavCtrl', ['$firebaseAuth', '$http', '$location', 'TopicsFactory
 
   self.subTopic = TopicsFactory.subTopic;
 
-
-      this.isActive = function (viewLocation) {
-          return viewLocation === $location.path();
-      };
-
+  this.isActive = function (viewLocation) {
+    return viewLocation === $location.path();
+  };
 
 }]);
