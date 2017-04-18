@@ -10,7 +10,7 @@ var subtopicIdeas5 = { list : [] };
 var commentsObject = { list : [] };
 var userMatchObject = { list : [] };
 var allSubcommentsObject = { list : [] };
-
+var getIdeaIdObject = { list : [] }
 //calls functions at startup
 init();
 
@@ -187,6 +187,16 @@ function getAllSubcomments() {
     });
 }//end of getAllUsers()
 
+//gets all subcomments for comments view
+function getIdeaId(subtopicIdea) {
+    $http({
+      method: 'GET',
+      url: '/data/getIdeaId',
+      headers: subtopicIdea
+    }).then(function(response) {
+      getIdeaIdObject.list = response.data;
+    });
+}//end of getAllUsers()
 
 
 
@@ -219,7 +229,11 @@ function getAllSubcomments() {
 //adds sub-comments to DB
     addNewSubComment : addNewSubComment,
 //adds sub-comments to view
-    allSubcommentsObject : allSubcommentsObject
+    allSubcommentsObject : allSubcommentsObject,
+//gets specific idea id from DB
+    getIdeaId : getIdeaId,
+//specifid idea from DB for comment view
+    getIdeaIdObject : getIdeaIdObject
 
   }
 

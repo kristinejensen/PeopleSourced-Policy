@@ -207,5 +207,22 @@ router.get('/allSubcomments', function(req, res) {
     });//end of .then
 });//end of router.get
 
+//gets specific idea by id for comment view
+router.get('/getIdeaId', function(req, res) {
+  var subtopicIdea = req.headers;
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE ideas.id=$1", [subtopicIdea.id])
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
+
 
 module.exports = router;

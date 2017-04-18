@@ -9,9 +9,13 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 //shows all comments from BD to view
   self.commentsObject = DataFactory.commentsObject;
   self.allSubcommentsObject = DataFactory.allSubcommentsObject;
-  self.subtopicIdeas = $routeParams.id;
+  self.getIdeaIdObject = DataFactory.getIdeaIdObject;
+console.log('getIdeaIdObject:',self.getIdeaIdObject);
+//two lines below do data request to DB for specific idea ID
+  var subtopicIdea = $routeParams;
+  DataFactory.getIdeaId(subtopicIdea);
 
-
+// console.log('subtopicIdeas:',self.subtopicIdeas);
 //add comment to comment to DB
   self.commentRedirect = function() {
 //redirect after submission

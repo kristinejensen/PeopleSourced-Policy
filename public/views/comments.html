@@ -11,21 +11,21 @@
 -->
 <div class = "greybackground">
   <div class="row subTopic">
-    <div class="ideaArea">
+    <div ng-repeat="idea in cc.getIdeaIdObject.list" class="ideaArea">
       <!--//SUBTOPIC TITLE AND DESCRIPTION//-->
       <div class="col-md-1 col-lg-1"></div>
       <div class="col-md-10 col-lg-10 topicText" style="padding-bottom: 0px !important;">
         <div class="card_content" style="padding-bottom: 0px;">
-          <h2>IDEA TITLE</h2>
-          <p> {{cc.subtopicIdeas}} </p>
+          <h2> Title: {{idea.title}}</h2>
+          <p> Description: {{idea.description}} </p>
         </div>
         <div class="author_content">
           <div class ="author_img col-xl-3 col-md-3">
-            <p>IMAGE</p>
+            <p> {{cc.subtopicIdeas.photo}} </p>
           </div>
           <div class="author_info cole-xl 9 col-md-9">
-            <h4>Author Name</h4>
-            <h5>Ward x</h5>
+            <h4> <img class="authImage" ng-src="{{idea.photo}}"> Author: {{idea.name}}  </h4>
+            <h5> Ward: {{idea.ward}} </h5>
           </div>
         </div>
         <div class="love_like row">

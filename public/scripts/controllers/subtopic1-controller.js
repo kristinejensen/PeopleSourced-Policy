@@ -50,12 +50,8 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
   }//end of self.createIdea()
 
   //get moreComments button click
-    self.moreComments = function(subtopicIdeas) {
-      $location.path('/comment/' + subtopicIdeas.id);
-      console.log(subtopicIdeas);
+    self.moreComments = function(subtopicIdea) {
+      $location.path('/comment/'+subtopicIdea.id);
     }
 
 }]);//end of app.controller()
-
-
-// + subtopicIdeas.description + subtopicIdeas.title + subtopicIdeas.email

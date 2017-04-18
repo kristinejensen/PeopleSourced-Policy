@@ -57,11 +57,6 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'Subtopic5Controller',
     controllerAs: 'st5c'
   })
-  .when('/views/:id', {
-    templateUrl: 'views/comment.html',
-    controller: 'CommentConnectController',
-    controllerAs: 'ccc'
-  })
   .when('/admin-manage-users', {
     templateUrl: 'views/admin-views/admin-manage-users.html',
     controller: 'AdminManageUsersController',
