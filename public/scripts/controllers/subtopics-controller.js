@@ -4,6 +4,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.subTopic = TopicsFactory.subTopic;
   self.subtopicIdeas = DataFactory.subtopicIdeas;
   self.index = $routeParams.id;
+  console.log('index on load: ', self.index);
 
   getIdeas(self.index);
 
@@ -18,8 +19,10 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   }
   //redirect to correct subtopic view
   //not working :(
-  function subView(url) {
-    $location.path('/#!/subtopics/' + url);
+  function redirectToSubtopic(url) {
+    $location.path('/subtopics/' + url);
+    getIdeas(url);
+    console.log('index in redirect: ', self.index);
   }
   //redirect to add idea view
   self.createIdea = function() {
@@ -30,38 +33,27 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     $location.path('/comment');
   }
 
-  var userMatchObject = DataFactory.userMatchObject.list;
-
   self.addNewIdea = function(idea) {
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
-    //container to loop id's through
-    var id = "";
-    //loops through all users email to find correct id
-      for (var i = 0; i < userMatchObject.length; i++) {
-        if (userMatchObject[i].email == firebaseUser.email) {
-          var id = userMatchObject[i].id;
-        }//end of if
-      };//end of for loop
-
-    //name and email is added to object
+    //creates the new idea object from form/auth
       var newIdea = {
         name : firebaseUser.displayName,
         email : firebaseUser.email,
         subtopicId : idea.subtopicId,
         title : idea.title,
         description : idea.description,
-        id : id
+        id : idea.subtopicId
       }
-      console.log('new idea?: ', newIdea);
-    //sents object to factory
+      //sents object to factory
       DataFactory.addNewIdea(newIdea);
+      //redirect to correct subtopic page after submit
+      redirectToSubtopic(newIdea.id);
+      getIdeas(newIdea.id);
+
     //empties inputs on submit
       self.idea = {};
-    //redirect to correct subtopic page after submit
-    //not working :(
-      subView(idea.subtopicId);
     }//end of self.createIdea()
   //END CHRIS' CODE
 }]);
