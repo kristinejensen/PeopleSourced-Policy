@@ -224,7 +224,7 @@ router.get('/getIdeaId', function(req, res) {
     });//end of .then
 });//end of router.get
 
-//gets specific comment by id for comment view
+//gets specific comment by id for comment view (subtopic id)
 router.get('/getCommentId', function(req, res) {
   var subtopicIdea = req.headers;
   pool.connect()
@@ -242,3 +242,6 @@ router.get('/getCommentId', function(req, res) {
 });//end of router.get
 
 module.exports = router;
+
+
+// "SELECT * FROM comments WHERE idea_id=$1", [subtopicIdea.id]

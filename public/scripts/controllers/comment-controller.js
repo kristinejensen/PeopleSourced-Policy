@@ -6,9 +6,11 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   var firebaseUser = auth.$getAuth();
 
 
-//shows all comments from BD to view
+//shows all comments from BD to view(migth not need the two lines below)
   self.commentsObject = DataFactory.commentsObject;
   self.allSubcommentsObject = DataFactory.allSubcommentsObject;
+
+//come form DB
   self.getIdeaIdObject = DataFactory.getIdeaIdObject;
   self.getCommentIdObject = DataFactory.getCommentIdObject;
 
@@ -20,12 +22,12 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 //add comment to comment to DB
   self.commentRedirect = function() {
 //redirect after submission
-    $location.url('/comment');
+    $location.url('/home');
   }//end of self.commentRedirect()
+
 
 //adds new comment to DB (need to add firebase id into the line below)
   self.addComment = function(comment) {
-    console.log('comment: ',comment);
     var newComment = {
             description : comment.description,
             idea_id : subtopicIdea.id,
@@ -37,8 +39,10 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 //empties inputs after submission
     self.newComment = {};
 //redirect after submission
-    $location.url('/comment');
+    $location.url('/comment/');
   }//end of self.addComment()
+
+
 
   self.createIdea = function() {
 //redirect after submission
@@ -52,17 +56,20 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     self.showComment = true;
   }
 
+
 //button click to add new sub-comment (need to add firebase id into the line below)
   self.addNewSubComment = function(subComment){
-    console.log('subComment: ',subComment);
 //empties sub-comment text area on submit
   var newSubComment = {
           description : subComment.description,
-          comment_id : subtopicIdea.id,
+          comment_id : "12"
           // user_id : need to put the firebase id in here when that works
         }
     DataFactory.addNewSubComment(newSubComment);
-    self.newSubComment = {};
+    self.subComment = {};
   }//end of addNewSubComment()
+
+
+
 
 }]);//end of app.controller()

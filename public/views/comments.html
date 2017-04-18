@@ -16,7 +16,7 @@
       <div class="col-md-1 col-lg-1"></div>
       <div class="col-md-10 col-lg-10 topicText" style="padding-bottom: 0px !important;">
         <div class="card_content" style="padding-bottom: 0px;">
-          <h2> Title: {{idea.title}}</h2>
+          <h2> Title: {{idea.title}} </h2>
           <p> Description: {{idea.description}} </p>
         </div>
         <div class="author_content">
@@ -32,17 +32,17 @@
           <ul>
             <div class="col-md-4 col-xs-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
               <li class="like">
-                <span>LIKE</span>
+                <span> LIKE </span>
               </li>
             </div>
             <div class="col-md-4 col-xs-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
               <li class="love">
-                <span style>LOVE</span>
+                <span style> LOVE </span>
               </li>
             </div>
             <div class="col-md-4 col-xs-4 actionBtn" style="background-color: #6fa8dc;">
               <li class="love">
-                <span>FLAG</span>
+                <span> FLAG </span>
               </li>
             </div>
           </ul>
@@ -58,8 +58,8 @@
   <div class="commentArea">
     <div class="col-md-2 col-lg-2"></div>
     <div class="col-md-10 col-lg-10">
-      <textarea ng-model="cc.comment.description" style="border: 1px solid lightgrey; display: block; margin-left: auto; margin-right: auto;" placeholder="Comment..." name="name" rows="8" cols="80"></textarea>
-      <button ng-click="cc.addComment(cc.comment)" type="button"> Submit Comment </button>
+      <textarea ng-model="cc.newComment.description" style="border: 1px solid lightgrey; display: block; margin-left: auto; margin-right: auto;" placeholder="Comment..." name="name" rows="8" cols="80"></textarea>
+      <button ng-click="cc.addComment(cc.newComment)" type="button"> Submit Comment </button>
     </div>
   </div>
   <!--
@@ -75,7 +75,7 @@
     </div>
     <div class="author_content">
       <div class ="author_img col-xl-3 col-md-3">
-        <p>{{comments.photo}}</p>
+        <p><img class="authImage" ng-src="{{comments.photo}}" alt=""></p>
       </div>
       <div class="author_info cole-xl 9 col-md-9">
         <h4> {{comments.name}} </h4>
@@ -86,17 +86,17 @@
       <ul>
         <div class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
           <li class="like">
-            <span>LIKE</span>
+            <span> LIKE </span>
           </li>
         </div>
         <div class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
           <li class="love">
-            <span>FLAG</span>
+            <span> FLAG </span>
           </li>
         </div>
         <div class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc;" ng-click="cc.showCommentArea()">
           <li class="love">
-            <span>COMMENT</span>
+            <span> COMMENT </span>
           </li>
         </div>
       </ul>
@@ -131,22 +131,22 @@
     </div>
     <div class="author_content">
       <div class ="author_img col-xl-3 col-md-3">
-        <p>IMAGE {{subcomments.photo}} </p>
+        <p> {{subcomments.photo}} </p>
       </div>
       <div class="author_info cole-xl 9 col-md-9">
-        <h4>Author Name {{subcomments.name}} </h4>
-        <h5>Ward x {{subcomments.ward}} </h5>
+        <h4> {{subcomments.name}} </h4>
+        <h5> {{subcomments.ward}} </h5>
       </div>
     </div>
     <div class="love_like row">
       <ul>
         <div class="col-md-6 col-lg-6 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
           <li class="like">
-            <span>LIKE</span>
+            <span> LIKE </span>
           </li>
         </div>
         <div class="col-md-6 col-lg-6 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
           <li class="love">
-            <span>FLAG</span>
+            <span> FLAG </span>
           </li>
         </div>
