@@ -224,5 +224,21 @@ router.get('/getIdeaId', function(req, res) {
     });//end of .then
 });//end of router.get
 
+//gets specific comment by id for comment view
+router.get('/getCommentId', function(req, res) {
+  var subtopicIdea = req.headers;
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT * FROM comments WHERE idea_id=$1", [subtopicIdea.id])
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
 
 module.exports = router;

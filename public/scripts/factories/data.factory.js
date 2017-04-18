@@ -11,6 +11,7 @@ var commentsObject = { list : [] };
 var userMatchObject = { list : [] };
 var allSubcommentsObject = { list : [] };
 var getIdeaIdObject = { list : [] }
+var getCommentIdObject = { list : [] }
 //calls functions at startup
 init();
 
@@ -196,6 +197,17 @@ function getIdeaId(subtopicIdea) {
     }).then(function(response) {
       getIdeaIdObject.list = response.data;
     });
+
+    $http({
+      method: 'GET',
+      url: '/data/getCommentId',
+      headers: subtopicIdea
+    }).then(function(response) {
+      getCommentIdObject.list = response.data;
+    });
+
+
+
 }//end of getAllUsers()
 
 
@@ -233,7 +245,9 @@ function getIdeaId(subtopicIdea) {
 //gets specific idea id from DB
     getIdeaId : getIdeaId,
 //specifid idea from DB for comment view
-    getIdeaIdObject : getIdeaIdObject
+    getIdeaIdObject : getIdeaIdObject,
+//specified comments from DB for comment view
+    getCommentIdObject : getCommentIdObject
 
   }
 

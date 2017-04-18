@@ -10,6 +10,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.commentsObject = DataFactory.commentsObject;
   self.allSubcommentsObject = DataFactory.allSubcommentsObject;
   self.getIdeaIdObject = DataFactory.getIdeaIdObject;
+  self.getCommentIdObject = DataFactory.getCommentIdObject;
 
 //two lines below do data request to DB for specific idea ID
   var subtopicIdea = $routeParams;
@@ -22,14 +23,14 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     $location.url('/comment');
   }//end of self.commentRedirect()
 
-//adds new comment to DB
+//adds new comment to DB (need to add firebase id into the line below)
   self.addComment = function(addComment) {
-
     newComment = {
       description : addComment.description,
       idea_id : subtopicIdea.id,
       // user_id : need to put the firebase id in here when that works
     }
+
 //sents comment from view to DB
     DataFactory.addComment(newComment);
 //empties inputs after submission
