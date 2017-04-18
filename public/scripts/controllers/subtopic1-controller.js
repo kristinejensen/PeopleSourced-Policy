@@ -51,8 +51,7 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
 
   //get moreComments button click
     self.moreComments = function(subtopicIdeas) {
-      // subtopicIdeas = $routeParams.id
-      $location.path('/comment/' + subtopicIdeas);
+      $location.path('/comment/' + subtopicIdeas.id);
       console.log(subtopicIdeas);
     }
 
