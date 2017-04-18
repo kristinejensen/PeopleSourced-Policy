@@ -27,7 +27,7 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'FlagController',
     controllerAs: 'fc'
   })
-  .when('/comment', {
+  .when('/comment/:id', {
     templateUrl: 'views/comments.html',
     controller: 'CommentController',
     controllerAs: 'cc'

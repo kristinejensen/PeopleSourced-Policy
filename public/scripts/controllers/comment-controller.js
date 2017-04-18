@@ -1,4 +1,4 @@
-app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', function($firebaseAuth, $http, $location, DataFactory){
+app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', '$routeParams', function($firebaseAuth, $http, $location, DataFactory, $routeParams){
 
 
   var self = this;
@@ -9,6 +9,8 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 //shows all comments from BD to view
   self.commentsObject = DataFactory.commentsObject;
   self.allSubcommentsObject = DataFactory.allSubcommentsObject;
+  self.subtopicIdeas = $routeParams.id;
+
 
 //add comment to comment to DB
   self.commentRedirect = function() {
