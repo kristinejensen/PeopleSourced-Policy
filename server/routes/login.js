@@ -14,13 +14,31 @@ var config = {
   idleTimeoutMillis: 30000
 };//end of config
 
+//gets all users to compare at login view if in the system
+router.get('/getUserMatch', function (req, res) {
+  console.log('get user match route');
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT id, email FROM users WHERE id = $1", [req.decodedToken.userSQLId])
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
+
 //adds new idea to DB (need to get query to add id or email)
 router.post('/newidea', function (req, res) {
   var newIdea = req.body;
+  console.log('what is the user id?: ', req.decodedToken.userSQLId);
   console.log('newIdea: ', newIdea);
   pool.connect()
     .then(function (client) {
-      client.query('INSERT INTO ideas (title, description, subtopics_id, users_id) VALUES ($1, $2, $3, $4)',
+      client.query('INSERT INTO ideas (title, description, subtopics_id, user_id) VALUES ($1, $2, $3, $4)',
         [newIdea.title, newIdea.description, newIdea.subtopicId, req.decodedToken.userSQLId])
         .then(function (result) {
           client.release();
@@ -53,24 +71,26 @@ router.post('/addComment', function (req, res) {
 });//end of router.post
 
 router.post('/newUser', function (req, res) {
+
  var newUser = req.body;
+
  // console.log('newUser: ', newUser.address);
  civicInfo.voterInfo(
    { address: newUser.address}, function callback (error, data) {
-    //  console.log("error", error);
-    //  console.log("++++++++++++++++++data",data);
-newUser.ward = "other";
-for (var i = 0; i <= 14; i++) {
-  // console.log(typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ]);
-  if (typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ] !== 'undefined') {
-  newUser.ward = "ward " + (i);
-  }
-}
+     //  console.log("error", error);
+     //  console.log("++++++++++++++++++data",data);
+     newUser.ward = "other";
+     for (var i = 0; i <= 14; i++) {
+       // console.log(typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ]);
+       if (typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ] !== 'undefined') {
+         newUser.ward = "ward " + (i);
+       }
+     }
 
-console.log(newUser);
- pool.connect()
-   .then(function (client) {
-     client.query('INSERT INTO users (name, address, email, ward, photo) VALUES ($1, $2, $3, $4, $5)',
+     console.log(newUser);
+     pool.connect()
+     .then(function (client) {
+       client.query('INSERT INTO users (name, address, email, ward, photo) VALUES ($1, $2, $3, $4, $5)',
        [newUser.name, newUser.address, newUser.email, newUser.ward, newUser.photo])
        .then(function (result) {
          client.release();
@@ -80,8 +100,8 @@ console.log(newUser);
          console.log('error on INSERT', err);
          res.sendStatus(500);
        });
-   });//end of .then
-});//end of router.post
+     });//end of .then
+   });//end of router.post
 
 });
 

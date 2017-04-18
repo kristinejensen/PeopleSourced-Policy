@@ -2,6 +2,19 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   console.log('datafactory loading?');
 
+  var auth = $firebaseAuth();
+
+  // fires on:
+  // login, logout, refresh
+  // auth.$onAuthStateChanged(function(firebaseUser) {
+  //  if (firebaseUser) {
+  //    console.log('we are still logged in!');
+  //    // go reload idea data....
+  //  } else {
+  //    console.log('boooo');
+  //  }
+  // });
+
   //Start Kris' Code
   //containers
   var subTopicObject = { list:[] };
@@ -205,12 +218,22 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   }//end of addComment()
   //End Kris' Code
 
-  function getUserMatch() {
-    $http({
+  function getUserMatch(idToken) {
+    return $http({
       method: 'GET',
-      url: '/data/getUserMatch'
-    }).then(function(response) {
-      userMatchObject.list = response.data;
+      url: '/login/getUserMatch',
+      headers: {
+        id_token: idToken
+      }
+    })
+    .then(function(response) {
+      // userMatchObject.list = response.data;
+      console.log('getusermatch response: ', response);
+      return response.data;
+    })
+    .catch(function(error) {
+      console.log('error on get user match', error);
+      return 403;
     });
   }//end of getAllUsers()
 

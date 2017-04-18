@@ -29,14 +29,14 @@ app.use('/data', data);
 app.use('/admin', admin);
 app.use('/public', public);
 app.use('/admin-topics', adminTopics);
-app.use('/login', login);
+
 
 
 app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 
 /* Whatever you do below this is protected by your authentication. */
 app.use(decoder.token);
-
+app.use('/login', login);
 
 
 app.listen(portDecision, function(){

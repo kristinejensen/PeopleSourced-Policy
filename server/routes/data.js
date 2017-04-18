@@ -82,21 +82,7 @@ router.get('/subtopicIdeas', function(req, res){
   });
 });
 
-//gets all users to compare at login view if in the system
-router.get('/getUserMatch', function (req, res) {
-  pool.connect()
-    .then(function (client) {
-      client.query("SELECT id, email FROM users")
-        .then(function (result) {
-          client.release();
-          res.send(result.rows);
-        })
-        .catch(function (err) {
-          console.log('error on SELECT', err);
-          res.sendStatus(500);
-        });
-    });//end of .then
-});//end of router.get
+
 
 router.get('/comments', function(req, res){
   var userEmail = req.decodedToken.email;
