@@ -30,9 +30,8 @@ app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 
 //anyone can see these routes.
 app.use('/public', public);
-//this is where put/post/update routes should go
+//need to be a user to access these routes
 app.use('/data', data);
-
 
 
 
@@ -41,10 +40,11 @@ app.use('/data', data);
 app.use(decoder.token);
 //need to check to make sure the user is an admin before any of these routes can be acces.
 app.use('/admin-topics', adminTopics);
-//need to be a user to access these routes
-app.use('/login', login);
 //need to check to make sure the user is an admin before any of these routes can be accessed.
 app.use('/admin', admin);
+//need to be a user to access these routes
+app.use('/login', login);
+
 
 
 app.listen(portDecision, function(){
