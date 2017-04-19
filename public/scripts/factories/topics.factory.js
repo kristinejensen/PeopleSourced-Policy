@@ -4,10 +4,6 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   //********************************************//
   var mainTopic = {list: []};
 
-
-
-  // var auth = $firebaseAuth();
-
   function updateTopic(title, description, id){
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth()
