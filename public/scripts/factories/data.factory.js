@@ -100,8 +100,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //add new idea to DB from button click from idea view
   function addNewIdea(newIdea){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
+    return firebase.auth().currentUser.getToken().then(function(idToken) {
+      return $http({
         method: 'POST',
         url: '/login/newIdea',
         data: newIdea,
@@ -109,7 +109,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           id_token: idToken
         }
       }).then(function(response){
-        getSubtopicIdeas();
+        // getSubtopicIdeas();
         swal("Idea Added To Database", "", "success");
         self.newIdea = {};
       }).catch(function(error) {
@@ -123,7 +123,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   function getSubTopics() {
     $http({
       method: 'GET',
-      url: '/data/getSubTopics'
+      url: '/public/getSubTopics'
     }).then(function(response) {
       subTopicObject.list = response.data;
     });
@@ -133,7 +133,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   function getSubtopicIdeas(id) {
     $http({
       method: 'GET',
-      url: '/data/subtopicIdeas',
+      url: '/public/subtopicIdeas',
       headers: {
         id : id
       }
@@ -189,7 +189,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   function getComments() {
     $http({
       method: 'GET',
-      url: '/data/allComments'
+      url: '/public/allComments'
     }).then(function(response) {
       commentsObject.list = response.data;
     });
@@ -244,39 +244,39 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     console.log('inside of get tally?');
     $http({
       method: 'GET',
-      url: '/data/userTally'
+      url: '/public/userTally'
     }).then(function(response){
       userTally.count = response.data;
     });
     $http({
       method: 'GET',
-      url: '/data/ideasTally'
+      url: '/public/ideasTally'
     }).then(function(response){
       ideasTally.count = response.data;
     });
     $http({
       method: 'GET',
-      url: '/data/commentsTally'
+      url: '/public/commentsTally'
     }).then(function(response){
       commentsTally.count = response.data;
     });
     $http({
       method: 'GET',
-      url: '/data/likesTally'
+      url: '/public/likesTally'
     }).then(function(response){
       likesTally.count = response.data;
     });
   } // end of getTallyInfo function
 
-  function getLikes() {
-    $http({
-      method: 'GET',
-      url: '/data/getLikes'
-    }).then(function(response) {
-      likes.count = response.data;
-      console.log(likes.count);
-    });
-  }
+  // function getLikes() {
+  //   $http({
+  //     method: 'GET',
+  //     url: '/data/getLikes'
+  //   }).then(function(response) {
+  //     likes.count = response.data;
+  //     console.log(likes.count);
+  //   });
+  // }
 
   //adds like to DB
   function addLike(ideaId){

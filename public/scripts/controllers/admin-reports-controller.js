@@ -1,4 +1,4 @@
-app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', function($firebaseAuth, $http, $location){
+app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', function ($firebaseAuth, $http, $location){
   var self = this;
   var auth = $firebaseAuth();
   var ctx = document.getElementById("myChart");
@@ -69,8 +69,6 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
           }
         }
       });
-
-
     });
   }//end of getAllUsers()
 

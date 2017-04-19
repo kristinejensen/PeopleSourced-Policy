@@ -7,23 +7,9 @@ var pool = require('../modules/database-config');
 //               MAIN TOPIC                //
 //                                         //
 //*****************************************//
-
-// router.get('/findActiveTopic', function(req, res){
-//   var title = req.headers.title
-//   var description = req.headers.description;
-//   pool.connect( function (err, client, done) {
-//     client.query('SELECT * FROM main_topics WHERE active = true;', function(err, result){
-//       done();
-//       if(err){
-//         console.log('Error finding main topic from the database.', err);
-//         res.sendStatus(500);
-//       } else {
-//         res.send(result.rows);
-//       }
-//     });
-//   });
-// });
-
+//**********************************************//
+//           ADMIN UPDATE ACTIVE TOPIC          //
+//**********************************************//
 router.put('/updateActiveTopic', function(req, res){
   var mainTopic = {title: req.body.title, description: req.body.description, id: req.body.id};
   pool.connect( function (err, client, done) {
@@ -39,7 +25,9 @@ router.put('/updateActiveTopic', function(req, res){
     });
   });
 });
-
+//**********************************************//
+//        DISPLAY UPCOMING TOPIC ON VIEW        //
+//**********************************************//
 router.get('/findUpcomingTopic', function(req, res){
   var title = req.headers.title
   var description = req.headers.description;
@@ -55,7 +43,9 @@ router.get('/findUpcomingTopic', function(req, res){
     });
   });
 });
-
+//**********************************************//
+//          ADMIN UPDATE UPCOMING TOPIC         //
+//**********************************************//
 router.put('/updateUpcomingTopic', function(req, res){
   var mainTopic = {title: req.body.title, description: req.body.description, id: req.body.id};
   pool.connect( function (err, client, done) {
@@ -71,7 +61,9 @@ router.put('/updateUpcomingTopic', function(req, res){
     });
   });
 });
-
+//**********************************************//
+//          ADMIN CREATE UPCOMING TOPIC         //
+//**********************************************//
 router.put('/addUpcomingTopic', function(req, res){
   var mainTopic = {title: req.body.title, description: req.body.description};
   console.log('what is main topic?: ', mainTopic);
@@ -88,13 +80,14 @@ router.put('/addUpcomingTopic', function(req, res){
     });
   });
 });
-
 //*****************************************//
 //                                         //
 //               SUB TOPICS                //
 //                                         //
 //*****************************************//
-
+//**********************************************//
+//           DISPLAY ACTIVE SUBTOPICS           //
+//**********************************************//
 router.get('/findActiveSubTopics', function(req, res){
   pool.connect( function (err, client, done) {
     //First find the active Topic, then find all subTopics that are a part of this main topic.
@@ -127,7 +120,9 @@ router.get('/findActiveSubTopics', function(req, res){
     });
   });
 });
-
+//**********************************************//
+//        ADMIN UPDATE ACTIVE SUBTOPICS         //
+//**********************************************//
 router.put('/updateActiveSubTopics', function(req, res) {
   var subtopic = {title: req.body.title, description: req.body.description, id: req.body.id};
   pool.connect( function (err, client, done) {
@@ -143,7 +138,9 @@ router.put('/updateActiveSubTopics', function(req, res) {
     });
   });
 });
-
+//**********************************************//
+//          DISPLAY UPCOMING SUBTOPICS          //
+//**********************************************//
 router.get('/findUpcomingSubTopics', function(req, res){
   pool.connect( function (err, client, done) {
     client.query('SELECT * FROM subtopics WHERE upcoming = true ORDER BY id ASC LIMIT 5;',
@@ -158,7 +155,9 @@ router.get('/findUpcomingSubTopics', function(req, res){
     });
   });
 });
-
+//**********************************************//
+//        ADMIN UPDATE UPCOMING SUBTOPICS       //
+//**********************************************//
 router.put('/updateUpcomingSubTopics', function(req, res) {
   var subtopic = {title: req.body.title, description: req.body.description, id: req.body.id};
   pool.connect( function (err, client, done) {
@@ -174,7 +173,9 @@ router.put('/updateUpcomingSubTopics', function(req, res) {
     });
   });
 });
-
+//**********************************************//
+//       ADMIN ADD NEW UPCOMING SUBTOPIC        //
+//**********************************************//
 router.post('/addUpcomingSubTopics', function(req, res) {
   var subtopic = {title: req.body.title, description: req.body.description};
   pool.connect( function (err, client, done) {
@@ -199,31 +200,5 @@ router.post('/addUpcomingSubTopics', function(req, res) {
     });
   });
 });
-
-// router.put('/addUpcomingSubTopics', function(req, res) {
-//   var subtopic = {title: req.body.title, description: req.body.description};
-//   pool.connect( function (err, client, done) {
-//     client.query('SELECT id FROM main_topics WHERE upcoming = true;'), function (err, result){
-//       done();
-//       if(err){
-//         console.log('Error updating upcoming subtopics user', err);
-//         res.sendStatus(500);
-//       } else {
-//         console.log('RESULT?: ', result.rows.id);
-//         var upcomingMainTopicId = result;
-//         // client.query('INSERT INTO subtopics (title, description, upcoming, main_id) VALUES ($1, $2, true, $3);',
-//         // [subtopic.title, subtopic.description, upcomingMainTopicId], function(err, result){
-//         //   done();
-//         //   if(err){
-//         //     console.log('Error updating upcoming subtopics user', err);
-//         //     res.sendStatus(500);
-//         //   } else {
-//         //     res.sendStatus(201);
-//         //   }
-//         // });
-//       }
-//     }
-//   });
-// });
 
 module.exports = router;

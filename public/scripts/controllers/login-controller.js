@@ -8,11 +8,13 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
   auth.$onAuthStateChanged(function(firebaseUser) {
    if (firebaseUser) {
      console.log('we are still logged in!');
+     self.email = firebaseUser.email;
      // go reload idea data....
     //  DataFactory.GetMyStuff();
    } else {
      console.log('boooo');
      // redirect
+     self.email = '';
      self.logout();
    }
   });
@@ -102,10 +104,13 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
 
     var newUser = {
       name : firebaseUser.displayName,
-      address : user.street + " " + user.city + ", " + user.state + " " + user.zipCode,
+      address : user.street,
+      city:user.city,
+      state: user.state,
+      zipCode:user.zipCode,
       email : firebaseUser.email,
       photo : firebaseUser.photoURL,
-      word : ""
+      ward : ""
     }
     //sends object to DB
     DataFactory.addNewUser(newUser);

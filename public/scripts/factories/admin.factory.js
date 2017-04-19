@@ -105,7 +105,7 @@ app.factory('AdminFactory', ['$http', function($http){
         // }
       }).then(function(response){
         filterList.list = response.data;
-        console.log(filterList.list);
+        console.log('filterList', filterList.list);
       })
     // });
   }

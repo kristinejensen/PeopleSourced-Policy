@@ -9,6 +9,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   getIdeas(self.index);
 
   function getIdeas(index){
+    console.log('FUNCTIONS', index);
     DataFactory.getSubtopicIdeas(index);
   }
 
@@ -21,8 +22,11 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   //not working :(
   function redirectToSubtopic(url) {
     $location.path('/subtopics/' + url);
-    getIdeas(url);
+    getIdeas(self.index);
+
+    // getIdeas(url);
     console.log('index in redirect: ', self.index);
+    console.log('url in redirect: ', url);
   }
   //redirect to add idea view
   self.createIdea = function() {
@@ -47,10 +51,11 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
         id : idea.subtopicId
       }
       //sents object to factory
-      DataFactory.addNewIdea(newIdea);
+      DataFactory.addNewIdea(newIdea).then(function(response){
+        redirectToSubtopic(newIdea.id);
+      });
       //redirect to correct subtopic page after submit
-      redirectToSubtopic(newIdea.id);
-      getIdeas(newIdea.id);
+      // getIdeas(newIdea.id);
 
     //empties inputs on submit
       self.idea = {};
