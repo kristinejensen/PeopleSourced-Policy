@@ -33,7 +33,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
             idea_id : subtopicIdea.id,
             // user_id : need to put the firebase id in here when that works
           }
-
+console.log(newComment);
 //sents comment from view to DB
     DataFactory.addComment(newComment);
 //empties inputs after submission

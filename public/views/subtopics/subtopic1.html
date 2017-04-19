@@ -63,11 +63,11 @@
 <div class=" container">
   <form class="filterIdeas" align="left" action="index.html" method="post">
     <select name="Subtopics" class="filterIdeas">
-      <option value="placeholder">Filter Ideas By:</option>
-      <option value="mostRecent">Most Recent</option>
-      <option value="mostLiked">Most Liked</option>
-      <option value="mostLoved">Most Loved</option>
-      <option value="mostComments">Most Comments</option>
+      <option ng-model="st1c.filter.filterIdeas" value="placeholder"> Filter Ideas By: </option>
+      <option ng-model="st1c.filter.mostRecent" value="mostRecent"> Most Recent </option>
+      <option ng-model="st1c.filter.mostLiked" value="mostLiked"> Most Liked </option>
+      <option ng-model="st1c.filter.mostLoved" value="mostLoved"> Most Loved </option>
+      <option ng-model="st1c.filter.mostComments" value="mostComments"> Most Comments </option>
     </select>
   </form>
 </div>

@@ -54,4 +54,11 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
       $location.path('/comment/'+subtopicIdea.id);
     }
 
+
+
+
+
+
+
+
 }]);//end of app.controller()
