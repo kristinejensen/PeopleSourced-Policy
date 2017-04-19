@@ -4,7 +4,7 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   //********************************************//
   var mainTopic = {list: []};
 
-  findActiveTopic(); //move these to the controllers and on/auth state change
+
 
   // var auth = $firebaseAuth();
 
@@ -43,7 +43,6 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   //********************************************//
   var upcomingMainTopic = {list: []};
   var noUpcomingTopic = {list: []};
-  findUpcomingTopic();
 
   function findUpcomingTopic(){
     var auth = $firebaseAuth();
@@ -117,7 +116,6 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   //*********************************************//
   var subTopic = {list: []};
 
-  findActiveSubTopics();
 
   // function findSpecificSubTopic(id){
   //   $http({
@@ -151,19 +149,18 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   }
 
   function findActiveSubTopics(){
-        $http({
-          method:'GET',
-          url: '/public/findActiveSubTopics'
-        }).then(function(response){
-          subTopic.list = response.data;
-        });
+    $http({
+      method:'GET',
+      url: '/public/findActiveSubTopics'
+    }).then(function(response){
+      subTopic.list = response.data;
+    });
   }
   //*********************************************//
   //          UPDATE UPCOMING SUBTOPICS          //
   //*********************************************//
   var upcomingSubTopic = {list: []};
 
-  findUpcomingSubTopics();
 
   function updateUpcomingSubTopic(title, description, id){
     var auth = $firebaseAuth();
@@ -232,7 +229,12 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   //*********************************************//
   //          SET NEW CURRENT SUBTOPICS          //
   //*********************************************//
-
+  function init(){
+    findActiveTopic();
+    findUpcomingTopic();
+    findActiveSubTopics();
+    findUpcomingSubTopics();
+  }
   //*********************************************//
   //                     API                     //
   //*********************************************//
@@ -259,6 +261,8 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     updateUpcomingSubTopic : updateUpcomingSubTopic,
     //adding a new upcoming sub topic
     addUpcomingSubTopic : addUpcomingSubTopic,
+    //init
+    init: init
   }
 
 }]); // end of app.factory

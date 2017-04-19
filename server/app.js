@@ -32,8 +32,7 @@ app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 app.use('/public', public);
 //this is where put/post/update routes should go
 app.use('/data', data);
-//need to check to make sure the user is an admin before any of these routes can be accessed.
-app.use('/admin', admin);
+
 
 
 
@@ -44,6 +43,8 @@ app.use(decoder.token);
 app.use('/admin-topics', adminTopics);
 //need to be a user to access these routes
 app.use('/login', login);
+//need to check to make sure the user is an admin before any of these routes can be accessed.
+app.use('/admin', admin);
 
 
 app.listen(portDecision, function(){

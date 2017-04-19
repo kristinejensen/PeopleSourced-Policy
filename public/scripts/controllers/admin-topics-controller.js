@@ -1,5 +1,22 @@
-app.controller('AdminTopicsController', ['$http', '$location', 'TopicsFactory', function($http, $location, TopicsFactory){
+app.controller('AdminTopicsController', ['$http', '$location', 'TopicsFactory', '$firebaseAuth', function($http, $location, TopicsFactory, $firebaseAuth){
   const self = this;
+  const auth = $firebaseAuth();
+
+  auth.$onAuthStateChanged(function(firebaseUser) {
+   if (firebaseUser) {
+     console.log('we are still logged in!');
+     self.email = firebaseUser.email;
+     // go reload idea data....
+    //  AdminFactory.init();
+    //load all of the data ->
+    TopicsFactory.init();
+   } else {
+     console.log('boooo');
+     // redirect
+     self.email = '';
+     self.logout();
+   }
+  });
 
   //********************************************//
   //         UPDATE CURRENT MAIN TOPIC          //
