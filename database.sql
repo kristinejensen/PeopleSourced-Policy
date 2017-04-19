@@ -103,3 +103,7 @@ INSERT INTO user_filter (id, filter)
 VALUES(1, 'name'),
 (2, 'email'),
 (3, 'ward');
+
+
+ALTER TABLE main_topics
+ADD upcoming BOOLEAN DEFAULT false;
