@@ -1,20 +1,33 @@
-app.factory('TopicsFactory', ['$http', function($http){
+app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
   //********************************************//
   //         UPDATE CURRENT MAIN TOPIC          //
   //********************************************//
   var mainTopic = {list: []};
 
-  findActiveTopic();
+  findActiveTopic(); //move these to the controllers and on/auth state change
+
+  // var auth = $firebaseAuth();
 
   function updateTopic(title, description, id){
-    var mainTopic = {title: title, description: description, id: id}
-    $http({
-      method: 'PUT',
-      url: '/admin-topics/updateActiveTopic',
-      data: mainTopic
-    }).then(function(response) {
-      findActiveTopic();
-    })
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        var mainTopic = {title: title, description: description, id: id}
+        $http({
+          method: 'PUT',
+          url: '/admin-topics/updateActiveTopic',
+          headers: {
+            id_token: idToken
+          },
+          data: mainTopic
+        }).then(function(response) {
+          findActiveTopic();
+        });
+      });
+    } else {
+      mainTopic.list = [];
+    }
   }
 
   function findActiveTopic(){
@@ -33,39 +46,66 @@ app.factory('TopicsFactory', ['$http', function($http){
   findUpcomingTopic();
 
   function findUpcomingTopic(){
-    $http({
-      method:'GET',
-      url: '/admin-topics/findUpcomingTopic'
-    }).then(function(response){
-      upcomingMainTopic.list = response.data[0];
-      if (upcomingMainTopic.list == undefined){
-        noUpcomingTopic.list = true;
-      } else if (upcomingMainTopic.list !== undefined){
-        noUpcomingTopic.list = false;
-      }
-    });
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        $http({
+          method:'GET',
+          url: '/admin-topics/findUpcomingTopic',
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          upcomingMainTopic.list = response.data[0];
+          if (upcomingMainTopic.list == undefined){
+            noUpcomingTopic.list = true;
+          } else if (upcomingMainTopic.list !== undefined){
+            noUpcomingTopic.list = false;
+          }
+        });
+      });
+    }
   }
 
   function updateUpcomingTopic(title, description, id){
-    var mainTopic = {title: title, description: description, id: id}
-    $http({
-      method: 'PUT',
-      url: '/admin-topics/updateUpcomingTopic',
-      data: mainTopic
-    }).then(function(response) {
-      findUpcomingTopic();
-    })
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        var mainTopic = {title: title, description: description, id: id}
+        $http({
+          method: 'PUT',
+          url: '/admin-topics/updateUpcomingTopic',
+          headers: {
+            id_token: idToken
+          },
+          data: mainTopic
+        }).then(function(response) {
+          findUpcomingTopic();
+        })
+      });
+    }
   }
 
   function addUpcomingTopic(title, description){
-    var mainTopic = {title: title, description: description}
-    $http({
-      method:'PUT',
-      url: '/admin-topics/addUpcomingTopic',
-      data: mainTopic
-    }).then(function(response){
-      findUpcomingTopic();
-    });
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        var mainTopic = {title: title, description: description}
+        $http({
+          method:'PUT',
+          url: '/admin-topics/addUpcomingTopic',
+          headers: {
+            id_token: idToken
+          },
+          data: mainTopic
+        }).then(function(response){
+          findUpcomingTopic();
+        });
+      });
+    }
   }
 
   //********************************************//
@@ -91,23 +131,32 @@ app.factory('TopicsFactory', ['$http', function($http){
   // }
 
   function updateSubTopic(title, description, id){
-    var subTopic = {title: title, description: description, id: id}
-    $http({
-      method: 'PUT',
-      url: '/admin-topics/updateActiveSubTopics',
-      data: subTopic
-    }).then(function(response) {
-      findActiveSubTopics();
-    })
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        var subTopic = {title: title, description: description, id: id}
+        $http({
+          method: 'PUT',
+          url: '/admin-topics/updateActiveSubTopics',
+          headers: {
+            id_token: idToken
+          },
+          data: subTopic
+        }).then(function(response) {
+          findActiveSubTopics();
+        })
+      });
+    }
   }
 
   function findActiveSubTopics(){
-    $http({
-      method:'GET',
-      url: '/admin-topics/findActiveSubTopics'
-    }).then(function(response){
-      subTopic.list = response.data;
-    });
+        $http({
+          method:'GET',
+          url: '/public/findActiveSubTopics'
+        }).then(function(response){
+          subTopic.list = response.data;
+        });
   }
   //*********************************************//
   //          UPDATE UPCOMING SUBTOPICS          //
@@ -117,41 +166,68 @@ app.factory('TopicsFactory', ['$http', function($http){
   findUpcomingSubTopics();
 
   function updateUpcomingSubTopic(title, description, id){
-    var subTopic = {title: title, description: description, id: id}
-    $http({
-      method: 'PUT',
-      url: '/admin-topics/updateUpcomingSubTopics',
-      data: subTopic
-    }).then(function(response) {
-      findUpcomingSubTopics();
-    })
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        var subTopic = {title: title, description: description, id: id}
+        $http({
+          method: 'PUT',
+          url: '/admin-topics/updateUpcomingSubTopics',
+          headers: {
+            id_token: idToken
+          },
+          data: subTopic
+        }).then(function(response) {
+          findUpcomingSubTopics();
+        })
+      });
+    }
   }
 
   function addUpcomingSubTopic(title, description){
-    var subTopic = {title: title, description: description}
-    $http({
-      method: 'POST',
-      url: '/admin-topics/addUpcomingSubTopics',
-      data: subTopic
-    }).then(function(response) {
-      findUpcomingSubTopics();
-    })
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        var subTopic = {title: title, description: description}
+        $http({
+          method: 'POST',
+          url: '/admin-topics/addUpcomingSubTopics',
+          headers: {
+            id_token: idToken
+          },
+          data: subTopic
+        }).then(function(response) {
+          findUpcomingSubTopics();
+        })
+      });
+    }
   }
 
   function findUpcomingSubTopics(){
-    $http({
-      method:'GET',
-      url: '/admin-topics/findUpcomingSubTopics'
-    }).then(function(response){
-      if(response.data.length < 5){
-        while (response.data.length < 5) {
-          response.data.push({noSubTopic: true});
-          upcomingSubTopic.list = response.data;
-        }
-      }else {
-      upcomingSubTopic.list = response.data;
-      }
-    });
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        $http({
+          method:'GET',
+          url: '/admin-topics/findUpcomingSubTopics',
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          if(response.data.length < 5){
+            while (response.data.length < 5) {
+              response.data.push({noSubTopic: true});
+              upcomingSubTopic.list = response.data;
+            }
+          }else {
+            upcomingSubTopic.list = response.data;
+          }
+        });
+      });
+    }
   }
   //*********************************************//
   //          SET NEW CURRENT SUBTOPICS          //
@@ -183,6 +259,6 @@ app.factory('TopicsFactory', ['$http', function($http){
     updateUpcomingSubTopic : updateUpcomingSubTopic,
     //adding a new upcoming sub topic
     addUpcomingSubTopic : addUpcomingSubTopic,
-    }
+  }
 
 }]); // end of app.factory

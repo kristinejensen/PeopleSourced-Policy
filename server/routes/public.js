@@ -22,6 +22,42 @@ router.get('/findActiveTopic', function(req, res){
   });
 });
 
+//**********************************************//
+//           DISPLAY ACTIVE SUBTOPICS           //
+//**********************************************//
+router.get('/findActiveSubTopics', function(req, res){
+  pool.connect( function (err, client, done) {
+    //First find the active Topic, then find all subTopics that are a part of this main topic.
+    //This acts as one extra layer of security, I could consider removing it.
+    client.query('SELECT id FROM main_topics WHERE active = true;', function(err, result){
+      done();
+      if(err){
+        console.log('Error finding an active Main Topic for Subtopic Query', err);
+        res.sendStatus(500);
+      } else {
+        if (result.rows != undefined){
+          activeMainTopicID = result.rows[0].id;
+          pool.connect(function(err, client, done){
+            //Limit Query to 5 as an extra layer of security to ensure the site styling doesn't break.
+            client.query('SELECT * FROM subtopics WHERE main_id = $1 AND active = true ORDER BY id ASC LIMIT 5;',
+            [activeMainTopicID], function(err, result){
+              done();
+              if(err){
+                console.log('Error finding all active subtopics', err);
+                res.sendStatus(500);
+              } else {
+                res.send(result.rows);
+              }
+            });//ends client.query
+          });//ends pool.connect
+        } else{
+          console.log('THERE IS NO CURRENT THINGY');
+        }
+      }
+    });
+  });
+});
+
 router.get('/findSpecificSubTopic/', function(req, res){
   console.log('where is the id? :', req.headers);
   var subtopicId = 1;

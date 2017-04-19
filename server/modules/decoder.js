@@ -33,7 +33,7 @@ var tokenDecoder = function (req, res, next) {
                 next();
               } else if (userSQLIdResult.rows.length === 0) {
                 console.log('could not find user in DB');
-                res.send({user: null});                
+                res.send({user: null});
               } else {
                 console.log('here');
                 res.sendStatus(403);
@@ -53,7 +53,7 @@ var tokenDecoder = function (req, res, next) {
     // Seems to be hit when chrome makes request for map files
     // Will also be hit when user does not send back an idToken in the header
     // technically, some of these should return 403 and some should return 404
-    res.sendStatus(404);
+    res.sendStatus(405);
   }
 }
 
