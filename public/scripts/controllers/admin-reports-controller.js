@@ -11,7 +11,7 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
   function getUserChart() {
     $http({
       method: 'GET',
-      url: '/data/userChart'
+      url: '/admin/userChart'
     }).then(function(response) {
       for (var i = 0; i < response.data.length; i++) {
         wardChart.push(response.data[i].ward);
@@ -77,7 +77,7 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
   function getIdeaChart() {
     $http({
       method: 'GET',
-      url: '/data/ideaChart'
+      url: '/admin/ideaChart'
     }).then(function(response) {
       for (var i = 0; i < response.data.length; i++) {
         wardChart.push(response.data[i].ward);
