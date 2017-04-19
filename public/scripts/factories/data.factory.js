@@ -1,22 +1,8 @@
 app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($http, $firebaseAuth, $routeParams){
 
-  console.log('datafactory loading?');
-
   var auth = $firebaseAuth();
 
-  // fires on:
-  // login, logout, refresh
-  // auth.$onAuthStateChanged(function(firebaseUser) {
-  //  if (firebaseUser) {
-  //    console.log('we are still logged in!');
-  //    // go reload idea data....
-  //  } else {
-  //    console.log('boooo');
-  //  }
-  // });
-
   //Start Kris' Code
-  //containers
   var subTopicObject = { list:[] };
   var subtopicIdeas = { list:[] };
   var commentsObject = { list:[] };
