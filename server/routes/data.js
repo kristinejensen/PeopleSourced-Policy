@@ -52,7 +52,7 @@ router.get('/getSubTopics', function(req, res) {
 router.get('/subtopicIdeas1', function(req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.users_id = users.id WHERE subtopics_id=1;")
+      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=1;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -68,7 +68,7 @@ router.get('/subtopicIdeas1', function(req, res) {
 router.get('/subtopicIdeas2', function(req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.users_id = users.id WHERE subtopics_id=2;")
+      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=2;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -84,7 +84,7 @@ router.get('/subtopicIdeas2', function(req, res) {
 router.get('/subtopicIdeas3', function(req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.users_id = users.id WHERE subtopics_id=3;")
+      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=3;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -100,7 +100,7 @@ router.get('/subtopicIdeas3', function(req, res) {
 router.get('/subtopicIdeas4', function(req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.users_id = users.id WHERE subtopics_id=4;")
+      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=4;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -116,7 +116,7 @@ router.get('/subtopicIdeas4', function(req, res) {
 router.get('/subtopicIdeas5', function(req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.users_id = users.id WHERE subtopics_id=5;")
+      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=5;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -212,7 +212,7 @@ router.get('/getIdeaId', function(req, res) {
   var subtopicIdea = req.headers;
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE ideas.id=$1", [subtopicIdea.id])
+      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.user_id = users.id WHERE ideas.id=$1", [subtopicIdea.id])
         .then(function (result) {
           client.release();
           res.send(result.rows);

@@ -26,7 +26,7 @@ router.post('/newidea', function (req, res) {
   console.log('newIdea: ', newIdea);
   pool.connect()
     .then(function (client) {
-      client.query('INSERT INTO ideas (title, description, subtopics_id, users_id) VALUES ($1, $2, $3, $4)',
+      client.query('INSERT INTO ideas (title, description, subtopics_id, user_id) VALUES ($1, $2, $3, $4)',
         [newIdea.title, newIdea.description, newIdea.subtopicId, newIdea.id])
         .then(function (result) {
           client.release();
