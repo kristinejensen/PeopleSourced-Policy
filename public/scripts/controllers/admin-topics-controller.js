@@ -13,8 +13,9 @@ app.controller('AdminTopicsController', ['$http', '$location', 'TopicsFactory', 
    } else {
      console.log('boooo');
      // redirect
+     TopicsFactory.init();
      self.email = '';
-     self.logout();
+    //  self.logout();
    }
   });
 

@@ -235,6 +235,11 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     findActiveSubTopics();
     findUpcomingSubTopics();
   }
+
+  findActiveTopic();
+  findUpcomingTopic();
+  findActiveSubTopics();
+  findUpcomingSubTopics();
   //*********************************************//
   //                     API                     //
   //*********************************************//

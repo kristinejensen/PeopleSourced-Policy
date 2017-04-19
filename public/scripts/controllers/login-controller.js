@@ -15,7 +15,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
      console.log('boooo');
      // redirect
      self.email = '';
-     self.logout();
+    //  self.logout();
    }
   });
 
@@ -54,7 +54,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
           DataFactory.getUserMatch(idToken).then(function(userInfo) {
             if(userInfo[0].id) {
               console.log('sending home');
-              logoutView();
+              // logoutView();
             } else {
               // user not in our DB....yet
               console.log('going to login view to get address');
@@ -91,7 +91,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
     auth.$signOut().then(function() {
       self.email = '';
       //redirects back to home view
-      logoutView();
+      // logoutView();
     });//end of auth.$signOut()
   };//end of self.deAuthUser()
 

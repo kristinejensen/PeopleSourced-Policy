@@ -14,7 +14,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var likes = {};
 
   //calls functions at startup
-  init();
+  // init();
 
   function init() {
     getUsers();
