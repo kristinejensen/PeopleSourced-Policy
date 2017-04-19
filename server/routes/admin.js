@@ -1,10 +1,52 @@
 var express = require('express');
 var router = express.Router();
-var pg = require('pg');
 var pool = require('../modules/database-config');
 
+//**********************************************//
+//                                              //
+//               ADMIN REPORTS VIEW             //
+//                                              //
+//**********************************************//
+//Finds the number of users in a ward to display on admin view.
+router.get('/userChart', function (req, res) {
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT ward, count(ward) FROM users GROUP BY ward")
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
 
-//request to get all users for manage users admin view
+//gets all users name and id for idea and comment view
+router.get('/ideaChart', function (req, res) {
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT ward, count(ward) FROM users GROUP BY ward")
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
+
+//**********************************************//
+//                                              //
+//              ADMIN MANAGE USERS              //
+//                                              //
+//**********************************************//
+//**********************************************//
+//       GET ALL USERS TO DISPLAY ON VIEW       //
+//**********************************************//
 router.get('/manageUsers', function(req, res){
   pool.connect( function (err, client, done) {
     client.query('WITH ideas_flags_count_temp_table AS (SELECT users.id AS user_id, COUNT(users.id) AS ideas_flags_count FROM ideas_flags JOIN users ON ideas_flags.user_id=users.id GROUP BY users.id),' +
@@ -13,7 +55,7 @@ router.get('/manageUsers', function(req, res){
     'SELECT users.name, users.email, users.ward, users.active, users.id, ideas_flags_count, comments_flags_count, subflags_count FROM users LEFT OUTER JOIN ideas_flags_count_temp_table ON ideas_flags_count_temp_table.user_id=users.id LEFT JOIN comments_flags_count_temp_table ON comments_flags_count_temp_table.user_id=users.id LEFT JOIN subflags_count_temp_table ON subflags_count_temp_table.user_id=users.id WHERE ideas_flags_count IS NOT NULL OR comments_flags_count IS NOT NULL OR subflags_count IS NOT NULL;', function(err, result){
       done();
       if(err){
-        ('Error completing manage users query', err);
+        console.log('Error completing manage users query', err);
         res.sendStatus(500);
       } else {
         res.send(result.rows);
@@ -22,16 +64,17 @@ router.get('/manageUsers', function(req, res){
     });
   });
 });
-
-
-//function to deactivate user
+//**********************************************//
+//         USER ACTIVATION/DEACTIVATION         //
+//**********************************************//
+//Deactivate user
 router.put('/deactivateUser/:id', function(req, res) {
   var userToDeactivateId = req.params.id;
   pool.connect( function (err, client, done) {
     client.query('UPDATE users SET active=false WHERE id=$1;',[userToDeactivateId], function(err, result){
       done();
       if(err){
-        ('Error deactivating user', err);
+        console.log('Error deactivating user', err);
         res.sendStatus(500);
       } else {
         res.send(result.rows);
@@ -41,7 +84,7 @@ router.put('/deactivateUser/:id', function(req, res) {
   });
 });
 
-//function to reactivate user
+//Reactivate user
 router.put('/reactivateUser/:id', function(req, res) {
   var userToReactivateId = req.params.id;
   pool.connect(function (err, client, done) {
@@ -57,7 +100,9 @@ router.put('/reactivateUser/:id', function(req, res) {
     });
   });
 });
-
+//**********************************************//
+//                 USER FILTER                  //
+//**********************************************//
 //populates user filter on admin manage users view
 router.get('/filterUsers', function (req, res) {
   pool.connect(function (err, client, done) {
@@ -73,7 +118,9 @@ router.get('/filterUsers', function (req, res) {
     });
   });
 });
-
+//**********************************************//
+//        LOGIC FOR WHAT THE FILTER DOES        //
+//**********************************************//
 //queries database for matching users on admin manage users view
 router.get('/searchUsers', function (req, res) {
   var userSearch = req.headers
@@ -132,6 +179,5 @@ router.get('/searchUsers', function (req, res) {
     });
   }
 });
-
 
 module.exports = router;

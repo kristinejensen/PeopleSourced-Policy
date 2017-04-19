@@ -1,17 +1,45 @@
-<div id="subtopicNav" class="row">
-  <div class="col-md-5ths col-xs-12">
-    <button onclick="location.href='#!subtopic1'" type="button" class="btn-nav">subtopic1</button>
+<!--
+/* ============================================================================ *
+*         DESKTOP SUB NAV                                                        *
+* ============================================================================= */
+-->
+
+<div ng-controller="NavCtrl as nc" id="subtopicNav" class="row visible-sm-block visible-md-block visible-lg-block">
+  <div class="col-md-2 col-sm-2 sub-nav">
+    <li><a ng-href="#!" type="button" class="btn-nav" style="color: white;">Home</a></li>
   </div>
-  <div class="col-md-5ths col-xs-12">
-    <button onclick="location.href='#!subtopic2'" type="button" class="btn-nav">subtopic2</button>
+  <div ng-repeat="subtopic in nc.subTopic.list" class="col-md-2 col-sm-2 sub-nav">
+    <li><a ng-href="#!subtopics/{{subtopic.id}}" type="button" class="btn-nav">{{subtopic.title}}</a></li>
   </div>
-  <div class="col-md-5ths col-xs-12">
-    <button onclick="location.href='#!subtopic3'" type="button" class="btn-nav">subtopic3</button>
-  </div>
-  <div class="col-md-5ths col-xs-12">
-    <button onclick="location.href='#!subtopic4'" type="button" class="btn-nav">subtopic4</button>
-  </div>
-  <div class="col-md-5ths col-xs-12">
-    <button onclick="location.href='#!subtopic5'" type="button" class="btn-nav">subtopic5</button>
-  </div>
+</div>
+
+<!--
+/* ============================================================================ *
+*         MOBILE SUB NAV                                                        *
+* ============================================================================= */
+-->
+
+<div class="navbar-wrapper visible-xs-block">
+  <nav class="navbar navbar-inverse" style="border-radius: 0px; background-color: #333333; margin-bottom: 0px;">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand pull left" style="color: white;">Select a Subtopic</a>
+      </div>
+      <div ng-controller="NavCtrl as nc" style="margin-top: 0px !important; padding-top: 0px !important;"id="navbar" class="navbar-collapse collapse">
+        <ul style="margin-top: 0px !important; padding-top: 0px !important;"class="nav navbar-nav">
+          <li><a href="#!" style="color: white;">Home</a>
+          </li>
+          <li ng-repeat="subtopic in nc.subTopic.list"><a ng-href="#!subtopics/{{subtopic.id}}" style="color: white;">{{subtopic.title}}d</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
 </div>

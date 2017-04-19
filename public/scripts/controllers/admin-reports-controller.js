@@ -1,4 +1,4 @@
-app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', function($firebaseAuth, $http, $location){
+app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', function ($firebaseAuth, $http, $location){
   var self = this;
   var auth = $firebaseAuth();
   var ctx = document.getElementById("myChart");
@@ -7,11 +7,37 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
   var allUsers = {list:[]};
 
 
+
+  auth.$onAuthStateChanged(function(firebaseUser) {
+   if (firebaseUser) {
+     console.log('we are still logged in!');
+     self.email = firebaseUser.email;
+     // go reload idea data....
+     getUserChart();
+     getIdeaChart();
+   } else {
+     console.log('boooo');
+     // redirect
+     self.email = '';
+    //  self.logout();
+   }
+  });
+
+
   getUserChart();
+  getIdeaChart();
+
   function getUserChart() {
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
       method: 'GET',
-      url: '/data/userChart'
+      url: '/admin/userChart',
+      headers: {
+        id_token: idToken
+      }
     }).then(function(response) {
       for (var i = 0; i < response.data.length; i++) {
         wardChart.push(response.data[i].ward);
@@ -69,17 +95,23 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
           }
         }
       });
-
-
     });
+  });
+  }
   }//end of getAllUsers()
 
 
-  getIdeaChart();
   function getIdeaChart() {
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
       method: 'GET',
-      url: '/data/ideaChart'
+      url: '/admin/ideaChart',
+      headers: {
+        id_token: idToken
+      }
     }).then(function(response) {
       for (var i = 0; i < response.data.length; i++) {
         wardChart.push(response.data[i].ward);
@@ -87,6 +119,8 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
       }
 
 });
+});
+}
 };
 
 }]);

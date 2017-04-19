@@ -1,11 +1,10 @@
-app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
+app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($http, $firebaseAuth, $routeParams){
 
+  var auth = $firebaseAuth();
+
+  //Start Kris' Code
   var subTopicObject = { list:[] };
-  var subtopicIdeas1 = { list:[] };
-  var subtopicIdeas2 = { list:[] };
-  var subtopicIdeas3 = { list:[] };
-  var subtopicIdeas4 = { list:[] };
-  var subtopicIdeas5 = { list:[] };
+  var subtopicIdeas = { list:[] };
   var commentsObject = { list:[] };
   var userMatchObject = { list : [] };
   var userTally = {};
@@ -15,9 +14,46 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
   var likes = {};
 
   //calls functions at startup
-  init();
+  // init();
 
   function init() {
+    getUsers();
+  }
+
+  //function to display user list on manage users admin view
+  function getUsers(){
+    $http({
+      method: 'GET',
+      url: '/admin/manageUsers'
+    }).then(function(response){
+      // allUsers.list = response.data;
+      // console.log(allUsers.list);
+    })
+  }
+
+  function deactivateUser(userId) {
+    swal({
+      title: 'Deactivate User',
+      text: "Are you sure you want to deactivate this user?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, I\'m sure'
+    }).then(function() {
+      $http({
+        method: 'PUT',
+        url: '/admin/deactivateUser/' + userId
+      }).then(function(response) {
+        console.log('user marked as inactive');
+        swal(
+          'Success',
+          'The user has been deactivated.',
+          'success'
+        )
+        init();
+      });
+    })
     getSubTopics();
     getSubtopicIdeas();
     getComments();
@@ -50,8 +86,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
 
   //add new idea to DB from button click from idea view
   function addNewIdea(newIdea){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
+    return firebase.auth().currentUser.getToken().then(function(idToken) {
+      return $http({
         method: 'POST',
         url: '/login/newIdea',
         data: newIdea,
@@ -59,8 +95,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
           id_token: idToken
         }
       }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        getSubtopicIdeas();
+        // getSubtopicIdeas();
         swal("Idea Added To Database", "", "success");
         self.newIdea = {};
       }).catch(function(error) {
@@ -74,46 +109,22 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
   function getSubTopics() {
     $http({
       method: 'GET',
-      url: '/data/getSubTopics'
+      url: '/public/getSubTopics'
     }).then(function(response) {
       subTopicObject.list = response.data;
     });
   }//end of getSubTopics()
 
   //adds ideas to subtopic views
-  function getSubtopicIdeas() {
+  function getSubtopicIdeas(id) {
     $http({
       method: 'GET',
-      url: '/data/subtopicIdeas1'
+      url: '/public/subtopicIdeas',
+      headers: {
+        id : id
+      }
     }).then(function(response) {
-      subtopicIdeas1.list = response.data;
-    });
-    $http({
-      method: 'GET',
-      url: '/data/subtopicIdeas2'
-    }).then(function(response) {
-      subtopicIdeas2.list = response.data;
-    });
-
-    $http({
-      method: 'GET',
-      url: '/data/subtopicIdeas3'
-    }).then(function(response) {
-      subtopicIdeas3.list = response.data;
-    });
-
-    $http({
-      method: 'GET',
-      url: '/data/subtopicIdeas4'
-    }).then(function(response) {
-      subtopicIdeas4.list = response.data;
-    });
-
-    $http({
-      method: 'GET',
-      url: '/data/subtopicIdeas5'
-    }).then(function(response) {
-      subtopicIdeas5.list = response.data;
+      subtopicIdeas.list = response.data;
     });
   }//end of getSubTopicIdeas()
 
@@ -164,7 +175,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
   function getComments() {
     $http({
       method: 'GET',
-      url: '/data/allComments'
+      url: '/public/allComments'
     }).then(function(response) {
       commentsObject.list = response.data;
     });
@@ -191,53 +202,67 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
       });
     });//end of firebase.auth()
   }//end of addComment()
+  //End Kris' Code
 
-  function getUserMatch() {
-    $http({
+  function getUserMatch(idToken) {
+    return $http({
       method: 'GET',
-      url: '/data/getUserMatch'
-    }).then(function(response) {
-      userMatchObject.list = response.data;
+      url: '/login/getUserMatch',
+      headers: {
+        id_token: idToken
+      }
+    })
+    .then(function(response) {
+      // userMatchObject.list = response.data;
+      console.log('getusermatch response: ', response);
+      return response.data;
+    })
+    .catch(function(error) {
+      console.log('error on get user match', error);
+      return 403;
     });
   }//end of getAllUsers()
 
+  getTallyInfo();
+
   //function to display tallies on home page
   function getTallyInfo() {
+    console.log('inside of get tally?');
     $http({
       method: 'GET',
-      url: '/data/userTally'
+      url: '/public/userTally'
     }).then(function(response){
       userTally.count = response.data;
     });
     $http({
       method: 'GET',
-      url: '/data/ideasTally'
+      url: '/public/ideasTally'
     }).then(function(response){
       ideasTally.count = response.data;
     });
     $http({
       method: 'GET',
-      url: '/data/commentsTally'
+      url: '/public/commentsTally'
     }).then(function(response){
       commentsTally.count = response.data;
     });
     $http({
       method: 'GET',
-      url: '/data/likesTally'
+      url: '/public/likesTally'
     }).then(function(response){
       likesTally.count = response.data;
     });
   } // end of getTallyInfo function
 
-  function getLikes() {
-    $http({
-      method: 'GET',
-      url: '/data/getLikes'
-    }).then(function(response) {
-      likes.count = response.data;
-      console.log(likes.count);
-    });
-  }
+  // function getLikes() {
+  //   $http({
+  //     method: 'GET',
+  //     url: '/data/getLikes'
+  //   }).then(function(response) {
+  //     likes.count = response.data;
+  //     console.log(likes.count);
+  //   });
+  // }
 
   //adds like to DB
   function addLike(ideaId){
@@ -267,13 +292,12 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseA
     addNewUser : addNewUser,
     addNewIdea : addNewIdea,
     subTopicObject : subTopicObject,
-    subtopicIdeas1 : subtopicIdeas1,
-    subtopicIdeas2 : subtopicIdeas2,
-    subtopicIdeas3 : subtopicIdeas3,
-    subtopicIdeas4 : subtopicIdeas4,
-    subtopicIdeas5 : subtopicIdeas5,
+    subtopicIdeas : subtopicIdeas,
     addComment : addComment,
     commentsObject : commentsObject,
+    getSubtopicIdeas : getSubtopicIdeas,
+    // allUsers: allUsers,
+    deactivateUser: deactivateUser,
     getUserMatch : getUserMatch,
     userMatchObject : userMatchObject,
   }

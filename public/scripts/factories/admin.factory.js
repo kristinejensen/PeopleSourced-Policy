@@ -1,11 +1,11 @@
-app.factory('AdminFactory', ['$http', function($http){
+app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
 
   var allUsers = {list: []};
   var filterList = {list: []};
   var userFilter = {};
   var userResults = {list: []};
 
-  init();
+  // init(); //run
 
   //startup functions
   function init() {
@@ -15,13 +15,16 @@ app.factory('AdminFactory', ['$http', function($http){
 
   //function to display user list on manage users admin view
   function getUsers() {
-    // firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        $http({
         method: 'GET',
-        url: '/admin/manageUsers'
-        // headers: {
-        //   id_token: idToken
-        // }
+        url: '/admin/manageUsers',
+        headers: {
+          id_token: idToken
+        }
       }).then(function(response){
         allUsers.list = response.data;
         console.log(allUsers.list);
@@ -37,12 +40,16 @@ app.factory('AdminFactory', ['$http', function($http){
           }
         }
       })
-    // });
+    });
   }
+}
 
   //function to deactivate user profile
   function deactivateUser(userId) {
-    // firebase.auth().currentUser.getToken().then(function(idToken) {
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth();
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
       swal({
         title: 'Deactivate User',
         text: "Are you sure you want to deactivate this user?",
@@ -54,21 +61,25 @@ app.factory('AdminFactory', ['$http', function($http){
       }).then(function() {
         $http({
           method: 'PUT',
-          url: '/admin/deactivateUser/' + userId
-          // headers: {
-          //   id_token: idToken
-          // }
+          url: '/admin/deactivateUser/' + userId,
+          headers: {
+            id_token: idToken
+          }
         }).then(function(response) {
           console.log('user marked as inactive');
           init();
         });
       })
-    // });
+    });
+  }
   }
 
   //function to reactivate user profile
   function reactivateUser(userId) {
-    // firebase.auth().currentUser.getToken().then(function(idToken) {
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
       console.log('reactivate user button clicked');
       console.log(userId);
       swal({
@@ -82,42 +93,50 @@ app.factory('AdminFactory', ['$http', function($http){
       }).then(function() {
         $http({
           method: 'PUT',
-          url: '/admin/reactivateUser/' + userId
-          // headers: {
-          //   id_token: idToken
-          // }
+          url: '/admin/reactivateUser/' + userId,
+          headers: {
+            id_token: idToken
+          }
         }).then(function(response) {
           console.log('user marked as active');
           init();
         });
       })
-    // });
+    });
+  }
   }
 
   //function to filter user search on admin manage users view
   function filterUsers() {
-    // firebase.auth().currentUser.getToken().then(function(idToken) {
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'GET',
-        url: '/admin/filterUsers'
-        // headers: {
-        //   id_token: idToken
-        // }
+        url: '/admin/filterUsers',
+        headers: {
+          id_token: idToken
+        }
       }).then(function(response){
         filterList.list = response.data;
-        console.log(filterList.list);
+        console.log('filterList', filterList.list);
       })
-    // });
+    });
+  }
   }
 
   //function to search users on admin manage users view
   function searchUsers() {
-    // firebase.auth().currentUser.getToken().then(function(idToken) {
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'GET',
         url: '/admin/searchUsers',
         headers: {
-          // id_token: idToken,
+          id_token: idToken,
           searchString: userFilter.searchString,
           filter: userFilter.filter.filter
         }
@@ -136,7 +155,8 @@ app.factory('AdminFactory', ['$http', function($http){
           }
         }
       })
-    // });
+    });
+  }
   }
 
   return {
@@ -146,7 +166,8 @@ app.factory('AdminFactory', ['$http', function($http){
     filterList: filterList,
     searchUsers: searchUsers,
     userFilter: userFilter,
-    userResults: userResults
+    userResults: userResults,
+    init: init
   }
 
 }]); // end of app.factory
