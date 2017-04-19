@@ -1,4 +1,4 @@
-var app = angular.module('ConnectApp', ['ngRoute','firebase']);
+var app = angular.module('ConnectApp', ['ngRoute','firebase', 'ui.bootstrap']);
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -6,6 +6,11 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'views/home.html',
     controller: 'HomeController',
     controllerAs: 'hc'
+  })
+  .when('/header', {
+    templateUrl: 'views/header.html',
+    controller: 'HeaderController',
+    controllerAs: 'hrc'
   })
   .when('/login', {
     templateUrl: 'views/login.html',
@@ -18,7 +23,7 @@ app.config(['$routeProvider', function($routeProvider) {
     controllerAs: 'ic'
   })
   .when('/flag', {
-    templateUrl: 'views/idea.html',
+    templateUrl: 'views/flag.html',
     controller: 'FlagController',
     controllerAs: 'fc'
   })
@@ -27,67 +32,38 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'CommentController',
     controllerAs: 'cc'
   })
-  .when('/subtopic1', {
-    templateUrl: 'views/subtopic1.html',
-    controller: 'Subtopic1Controller',
-    controllerAs: 'st1c'
-  })
-  .when('/subtopic2', {
-    templateUrl: 'views/subtopic2.html',
-    controller: 'Subtopic2Controller',
-    controllerAs: 'st2c'
-  })
-  .when('/subtopic3', {
-    templateUrl: 'views/subtopic3.html',
-    controller: 'Subtopic3Controller',
-    controllerAs: 'st3c'
-  })
-  .when('/subtopic4', {
-    templateUrl: 'views/subtopic4.html',
-    controller: 'Subtopic4Controller',
-    controllerAs: 'st4c'
-  })
-  .when('/subtopic5', {
-    templateUrl: 'views/subtopic5.html',
-    controller: 'Subtopic5Controller',
-    controllerAs: 'st5c'
+  .when('/subtopics/:id', {
+    templateUrl: 'views/subtopics.html',
+    controller: 'SubtopicsController',
+    controllerAs: 'stc'
   })
   .when('/views/:id', {
     templateUrl: 'views/comment.html',
     controller: 'CommentConnectController',
     controllerAs: 'ccc'
   })
-
-
-//only the /admin-flagged section has been changed.
-// IMPORTANT be sure to change templateURL, controller, and controllerAs
-
-
-  // .when('/admin-flagged', {
-  //   templateUrl: 'views/subtopic3.html',
-  //   controller: 'SubtopicOneController',
-  //   controllerAs: 'st3c'
-  // })
-  // .when('/admin-manage-users', {
-  //   templateUrl: 'views/subtopic4.html',
-  //   controller: 'SubtopicOneController',
-  //   controllerAs: 'st4c'
-  // })
-  // .when('/admin-reports', {
-  //   templateUrl: 'views/subtopic5.html',
-  //   controller: 'SubtopicOneController',
-  //   controllerAs: 'st5c'
-  // })
-  // .when('/admin-topics', {
-  //   templateUrl: 'views/comment.html',
-  //   controller: 'CommentConnectController',
-  //   controllerAs: 'ccc'
-  // })
-
-
-
-
+  .when('/admin-manage-users', {
+    templateUrl: 'views/admin-views/admin-manage-users.html',
+    controller: 'AdminManageUsersController',
+    controllerAs: 'amuc'
+  })
+  .when('/admin-flags', {
+    templateUrl: 'views/admin-views/admin-flags.html',
+    controller: 'AdminFlaggedController',
+    controllerAs: 'afc'
+  })
+  .when('/admin-reports', {
+    templateUrl: 'views/admin-views/admin-reports.html',
+    controller: 'AdminReportsController',
+    controllerAs: 'arc'
+  })
+  .when('/admin-topics', {
+    templateUrl: 'views/admin-views/admin-topics.html',
+    controller: 'AdminTopicsController',
+    controllerAs: 'atc'
+  })
   .otherwise({
     redirectTo: 'home'
   })
-}]); // end of app.config
+
+}]);

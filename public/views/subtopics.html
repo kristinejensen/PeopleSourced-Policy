@@ -1,0 +1,147 @@
+<!--
+/* ============================================================================ *
+*        SUBTOPIC NAVIGATION                                                    *
+* ============================================================================= */
+-->
+<div ng-include="'/views/templates/subtopicNav.html'"></div>
+<!--
+/* ============================================================================ *
+*         SUBTOPIC TITLE AND DESCRIPTION DESKTOP                                *
+* ============================================================================= */
+-->
+<div class = "greybackground">
+  <div class = "container">
+    <div class="row subTopic">
+
+      <div class="visible-md-block visible-lg-block visible-xl-block">
+        <!--//SUBTOPIC TITLE AND DESCRIPTION//-->
+        <div class="col-md-7 col-lg-7 topicText">
+          <h1>{{stc.subTopic.list[stc.index - 1].title}}</h1>
+          <p>{{stc.subTopic.list[stc.index - 1].description}}</p>
+        </div>
+        <!--//CALL TO ACTION ON MEDIUM AND LARGE SCREEN//-->
+        <div class="col-md-5 col-lg-5 callToAction">
+          <div class="ctaTitle">
+            <h2><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
+          </div>
+          <div>
+            <form class="ctaForm" align="center" action="index.html" method="post">
+              <select ng-model="stc.idea.subtopicId">
+                <!-- <option>Choose a Topic</option> -->
+                <option ng-repeat="subtopic in stc.subTopic.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
+              </select>
+              <input ng-model="stc.idea.title" type="text" name="" value="" placeholder="Title">
+              <textarea ng-model="stc.idea.description" name="comment" placeholder="Description..."form="usrform"></textarea><br>
+              <button ng-click="stc.addNewIdea(stc.idea)" class = "btn-cta" type="button" name="button">Add Your Idea!</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--
+      /* ============================================================================ *
+      *         SUBTOPIC TITLE AND DESCRIPTION MOBILE                                *
+      * ============================================================================= */
+    -->
+    <div class="visible-xs-block">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-10 topicText">
+        <h1>{{stc.subTopic.list[stc.index - 1].title}}</h1>
+        <p>{{stc.subTopic.list[stc.index - 1].description}}</p>
+      </div>
+      <div class="col-xs-1"></div>
+    </div>
+
+  </div>
+</div>
+
+<!--
+/* ============================================================================= *
+*        FILTER                                                                  *
+* ============================================================================== */
+-->
+<div class=" container">
+  <form class="filterIdeas" align="left" action="index.html" method="post">
+    <select name="Subtopics" class="filterIdeas">
+      <option value="placeholder">Filter Ideas By:</option>
+      <option value="mostRecent">Most Recent</option>
+      <option value="mostLiked">Most Liked</option>
+      <option value="mostLoved">Most Loved</option>
+      <option value="mostComments">Most Comments</option>
+    </select>
+  </form>
+</div>
+<!--
+/* ============================================================================= *
+*        IDEAS CARDS                                                             *
+* ============================================================================== */
+-->
+
+<div class = 'cardContainer'>
+  <div class = 'container'>
+    <!--//IDEACARDS SECTION//-->
+    <div class="row">
+      <div ng-repeat="ideas in stc.subtopicIdeas.list" class="singleCard cardCenter col-md-6 clearfix">
+        <div class="card_content">
+          <div style="height: 200px;">
+            <h2>{{ideas.title}} </h2>
+            <p>{{ideas.description}} </p>
+          </div>
+          <div class="author_content">
+            <div class ="author_img col-xl-3 col-md-3">
+              <p> <img ng-src="{{ideas.photo}}"></p>
+            </div>
+            <div class="author_info col-xl-6 col-md-6">
+              <h4> {{ideas.name}} </h4>
+              <h5> {{ideas.ward}} </h5>
+            </div>
+            <div class="col-xl-6 col-md-3">
+              <button ng-click="stc.moreComments()" type="button" name="Comments"> Comments </button>
+            </div>
+          </div>
+        </div>
+        <div class="love_like row">
+          <ul>
+            <div ng-click="stc.addLike(ideas.id)" class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
+              <li class="like">
+                <span> LIKE </span>
+              </li>
+            </div>
+            <div class="col-md-6 col-xs-6 actionBtn">
+              <li class="love">
+                <span> LOVE </span>
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  /* ============================================================================= *
+  *        CALL TO ACTION                                                          *
+  * ============================================================================== */
+-->
+<!--//CALL TO ACTION MEDIUM AND LARGE SCREEN//-->
+<div class="cta-home row visible-md-block visible-lg-block visible-xl-block">
+  <div class="col-md-6 col-xs-12">
+    <h3 class="light">HAVE AN IDEA?</h3>
+  </div>
+  <div class="col-md-6 col-xs-12">
+    <button ng-click="stc.createIdea()" type="button" class="btn-100" name="button"> START A CONVERSATION </button>
+  </div>
+</div>
+<!--//CALL TO ACTION MOBILE/SMALL SCREEN//-->
+<div id="cta_container" class="visible-xs-block">
+  <div id="stickyCTA" ng-click="stc.createIdea()">
+    <h4 class="light">
+      <i class="ctaIcon fa-fw fa fa-plus-circle fa-2x" style=" vertical-align: middle;"aria-hidden="true"></i>
+      Create an Idea
+    </h4>
+  </div>
+</div>
+
+
+</div>
+</div>
+<!-- </div> -->

@@ -4,7 +4,8 @@ CREATE TABLE main_topics (
   id SERIAL PRIMARY KEY,
   title VARCHAR(80),
   description VARCHAR(10000),
-  active boolean
+  active boolean DEFAULT false,
+  upcoming boolean DEFAULT false
 );
 
 CREATE TABLE subtopics (
@@ -12,14 +13,16 @@ CREATE TABLE subtopics (
   title VARCHAR(80),
   description VARCHAR(10000),
   main_id integer REFERENCES main_topics
+  active boolean DEFAULT false,
+  upcoming boolean DEFAULT false
 );
 
 CREATE TABLE ideas (
   id SERIAL PRIMARY KEY,
   title VARCHAR(80),
   description VARCHAR(5000),
-  subtopics_id integer REFERENCES subtopics,
-  user_id integer REFERENCES users
+  subtopics_id integer REFERENCES subtopics (id),
+  users_email integer REFERENCES users (email)
 );
 
 CREATE TABLE comments (
@@ -84,5 +87,19 @@ CREATE TABLE users (
   email VARCHAR(100) NOT NULL,
   address VARCHAR(2500) NOT NULL,
   ward VARCHAR(80),
-  admin BOOLEAN DEFAULT false
+  admin BOOLEAN DEFAULT false,
+  photo VARCHAR(80)
 );
+
+ALTER TABLE users
+ADD active BOOLEAN DEFAULT true;
+
+CREATE TABLE user_filter (
+  id SERIAL PRIMARY KEY,
+  filter VARCHAR(80) NOT NULL
+);
+
+INSERT INTO user_filter (id, filter)
+VALUES(1, 'name'),
+(2, 'email'),
+(3, 'ward');

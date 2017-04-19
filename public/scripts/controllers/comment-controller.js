@@ -1,8 +1,51 @@
 app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', function($firebaseAuth, $http, $location, DataFactory){
 
   var self = this;
-  var auth = $firebaseAuth();
 
+  //ARRI'S CODE STARTS HERE
+  self.showComment = false;
+
+   self.showCommentArea = function(){
+     console.log("button clicked");
+     self.showComment = true;
+   }
+   //ARRI'S CODE ENDS HERE
+
+   //CHRIS'S CODE STARTS HERE
+   //shows all comments from BD to view
+     self.commentsObject = DataFactory.commentsObject;
+
+   //add comment to comment to DB
+     self.commentRedirect = function() {
+   //redirect after submission
+       $location.url('/comment');
+     }//end of self.commentRedirect()
+
+   //adds new comment to DB
+     self.addComment = function(newComment) {
+   //sents comment from view to DB
+       DataFactory.addComment(newComment);
+   //empties inputs after submission
+       self.newComment = {};
+   //redirect after submission
+       $location.url('/comment');
+     }//end of self.addComment()
+
+     self.createIdea = function() {
+   //redirect after submission
+       $location.path('/idea');
+     }
+   //CHRIS'S CODE ENDS HERE
+
+   //JEREMY'S CODE STARTS HERE
+
+   //JEREMY'S CODE ENDS HERE
+
+   //KRIS'S CODE STARTS HERE
+
+   //KRIS'S CODE ENDS HERE
+
+  // var auth = $firebaseAuth();
   // auth.$onAuthStateChanged(getUser);
   //
   // //populates user profile information on page load
@@ -26,38 +69,16 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   //     console.log('Not logged in or not authorized.');
   //   }
   // };
-
-
-  //ARRI'S CODE STARTS HERE
-
-  //ARRI'S CODE ENDS HERE
-
-  //CHRIS'S CODE STARTS HERE
-
-  //CHRIS'S CODE ENDS HERE
-
-  //JEREMY'S CODE STARTS HERE
-
-  //JEREMY'S CODE ENDS HERE
-
-  //KRIS'S CODE STARTS HERE
-
-  //KRIS'S CODE ENDS HERE
-
   // function that logs user out on button click
-  self.logOut = function(){
-    auth.$signOut().then(function(){
-      console.log('Logging the user out!');
-      self.redirectHome();
-    });
-  };
-
-  // function to redirect user to home page after logout
-  self.redirectHome = function(){
-    $location.url('/home');
-  }
-
-  //accesses information from public API
-
-
-}]);
+  // self.logOut = function(){
+  //   auth.$signOut().then(function(){
+  //     console.log('Logging the user out!');
+  //     self.redirectHome();
+  //   });
+  // };
+  //
+  // // function to redirect user to home page after logout
+  // self.redirectHome = function(){
+  //   $location.url('/home');
+  // }
+}]);//end of app.controller()

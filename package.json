@@ -7,18 +7,25 @@
     "start": "node server/app.js",
     "test": "nodemon server/app.js"
   },
-  "author": "PSP-Group",
+  "author": "PSP-Group from Prime Digital Academy",
   "license": "MIT",
   "dependencies": {
     "angular": "^1.6.4",
+    "angular-chart.js": "^1.1.1",
     "angular-route": "^1.6.4",
+    "angular-ui-bootstrap": "^2.5.0",
     "angularfire": "^2.3.0",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
+    "chart.js": "^2.5.0",
+    "civic-info": "0.0.5",
     "express": "^4.14.0",
     "firebase": "^3.7.5",
     "firebase-admin": "^4.0.3",
+    "gapi": "0.0.3",
+    "googleapis": "^19.0.0",
     "nodemailer": "^3.1.8",
-    "pg": "^6.1.0"
+    "pg": "^6.1.0",
+    "serve-favicon": "^2.4.2"
   }
 }

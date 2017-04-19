@@ -1,0 +1,85 @@
+<!--
+/* ============================================================================= *
+*        ADMIN  NAVIGATION                                                       *
+* ============================================================================= */
+-->
+<div ng-include="'/views/templates/adminNav.html'"></div>
+
+<!--
+/* ============================================================================= *
+*       GRAPH OF ACTIVE USERS BY WARD                                            *
+* ============================================================================= */
+-->
+
+<div style="background-color:#F8F8F8; padding-top: 30px; padding-bottom: 15px">
+  <div class="container" style="padding-top:40px; padding-bottom:40px; background-color: white; border: 1px solid #eeeeee;d">
+    <h2 style="text-align:center; padding-top: 30px; padding-bottom: 30px;">Graph of Active Users By Ward</h2>
+  <canvas id="myChart"></canvas>
+
+  </div>
+
+</div>
+
+<!--
+/* ============================================================================= *
+*       FILTERABLE DATA                                                          *
+* ============================================================================= */
+-->
+<div style="background-color:#F8F8F8; padding-top: 15px; padding-bottom: 30px">
+  <div class="container" style="text-align: center; padding-top:40px; padding-bottom:40px; background-color: white; border: 1px solid #eeeeee;d">
+    <h3 style="text-align: left;">Graphical Data</h3>
+    <!--//FILTERS//-->
+    <div class="filters" style="padding-top: 30px; padding-bottom: 30px;">
+    <div class="col-md-3">
+      <select name="Wards">
+        <option value="subtopic1">Ward 1</option>
+        <option value="subtopic2">Ward 2</option>
+        <option value="subtopic3">Ward 3</option>
+        <option value="subtopic4">Ward 4</option>
+        <option value="subtopic5">Ward 5</option>
+        <option value="subtopic1">Ward 6</option>
+        <option value="subtopic2">Ward 7</option>
+        <option value="subtopic3">Ward 8</option>
+        <option value="subtopic4">Ward 9</option>
+        <option value="subtopic5">Ward 10</option>
+        <option value="subtopic3">Ward 11</option>
+        <option value="subtopic4">Ward 12</option>
+        <option value="subtopic5">Ward 13</option>
+      </select>
+    </div>
+
+    <div class=" col-md-3">
+      <select name="Subtopics">
+        <option value="subtopic1">Subtopic 1</option>
+        <option value="subtopic2">Subtopic 2</option>
+        <option value="subtopic3">Subtopic 3</option>
+        <option value="subtopic4">Subtopic 4</option>
+        <option value="subtopic5">Subtopic 5</option>
+      </select>
+    </div>
+
+    <div class=" col-md-3">
+      <select name="Actions">
+        <option value="subtopic1">Most Commented</option>
+        <option value="subtopic2">Most Liked</option>
+        <option value="subtopic3">Most Loved</option>
+      </select>
+    </div>
+
+    <div class=" col-md-3">
+      <button class = "btn-flt">Filter</button>
+    </div>
+
+  </div>
+    <!--//DATA//-->
+    <!--//GRAPH//-->
+    <div class="data" style="padding-top: 30px; padding-bottom: 30px;">
+
+    <div style="border:1px solid lightgrey; height: 400px; margin-top: 20px;" class="col-md-5">
+    </div>
+    <!--//TEXT INFORMATION//-->
+    <div style="background-color:#F8F8F8; height: 400px; margin-top: 20px;" class="col-md-7">
+    </div>
+  </div>
+  </div>
+</div>
