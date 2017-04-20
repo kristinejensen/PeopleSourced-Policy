@@ -23,11 +23,11 @@
       </div>
       <div>
         <form class="ctaForm" align="center" action="index.html" method="post">
-          <select>
+          <select ng-model="hc.idea.subtopicId">
             <option>Choose a Topic</option>
             <option ng-repeat="subtopic in hc.subTopic.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
           </select>
-          <input type="text" name="" value="" placeholder="Title">
+          <input ng-model="hc.idea.title" type="text" name="" value="" placeholder="Title">
           <textarea ng-model="hc.idea.description" name="comment" placeholder="Description..."form="usrform"></textarea><br>
           <button ng-click="hc.addNewIdea(hc.idea)" class = "btn-cta" type="button" name="button">Add Your Idea!</button>
         </form>
