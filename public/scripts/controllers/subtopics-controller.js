@@ -4,6 +4,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.subTopic = TopicsFactory.subTopic;
   self.subtopicIdeas = DataFactory.subtopicIdeas;
   self.index = $routeParams.id;
+  //not sure
+  self.subTopicObject = DataFactory.subTopicObject;
   console.log('index on load: ', self.index);
 
   getIdeas(self.index);
@@ -35,19 +37,29 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.moreComments = function() {
     $location.path('/comment');
   }
-
+var userMatchObject = DataFactory.userMatchObject.list;
   self.addNewIdea = function(idea) {
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
-    //creates the new idea object from form/auth
+
+    // container to loop id's through
+        var id = "";
+      //loops through all users email to find correct id
+          for (var i = 0; i < userMatchObject.length; i++) {
+            if (userMatchObject[i].email == firebaseUser.email) {
+              var id = userMatchObject[i].id;
+            }//end of if
+          };//end of for loop
+      //name and email is added to object
+
       var newIdea = {
         name : firebaseUser.displayName,
         email : firebaseUser.email,
         subtopicId : idea.subtopicId,
         title : idea.title,
         description : idea.description,
-        id : idea.subtopicId
+        id : id
       }
       //sents object to factory
       DataFactory.addNewIdea(newIdea).then(function(response){
@@ -59,5 +71,10 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     //empties inputs on submit
       self.idea = {};
     }//end of self.createIdea()
+
+    // get moreComments button click
+        self.moreComments = function(idea) {
+        $location.path('/comment/'+idea.id);
+        }
 
 }]);

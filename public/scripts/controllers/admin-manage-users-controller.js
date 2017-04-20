@@ -1,5 +1,4 @@
 
-//CHRIS
 app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactory', '$firebaseAuth', function($http, $location, AdminFactory, $firebaseAuth){
 
   var self = this;
@@ -38,4 +37,3 @@ app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactor
   self.userResults = AdminFactory.userResults;
 
 }]); //end of controller
-//CHRIS
