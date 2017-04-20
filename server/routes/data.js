@@ -242,5 +242,3 @@ router.get('/getCommentId', function(req, res) {
 });//end of router.get
 
 module.exports = router;
-
-//CHRIS

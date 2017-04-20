@@ -74,7 +74,6 @@ router.get('/getUserMatch', function (req, res) {
 //        });
 //      });//end of .then
 //    });//end of router.post
-//
 // });
 
 //*****************************************//
@@ -174,4 +173,3 @@ router.post('/addNewSubcomment', function (req, res) {
 });//end of router.post
 
 module.exports = router;
-//CHRIS

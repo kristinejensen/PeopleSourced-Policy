@@ -8,13 +8,7 @@
 <div ng-controller="NavCtrl as nc" id="subtopicNav" class="row visible-sm-block visible-md-block visible-lg-block">
   <div class="col-md-2 col-sm-2 sub-nav">
     <li><a ng-href="#!" type="button" class="btn-nav" style="color: white;">Home</a></li>
-</div>
-<!-- //CHRIS -->
-<!-- <div id="subtopicNav" class="row"> -->
-  <!-- <div class="col-md-5ths col-xs-12">
-    <button onclick="location.href='#!subtopic1'" type="button" class="btn-nav">subtopic1</button>
-
-  </div> -->
+  </div>
   <div ng-repeat="subtopic in nc.subTopic.list" class="col-md-2 col-sm-2 sub-nav">
     <li><a ng-href="#!subtopics/{{subtopic.id}}" type="button" class="btn-nav">{{subtopic.title}}</a></li>
   </div>
@@ -50,7 +44,4 @@
       </div>
     </div>
   </nav>
-
 </div>
-
-<!-- //CHRIS -->

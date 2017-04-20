@@ -23,6 +23,7 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
   }//end of homeView()
 //current subtopics for select option
   self.subTopicObject = DataFactory.subTopicObject;
+  console.log(self.subTopicObject);
 //all user email and id
 var userMatchObject = DataFactory.userMatchObject.list;
 //function adds new idea to DB

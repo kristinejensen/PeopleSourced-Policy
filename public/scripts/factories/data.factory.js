@@ -3,11 +3,14 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   var auth = $firebaseAuth();
 
-  //Start Kris' Code
+
   var subTopicObject = { list:[] };
   var subtopicIdeas = { list:[] };
   var commentsObject = { list:[] };
   var userMatchObject = { list : [] };
+  var allSubcommentsObject = { list : [] }
+  var getIdeaIdObject = { list : [] }
+  var getCommentIdObject = { list : [] }
   var userTally = {};
   var ideasTally = {};
   var commentsTally = {};
@@ -19,6 +22,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   function init() {
     getUsers();
+
   }
 
   //function to display user list on manage users admin view
@@ -349,27 +353,35 @@ function getIdeaId(subtopicIdea) {
     likesTally: likesTally,
     likes: likes,
     addLike: addLike,
+//new user object from add address button click
     addNewUser : addNewUser,
+//new idea object from idea button click
     addNewIdea : addNewIdea,
+//sends current subtopics to add idea view option element
     subTopicObject : subTopicObject,
+//adds ideas to subtopic1 view
     subtopicIdeas : subtopicIdeas,
+//adds comment to DB
     addComment : addComment,
+//gets comments to comment view
     commentsObject : commentsObject,
-    getSubtopicIdeas : getSubtopicIdeas,
     // allUsers: allUsers,
     deactivateUser: deactivateUser,
+//checks user for axisting account at login
     getUserMatch : getUserMatch,
+//all existing users object
     userMatchObject : userMatchObject,
 //adds sub-comments to DB
     addNewSubComment : addNewSubComment,
 //adds sub-comments to view
-    // allSubcommentsObject : allSubcommentsObject,
+    allSubcommentsObject : allSubcommentsObject,
 //gets specific idea id from DB
     getIdeaId : getIdeaId,
+    getSubtopicIdeas : getSubtopicIdeas,
 //specifid idea from DB for comment view
-    // getIdeaIdObject : getIdeaIdObject,
+    getIdeaIdObject : getIdeaIdObject,
 //specified comments from DB for comment view
-    // getCommentIdObject : getCommentIdObject
+    getCommentIdObject : getCommentIdObject
 
   }
 
