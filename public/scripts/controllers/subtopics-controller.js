@@ -1,11 +1,14 @@
 app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', '$routeParams', '$location', '$firebaseAuth', function(DataFactory, TopicsFactory, $http, $routeParams, $location, $firebaseAuth) {
   var self = this;
+  var auth = $firebaseAuth();
+  var firebaseUser = auth.$getAuth();
   //THESE TWO ARE THE SAME THING?
   self.subTopic = TopicsFactory.subTopic;
   self.subtopicIdeas = DataFactory.subtopicIdeas;
   self.index = $routeParams.id;
   //not sure
   self.subTopicObject = DataFactory.subTopicObject;
+  // self.subtopicIdeas = DataFactory.subtopicIdeas;
   console.log('index on load: ', self.index);
 
   getIdeas(self.index);
@@ -35,11 +38,12 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   }
   //get moreComments button click
   self.moreComments = function() {
-    $location.path('/comment');
+    $location.path('/comment/');
   }
-var userMatchObject = DataFactory.userMatchObject.list;
-console.log('userMatchObject.list: ', userMatchObject);
-  self.addNewIdea = function(idea, userMatchObject) {
+
+  var userMatchObject = DataFactory.userMatchObject.list;
+// console.log('userMatchObject.list: ', userMatchObject);
+  self.addNewIdea = function(idea) {
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
@@ -64,9 +68,9 @@ console.log('userMatchObject.list: ', userMatchObject);
       }
       //sents object to factory
       DataFactory.addNewIdea(newIdea).then(function(response){
-        redirectToSubtopic(newIdea.id);
+        redirectToSubtopic(newIdea);
       });
-      //redirect to correct subtopic page after submit
+      // redirect to correct subtopic page after submit
       // getIdeas(newIdea.id);
 
     //empties inputs on submit
@@ -74,8 +78,8 @@ console.log('userMatchObject.list: ', userMatchObject);
     }//end of self.createIdea()
 
     // get moreComments button click
-        self.moreComments = function(idea) {
-        $location.path('/comment/'+idea.id);
+        self.moreComments = function(subtopicIdea) {
+        $location.path('/comment/' + subtopicIdea.id);
         }
 
 }]);

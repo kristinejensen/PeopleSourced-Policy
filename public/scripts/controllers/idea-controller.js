@@ -1,4 +1,4 @@
-//CHRIS
+
 app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', function(DataFactory, $firebaseAuth, $location) {
 
   var self = this;
@@ -56,4 +56,3 @@ var userMatchObject = DataFactory.userMatchObject.list;
   };//end of addNewIdea()
 
 }]);//end of app.controller()
-//CHRIS

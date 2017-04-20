@@ -1,4 +1,4 @@
-//CHRIS
+
 app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', '$routeParams', function($firebaseAuth, $http, $location, DataFactory, $routeParams){
 
   var self = this;
@@ -18,7 +18,6 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   var subtopicIdea = $routeParams;
   DataFactory.getIdeaId(subtopicIdea);
 
-// console.log('subtopicIdeas:',self.subtopicIdeas);
 //add comment to comment to DB
   self.commentRedirect = function() {
 //redirect after submission
@@ -96,4 +95,3 @@ console.log(newComment);
 
 
 }]);//end of app.controller()
-//CHRIS
