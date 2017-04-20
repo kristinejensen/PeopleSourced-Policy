@@ -225,17 +225,27 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     var firebaseUser = auth.$getAuth()
     if(firebaseUser){
       firebase.auth().currentUser.getToken().then(function(idToken) {
-        var subTopic = {title: title, description: description, id: id}
-        $http({
-          method: 'UPDATE',
-          url: '/admin-topics/setNewTrimester',
-          headers: {
-            id_token: idToken
-          }
-        }).then(function(response) {
-          console.log('updated the trimester!');
-        })
-      });
+        swal({
+          title: 'WARNING',
+          text: "Are you sure you want to set the new trimester?",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, I\'m sure'
+        }).then(function(){
+          console.log('Right before http.');
+          $http({
+            method: 'PUT',
+            url: '/admin-topics/setNewTrimester',
+            headers: {
+              id_token: idToken
+            }
+          }).then(function(response) {
+            console.log('updated the trimester!');
+          })
+        });
+        });
     }
   }
 
@@ -300,7 +310,8 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     //this subtopic
     thisSubtopic: thisSubtopic,
     //yup
-    individualSubTopic: individualSubTopic
+    individualSubTopic: individualSubTopic,
+    setNewTrimester: setNewTrimester
   }
 
 }]); // end of app.factory

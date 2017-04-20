@@ -20,6 +20,12 @@ app.controller('AdminTopicsController', ['$http', '$location', 'TopicsFactory', 
   });
 
   //********************************************//
+  //             NEW TRIMESTER WIPE             //
+  //********************************************//
+  self.setNewTrimester = function(){
+    TopicsFactory.setNewTrimester()
+  }
+  //********************************************//
   //         UPDATE CURRENT MAIN TOPIC          //
   //********************************************//
   self.mainTopic = TopicsFactory.mainTopic;

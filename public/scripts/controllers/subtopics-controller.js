@@ -8,6 +8,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
 
   // thisSubtopic();
   
+
   thisSubtopic(self.index);
 
   function thisSubtopic(index){
