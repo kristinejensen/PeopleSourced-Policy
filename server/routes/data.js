@@ -1,5 +1,5 @@
-//CHRIS’S CODE STARTS HERE
 
+var pool = require('../modules/database-config');
 var express = require('express');
 var router = express.Router();
 // var pool = require('../modules/database-config');
@@ -17,7 +17,7 @@ var config = {
 var pool = new pg.Pool(config);
 
 //gets all users name and id for idea and comment view
-router.get('/getUserNameId', function (req, res) {
+router.get('/getUserNameId', function(req, res) {
   pool.connect()
     .then(function (client) {
       client.query("SELECT id, name FROM users")
@@ -33,7 +33,7 @@ router.get('/getUserNameId', function (req, res) {
 });//end of router.get
 
 //gets all subtopics for add idea view
-router.get('/getSubTopics', function (req, res) {
+router.get('/getSubTopics', function(req, res) {
   pool.connect()
     .then(function (client) {
       client.query("SELECT * FROM subtopics")
@@ -49,10 +49,10 @@ router.get('/getSubTopics', function (req, res) {
 });//end of router.get
 
 //gets ideas for subtopic1 view
-router.get('/subtopicIdeas1', function (req, res) {
+router.get('/subtopicIdeas1', function(req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE subtopics_id=1")
+      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=1;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -65,10 +65,10 @@ router.get('/subtopicIdeas1', function (req, res) {
 });//end of router.get
 
 //gets ideas for subtopic2 view
-router.get('/subtopicIdeas2', function (req, res) {
+router.get('/subtopicIdeas2', function(req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE subtopics_id=2")
+      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=2;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -81,10 +81,10 @@ router.get('/subtopicIdeas2', function (req, res) {
 });//end of router.get
 
 //gets ideas for subtopic3 view
-router.get('/subtopicIdeas3', function (req, res) {
+router.get('/subtopicIdeas3', function(req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE subtopics_id=3")
+      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=3;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -97,10 +97,10 @@ router.get('/subtopicIdeas3', function (req, res) {
 });//end of router.get
 
 //gets ideas for subtopic4 view
-router.get('/subtopicIdeas4', function (req, res) {
+router.get('/subtopicIdeas4', function(req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE subtopics_id=4")
+      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=4;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -113,10 +113,10 @@ router.get('/subtopicIdeas4', function (req, res) {
 });//end of router.get
 
 //gets ideas for subtopic5 view
-router.get('/subtopicIdeas5', function (req, res) {
+router.get('/subtopicIdeas5', function(req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.users_id = users.id WHERE subtopics_id=5")
+      client.query("SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=5;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -129,7 +129,7 @@ router.get('/subtopicIdeas5', function (req, res) {
 });//end of router.get
 
 //gets all users to compare at login view if in the system
-router.get('/getUserMatch', function (req, res) {
+router.get('/getUserMatch', function(req, res) {
   pool.connect()
     .then(function (client) {
       client.query("SELECT id, email FROM users")
@@ -161,7 +161,7 @@ router.get('/comments', function(req, res){
 });
 
 //gets all coments for comment view
-router.get('/allComments', function (req, res) {
+router.get('/allComments', function(req, res) {
   pool.connect()
     .then(function (client) {
       client.query("SELECT * FROM comments")
@@ -176,7 +176,7 @@ router.get('/allComments', function (req, res) {
     });//end of .then
 });//end of router.get
 
-router.get('/idea', function(req, res){
+router.get('/idea', function(req, res) {
   var userEmail = req.decodedToken.email;
   pool.connect(function (err, client, done) {
     client.query('SELECT * FROM idea;', [userEmail], function(err, result){
@@ -191,6 +191,54 @@ router.get('/idea', function(req, res){
   });
 });
 
+//gets all sub-coments for comment view
+router.get('/allSubcomments', function(req, res) {
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT * FROM subcomments")
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
 
-//CHRIS’S CODE ENDS HERE
+//gets specific idea by id for comment view
+router.get('/getIdeaId', function(req, res) {
+  var subtopicIdea = req.headers;
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.user_id = users.id WHERE ideas.id=$1", [subtopicIdea.id])
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
+
+//gets specific comment by id for comment view (subtopic id)
+router.get('/getCommentId', function(req, res) {
+  var subtopicIdea = req.headers;
+  pool.connect()
+    .then(function (client) {
+      client.query("SELECT * FROM comments WHERE idea_id=$1", [subtopicIdea.id])
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
+
 module.exports = router;

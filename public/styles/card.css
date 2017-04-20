@@ -1,3 +1,4 @@
+/*//CHRIS*/
 .cardContainer {
   margin: 100px;
 }
@@ -9,6 +10,7 @@
 }
 
 .actionBtn {
+
   background-color: #333333;
   height: 60px;
   vertical-align: middle;
@@ -66,7 +68,8 @@ ul {
 }
 
 .authImage {
-height: 30px;
-width: 30px;
+height: 40px;
+width: 40px;
 border-radius: 20px;
 }
+/*//CHRIS*/

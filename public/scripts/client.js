@@ -1,4 +1,5 @@
-var app = angular.module('ConnectApp', ['ngRoute','firebase']);
+
+var app = angular.module('ConnectApp', ['ngRoute','firebase', 'ui.bootstrap']);
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -27,40 +28,15 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'FlagController',
     controllerAs: 'fc'
   })
-  .when('/comment', {
+  .when('/comment/:id?', {
     templateUrl: 'views/comments.html',
     controller: 'CommentController',
     controllerAs: 'cc'
   })
-  .when('/subtopic1', {
-    templateUrl: 'views/subtopics/subtopic1.html',
-    controller: 'Subtopic1Controller',
-    controllerAs: 'st1c'
-  })
-  .when('/subtopic2', {
-    templateUrl: 'views/subtopics/subtopic2.html',
-    controller: 'Subtopic2Controller',
-    controllerAs: 'st2c'
-  })
-  .when('/subtopic3', {
-    templateUrl: 'views/subtopics/subtopic3.html',
-    controller: 'Subtopic3Controller',
-    controllerAs: 'st3c'
-  })
-  .when('/subtopic4', {
-    templateUrl: 'views/subtopics/subtopic4.html',
-    controller: 'Subtopic4Controller',
-    controllerAs: 'st4c'
-  })
-  .when('/subtopic5', {
-    templateUrl: 'views/subtopics/subtopic5.html',
-    controller: 'Subtopic5Controller',
-    controllerAs: 'st5c'
-  })
-  .when('/views/:id', {
-    templateUrl: 'views/comment.html',
-    controller: 'CommentConnectController',
-    controllerAs: 'ccc'
+  .when('/subtopics/:id', {
+    templateUrl: 'views/subtopics.html',
+    controller: 'SubtopicsController',
+    controllerAs: 'stc'
   })
   .when('/admin-manage-users', {
     templateUrl: 'views/admin-views/admin-manage-users.html',
@@ -81,11 +57,6 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'views/admin-views/admin-topics.html',
     controller: 'AdminTopicsController',
     controllerAs: 'atc'
-  })
-  .when('/test', {
-    templateUrl: 'views/test.html',
-    controller: 'HomeController',
-    controllerAs: 'hc'
   })
   .otherwise({
     redirectTo: 'home'

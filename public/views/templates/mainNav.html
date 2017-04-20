@@ -1,3 +1,4 @@
+
 <div id = "mainNav">
   <div class="row">
     <!--
@@ -16,7 +17,7 @@
     <div id="loginContainer" ng-controller="LoginController as lc" class="col-lg-6 col-md-6 col-xs-6">
 
       <!--//SIGN IN BUTTON//-->
-      <img class="authImage" ng-hide="!lc.email" src="{{lc.photo}}">{{lc.email}}
+      <!-- <img class="authImage" ng-hide="!lc.email" src="{{lc.photo}}">{{lc.email}} -->
       <button ng-show="!lc.email" ng-click="lc.login()" type="submit" class="btn-log">
         Login <i class="fa fa-sign-in"></i>
       </button>

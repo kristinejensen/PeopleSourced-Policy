@@ -1,9 +1,23 @@
+
 app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
-  //CHRIS’S CODE STARTS HERE
 
   //google authenticate bellow
   var auth = $firebaseAuth();
   var self = this;
+
+  auth.$onAuthStateChanged(function(firebaseUser) {
+   if (firebaseUser) {
+     console.log('we are still logged in!');
+     self.email = firebaseUser.email;
+     // go reload idea data....
+    //  DataFactory.GetMyStuff();
+   } else {
+     console.log('boooo');
+     // redirect
+     self.email = '';
+    //  self.logout();
+   }
+  });
 
   //object to verify if user exsists in DB (need to finish)
   var userMatchObject = DataFactory.userMatchObject.list;
@@ -24,6 +38,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
   function adminView() {
     $location.path('/admin');
   }
+
   var firebaseUser = auth.$getAuth();
   //user google login authentication
   self.login = function() {
@@ -31,11 +46,11 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
     DataFactory.getUserMatch();
     auth.$signInWithPopup("google").then(function(firebaseUser) {
       // //redirects to login view
-      // loginView();
+      loginView();
       //adds user google photo to view
-      self.photo = firebaseUser.user.photoURL;
+      // self.photo = firebaseUser.user.photoURL;
       //adds user google email to view
-      self.email = firebaseUser.user.email;
+      // self.email = firebaseUser.user.email;
       //object contains all users
       var userMatchObject = DataFactory.userMatchObject.list;
       //checks DB for exsisting users and then desides redirect
@@ -50,36 +65,90 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       console.log("Authentication failed: ", error);
     });//end of .catch
   };//end of self.login()
+
   //user google logout de-authedicate
   self.logout = function() {
     // console.log("logout clicked");
     auth.$signOut().then(function() {
+      self.email = '';
       //redirects back to home view
-      logoutView();
+      // logoutView();
     });//end of auth.$signOut()
   };//end of self.deAuthUser()
 
   //new user object from view button click
   self.addNewUser = function(user) {
     //brings in firebase data to function
-    var firebaseUser = auth.$getAuth();
+    // var firebaseUser = auth.$getAuth();
 
     //creating a new variable with input data and firebase data
-
     var newUser = {
       name : firebaseUser.displayName,
-      address : user.street + " " + user.city + ", " + user.state + " " + user.zipCode,
+      address : user.street,
+      city : user.city,
+      state : user.state,
+      zipCode :  user.zipCode,
       email : firebaseUser.email,
       photo : firebaseUser.photoURL,
-      word : ""
+      ward : ""
     }
+    console.log("newUser: ",newUser);
     //sends object to DB
     DataFactory.addNewUser(newUser);
+
     //empties inputs after submission
     self.user = {};
     //redirects back to home view after submission
     logoutView();
   }
 
-  //CHRIS’S CODE ENDS HERE
 }]);//end of app.controller()
+
+
+// var firebaseUser = auth.$getAuth();
+
+//user google login authentication
+// self.login = function() {
+  //call function at factory to get existing user id and email
+
+  // auth.$signInWithPopup("google").then(function(firebaseUser) {
+  //   if(firebaseUser) {
+      // firebaseUser.user.getToken().then(function(idToken) {
+        //adds user google photo to view
+        // self.photo = firebaseUser.user.photoURL;
+        //adds user google email to view
+        // self.email = firebaseUser.user.email;
+
+        // DataFactory.getUserMatch(idToken).then(function() {
+
+    //object contains all users
+    // var userMatchObject = DataFactory.userMatchObject.list;
+    //checks DB for exsisting users and then desides redirect
+    // for (var i = 0; i <userMatchObject.length; i++) {
+    //   if (userMatchObject[i].email == firebaseUser.user.email) {
+    //     logoutView();
+    //   } else {
+    //     loginView();
+    //   }
+    // };//end of for loop
+
+
+    // //adds user google photo to view
+    // self.photo = firebaseUser.user.photoURL;
+    // //adds user google email to view
+    // self.email = firebaseUser.user.email;
+    // //object contains all users
+    // var userMatchObject = DataFactory.userMatchObject.list;
+    // //checks DB for exsisting users and then desides redirect
+    // for (var i = 0; i <userMatchObject.length; i++) {
+    //   if (userMatchObject[i].email !== firebaseUser.user.email) {
+    //     loginView();
+    //   }
+    // };//end of for loop
+  // }).catch(function(error) {
+  //   console.log("Authentication failed: ", error);
+  // });//end of .catch
+
+// }
+// })
+// };//end of self.login()

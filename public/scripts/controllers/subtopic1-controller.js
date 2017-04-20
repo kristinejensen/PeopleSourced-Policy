@@ -1,5 +1,6 @@
-app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
-
+//
+// app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '$location', '$routeParams', function(DataFactory, $firebaseAuth, $http, $location, $routeParams){
+//
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
   var self = this;
@@ -7,7 +8,7 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
 //populates select options
   self.subTopicObject = DataFactory.subTopicObject;
 //displays specific subtopic ideas to view
-   self.subtopicIdeas1 = DataFactory.subtopicIdeas1;
+  self.subtopicIdeas1 = DataFactory.subtopicIdeas1;
 
 //redirect to home view
   function homeView() {
@@ -49,4 +50,12 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
     homeView();
   }//end of self.createIdea()
 
-}]);//end of app.controller()
+  //get moreComments button click
+    self.moreComments = function(subtopicIdea) {
+      $location.path('/comment/'+subtopicIdea.id);
+    }
+
+
+
+// }]);//end of app.controller()
+// //CHRIS

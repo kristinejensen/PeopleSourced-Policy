@@ -1,10 +1,11 @@
-
+-- //CHRIS
 
 CREATE TABLE main_topics (
   id SERIAL PRIMARY KEY,
   title VARCHAR(80),
   description VARCHAR(10000),
-  active boolean
+  active boolean DEFAULT false,
+  upcoming boolean DEFAULT false
 );
 
 CREATE TABLE subtopics (
@@ -12,6 +13,8 @@ CREATE TABLE subtopics (
   title VARCHAR(80),
   description VARCHAR(10000),
   main_id integer REFERENCES main_topics
+  active boolean DEFAULT false,
+  upcoming boolean DEFAULT false
 );
 
 CREATE TABLE ideas (
@@ -100,3 +103,7 @@ INSERT INTO user_filter (id, filter)
 VALUES(1, 'name'),
 (2, 'email'),
 (3, 'ward');
+
+
+ALTER TABLE main_topics
+ADD upcoming BOOLEAN DEFAULT false;

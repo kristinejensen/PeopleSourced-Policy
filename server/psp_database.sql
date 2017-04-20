@@ -1,3 +1,4 @@
+
 CREATE TABLE main_topics (
   id SERIAL PRIMARY KEY,
   title VARCHAR(80),

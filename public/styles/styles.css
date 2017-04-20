@@ -1,4 +1,4 @@
-
+/*//CHRIS*/
 /* ============================================================================= *
 *           MAIN TOPIC                                                           *
 * ============================================================================== */
@@ -32,7 +32,6 @@ h1, h2, h3, h4, h5, h6, p {
   color: #333333;
 }
 
-
 h1 {
   font-size: 80px;
 }
@@ -48,6 +47,12 @@ p {
   font-size: 20px;
 }
 }
+
+
+/* ============================================================================= *
+*           TALLY DIV                                                           *
+* ============================================================================== */
+
 
 /* ============================================================================= *
 *           STICKY CTA                                                           *
@@ -124,7 +129,7 @@ p {
 .logo, a, a:hover, a:active, a:visited {
   color: #333333;
   text-decoration: none;
-  margin-top: 45px;
+  /*margin-top: 45px;*/
 
 }
 
@@ -188,6 +193,24 @@ background-color: #333333;
 .col-md-5m {
   width: 35%;
   float: left;
+}
+
+@media (min-width: 768px)
+{
+    .navbar-header
+    {
+        float: none;
+    }
+
+    .navbar-toggle
+    {
+        display: block;
+    }
+
+    .navbar-collapse.collapse
+    {
+        display: none ;
+    }
 }
 
 /* ============================================================================= *
@@ -490,6 +513,103 @@ th {
   padding-bottom: 30px;
 }
 
+<<<<<<< HEAD
+.navbar-form input, .form-inline input {
+	width:auto;
+}
+
+.navbar {
+    margin-bottom:0;
+}
+
+.subnav {
+  margin:0;
+  top: 0px;
+  z-index: 1020;
+  background-color: rgb(247,247,247);
+  border-bottom: 1px solid #E1E1E1;
+  padding: 8px 0px 0px 0px;
+}
+
+.affix {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:10;
+    background-color: #6fa8dc !important;
+}
+
+.affix .btn-nav {
+    /*position: fixed;
+    top: 0;
+    width: 100%;
+    z-index:10;*/
+    color: #333333;
+    font-weight: bold;
+    background-color: #6fa8dc !important;
+}
+
+
+.adminTopic {
+  padding: 20px 60px 60px 60px;
+}
+
+.adminTopic > input {
+  height: 35px;
+  width: 100%;
+}
+
+.adminTopic > textarea {
+  height: 250px;
+  width: 100%;
+}
+
+.btn-admin {
+  width: 100px;
+  background-color: #333333;
+  color: white;
+  margin: 0px;
+  border-radius: 2px;
+  border: none;
+  height: 40px;
+  outline: none;
+  float: right;
+  text-align: center !important;
+}
+
+.btn-log:hover {
+  background-color: #666666;
+  color: white;
+}
+
+.sub-nav:hover {
+  background-color: #666666 !important;
+  display: inline-block;
+}
+
+.sub-nav > li:hover{
+  background-color: #666666 !important;
+}
+
+.sub-nav:hover > li:hover{
+  background-color: #666666 !important;
+}
+
+.sub-nav:hover > li {
+  height: 60px;
+  style: none;
+  background-color: #666666 !important;
+
+}
+
+.sub-nav > li {
+  height: 60px;
+  style: none;
+  line-height: 60px;
+  list-style-type: none;
+  text-align: center;
+  cursor: pointer;
+
 /*home view add idea div*/
 .haveIdeaHome {
   text-align: center;
@@ -503,4 +623,6 @@ th {
 /*idea main element*/
 .ideaMain {
   text-align: center;
+
 }
+/*//CHRIS*/

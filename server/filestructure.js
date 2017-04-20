@@ -1,3 +1,4 @@
+//CHRIS
 userData [ anonymous {
     id: 1,
     name: 'Jeremy Leif',
@@ -28,7 +29,7 @@ userData [ anonymous {
     admin: false },
   anonymous {
     id: 5,
-    name: 'Arri Koiman',
+    name: 'Arri Kooiman',
     email: 'arri.kooiman@gmail.com',
     address: '2104 Kenwood Pkwy Minneapolis MN 55405',
     ward: null,
@@ -61,3 +62,4 @@ userData [ anonymous {
     address: '5119 Camden Ave N,\nMinneapolis, MN 55430',
     ward: null,
     admin: false } ]
+//CHRIS
