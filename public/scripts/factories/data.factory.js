@@ -202,7 +202,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
       });
     });//end of firebase.auth()
   }//end of addComment()
-  //End Kris' Code
+
 
   function getUserMatch(idToken) {
     return $http({
@@ -374,4 +374,3 @@ function getIdeaId(subtopicIdea) {
   }
 
 }]); // end of app.factory
-//CHRIS

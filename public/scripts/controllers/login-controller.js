@@ -70,7 +70,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       }
 
       // //redirects to login view
-
       // loginView();
 
 
@@ -85,21 +84,21 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       //   }
       // };//end of for loop
 
-      loginView();
-      //adds user google photo to view
-      self.photo = firebaseUser.user.photoURL;
-      //adds user google email to view
-      self.email = firebaseUser.user.email;
-      //object contains all users
-      var userMatchObject = DataFactory.userMatchObject.list;
-      //checks DB for exsisting users and then desides redirect
-      for (var i = 0; i <userMatchObject.length; i++) {
-        if (userMatchObject[i].email == firebaseUser.user.email) {
-          logoutView();
-        } else {
-          loginView();
-        }
-      };//end of for loop
+
+      // //adds user google photo to view
+      // self.photo = firebaseUser.user.photoURL;
+      // //adds user google email to view
+      // self.email = firebaseUser.user.email;
+      // //object contains all users
+      // var userMatchObject = DataFactory.userMatchObject.list;
+      // //checks DB for exsisting users and then desides redirect
+      // for (var i = 0; i <userMatchObject.length; i++) {
+      //   if (userMatchObject[i].email == firebaseUser.user.email) {
+      //     logoutView();
+      //   } else {
+      //     loginView();
+      //   }
+      // };//end of for loop
     }).catch(function(error) {
       console.log("Authentication failed: ", error);
     });//end of .catch
@@ -118,7 +117,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
   //new user object from view button click
   self.addNewUser = function(user) {
     //brings in firebase data to function
-    var firebaseUser = auth.$getAuth();
+    // var firebaseUser = auth.$getAuth();
 
     //creating a new variable with input data and firebase data
     var newUser = {
@@ -141,4 +140,3 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
   }
 
 }]);//end of app.controller()
-//CHRIS

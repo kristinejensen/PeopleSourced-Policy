@@ -69,8 +69,5 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
     //not working :(
       // subView(idea.subtopicId);
     }//end of self.createIdea()
-  //END CHRIS' CODE
-
 
 }]);//end of app.controller()
-//CHRIS

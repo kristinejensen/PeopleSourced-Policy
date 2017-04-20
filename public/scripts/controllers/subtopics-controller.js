@@ -13,7 +13,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     DataFactory.getSubtopicIdeas(index);
   }
 
-  //BEGIN CHRIS' CODE
   //redirect to home view
   function homeView() {
     $location.path('/home');
@@ -60,5 +59,5 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     //empties inputs on submit
       self.idea = {};
     }//end of self.createIdea()
-  //END CHRIS' CODE
+
 }]);

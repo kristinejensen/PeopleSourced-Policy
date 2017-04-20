@@ -1,6 +1,6 @@
 
 //CHRIS
-app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactory', function($http, $location, AdminFactory){
+app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactory', '$firebaseAuth', function($http, $location, AdminFactory, $firebaseAuth){
 
   var self = this;
   var auth = $firebaseAuth();

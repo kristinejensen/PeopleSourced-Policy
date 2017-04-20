@@ -173,4 +173,3 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
   }
 
 }]); // end of app.factory
-//CHRIS

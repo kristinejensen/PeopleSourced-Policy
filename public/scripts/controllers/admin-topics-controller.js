@@ -1,6 +1,6 @@
 
 //CHRIS
-app.controller('AdminTopicsController', ['$firebaseAuth','$http', '$location', function($firebaseAuth, $http, $location){
+app.controller('AdminTopicsController', ['$http', '$location', 'TopicsFactory', '$firebaseAuth', function($http, $location, TopicsFactory, $firebaseAuth){
   var self = this;
   var auth = $firebaseAuth();
   const self = this;
@@ -92,4 +92,3 @@ app.controller('AdminTopicsController', ['$firebaseAuth','$http', '$location', f
   }
 
 }]);
-//CHRIS
