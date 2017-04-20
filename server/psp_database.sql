@@ -1,3 +1,4 @@
+-- //CHRIS
 CREATE TABLE main_topics (
   id SERIAL PRIMARY KEY,
   title VARCHAR(80),
@@ -84,3 +85,4 @@ CREATE TABLE users (
   ward VARCHAR(80),
   admin BOOLEAN DEFAULT false
 );
+-- //CHRIS

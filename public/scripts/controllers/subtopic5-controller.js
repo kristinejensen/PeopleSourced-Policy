@@ -1,3 +1,4 @@
+//CHRIS
 app.controller('Subtopic5Controller', ['DataFactory', '$firebaseAuth','$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
 
   var self = this;
@@ -50,3 +51,4 @@ app.controller('Subtopic5Controller', ['DataFactory', '$firebaseAuth','$http', '
   }//end of self.createIdea()
 
 }]);//end of app.controller()
+//CHRIS

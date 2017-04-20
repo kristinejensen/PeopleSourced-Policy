@@ -1,3 +1,4 @@
+//CHRIS
 app.factory('DataFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
 
 //containers
@@ -252,3 +253,4 @@ function getIdeaId(subtopicIdea) {
   }
 
 }]); // end of app.factory
+//CHRIS

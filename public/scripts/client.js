@@ -1,3 +1,4 @@
+//CHRIS
 var app = angular.module('ConnectApp', ['ngRoute','firebase']);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -87,3 +88,4 @@ app.config(['$routeProvider', function($routeProvider) {
   })
 
 }]);
+//CHRIS

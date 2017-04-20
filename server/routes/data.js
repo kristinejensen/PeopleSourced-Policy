@@ -1,4 +1,4 @@
-
+//CHRIS
 
 var express = require('express');
 var router = express.Router();
@@ -243,5 +243,4 @@ router.get('/getCommentId', function(req, res) {
 
 module.exports = router;
 
-
-// "SELECT * FROM comments WHERE idea_id=$1", [subtopicIdea.id]
+//CHRIS

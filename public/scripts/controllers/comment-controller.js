@@ -1,3 +1,4 @@
+//CHRIS
 app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', '$routeParams', function($firebaseAuth, $http, $location, DataFactory, $routeParams){
 
 
@@ -69,7 +70,5 @@ console.log(newComment);
     self.subComment = {};
   }//end of addNewSubComment()
 
-
-
-
 }]);//end of app.controller()
+//CHRIS

@@ -1,3 +1,4 @@
+//CHRIS
 app.factory('AdminFactory', ['$http', function($http){
 
   var allUsers = {list: []};
@@ -127,3 +128,4 @@ app.factory('AdminFactory', ['$http', function($http){
   }
 
 }]); // end of app.factory
+//CHRIS

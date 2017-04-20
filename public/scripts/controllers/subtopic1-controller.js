@@ -1,3 +1,4 @@
+//CHRIS
 app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '$location', '$routeParams', function(DataFactory, $firebaseAuth, $http, $location, $routeParams){
 
   var auth = $firebaseAuth();
@@ -62,3 +63,4 @@ app.controller('Subtopic1Controller', ['DataFactory', '$firebaseAuth','$http', '
 
 
 }]);//end of app.controller()
+//CHRIS

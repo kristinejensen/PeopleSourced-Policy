@@ -1,3 +1,4 @@
+//CHRIS
 app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
 
   //google authenticate bellow
@@ -86,3 +87,4 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
   }
 
 }]);//end of app.controller()
+//CHRIS

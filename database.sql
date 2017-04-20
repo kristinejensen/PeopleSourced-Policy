@@ -1,4 +1,4 @@
-
+-- //CHRIS
 
 CREATE TABLE main_topics (
   id SERIAL PRIMARY KEY,
@@ -100,3 +100,4 @@ INSERT INTO user_filter (id, filter)
 VALUES(1, 'name'),
 (2, 'email'),
 (3, 'ward');
+-- //CHRIS

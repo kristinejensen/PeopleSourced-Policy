@@ -1,3 +1,4 @@
+//CHRIS
 app.controller('HomeController', ['DataFactory', '$firebaseAuth', '$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
 
   var auth = $firebaseAuth();
@@ -49,3 +50,4 @@ app.controller('HomeController', ['DataFactory', '$firebaseAuth', '$http', '$loc
 
 
 }]);//end of app.controller()
+//CHRIS

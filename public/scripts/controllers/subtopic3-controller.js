@@ -1,3 +1,4 @@
+//CHRIS
 app.controller('Subtopic3Controller', ['DataFactory', '$firebaseAuth','$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
 
   var self = this;
@@ -10,7 +11,7 @@ app.controller('Subtopic3Controller', ['DataFactory', '$firebaseAuth','$http', '
 //redirect to add idea view
   self.createIdea = function() {
     $location.path('/idea');
-  }  
+  }
 
 //populates select options
   self.subTopicObject = DataFactory.subTopicObject;
@@ -52,5 +53,6 @@ app.controller('Subtopic3Controller', ['DataFactory', '$firebaseAuth','$http', '
     homeView();
   }//end of self.createIdea()
 
-//CHRIS’S CODE ENDS HERE
+
 }]);//end of app.controller()
+//CHRIS

@@ -1,3 +1,4 @@
+//CHRIS
 app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactory', function($http, $location, AdminFactory){
   var self = this;
 
@@ -21,3 +22,4 @@ app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactor
   self.userResults = AdminFactory.userResults;
 
 }]); //end of controller
+//CHRIS

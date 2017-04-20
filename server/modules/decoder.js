@@ -1,3 +1,4 @@
+//CHRIS
 var pool = require('../modules/database-config');
 var admin = require("firebase-admin");
 // var logger = require('./logger');
@@ -53,3 +54,4 @@ var tokenDecoder = function (req, res, next) {
 module.exports = {
  token: tokenDecoder,
 };
+//CHRIS
