@@ -4,6 +4,16 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.subTopic = TopicsFactory.subTopic;
   self.subtopicIdeas = DataFactory.subtopicIdeas;
   self.index = $routeParams.id;
+  self.individualSubtopic = TopicsFactory.individualSubTopic;
+
+  // thisSubtopic();
+  
+  thisSubtopic(self.index);
+
+  function thisSubtopic(index){
+    TopicsFactory.thisSubtopic(index);
+  }
+
   console.log('index on load: ', self.index);
 
   getIdeas(self.index);
@@ -42,23 +52,23 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
     //creates the new idea object from form/auth
-      var newIdea = {
-        name : firebaseUser.displayName,
-        email : firebaseUser.email,
-        subtopicId : idea.subtopicId,
-        title : idea.title,
-        description : idea.description,
-        id : idea.subtopicId
-      }
-      //sents object to factory
-      DataFactory.addNewIdea(newIdea).then(function(response){
-        redirectToSubtopic(newIdea.id);
-      });
-      //redirect to correct subtopic page after submit
-      // getIdeas(newIdea.id);
+    var newIdea = {
+      name : firebaseUser.displayName,
+      email : firebaseUser.email,
+      subtopicId : idea.subtopicId,
+      title : idea.title,
+      description : idea.description,
+      id : idea.subtopicId
+    }
+    //sents object to factory
+    DataFactory.addNewIdea(newIdea).then(function(response){
+      redirectToSubtopic(newIdea.id);
+    });
+    //redirect to correct subtopic page after submit
+    // getIdeas(newIdea.id);
 
     //empties inputs on submit
-      self.idea = {};
-    }//end of self.createIdea()
+    self.idea = {};
+  }//end of self.createIdea()
   //END CHRIS' CODE
 }]);

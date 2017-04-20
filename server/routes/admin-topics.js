@@ -184,4 +184,22 @@ router.post('/addUpcomingSubTopics', function(req, res) {
 }
 });
 
+router.put('/setNewTrimester', function(req, res) {
+  if(req.decodedToken.admin){
+  var subtopic = {title: req.body.title, description: req.body.description, id: req.body.id};
+  pool.connect( function (err, client, done) {
+    client.query('UPDATE main_topics SET active = false WHERE active = true; UPDATE sub_topics SET active = true WHERE upcoming = true;',
+    [subtopic.title, subtopic.description, subtopic.id], function(err, result){
+      done();
+      if(err){
+        console.log('Error updating subtopic user', err);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(201);
+      }
+    });
+  });
+}
+});
+
 module.exports = router;

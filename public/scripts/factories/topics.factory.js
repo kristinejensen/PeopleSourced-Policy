@@ -112,18 +112,6 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   //*********************************************//
   var subTopic = {list: []};
 
-
-  // function findSpecificSubTopic(id){
-  //   $http({
-  //     method:'GET',
-  //     url: '/public/findSpecificSubTopic',
-  //     // headers: id
-  //   }).then(function(response){
-  //     specificSubTopic.list = response.data;
-  //     console.log('Specific Subtopic at factory in http: ', specificSubTopic);
-  //   });
-  // }
-
   function updateSubTopic(title, description, id){
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth()
@@ -152,6 +140,15 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
       subTopic.list = response.data;
     });
   }
+
+  // function findSubTopic(){
+  //   $http({
+  //     method:'GET',
+  //     url: '/public/findActiveSubTopics'
+  //   }).then(function(response){
+  //     subTopic.list = response.data;
+  //   });
+  // }
   //*********************************************//
   //          UPDATE UPCOMING SUBTOPICS          //
   //*********************************************//
@@ -222,6 +219,40 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
       });
     }
   }
+
+  function setNewTrimester(){
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        var subTopic = {title: title, description: description, id: id}
+        $http({
+          method: 'UPDATE',
+          url: '/admin-topics/setNewTrimester',
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response) {
+          console.log('updated the trimester!');
+        })
+      });
+    }
+  }
+
+  var individualSubTopic = {list: []};
+
+  function thisSubtopic(index){
+    $http({
+      method:'GET',
+      url: '/public/findSpecificSubTopic',
+      headers: {
+        id: index
+      }
+    }).then(function(response){
+      individualSubTopic.list = response.data;
+    });
+  }
+
   //*********************************************//
   //          SET NEW CURRENT SUBTOPICS          //
   //*********************************************//
@@ -230,11 +261,13 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     findUpcomingTopic();
     findActiveSubTopics();
     findUpcomingSubTopics();
+    thisSubtopic();
   }
 
   findActiveTopic();
   findUpcomingTopic();
   findActiveSubTopics();
+  thisSubtopic();
   findUpcomingSubTopics();
   //*********************************************//
   //                     API                     //
@@ -263,7 +296,11 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     //adding a new upcoming sub topic
     addUpcomingSubTopic : addUpcomingSubTopic,
     //init
-    init: init
+    init: init,
+    //this subtopic
+    thisSubtopic: thisSubtopic,
+    //yup
+    individualSubTopic: individualSubTopic
   }
 
 }]); // end of app.factory

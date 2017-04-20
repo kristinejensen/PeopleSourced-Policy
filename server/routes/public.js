@@ -59,8 +59,8 @@ router.get('/findActiveSubTopics', function(req, res){
 });
 
 router.get('/findSpecificSubTopic/', function(req, res){
-  console.log('where is the id? :', req.headers);
-  var subtopicId = 1;
+  console.log('where is the id? :', req.headers.id);
+  var subtopicId = req.headers.id;
   pool.connect( function (err, client, done) {
     client.query('SELECT * FROM subtopics WHERE id = $1;',
     [subtopicId],function(err, result){
