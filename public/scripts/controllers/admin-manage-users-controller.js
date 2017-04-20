@@ -1,4 +1,7 @@
-app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactory', '$firebaseAuth', function($http, $location, AdminFactory, $firebaseAuth){
+
+//CHRIS
+app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactory', function($http, $location, AdminFactory){
+
   var self = this;
   var auth = $firebaseAuth();
 
@@ -35,3 +38,4 @@ app.controller('AdminManageUsersController', ['$http', '$location', 'AdminFactor
   self.userResults = AdminFactory.userResults;
 
 }]); //end of controller
+//CHRIS

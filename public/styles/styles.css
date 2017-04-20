@@ -1,4 +1,4 @@
-
+/*//CHRIS*/
 /* ============================================================================= *
 *           MAIN TOPIC                                                           *
 * ============================================================================== */
@@ -609,7 +609,7 @@ th {
   list-style-type: none;
   text-align: center;
   cursor: pointer;
-=======
+
 /*home view add idea div*/
 .haveIdeaHome {
   text-align: center;
@@ -623,5 +623,6 @@ th {
 /*idea main element*/
 .ideaMain {
   text-align: center;
->>>>>>> develop
+
 }
+/*//CHRIS*/

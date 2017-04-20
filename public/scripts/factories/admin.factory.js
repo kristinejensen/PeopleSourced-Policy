@@ -1,4 +1,6 @@
+
 app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
+
 
   var allUsers = {list: []};
   var filterList = {list: []};
@@ -171,3 +173,4 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
   }
 
 }]); // end of app.factory
+//CHRIS

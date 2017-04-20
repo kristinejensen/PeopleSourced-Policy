@@ -1,3 +1,4 @@
+//CHRIS
 var pg = require('pg');
 var config = {
   database: 'psp_database',
@@ -8,3 +9,4 @@ var config = {
 };//end of config
 
 module.exports = new pg.Pool(config);
+//CHRIS

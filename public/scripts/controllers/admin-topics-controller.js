@@ -1,4 +1,8 @@
-app.controller('AdminTopicsController', ['$http', '$location', 'TopicsFactory', '$firebaseAuth', function($http, $location, TopicsFactory, $firebaseAuth){
+
+//CHRIS
+app.controller('AdminTopicsController', ['$firebaseAuth','$http', '$location', function($firebaseAuth, $http, $location){
+  var self = this;
+  var auth = $firebaseAuth();
   const self = this;
   const auth = $firebaseAuth();
 
@@ -88,3 +92,4 @@ app.controller('AdminTopicsController', ['$http', '$location', 'TopicsFactory', 
   }
 
 }]);
+//CHRIS

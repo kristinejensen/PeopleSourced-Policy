@@ -1,3 +1,4 @@
+//CHRIS
 var config = {
   apiKey: "AIzaSyD8F8SlJt302YSbjt_AS-C9HiwyGy4jbpg",
   authDomain: "psp-msp.firebaseapp.com",
@@ -8,3 +9,4 @@ var config = {
 };
 
 firebase.initializeApp(config);
+//CHRIS

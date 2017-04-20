@@ -1,3 +1,4 @@
+
 app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth', '$http', '$location', function(DataFactory, TopicsFactory, $firebaseAuth, $http, $location){
   var self = this;
   var auth = $firebaseAuth();
@@ -72,3 +73,4 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
 
 
 }]);//end of app.controller()
+//CHRIS

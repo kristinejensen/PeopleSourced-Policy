@@ -1,6 +1,5 @@
-
+//CHRIS
 app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', function(DataFactory, $firebaseAuth, $location) {
-//CHRIS’S CODE STARTS HERE
 
   var self = this;
   var auth = $firebaseAuth();
@@ -55,55 +54,5 @@ var userMatchObject = DataFactory.userMatchObject.list;
     homeView();
   };//end of addNewIdea()
 
-//CHRIS’S CODE ENDS HERE
 }]);//end of app.controller()
-
-
-
-
-// var auth = $firebaseAuth();
-//
-//
-// auth.$onAuthStateChanged(getUser);
-//
-// //populates user profile information on page load
-// function getUser(){
-//   var firebaseUser = auth.$getAuth();
-//   if(firebaseUser) {
-//     firebaseUser.getToken().then(function(idToken){
-//       $http({
-//         method: 'GET',
-//         url: '/data/user',
-//         headers: {
-//           id_token: idToken
-//         }
-//       }).then(function(response){
-//         self.userProfile = response.data;
-//         console.log(self.userProfile);
-//
-//       })
-//     })
-//   } else {
-//     console.log('Not logged in or not authorized.');
-//   }
-// };
-//
-//
-// function getIdea(){
-//   var firebaseUser = auth.$getAuth();
-//   if(firebaseUser) {
-//     firebaseUser.getToken().then(function(idToken){
-//       $http({
-//         method: 'GET',
-//         url: '/data/idea',
-//         headers: {
-//           id_token: idToken
-//         }
-//       }).then(function(response){
-//         self.idea = response.data;
-//       })
-//     })
-//   } else {
-//     console.log('Not logged in or not authorized.');
-//   }
-// };
+//CHRIS

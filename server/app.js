@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+//CHRIS
+
+>>>>>>> feature-comments-two
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -27,13 +32,10 @@ app.use(bodyParser.json());
 
 app.use(favicon(path.join(__dirname, '../public/assets/favicon.ico')));
 
-
 //anyone can see these routes.
 app.use('/public', public);
 //need to be a user to access these routes
 app.use('/data', data);
-
-
 
 
 /* Whatever you do below this is protected by your authentication. */
@@ -45,6 +47,9 @@ app.use('/admin', admin);
 //need to be a user to access these routes
 app.use('/login', login);
 
+
+/* Whatever you do below this is protected by your authentication. */
+app.use(decoder.token);
 
 
 app.listen(portDecision, function(){

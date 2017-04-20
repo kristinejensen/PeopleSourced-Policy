@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($http, $firebaseAuth, $routeParams){
 
   var auth = $firebaseAuth();
@@ -62,7 +63,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     getLikes();
   }
 
-
   //add new user to DB from login view button click
   function addNewUser(newUser){
     firebase.auth().currentUser.getToken().then(function(idToken) {
@@ -105,7 +105,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     });//end of firebase.auth()
   }//end of addNewUser()
 
-  //adds subtopics1 to idea view select element
+  //adds subtopics to idea view select element
   function getSubTopics() {
     $http({
       method: 'GET',
@@ -246,13 +246,19 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     }).then(function(response){
       commentsTally.count = response.data;
     });
-    $http({
-      method: 'GET',
-      url: '/public/likesTally'
-    }).then(function(response){
-      likesTally.count = response.data;
-    });
-  } // end of getTallyInfo function
+  });//end of firebase.auth()
+}//end of addComment()
+
+//get users to pull id when an idea is Submitted
+// function getUserMatch() {
+//     $http({
+//       method: 'GET',
+//       url: '/public/likesTally'
+//     }).then(function(response){
+//       likesTally.count = response.data;
+//     });
+//   } // end of getTallyInfo function
+
 
   // function getLikes() {
   //   $http({
@@ -282,6 +288,60 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     });
   }
 
+//adds loved/idea to DB
+function addNewSubComment(newSubComment){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'POST',
+      url: '/login/addNewSubComment',
+      data: newSubComment,
+      headers: {
+        id_token: idToken
+      }
+    }).then(function(response){
+      // notyf.confirm('Blank Submitted For Approval');
+      getAllSubcomments();
+      swal("Comment Added To Database", "", "success");
+      self.newSubComment = {};
+    }).catch(function(error) {
+      swal("Values Are Incorrect", "Try Again!", "error");
+      console.log('error authenticating', error);
+    });
+  });//end of firebase.auth()
+}//end of addComment()
+
+//gets all subcomments for comments view
+function getAllSubcomments() {
+    $http({
+      method: 'GET',
+      url: '/data/allSubcomments'
+    }).then(function(response) {
+      allSubcommentsObject.list = response.data;
+    });
+}//end of getAllUsers()
+
+//gets all subcomments for comments view
+function getIdeaId(subtopicIdea) {
+    $http({
+      method: 'GET',
+      url: '/data/getIdeaId',
+      headers: subtopicIdea
+    }).then(function(response) {
+      getIdeaIdObject.list = response.data;
+    });
+
+    $http({
+      method: 'GET',
+      url: '/data/getCommentId',
+      headers: subtopicIdea
+    }).then(function(response) {
+      getCommentIdObject.list = response.data;
+    });
+
+}//end of getAllUsers()
+
+
+
   return {
     userTally: userTally,
     ideasTally: ideasTally,
@@ -300,6 +360,18 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     deactivateUser: deactivateUser,
     getUserMatch : getUserMatch,
     userMatchObject : userMatchObject,
+//adds sub-comments to DB
+    addNewSubComment : addNewSubComment,
+//adds sub-comments to view
+    allSubcommentsObject : allSubcommentsObject,
+//gets specific idea id from DB
+    getIdeaId : getIdeaId,
+//specifid idea from DB for comment view
+    getIdeaIdObject : getIdeaIdObject,
+//specified comments from DB for comment view
+    getCommentIdObject : getCommentIdObject
+
   }
 
 }]); // end of app.factory
+//CHRIS

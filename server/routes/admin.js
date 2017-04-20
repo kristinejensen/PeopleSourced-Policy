@@ -1,3 +1,4 @@
+//CHRIS
 var express = require('express');
 var router = express.Router();
 var pool = require('../modules/database-config');
@@ -195,3 +196,4 @@ router.get('/searchUsers', function (req, res) {
 });
 
 module.exports = router;
+//CHRIS
