@@ -39,55 +39,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
     $location.path('/admin');
   }
 
-  // var firebaseUser = auth.$getAuth();
-
-  //user google login authentication
-  // self.login = function() {
-    //call function at factory to get existing user id and email
-
-    // auth.$signInWithPopup("google").then(function(firebaseUser) {
-    //   if(firebaseUser) {
-        // firebaseUser.user.getToken().then(function(idToken) {
-          //adds user google photo to view
-          // self.photo = firebaseUser.user.photoURL;
-          //adds user google email to view
-          // self.email = firebaseUser.user.email;
-
-          // DataFactory.getUserMatch(idToken).then(function() {
-
-      //object contains all users
-      // var userMatchObject = DataFactory.userMatchObject.list;
-      //checks DB for exsisting users and then desides redirect
-      // for (var i = 0; i <userMatchObject.length; i++) {
-      //   if (userMatchObject[i].email == firebaseUser.user.email) {
-      //     logoutView();
-      //   } else {
-      //     loginView();
-      //   }
-      // };//end of for loop
-
-
-      // //adds user google photo to view
-      // self.photo = firebaseUser.user.photoURL;
-      // //adds user google email to view
-      // self.email = firebaseUser.user.email;
-      // //object contains all users
-      // var userMatchObject = DataFactory.userMatchObject.list;
-      // //checks DB for exsisting users and then desides redirect
-      // for (var i = 0; i <userMatchObject.length; i++) {
-      //   if (userMatchObject[i].email !== firebaseUser.user.email) {
-      //     loginView();
-      //   }
-      // };//end of for loop
-    // }).catch(function(error) {
-    //   console.log("Authentication failed: ", error);
-    // });//end of .catch
-
-// }
-// })
-// };//end of self.login()
-
-
   var firebaseUser = auth.$getAuth();
   //user google login authentication
   self.login = function() {
@@ -97,9 +48,9 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       // //redirects to login view
       loginView();
       //adds user google photo to view
-      self.photo = firebaseUser.user.photoURL;
+      // self.photo = firebaseUser.user.photoURL;
       //adds user google email to view
-      self.email = firebaseUser.user.email;
+      // self.email = firebaseUser.user.email;
       //object contains all users
       var userMatchObject = DataFactory.userMatchObject.list;
       //checks DB for exsisting users and then desides redirect
@@ -154,21 +105,50 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
 }]);//end of app.controller()
 
 
+// var firebaseUser = auth.$getAuth();
 
-//       if(firebaseUser) {
-//         console.log('sending home');
-//         logoutView();
-//       } else {
-//         // user not in our DB....yet
-//         console.log('going to login view to get address');
-//         loginView();
-//       }
-//     });
-//
-//   });
-// } else {
-//   console.log('could not login w/ firebase');
+//user google login authentication
+// self.login = function() {
+  //call function at factory to get existing user id and email
+
+  // auth.$signInWithPopup("google").then(function(firebaseUser) {
+  //   if(firebaseUser) {
+      // firebaseUser.user.getToken().then(function(idToken) {
+        //adds user google photo to view
+        // self.photo = firebaseUser.user.photoURL;
+        //adds user google email to view
+        // self.email = firebaseUser.user.email;
+
+        // DataFactory.getUserMatch(idToken).then(function() {
+
+    //object contains all users
+    // var userMatchObject = DataFactory.userMatchObject.list;
+    //checks DB for exsisting users and then desides redirect
+    // for (var i = 0; i <userMatchObject.length; i++) {
+    //   if (userMatchObject[i].email == firebaseUser.user.email) {
+    //     logoutView();
+    //   } else {
+    //     loginView();
+    //   }
+    // };//end of for loop
+
+
+    // //adds user google photo to view
+    // self.photo = firebaseUser.user.photoURL;
+    // //adds user google email to view
+    // self.email = firebaseUser.user.email;
+    // //object contains all users
+    // var userMatchObject = DataFactory.userMatchObject.list;
+    // //checks DB for exsisting users and then desides redirect
+    // for (var i = 0; i <userMatchObject.length; i++) {
+    //   if (userMatchObject[i].email !== firebaseUser.user.email) {
+    //     loginView();
+    //   }
+    // };//end of for loop
+  // }).catch(function(error) {
+  //   console.log("Authentication failed: ", error);
+  // });//end of .catch
+
 // }
-
-// //redirects to login view
-// loginView();e
+// })
+// };//end of self.login()
