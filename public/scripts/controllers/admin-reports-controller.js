@@ -72,7 +72,7 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
 
       new Chart(ctx, {
         data: data,
-        type: "polarArea",
+        type: "bar",
         options: {
           // legend:{
           //   labels: generateLabels:{ function(data)

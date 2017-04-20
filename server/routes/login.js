@@ -45,6 +45,37 @@ router.get('/getUserMatch', function (req, res) {
 //              NEW USER LGOIN             //
 //*****************************************//
 
+router.post('/newUser', function (req, res) {
+ var newUser = req.body;
+ console.log('newUser: ', newUser);
+ civicInfo.voterInfo(
+   { address: newUser.address}, function callback (error, data) {
+    //  console.log("error", error);
+    //  console.log("++++++++++++++++++data",data);
+newUser.ward = "other";
+for (var i = 0; i <= 14; i++) {
+  // console.log(typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ]);
+  if (typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ] !== 'undefined') {
+    newUser.ward = "ward " + (i);
+  }//end of if
+}//end of for loop
+ pool.connect()
+   .then(function (client) {
+     client.query('INSERT INTO users (name, address, city, state, zipcode, email, photo, ward) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+       [newUser.name, newUser.address, newUser.city, newUser.state, newUser.zipCode, newUser.email, newUser.photo, newUser.ward])
+       .then(function (result) {
+         client.release();
+         res.sendStatus(201);
+       })
+       .catch(function (err) {
+         console.log('error on INSERT', err);
+         res.sendStatus(500);
+       });
+    });//end of .then
+  });//end of civicinfo
+});//end of router.post
+
+
 // router.post('/newUser', function (req, res) {
 //  var newUser = req.body;
 //  // console.log('newUser: ', newUser.address);
@@ -122,35 +153,6 @@ router.post('/addComment', function (req, res) {
     });//end of .then
   });//end of router.post
 
-router.post('/newUser', function (req, res) {
- var newUser = req.body;
- console.log('newUser: ', newUser);
- civicInfo.voterInfo(
-   { address: newUser.address}, function callback (error, data) {
-    //  console.log("error", error);
-    //  console.log("++++++++++++++++++data",data);
-newUser.ward = "other";
-for (var i = 0; i <= 14; i++) {
-  // console.log(typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ]);
-  if (typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ] !== 'undefined') {
-    newUser.ward = "ward " + (i);
-  }//end of if
-}//end of for loop
- pool.connect()
-   .then(function (client) {
-     client.query('INSERT INTO users (name, address, city, state, zipCode, email, photo, ward) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
-       [newUser.name, newUser.address, newUser.city, newUser.state, newUser.zipCode, newUser.email, newUser.photo, newUser.ward])
-       .then(function (result) {
-         client.release();
-         res.sendStatus(201);
-       })
-       .catch(function (err) {
-         console.log('error on INSERT', err);
-         res.sendStatus(500);
-       });
-    });//end of .then
-  });//end of civicinfo
-});//end of router.post
 
 //adds new sub-comment to DB
 router.post('/addNewSubcomment', function (req, res) {

@@ -69,14 +69,14 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //add new user to DB from login view button click
   function addNewUser(newUser){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
+    // firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
         url: '/login/newUser',
-        data: newUser,
-        headers: {
-          id_token: idToken
-        }
+        data: newUser
+        // headers: {
+          // id_token: idToken
+        // }
       }).then(function(response){
         // notyf.confirm('Blank Submitted For Approval');
         swal("User Added To Database", "", "success");
@@ -85,7 +85,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         swal("Sorry, we couldn't process your address.", "Try Again!", "error");
         console.log('error authenticating', error);
       });
-    });//end of firebase.auth()
+    // });//end of firebase.auth()
   }//end of addNewUser()
 
   //add new idea to DB from button click from idea view

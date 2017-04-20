@@ -29,7 +29,8 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.addComment = function(comment) {
     var newComment = {
             description : comment.description,
-            idea_id : subtopicIdea.id,
+            // idea_id : subtopicIdea.id,
+            idea_id : $routeParams
             // user_id : need to put the firebase id in here when that works
           }
 console.log(newComment);
