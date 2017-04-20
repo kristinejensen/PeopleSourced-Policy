@@ -208,18 +208,14 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   }//end of addComment()
 
 
-  function getUserMatch(idToken) {
+  function getUserMatch() {
     return $http({
       method: 'GET',
-      url: '/login/getUserMatch',
-      headers: {
-        id_token: idToken
-      }
+      url: '/data/getUserMatch'
     })
     .then(function(response) {
-      // userMatchObject.list = response.data;
+      userMatchObject.list = response.data;
       console.log('getusermatch response: ', response);
-      return response.data;
     })
     .catch(function(error) {
       console.log('error on get user match', error);

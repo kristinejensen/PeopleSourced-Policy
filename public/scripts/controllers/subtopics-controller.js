@@ -38,7 +38,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     $location.path('/comment');
   }
 var userMatchObject = DataFactory.userMatchObject.list;
-  self.addNewIdea = function(idea) {
+console.log('userMatchObject.list: ', userMatchObject);
+  self.addNewIdea = function(idea, userMatchObject) {
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
