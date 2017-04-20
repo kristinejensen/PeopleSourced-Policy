@@ -1,3 +1,4 @@
+
 var app = angular.module('ConnectApp', ['ngRoute','firebase', 'ui.bootstrap']);
 
 app.config(['$routeProvider', function($routeProvider) {
@@ -27,7 +28,7 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'FlagController',
     controllerAs: 'fc'
   })
-  .when('/comment', {
+  .when('/comment/:id?', {
     templateUrl: 'views/comments.html',
     controller: 'CommentController',
     controllerAs: 'cc'
@@ -36,11 +37,6 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'views/subtopics.html',
     controller: 'SubtopicsController',
     controllerAs: 'stc'
-  })
-  .when('/views/:id', {
-    templateUrl: 'views/comment.html',
-    controller: 'CommentConnectController',
-    controllerAs: 'ccc'
   })
   .when('/admin-manage-users', {
     templateUrl: 'views/admin-views/admin-manage-users.html',

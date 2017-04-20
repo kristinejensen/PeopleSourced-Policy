@@ -80,28 +80,28 @@
   <div class = 'container'>
     <!--//IDEACARDS SECTION//-->
     <div class="row">
-      <div ng-repeat="ideas in stc.subtopicIdeas.list" class="singleCard cardCenter col-md-6 clearfix">
+      <div ng-repeat="subtopicIdeas in stc.subtopicIdeas.list" class="singleCard cardCenter col-md-6 clearfix">
         <div class="card_content">
           <div style="height: 200px;">
-            <h2>{{ideas.title}} </h2>
-            <p>{{ideas.description}} </p>
+            <h2> {{subtopicIdeas.title}} </h2>
+            <p> {{subtopicIdeas.description}} </p>
           </div>
           <div class="author_content">
             <div class ="author_img col-xl-3 col-md-3">
               <p> <img ng-src="{{ideas.photo}}"></p>
             </div>
             <div class="author_info col-xl-6 col-md-6">
-              <h4> {{ideas.name}} </h4>
-              <h5> {{ideas.ward}} </h5>
+              <h4> {{subtopicIdeas.name}} </h4>
+              <h5> {{subtopicIdeas.ward}} </h5>
             </div>
             <div class="col-xl-6 col-md-3">
-              <button ng-click="stc.moreComments()" type="button" name="Comments"> Comments </button>
+              <button ng-click="stc.moreComments(subtopicIdeas)" type="button" name="Comments"> Comments </button>
             </div>
           </div>
         </div>
         <div class="love_like row">
           <ul>
-            <div ng-click="stc.addLike(ideas.id)" class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
+            <div ng-click="stc.addLike()" class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
               <li class="like">
                 <span> LIKE </span>
               </li>

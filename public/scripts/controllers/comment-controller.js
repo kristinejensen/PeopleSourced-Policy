@@ -1,17 +1,62 @@
-app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', function($firebaseAuth, $http, $location, DataFactory){
+
+app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', '$routeParams', function($firebaseAuth, $http, $location, DataFactory, $routeParams){
 
   var self = this;
+  var auth = $firebaseAuth();
+  var firebaseUser = auth.$getAuth();
 
-  //ARRI'S CODE STARTS HERE
+
+//shows all comments from BD to view(migth not need the two lines below)
+  self.commentsObject = DataFactory.commentsObject;
+  self.allSubcommentsObject = DataFactory.allSubcommentsObject;
+
+//come form DB
+  self.getIdeaIdObject = DataFactory.getIdeaIdObject;
+  self.getCommentIdObject = DataFactory.getCommentIdObject;
+
+//two lines below do data request to DB for specific idea ID
+  var subtopicIdea = $routeParams;
+  DataFactory.getIdeaId(subtopicIdea);
+
+//add comment to comment to DB
+  self.commentRedirect = function() {
+//redirect after submission
+    $location.url('/home');
+  }//end of self.commentRedirect()
+
+
+//adds new comment to DB (need to add firebase id into the line below)
+  self.addComment = function(comment) {
+    var newComment = {
+            description : comment.description,
+            // idea_id : subtopicIdea.id,
+            idea_id : $routeParams
+            // user_id : need to put the firebase id in here when that works
+          }
+console.log(newComment);
+//sents comment from view to DB
+    DataFactory.addComment(newComment);
+//empties inputs after submission
+    self.newComment = {};
+//redirect after submission
+    $location.url('/comment/');
+  }//end of self.addComment()
+
+
+
+  self.createIdea = function() {
+//redirect after submission
+    $location.path('/idea');
+  }
+
+//shows and hides sun-comment text area
   self.showComment = false;
+//sub-comment button click function
+  self.showCommentArea = function(){
+    console.log("button clicked");
+    self.showComment = true;
+  }
 
-   self.showCommentArea = function(){
-     console.log("button clicked");
-     self.showComment = true;
-   }
-   //ARRI'S CODE ENDS HERE
-
-   //CHRIS'S CODE STARTS HERE
    //shows all comments from BD to view
      self.commentsObject = DataFactory.commentsObject;
 
@@ -35,50 +80,19 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
    //redirect after submission
        $location.path('/idea');
      }
-   //CHRIS'S CODE ENDS HERE
 
-   //JEREMY'S CODE STARTS HERE
+//button click to add new sub-comment (need to add firebase id into the line below)
+  self.addNewSubComment = function(subComment){
+//empties sub-comment text area on submit
+  var newSubComment = {
+          description : subComment.description,
+          comment_id : "12"
+          // user_id : need to put the firebase id in here when that works
+        }
+    DataFactory.addNewSubComment(newSubComment);
+    self.subComment = {};
+  }//end of addNewSubComment()
 
-   //JEREMY'S CODE ENDS HERE
 
-   //KRIS'S CODE STARTS HERE
 
-   //KRIS'S CODE ENDS HERE
-
-  // var auth = $firebaseAuth();
-  // auth.$onAuthStateChanged(getUser);
-  //
-  // //populates user profile information on page load
-  // function getUser(){
-  //   var firebaseUser = auth.$getAuth();
-  //   if(firebaseUser) {
-  //     firebaseUser.getToken().then(function(idToken){
-  //       $http({
-  //         method: 'GET',
-  //         url: '/data/user',
-  //         headers: {
-  //           id_token: idToken
-  //         }
-  //       }).then(function(response){
-  //         self.userProfile = response.data;
-  //         console.log(self.userProfile);
-  //
-  //       })
-  //     })
-  //   } else {
-  //     console.log('Not logged in or not authorized.');
-  //   }
-  // };
-  // function that logs user out on button click
-  // self.logOut = function(){
-  //   auth.$signOut().then(function(){
-  //     console.log('Logging the user out!');
-  //     self.redirectHome();
-  //   });
-  // };
-  //
-  // // function to redirect user to home page after logout
-  // self.redirectHome = function(){
-  //   $location.url('/home');
-  // }
 }]);//end of app.controller()

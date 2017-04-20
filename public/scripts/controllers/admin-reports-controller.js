@@ -1,3 +1,4 @@
+
 app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', function ($firebaseAuth, $http, $location){
   var self = this;
   var auth = $firebaseAuth();
@@ -71,7 +72,7 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
 
       new Chart(ctx, {
         data: data,
-        type: "polarArea",
+        type: "bar",
         options: {
           // legend:{
           //   labels: generateLabels:{ function(data)
@@ -123,4 +124,6 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
 }
 };
 
+
 }]);
+//CHRIS

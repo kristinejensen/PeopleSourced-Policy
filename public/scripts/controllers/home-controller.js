@@ -1,3 +1,4 @@
+
 app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth', '$http', '$location', function(DataFactory, TopicsFactory, $firebaseAuth, $http, $location){
   var self = this;
   var auth = $firebaseAuth();
@@ -6,15 +7,14 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
 
   self.mainTopic = TopicsFactory.mainTopic;
   self.subTopic = TopicsFactory.subTopic;
-  //END ARRI'S CODE
-  //BEGIN KRIS' CODE
+
   self.userTally = DataFactory.userTally;
   self.ideasTally = DataFactory.ideasTally;
   self.commentsTally = DataFactory.commentsTally;
   self.likesTally = DataFactory.likesTally;
-  //END KRIS' CODE
 
-  // //BEGIN CHRIS' CODE
+
+
   self.redirectLogin = function () {
     $location.url('/login');
   }
@@ -22,7 +22,7 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   self.redirectIdea = function () {
     $location.url('/idea');
   }
-  // //redirect to home view
+
   function homeView() {
     $location.path('/home');
   }//end of homeView()
@@ -68,7 +68,5 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
     //not working :(
       // subView(idea.subtopicId);
     }//end of self.createIdea()
-  //END CHRIS' CODE
-
 
 }]);//end of app.controller()

@@ -1,4 +1,6 @@
+
 app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
+
 
   var allUsers = {list: []};
   var filterList = {list: []};

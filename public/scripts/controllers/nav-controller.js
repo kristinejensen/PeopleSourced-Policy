@@ -1,3 +1,4 @@
+
 app.controller('NavCtrl', ['$firebaseAuth', '$http', '$location', 'TopicsFactory', function($firebaseAuth, $http, $location, TopicsFactory){
 
   var self = this;
@@ -9,3 +10,4 @@ app.controller('NavCtrl', ['$firebaseAuth', '$http', '$location', 'TopicsFactory
   };
 
 }]);
+//CHRIS

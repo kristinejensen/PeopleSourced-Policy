@@ -1,12 +1,16 @@
+
 app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($http, $firebaseAuth, $routeParams){
 
   var auth = $firebaseAuth();
 
-  //Start Kris' Code
+
   var subTopicObject = { list:[] };
   var subtopicIdeas = { list:[] };
   var commentsObject = { list:[] };
   var userMatchObject = { list : [] };
+  var allSubcommentsObject = { list : [] }
+  var getIdeaIdObject = { list : [] }
+  var getCommentIdObject = { list : [] }
   var userTally = {};
   var ideasTally = {};
   var commentsTally = {};
@@ -18,6 +22,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   function init() {
     getUsers();
+
   }
 
   //function to display user list on manage users admin view
@@ -62,17 +67,16 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     getLikes();
   }
 
-
   //add new user to DB from login view button click
   function addNewUser(newUser){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
+    // firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
         url: '/login/newUser',
-        data: newUser,
-        headers: {
-          id_token: idToken
-        }
+        data: newUser
+        // headers: {
+          // id_token: idToken
+        // }
       }).then(function(response){
         // notyf.confirm('Blank Submitted For Approval');
         swal("User Added To Database", "", "success");
@@ -81,7 +85,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         swal("Sorry, we couldn't process your address.", "Try Again!", "error");
         console.log('error authenticating', error);
       });
-    });//end of firebase.auth()
+    // });//end of firebase.auth()
   }//end of addNewUser()
 
   //add new idea to DB from button click from idea view
@@ -105,7 +109,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     });//end of firebase.auth()
   }//end of addNewUser()
 
-  //adds subtopics1 to idea view select element
+  //adds subtopics to idea view select element
   function getSubTopics() {
     $http({
       method: 'GET',
@@ -202,20 +206,16 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
       });
     });//end of firebase.auth()
   }//end of addComment()
-  //End Kris' Code
 
-  function getUserMatch(idToken) {
+
+  function getUserMatch() {
     return $http({
       method: 'GET',
-      url: '/login/getUserMatch',
-      headers: {
-        id_token: idToken
-      }
+      url: '/data/getUserMatch'
     })
     .then(function(response) {
-      // userMatchObject.list = response.data;
+      userMatchObject.list = response.data;
       console.log('getusermatch response: ', response);
-      return response.data;
     })
     .catch(function(error) {
       console.log('error on get user match', error);
@@ -246,13 +246,19 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     }).then(function(response){
       commentsTally.count = response.data;
     });
-    $http({
-      method: 'GET',
-      url: '/public/likesTally'
-    }).then(function(response){
-      likesTally.count = response.data;
-    });
-  } // end of getTallyInfo function
+  };//end of firebase.auth()
+
+
+//get users to pull id when an idea is Submitted
+// function getUserMatch() {
+//     $http({
+//       method: 'GET',
+//       url: '/public/likesTally'
+//     }).then(function(response){
+//       likesTally.count = response.data;
+//     });
+//   } // end of getTallyInfo function
+
 
   // function getLikes() {
   //   $http({
@@ -282,6 +288,60 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     });
   }
 
+//adds loved/idea to DB
+function addNewSubComment(newSubComment){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'POST',
+      url: '/login/addNewSubComment',
+      data: newSubComment,
+      headers: {
+        id_token: idToken
+      }
+    }).then(function(response){
+      // notyf.confirm('Blank Submitted For Approval');
+      getAllSubcomments();
+      swal("Comment Added To Database", "", "success");
+      self.newSubComment = {};
+    }).catch(function(error) {
+      swal("Values Are Incorrect", "Try Again!", "error");
+      console.log('error authenticating', error);
+    });
+  });//end of firebase.auth()
+}//end of addComment()
+
+//gets all subcomments for comments view
+function getAllSubcomments() {
+    $http({
+      method: 'GET',
+      url: '/data/allSubcomments'
+    }).then(function(response) {
+      allSubcommentsObject.list = response.data;
+    });
+}//end of getAllUsers()
+
+//gets all subcomments for comments view
+function getIdeaId(subtopicIdea) {
+    $http({
+      method: 'GET',
+      url: '/data/getIdeaId',
+      headers: subtopicIdea
+    }).then(function(response) {
+      getIdeaIdObject.list = response.data;
+    });
+
+    $http({
+      method: 'GET',
+      url: '/data/getCommentId',
+      headers: subtopicIdea
+    }).then(function(response) {
+      getCommentIdObject.list = response.data;
+    });
+
+}//end of getAllUsers()
+
+
+
   return {
     userTally: userTally,
     ideasTally: ideasTally,
@@ -289,17 +349,36 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     likesTally: likesTally,
     likes: likes,
     addLike: addLike,
+//new user object from add address button click
     addNewUser : addNewUser,
+//new idea object from idea button click
     addNewIdea : addNewIdea,
+//sends current subtopics to add idea view option element
     subTopicObject : subTopicObject,
+//adds ideas to subtopic1 view
     subtopicIdeas : subtopicIdeas,
+//adds comment to DB
     addComment : addComment,
+//gets comments to comment view
     commentsObject : commentsObject,
-    getSubtopicIdeas : getSubtopicIdeas,
     // allUsers: allUsers,
     deactivateUser: deactivateUser,
+//checks user for axisting account at login
     getUserMatch : getUserMatch,
+//all existing users object
     userMatchObject : userMatchObject,
+//adds sub-comments to DB
+    addNewSubComment : addNewSubComment,
+//adds sub-comments to view
+    allSubcommentsObject : allSubcommentsObject,
+//gets specific idea id from DB
+    getIdeaId : getIdeaId,
+    getSubtopicIdeas : getSubtopicIdeas,
+//specifid idea from DB for comment view
+    getIdeaIdObject : getIdeaIdObject,
+//specified comments from DB for comment view
+    getCommentIdObject : getCommentIdObject
+
   }
 
 }]); // end of app.factory
