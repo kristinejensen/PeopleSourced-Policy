@@ -100,7 +100,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
           loginView();
         }
       };//end of for loop
->>>>>>> feature-comments-two
     }).catch(function(error) {
       console.log("Authentication failed: ", error);
     });//end of .catch

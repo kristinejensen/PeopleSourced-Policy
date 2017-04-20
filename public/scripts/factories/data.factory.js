@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($http, $firebaseAuth, $routeParams){
 
   var auth = $firebaseAuth();
@@ -246,8 +246,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     }).then(function(response){
       commentsTally.count = response.data;
     });
-  });//end of firebase.auth()
-}//end of addComment()
+  };//end of firebase.auth()
+
 
 //get users to pull id when an idea is Submitted
 // function getUserMatch() {
@@ -363,13 +363,13 @@ function getIdeaId(subtopicIdea) {
 //adds sub-comments to DB
     addNewSubComment : addNewSubComment,
 //adds sub-comments to view
-    allSubcommentsObject : allSubcommentsObject,
+    // allSubcommentsObject : allSubcommentsObject,
 //gets specific idea id from DB
     getIdeaId : getIdeaId,
 //specifid idea from DB for comment view
-    getIdeaIdObject : getIdeaIdObject,
+    // getIdeaIdObject : getIdeaIdObject,
 //specified comments from DB for comment view
-    getCommentIdObject : getCommentIdObject
+    // getCommentIdObject : getCommentIdObject
 
   }
 

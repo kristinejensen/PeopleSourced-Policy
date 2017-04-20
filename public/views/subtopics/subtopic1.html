@@ -5,23 +5,23 @@
 *        SUBTOPIC NAVIGATION                                                    *
 * ============================================================================= */
 -->
-<div ng-include="'/views/templates/subtopicNav.html'"></div>
+<!-- <div ng-include="'/views/templates/subtopicNav.html'"></div> -->
 <!--
 /* ============================================================================ *
 *         SUBTOPIC TITLE AND DESCRIPTION DESKTOP                                *
 * ============================================================================= */
 -->
-<div class = "greybackground">
+<!-- <div class = "greybackground">
   <div class = "container">
     <div class="row subTopic">
-      <div class="visible-md-block visible-lg-block visible-xl-block">
+      <div class="visible-md-block visible-lg-block visible-xl-block"> -->
         <!--//SUBTOPIC TITLE AND DESCRIPTION//-->
-        <div class="col-md-7 col-lg-7 topicText">
+        <!-- <div class="col-md-7 col-lg-7 topicText">
           <h1>SUBTOPIC 1 TITLE</h1>
           <p>here is some text that will be associated with the subtopic.</p>
-        </div>
+        </div> -->
         <!--//CALL TO ACTION ON MEDIUM AND LARGE SCREEN//-->
-        <div class="col-md-5 col-lg-5 callToAction">
+        <!-- <div class="col-md-5 col-lg-5 callToAction">
 
           <div class="ctaTitle">
             <h2><i class="fa fa-lightbulb-o" aria-hidden="true"></i>  Have an Idea?</h2>
@@ -38,13 +38,13 @@
             </form>
           </div>
         </div>
-      </div>
+      </div> -->
       <!--
       /* ============================================================================ *
       *         SUBTOPIC TITLE AND DESCRIPTION MOBILE                                *
       * ============================================================================= */
     -->
-    <div class="visible-xs-block">
+    <!-- <div class="visible-xs-block">
       <div class="col-xs-1"></div>
       <div class="col-xs-10 topicText">
         <h1>SUBTOPIC 1 TITLE</h1>
@@ -53,14 +53,14 @@
       <div class="col-xs-1"></div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!--
 /* ============================================================================= *
 *        FILTER                                                                  *
 * ============================================================================== */
 -->
-<div class=" container">
+<!-- <div class=" container">
   <form class="filterIdeas" align="left" action="index.html" method="post">
     <select name="Subtopics" class="filterIdeas">
       <option ng-model="st1c.filter.filterIdeas" value="placeholder"> Filter Ideas By: </option>
@@ -70,19 +70,19 @@
       <option ng-model="st1c.filter.mostComments" value="mostComments"> Most Comments </option>
     </select>
   </form>
-</div>
+</div> -->
 <!--
 /* ============================================================================= *
 *        IDEAS CARDS                                                             *
 * ============================================================================== */
 -->
 
-<div class = 'cardContainer'>
-  <div class = 'container'>
+<!-- <div class = 'cardContainer'>
+  <div class = 'container'> -->
     <!--//IDEACARDS SECTION//-->
-    <div class="row container">
+    <!-- <div class="row container"> -->
       <!-- START NG REPEAT BELOW HERE -->
-      <div ng-repeat="subtopicIdeas in st1c.subtopicIdeas1.list" class="singleCard cardCenter col-md-5">
+      <!-- <div ng-repeat="subtopicIdeas in st1c.subtopicIdeas1.list" class="singleCard cardCenter col-md-5">
         <div class="card_content">
           <h2>Title: {{subtopicIdeas.title}} </h2>
           <p> Description: {{subtopicIdeas.description}} </p>
@@ -111,7 +111,7 @@
           </ul>
         </div>
         <button ng-click="st1c.moreComments(subtopicIdeas)" type="button" name="Comments"> Comment </button>
-      </div>
+      </div> -->
 
     <!--
     /* ============================================================================= *
@@ -119,16 +119,16 @@
     * ============================================================================== */
   -->
   <!--//CALL TO ACTION MEDIUM AND LARGE SCREEN//-->
-  <div class="cta-home row visible-md-block visible-lg-block visible-xl-block">
+  <!-- <div class="cta-home row visible-md-block visible-lg-block visible-xl-block">
     <div class="col-md-6 col-xs-12">
       <h3 class="light">HAVE AN IDEA?</h3>
     </div>
     <div class="col-md-6 col-xs-12">
       <button ng-click="st1c.createIdea()" type="button" class="btn-100" name="button"> START A CONVERSATION </button>
     </div>
-  </div>
+  </div> -->
   <!--//CALL TO ACTION MOBILE/SMALL SCREEN//-->
-  <div id="cta_container" class="visible-xs-block">
+  <!-- <div id="cta_container" class="visible-xs-block">
     <div id="stickyCTA">
       <h4 class="light">
         <i ng-click="st1c.createIdea()" class="ctaIcon fa-fw fa fa-plus-circle fa-2x" style=" vertical-align: middle;"aria-hidden="true"></i>
@@ -137,5 +137,5 @@
     </div>
   </div>
 </div>
-</div>
+</div> -->
 <!-- //CHRIS -->
