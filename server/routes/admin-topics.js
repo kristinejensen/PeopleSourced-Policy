@@ -183,5 +183,72 @@ router.post('/addUpcomingSubTopics', function(req, res) {
   });
 }
 });
+//**********************************************//
+//            SETS THE NEW TRIMESTER            //
+//**********************************************//
+router.put('/setNewTrimester', function(req, res) {
+  console.log('made it to the route. What now?');
+  console.log('token?', req.decodedToken.admin);
+  if(req.decodedToken.admin){
+    var subtopic = {title: req.body.title, description: req.body.description, id: req.body.id};
+    pool.connect( function (err, client, done) {
+      client.query('UPDATE main_topics SET active = false WHERE active = true;',
+      function(err, result){
+        done();
+        if(err){
+          console.log('Error step 1', err);
+          res.sendStatus(500);
+        } else {
+          client.query('UPDATE main_topics SET active = true WHERE upcoming = true;',
+          function (err, result){
+            done();
+
+            if (err){
+              console.log('Error step 2')
+            } else {
+              client.query('UPDATE main_topics SET upcoming = false WHERE upcoming = true;',
+              function (err, result){
+                done();
+
+                if (err){
+
+                  console.log('Error step 3')
+                } else {
+                  client.query('UPDATE subtopics SET active = false WHERE active = true;',
+                  function (err, result){
+                            done();
+                    if (err){
+
+
+                      console.log('Error step 4')
+                    } else {
+                      client.query('UPDATE subtopics SET active = true WHERE upcoming = true;',
+                      function (err, result){
+                        done();
+                        if (err){
+                          console.log('Error step 5')
+                        } else {
+                          client.query('UPDATE subtopics SET upcoming = false WHERE upcoming = true;',
+                          function (err, result){
+                            done();
+                            if (err){
+                              console.log('Error step 6')
+                            } else {
+                              res.sendStatus(201);
+                            }
+                          });
+                        }
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+  }
+});
 
 module.exports = router;
