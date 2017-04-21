@@ -15,7 +15,6 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
      self.email = firebaseUser.email;
      // go reload idea data....
      getUserChart();
-     getIdeaChart();
    } else {
      console.log('boooo');
      // redirect
@@ -23,10 +22,6 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
     //  self.logout();
    }
   });
-
-
-  getUserChart();
-  getIdeaChart();
 
   function getUserChart() {
     var auth = $firebaseAuth();
@@ -100,30 +95,6 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
   });
   }
   }//end of getAllUsers()
-
-
-  function getIdeaChart() {
-    var auth = $firebaseAuth();
-    var firebaseUser = auth.$getAuth();
-    if(firebaseUser){
-      firebase.auth().currentUser.getToken().then(function(idToken) {
-    $http({
-      method: 'GET',
-      url: '/admin/ideaChart',
-      headers: {
-        id_token: idToken
-      }
-    }).then(function(response) {
-      for (var i = 0; i < response.data.length; i++) {
-        wardChart.push(response.data[i].ward);
-        countChart.push(response.data[i].count)
-      }
-
-});
-});
-}
-};
-
 
 }]);
 //CHRIS
