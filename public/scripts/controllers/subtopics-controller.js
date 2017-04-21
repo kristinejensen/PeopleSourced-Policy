@@ -1,3 +1,4 @@
+
 app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', '$routeParams', '$location', '$firebaseAuth', function(DataFactory, TopicsFactory, $http, $routeParams, $location, $firebaseAuth) {
   var self = this;
   var auth = $firebaseAuth();
@@ -33,7 +34,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   //redirect to correct subtopic view
   //not working :(
   function redirectToSubtopic(url) {
-    $location.path('/subtopics/' + url);
+    $location.path('/subtopics/' + subtopicIdea.id);
     getIdeas(self.index);
 
     // getIdeas(url);

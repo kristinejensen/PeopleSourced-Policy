@@ -3,7 +3,7 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   var self = this;
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
-  //BEGIN ARRI'S CODE
+  
 
   self.mainTopic = TopicsFactory.mainTopic;
   self.subTopic = TopicsFactory.subTopic;
@@ -17,11 +17,11 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
 
   self.redirectLogin = function () {
     $location.url('/login');
-  }
+  }//end of redirectLogin()
 
   self.redirectIdea = function () {
     $location.url('/idea');
-  }
+  }//end of redirect()
 
   function homeView() {
     $location.path('/home');
