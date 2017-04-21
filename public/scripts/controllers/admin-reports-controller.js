@@ -77,7 +77,6 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
           // }},
 
           // },
-          responsive: true,
           defaultFontSize:90,
           display: true,
           defaultFontSize: 44,

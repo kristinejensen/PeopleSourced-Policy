@@ -33,19 +33,21 @@ router.get('/getUserMatch', function (req, res) {
 //              NEW USER LOGIN             //
 //*****************************************//
 router.post('/newUser', function (req, res) {
- var newUser = req.body;
- console.log('newUser: ', newUser);
- civicInfo.voterInfo(
-   { address: newUser.address}, function callback (error, data) {
-    //  console.log("error", error);
-    //  console.log("++++++++++++++++++data",data);
-newUser.ward = "other";
-for (var i = 0; i <= 14; i++) {
-  // console.log(typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ]);
-  if (typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ] !== 'undefined') {
-    newUser.ward = "ward " + (i);
-  }//end of if
-}//end of for loop
+//  var newUser = req.body;
+//  console.log('newUser: ', newUser.address);
+//  var userAddress = newUser.address + ' ' + newUser.city + ' ' + newUser.state + ' ' + newUser.zipCode;
+//  console.log('user address', userAddress);
+//  civicInfo.voterInfo(
+//    { address: newUser.address}, function callback (error, data) {
+//     //  console.log("error", error);
+//     //  console.log("++++++++++++++++++data",data);
+//     newUser.ward = "other";
+//     for (var i = 0; i <= 14; i++) {
+//   // console.log(typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ]);
+//     if (typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ] !== 'undefined') {
+//     newUser.ward = "ward " + (i);
+//     }//end of if
+// }//end of for loop
  pool.connect()
    .then(function (client) {
      client.query('INSERT INTO users (name, address, city, state, zipcode, email, photo, ward) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
@@ -59,8 +61,8 @@ for (var i = 0; i <= 14; i++) {
          res.sendStatus(500);
        });
     });//end of .then
-  });//end of civicinfo
-});//end of router.post 
+  // });//end of civicinfo
+});//end of router.post
 
 
 // router.post('/newUser', function (req, res) {

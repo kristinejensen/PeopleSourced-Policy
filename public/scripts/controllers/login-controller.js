@@ -20,8 +20,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
 
   //object to verify if user exsists in DB (need to finish)
   var userMatchObject = DataFactory.userMatchObject.list;
-
-  self.message= "hey there"
   //notyf must have
   // var notyf = new Notyf();
 
