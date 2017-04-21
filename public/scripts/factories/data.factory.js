@@ -85,7 +85,7 @@ console.log(subTopicObject);
     return firebase.auth().currentUser.getToken().then(function(idToken) {
       return $http({
         method: 'POST',
-        url: '/login/newIdea',
+        url: '/engagement/newIdea',
         data: newIdea,
         headers: {
           id_token: idToken
@@ -182,7 +182,7 @@ console.log(subTopicObject);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
-        url: '/login/addComment',
+        url: '/engagement/addComment',
         data: newComment,
         headers: {
           id_token: idToken
@@ -283,7 +283,7 @@ function addNewSubComment(newSubComment){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
       method: 'POST',
-      url: '/login/addNewSubComment',
+      url: '/engagement/addNewSubComment',
       data: newSubComment,
       headers: {
         id_token: idToken

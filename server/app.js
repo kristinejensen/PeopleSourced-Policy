@@ -14,6 +14,8 @@ var admin = require('./routes/admin');
 var adminTopics = require('./routes/admin-topics');
 var login = require('./routes/login');
 var data = require('./routes/data');
+var engagement = require('./routes/engagement');
+
 // var list_data = require('./routes/list_data');
 var public = require('./routes/public');
 var admin = require('./routes/admin');
@@ -38,11 +40,12 @@ app.use('/login', login);
 
 /* Whatever you do below this is protected by your authentication. */
 app.use(decoder.token);
-
 //need to check to make sure the user is an admin before any of these routes can be acces.
 app.use('/admin-topics', adminTopics);
 //need to check to make sure the user is an admin before any of these routes can be accessed.
 app.use('/admin', admin);
+//need to be a user
+app.use('/engagement', engagement);
 
 
 app.listen(portDecision, function(){

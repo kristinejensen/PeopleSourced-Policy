@@ -8,18 +8,6 @@ var civicInfo = require("civic-info")({apiKey: 'AIzaSyDmMib1-iMC4PwQZcnsKUa4vnB0
 var voterInfo={};
 var user = {};
 
-
-// var config = {
-//   database: 'psp_database',
-//   host: 'localhost',
-//   port: 5432,
-//   max: 10,
-//   idleTimeoutMillis: 30000
-// };//end of config
-//
-// //pool / pg constructor function
-// var pool = new pg.Pool(config);
-
 //*****************************************//
 //           PREVIOUS USER LGOIN           //
 //*****************************************//
@@ -42,7 +30,7 @@ router.get('/getUserMatch', function (req, res) {
 });//end of router.get
 
 //*****************************************//
-//              NEW USER LGOIN             //
+//              NEW USER LOGIN             //
 //*****************************************//
 
 router.post('/newUser', function (req, res) {
@@ -107,74 +95,6 @@ for (var i = 0; i <= 14; i++) {
 //    });//end of router.post
 // });
 
-//*****************************************//
-//              ADD A NEW IDEA             //
-//*****************************************//
-
-//adds new idea to DB
-router.post('/newidea', function (req, res) {
-  var newIdea = req.body;
-  pool.connect()
-    .then(function (client) {
-      client.query('INSERT INTO ideas (title, description, subtopics_id, user_id) VALUES ($1, $2, $3, $4)',
-        // [newIdea.title, newIdea.description, newIdea.subtopicId, req.decodedToken.userSQLId])
-        [newIdea.title, newIdea.description, newIdea.subtopicId, newIdea.id])
-        .then(function (result) {
-          client.release();
-          res.sendStatus(201);
-        })
-        .catch(function (err) {
-          console.log('error on INSERT', err);
-          res.sendStatus(500);
-        });
-    });//end of .then
-});//end of router.post
-
-//*****************************************//
-//              ADD A COMMENT              //
-//*****************************************//
-
-//adds comments to DB
-router.post('/addComment', function (req, res) {
-  var newComment = req.body;
-  console.log('newComment: ', newComment);
-  pool.connect()
-    .then(function (client) {
-      client.query('INSERT INTO comments (description, idea_id, user_id) VALUES ($1, $2, $3)',
-        [newComment.description, newComment.idea_id, newComment.user_id ])
-        .then(function (result) {
-          client.release();
-          res.sendStatus(201);
-        })
-        .catch(function (err) {
-          console.log('error on INSERT', err);
-          res.sendStatus(500);
-        });
-    });//end of .then
-  });//end of router.post
-
-
-//adds new sub-comment to DB
-router.post('/addNewSubcomment', function (req, res) {
-  var newSubComment = req.body;
-  var token = req.params; //this is were im stuck!!
-  console.log('token: ', token);
-  pool.connect()
-    .then(function (client) {
-      client.query('INSERT INTO subcomments (description) VALUES ($1)',
-        [newSubComment.description])
-        .then(function (result) {
-          client.release();
-          res.sendStatus(201);
-        })
-        .catch(function (err) {
-          console.log('error on INSERT', err);
-          res.sendStatus(500);
-        });
-    });//end of .then
-});//end of router.post
-
-module.exports = router;
-
 
 //req.decodedToken.userSQLId
+module.exports = router;
