@@ -34,9 +34,9 @@ router.get('/getUserMatch', function (req, res) {
 //*****************************************//
 router.post('/newUser', function (req, res) {
   var newUser = req.body;
-  console.log('newUser: ', newUser.address);
+  // console.log('newUser: ', newUser.address);
   var userAddress = newUser.address + ' ' + newUser.city + ', ' + newUser.state + ' ' + newUser.zipCode;
-  console.log('user address', userAddress);
+  // console.log('user address', userAddress);
   civicInfo.voterInfo(
     { address: newUser.address}, function callback (error, data) {
       if (error == 'Not Found'){

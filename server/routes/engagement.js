@@ -34,7 +34,7 @@ router.post('/newidea', function (req, res) {
 router.post('/addComment', function (req, res) {
   if(req.decodedToken.userSQLId) {
   var newComment = req.body;
-  console.log('newComment: ', newComment);
+  // console.log('newComment: ', newComment);
   pool.connect()
     .then(function (client) {
       client.query('INSERT INTO comments (description, idea_id, user_id) VALUES ($1, $2, $3)',
@@ -57,7 +57,7 @@ router.post('/addNewSubcomment', function (req, res) {
   if(req.decodedToken.userSQLId) {
   var newSubComment = req.body;
   var token = req.params; //this is were im stuck!!
-  console.log('token: ', token);
+  // console.log('token: ', token);
   pool.connect()
     .then(function (client) {
       client.query('INSERT INTO subcomments (description, user_id, comment_id) VALUES ($1, $2, $3)',
