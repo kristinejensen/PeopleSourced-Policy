@@ -11,6 +11,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var allSubcommentsObject = { list : [] }
   var getIdeaIdObject = { list : [] }
   var getCommentIdObject = { list : [] }
+  var allUsers = { list : [] }
   var userTally = {};
   var ideasTally = {};
   var commentsTally = {};
@@ -33,7 +34,7 @@ console.log(subTopicObject);
       method: 'GET',
       url: '/admin/manageUsers'
     }).then(function(response){
-      // allUsers.list = response.data;
+      allUsers.list = response.data;
       // console.log(allUsers.list);
     })
   }
