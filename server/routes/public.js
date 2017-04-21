@@ -59,8 +59,7 @@ router.get('/findActiveSubTopics', function(req, res){
 });
 
 router.get('/findSpecificSubTopic/', function(req, res){
-  console.log('where is the id? :', req.headers);
-  var subtopicId = 1;
+  var subtopicId = req.headers.id;
   pool.connect( function (err, client, done) {
     client.query('SELECT * FROM subtopics WHERE id = $1;',
     [subtopicId],function(err, result){
@@ -165,7 +164,7 @@ router.get('/likesTally', function(req, res){
 router.get('/getSubTopics', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM subtopics")
+      client.query("SELECT * FROM subtopics WHERE active = true;")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -200,6 +199,7 @@ router.get('/allComments', function (req, res) {
 //Finds all ideas based on the $routeParams/subtopic id and adds them to the subtopic views
 router.get('/subtopicIdeas', function(req, res){
   var subtopicId = req.headers.id;
+  console.log('subtopicID?', subtopicId);
   pool.connect(function (err, client, done) {
     client.query('SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=$1;',
     [subtopicId], function(err, result){
@@ -213,6 +213,6 @@ router.get('/subtopicIdeas', function(req, res){
       }
     });
   });
-n});
+});
 
 module.exports = router;

@@ -15,10 +15,14 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     TopicsFactory.thisSubtopic(index);
   }
 
+  // self.subtopicIdeas = DataFactory.subtopicIdeas;
+  // console.log('index on load: ', self.index);
+
+
   getIdeas(self.index);
 
   function getIdeas(index){
-    console.log('FUNCTIONS', index);
+    // console.log('FUNCTIONS', index);
     DataFactory.getSubtopicIdeas(index);
   }
 
@@ -84,6 +88,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   // get moreComments button click
   self.moreComments = function(subtopicIdea) {
     $location.path('/comment/' + subtopicIdea.id);
+    console.log(subtopicIdea.id);
   }
 
 }]);

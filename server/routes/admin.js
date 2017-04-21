@@ -13,7 +13,7 @@ router.get('/userChart', function (req, res) {
   if(req.decodedToken.admin){
     pool.connect()
     .then(function (client) {
-      client.query("SELECT ward, count(ward) FROM users GROUP BY ward")
+      client.query("SELECT ward, count(ward) FROM users GROUP BY ward ORDER BY ward ASC")
       .then(function (result) {
         client.release();
         res.send(result.rows);

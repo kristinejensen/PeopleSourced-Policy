@@ -74,7 +74,7 @@ router.put('/updateUpcomingTopic', function(req, res){
 router.put('/addUpcomingTopic', function(req, res){
   if(req.decodedToken.admin){
   var mainTopic = {title: req.body.title, description: req.body.description};
-  console.log('what is main topic?: ', mainTopic);
+  // console.log('what is main topic?: ', mainTopic);
   pool.connect( function (err, client, done) {
     client.query('INSERT INTO main_topics (title, description, upcoming) VALUES ($1, $2, true);',
     [mainTopic.title, mainTopic.description], function(err, result){

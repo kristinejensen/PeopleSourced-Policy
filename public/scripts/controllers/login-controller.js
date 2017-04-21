@@ -1,4 +1,3 @@
-
 app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$location', function(DataFactory, $firebaseAuth, $http, $location){
 
   //google authenticate bellow
@@ -21,8 +20,6 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
 
   //object to verify if user exsists in DB (need to finish)
   var userMatchObject = DataFactory.userMatchObject.list;
-
-  self.message= "hey there"
   //notyf must have
   // var notyf = new Notyf();
 
@@ -80,7 +77,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
   self.addNewUser = function(user) {
     //brings in firebase data to function
     // var firebaseUser = auth.$getAuth();
-
+    console.log('fb user', firebaseUser);
     //creating a new variable with input data and firebase data
     var newUser = {
       name : firebaseUser.displayName,

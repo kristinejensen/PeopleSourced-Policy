@@ -23,6 +23,7 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
    }
   });
 
+
   function getUserChart() {
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
@@ -36,7 +37,8 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
       }
     }).then(function(response) {
       for (var i = 0; i < response.data.length; i++) {
-        wardChart.push(response.data[i].ward);
+        var ward = 'Ward ' + response.data[i].ward;
+        wardChart.push(ward);
         countChart.push(response.data[i].count)
       }
 
@@ -46,19 +48,20 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
           // [11,16,7,3,14,17,2,11,17,9,2,1,7,8]
           ,
           backgroundColor: [
-            "#FF6384",
-            "#4BC0C0",
-            "#FFCE56",
-            "#E7E9ED",
             "#36A2EB",
-            "rgb(74, 236, 110)",
-            "rgb(237, 60, 65)",
-            "rgb(121, 22, 113)",
-            "rgb(01, 12, 153)",
-            "rgb(221, 22, 13)",
-            "rgb(101, 312, 53)",
-            "rgb(221, 133, 133)",
-            "rgb(77, 12, 153)",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
+            "#36A2EB",
           ],
           label: 'My dataset' // for legend
         }],
@@ -81,7 +84,7 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
           title: {
             display: true,
             fontSize:44,
-            text: 'Wards Chart'
+            // text: 'Wards Chart'
           },
 
           elements: {

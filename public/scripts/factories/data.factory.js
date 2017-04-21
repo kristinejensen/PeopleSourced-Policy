@@ -11,6 +11,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var allSubcommentsObject = { list : [] }
   var getIdeaIdObject = { list : [] }
   var getCommentIdObject = { list : [] }
+  var allUsers = { list : [] }
   var userTally = {};
   var ideasTally = {};
   var commentsTally = {};
@@ -23,19 +24,12 @@ console.log(subTopicObject);
   init();
 
   function init() {
-    getUsers();
+    getSubtopicIdeas();
+    getComments();
+    getUserMatch();
+    getTallyInfo();
+    // getLikes();
     getSubTopics();
-  }
-
-  //function to display user list on manage users admin view
-  function getUsers(){
-    $http({
-      method: 'GET',
-      url: '/admin/manageUsers'
-    }).then(function(response){
-      // allUsers.list = response.data;
-      // console.log(allUsers.list);
-    })
   }
 
   function deactivateUser(userId) {
@@ -61,11 +55,11 @@ console.log(subTopicObject);
         init()
       });
     })
-    getSubtopicIdeas();
-    getComments();
-    getUserMatch();
-    getTallyInfo();
-    getLikes();
+    // getSubtopicIdeas();
+    // getComments();
+    // getUserMatch();
+    // getTallyInfo();
+    // getLikes();
   }
 
 
@@ -95,7 +89,7 @@ console.log(subTopicObject);
     return firebase.auth().currentUser.getToken().then(function(idToken) {
       return $http({
         method: 'POST',
-        url: '/login/newIdea',
+        url: '/engagement/newIdea',
         data: newIdea,
         headers: {
           id_token: idToken
@@ -105,7 +99,6 @@ console.log(subTopicObject);
         swal("Idea Added To Database", "", "success");
         self.newIdea = {};
       }).catch(function(error) {
-        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
         console.log('error authenticating', error);
       });
     });//end of firebase.auth()
@@ -192,16 +185,18 @@ console.log(subTopicObject);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
-        url: '/login/addComment',
+        url: '/engagement/addComment',
         data: newComment,
         headers: {
           id_token: idToken
         }
       }).then(function(response){
         // notyf.confirm('Blank Submitted For Approval');
-        getComments();
+        // getComments();
         swal("Comment Added To Database", "", "success");
         self.addComment = {};
+        // getComments();
+        // getIdeaId();
       }).catch(function(error) {
         swal("Values Are Incorrect", "Try Again!", "error");
         console.log('error authenticating', error);
@@ -245,6 +240,12 @@ getUserMatch()
       url: '/public/commentsTally'
     }).then(function(response){
       commentsTally.count = response.data;
+    });
+    $http({
+      method: 'GET',
+      url: '/public/likesTally'
+    }).then(function(response){
+      likesTally.count = response.data;
     });
   };//end of firebase.auth()
 
@@ -293,7 +294,7 @@ function addNewSubComment(newSubComment){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
       method: 'POST',
-      url: '/login/addNewSubComment',
+      url: '/engagement/addNewSubComment',
       data: newSubComment,
       headers: {
         id_token: idToken
