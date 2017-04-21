@@ -73,7 +73,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     self.showComment = true;
   }
 
-  //button click to add new sub-comment (need to add firebase id into the line below)
+//button click to add new sub-comment (need to add firebase id into the line below)
   self.addNewSubComment = function(subComment){
     var userMatchObject = DataFactory.userMatchObject.list;
 //sources firebaseUser in the function

@@ -38,8 +38,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     getIdeas(self.index);
 
     // getIdeas(url);
-    console.log('index in redirect: ', self.index);
-    console.log('url in redirect: ', url);
+    // console.log('index in redirect: ', self.index);
+    // console.log('url in redirect: ', url);
   }
   //redirect to add idea view
   self.createIdea = function() {
@@ -53,19 +53,18 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   var userMatchObject = DataFactory.userMatchObject.list;
   // console.log('userMatchObject.list: ', userMatchObject);
   self.addNewIdea = function(idea) {
-    //sources firebaseUser in the function
+//sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
 
-    // container to loop id's through
+//container to loop id's through
     var id = "";
-    //loops through all users email to find correct id
+//loops through all users email to find correct id
     for (var i = 0; i < userMatchObject.length; i++) {
       if (userMatchObject[i].email == firebaseUser.email) {
         var id = userMatchObject[i].id;
       }//end of if
     };//end of for loop
-    //name and email is added to object
 
     var newIdea = {
       name : firebaseUser.displayName,
@@ -75,21 +74,22 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
       description : idea.description,
       id : id
     }
-    //sents object to factory
+//sents object to factory
     DataFactory.addNewIdea(newIdea).then(function(response){
       redirectToSubtopic(newIdea);
     });
     // redirect to correct subtopic page after submit
     // getIdeas(newIdea.id);
 
-    //empties inputs on submit
+//empties inputs on submit
     self.idea = {};
   }//end of self.createIdea()
 
-  // get moreComments button click
+//get moreComments button click
   self.moreComments = function(subtopicIdea) {
     $location.path('/comment/' + subtopicIdea.id);
     console.log(subtopicIdea.id);
   }
 
-}]);
+
+}]);//end of my.app
