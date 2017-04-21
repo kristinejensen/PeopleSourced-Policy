@@ -59,8 +59,8 @@ router.get('/findActiveSubTopics', function(req, res){
 });
 
 router.get('/findSpecificSubTopic/', function(req, res){
-  console.log('where is the id? :', req.headers.id);
-  var subtopicId = req.headers.id;
+  console.log('where is the id? :', req.headers);
+  var subtopicId = 1;
   pool.connect( function (err, client, done) {
     client.query('SELECT * FROM subtopics WHERE id = $1;',
     [subtopicId],function(err, result){
@@ -165,7 +165,7 @@ router.get('/likesTally', function(req, res){
 router.get('/getSubTopics', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM subtopics WHERE active=true")
+      client.query("SELECT * FROM subtopics")
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -213,6 +213,6 @@ router.get('/subtopicIdeas', function(req, res){
       }
     });
   });
-});
+n});
 
 module.exports = router;
