@@ -190,6 +190,7 @@ console.log(subTopicObject);
 
   //adds loved/idea to DB
   function addComment(newComment){
+    console.log("newComment: ",newComment);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
