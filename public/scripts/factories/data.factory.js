@@ -4,9 +4,9 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var auth = $firebaseAuth();
 
 
-  var subTopicObject = { list:[] };
-  var subtopicIdeas = { list:[] };
-  var commentsObject = { list:[] };
+  var subTopicObject = { list : [] };
+  var subtopicIdeas = { list : [] };
+  var commentsObject = { list : [] };
   var userMatchObject = { list : [] };
   var allSubcommentsObject = { list : [] }
   var getIdeaIdObject = { list : [] }
@@ -16,13 +16,15 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var commentsTally = {};
   var likesTally = {};
   var likes = {};
+console.log(subTopicObject);
+
 
   //calls functions at startup
-  // init();
+  init();
 
   function init() {
     getUsers();
-
+    getSubTopics();
   }
 
   //function to display user list on manage users admin view
@@ -56,16 +58,16 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           'The user has been deactivated.',
           'success'
         )
-        init();
+        init()
       });
     })
-    getSubTopics();
     getSubtopicIdeas();
     getComments();
     getUserMatch();
     getTallyInfo();
     getLikes();
   }
+
 
   //add new user to DB from login view button click
   function addNewUser(newUser){
@@ -113,7 +115,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   function getSubTopics() {
     $http({
       method: 'GET',
-      url: '/public/getSubTopics'
+      url: '/public/getSubTopics',
     }).then(function(response) {
       subTopicObject.list = response.data;
     });
@@ -145,7 +147,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
       }).then(function(response){
         // notyf.confirm('Blank Submitted For Approval');
         swal("Loved Added To Database", "", "success");
-        self.subtopicIdeas = {};
+        // self.subtopicIdeas = {};
       }).catch(function(error) {
         swal("Sorry, we couldn't process your request.", "Try Again!", "error");
         console.log('error authenticating', error);
@@ -166,7 +168,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
       }).then(function(response){
         // notyf.confirm('Blank Submitted For Approval');
         swal("flag Added To Database", "", "success");
-        self.subtopicIdeas = {};
+        // self.subtopicIdeas = {};
       }).catch(function(error) {
         swal("Sorry, we couldn't process your request.", "Try Again!", "error");
         console.log('error authenticating', error);
@@ -207,17 +209,15 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     });//end of firebase.auth()
   }//end of addComment()
 
-
+getUserMatch()
   function getUserMatch() {
-    return $http({
+    $http({
       method: 'GET',
-      url: '/data/getUserMatch'
-    })
-    .then(function(response) {
+      url: '/data/getUserMatch',
+    }).then(function(response) {
       userMatchObject.list = response.data;
-      console.log('getusermatch response: ', response);
-    })
-    .catch(function(error) {
+      // console.log('getusermatch response: ', response);
+    }).catch(function(error) {
       console.log('error on get user match', error);
       return 403;
     });
@@ -227,7 +227,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //function to display tallies on home page
   function getTallyInfo() {
-    console.log('inside of get tally?');
+    // console.log('inside of get tally?');
     $http({
       method: 'GET',
       url: '/public/userTally'
@@ -272,7 +272,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //adds like to DB
   function addLike(ideaId){
-    console.log(ideaId);
+    // console.log(ideaId);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
@@ -281,7 +281,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           id_token: idToken
         }
       }).then(function(response){
-        console.log(response);
+        // console.log(response);
       }).catch(function(error) {
         console.log('error adding like to database', error);
       });

@@ -165,7 +165,7 @@ router.get('/likesTally', function(req, res){
 router.get('/getSubTopics', function (req, res) {
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM subtopics")
+      client.query("SELECT * FROM subtopics WHERE active=true")
         .then(function (result) {
           client.release();
           res.send(result.rows);
