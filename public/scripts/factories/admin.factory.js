@@ -7,7 +7,7 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
   var userFilter = {};
   var userResults = {list: []};
 
-  init(); //run
+  // init(); //run
 
   //startup functions
   function init() {
