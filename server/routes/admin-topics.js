@@ -202,24 +202,19 @@ router.put('/setNewTrimester', function(req, res) {
           client.query('UPDATE main_topics SET active = true WHERE upcoming = true;',
           function (err, result){
             done();
-
             if (err){
               console.log('Error step 2')
             } else {
               client.query('UPDATE main_topics SET upcoming = false WHERE upcoming = true;',
               function (err, result){
                 done();
-
                 if (err){
-
                   console.log('Error step 3')
                 } else {
                   client.query('UPDATE subtopics SET active = false WHERE active = true;',
                   function (err, result){
-                            done();
+                    done();
                     if (err){
-
-
                       console.log('Error step 4')
                     } else {
                       client.query('UPDATE subtopics SET active = true WHERE upcoming = true;',
