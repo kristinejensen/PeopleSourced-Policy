@@ -242,6 +242,12 @@ getUserMatch()
     }).then(function(response){
       commentsTally.count = response.data;
     });
+    $http({
+      method: 'GET',
+      url: '/public/likesTally'
+    }).then(function(response){
+      likesTally.count = response.data;
+    });
   };//end of firebase.auth()
 
 
