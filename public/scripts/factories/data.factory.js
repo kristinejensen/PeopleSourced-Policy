@@ -4,9 +4,9 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var auth = $firebaseAuth();
 
 
-  var subTopicObject = { list:[] };
-  var subtopicIdeas = { list:[] };
-  var commentsObject = { list:[] };
+  var subTopicObject = { list : [] };
+  var subtopicIdeas = { list : [] };
+  var commentsObject = { list : [] };
   var userMatchObject = { list : [] };
   var allSubcommentsObject = { list : [] }
   var getIdeaIdObject = { list : [] }
@@ -17,11 +17,14 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var likesTally = {};
   var likes = {};
 console.log(subTopicObject);
+
+
   //calls functions at startup
-  // init();
+  init();
 
   function init() {
     getUsers();
+    getSubTopics();
   }
 
   //function to display user list on manage users admin view
@@ -55,16 +58,16 @@ console.log(subTopicObject);
           'The user has been deactivated.',
           'success'
         )
-        init();
+        init()
       });
     })
-    getSubTopics();
     getSubtopicIdeas();
     getComments();
     getUserMatch();
     getTallyInfo();
     getLikes();
   }
+
 
   //add new user to DB from login view button click
   function addNewUser(newUser){

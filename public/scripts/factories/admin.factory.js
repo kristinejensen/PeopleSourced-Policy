@@ -7,7 +7,7 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
   var userFilter = {};
   var userResults = {list: []};
 
-  // init(); //run
+  init(); //run
 
   //startup functions
   function init() {
@@ -20,13 +20,13 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
     if(firebaseUser){
-      firebase.auth().currentUser.getToken().then(function(idToken) {
+      // firebase.auth().currentUser.getToken().then(function(idToken) {
         $http({
         method: 'GET',
         url: '/admin/manageUsers',
-        headers: {
-          id_token: idToken
-        }
+        // headers: {
+        //   id_token: idToken
+        // }
       }).then(function(response){
         allUsers.list = response.data;
         console.log(allUsers.list);
@@ -42,7 +42,7 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
           }
         }
       })
-    });
+    // });
   }
 }
 
