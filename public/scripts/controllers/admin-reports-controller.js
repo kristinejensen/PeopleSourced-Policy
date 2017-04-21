@@ -24,8 +24,6 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
   });
 
 
-
-
   function getUserChart() {
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
