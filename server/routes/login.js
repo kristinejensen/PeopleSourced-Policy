@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 var pool = require('../modules/database-config');
 var google = require('googleapis');
-var civicInfo = require("civic-info")({apiKey: 'AIzaSyDmMib1-iMC4PwQZcnsKUa4vnB00l0sAfU'});
+var civicInfo = require("../modules/civic-info")({apiKey: 'AIzaSyDmMib1-iMC4PwQZcnsKUa4vnB00l0sAfU'});
 
 var voterInfo={};
 var user = {};
@@ -35,7 +35,7 @@ router.get('/getUserMatch', function (req, res) {
 router.post('/newUser', function (req, res) {
   var newUser = req.body;
   console.log('newUser: ', newUser.address);
-  var userAddress = newUser.address + ' ' + newUser.city + ' ' + newUser.state + ' ' + newUser.zipCode;
+  var userAddress = newUser.address + ' ' + newUser.city + ', ' + newUser.state + ' ' + newUser.zipCode;
   console.log('user address', userAddress);
   civicInfo.voterInfo(
     { address: newUser.address}, function callback (error, data) {
@@ -44,7 +44,7 @@ router.post('/newUser', function (req, res) {
         res.sendStatus(500);
       } else {
         //  console.log("++++++++++++++++++data",data);
-        newUser.ward = "other";
+        newUser.ward = 0;
         for (var i = 0; i <= 14; i++) {
           // console.log(typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ]);
           if (typeof data.divisions['ocd-division/country:us/state:mn/place:minneapolis/ward:' + i ] !== 'undefined') {
