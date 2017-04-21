@@ -3,7 +3,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   var auth = $firebaseAuth();
 
-
   var subTopicObject = { list : [] };
   var subtopicIdeas = { list : [] };
   var commentsObject = { list : [] };
@@ -194,8 +193,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         }
       }).then(function(response){
         notyf.confirm('Your comment was added!');
-        // getComments();
-        swal("Comment Added To Database", "", "success");
+        // swal("Comment Added To Database", "", "success");
         self.addComment = {};
         // getComments();
         // getIdeaId();
@@ -376,6 +374,7 @@ function getIdeaId(subtopicIdea) {
     allSubcommentsObject : allSubcommentsObject,
 //gets specific idea id from DB
     getIdeaId : getIdeaId,
+//current subtopic ideas    
     getSubtopicIdeas : getSubtopicIdeas,
 //specifid idea from DB for comment view
     getIdeaIdObject : getIdeaIdObject,
@@ -384,6 +383,6 @@ function getIdeaId(subtopicIdea) {
 //gets all subcomments
     getAllSubcomments : getAllSubcomments
 
-  }
+  }//end of return
 
 }]); // end of app.factory

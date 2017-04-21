@@ -52,12 +52,14 @@
 
     <div class=" col-md-3">
       <select name="Subtopics">
+        <option> </option>
         <option ng-repeat="subtopic in arc.subTopicObject.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
       </select>
     </div>
 
     <div class=" col-md-3">
       <select name="Actions">
+        <option> </option>
         <option value="subtopic1"> Most Commented </option>
         <option value="subtopic2"> Most Liked </option>
         <option value="subtopic3"> Most Loved </option>

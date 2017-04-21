@@ -60,9 +60,8 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     DataFactory.addComment(newComment);
     //empties inputs after submission
     self.comment = {};
-    //redirect after submission - NOOOO
-    // $location.url('/home');
   }//end of self.addComment()
+
   //*****************************************//
   //           SUBCOMMENT CREATION           //
   //*****************************************//
@@ -72,12 +71,10 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.showCommentArea = function(comments){
     console.log("comments ", comments);
     self.showComment = true;
-
   }
 
   //button click to add new sub-comment (need to add firebase id into the line below)
   self.addNewSubComment = function(subComment){
-
     var userMatchObject = DataFactory.userMatchObject.list;
 //sources firebaseUser in the function
     var firebaseUser = auth.$getAuth();
@@ -92,7 +89,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
     var newSubComment = {
       description : subComment.description,
-      comment_id : "110",//this is where im stuck
+      comment_id : "197",//this is where im stuck
       user_id : id
     }
     console.log(newSubComment);
