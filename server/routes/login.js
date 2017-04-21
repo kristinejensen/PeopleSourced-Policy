@@ -32,7 +32,6 @@ router.get('/getUserMatch', function (req, res) {
 //*****************************************//
 //              NEW USER LOGIN             //
 //*****************************************//
-
 router.post('/newUser', function (req, res) {
  var newUser = req.body;
  console.log('newUser: ', newUser);
@@ -61,7 +60,7 @@ for (var i = 0; i <= 14; i++) {
        });
     });//end of .then
   });//end of civicinfo
-});//end of router.post
+});//end of router.post 
 
 
 // router.post('/newUser', function (req, res) {
