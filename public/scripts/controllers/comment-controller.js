@@ -38,7 +38,7 @@ self.addComment = function(comment) {
 //empties inputs after submission
   self.newComment = {};
 //redirect after submission
-  $location.url('/comment/?');
+  $location.url('/home');
 }//end of self.addComment()
 
 
