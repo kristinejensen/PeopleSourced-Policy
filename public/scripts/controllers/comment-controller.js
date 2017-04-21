@@ -57,7 +57,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     //sents comment from view to DB
     DataFactory.addComment(newComment);
     //empties inputs after submission
-    self.newComment = {};
+    self.comment = {};
     //redirect after submission - NOOOO
     // $location.url('/home');
   }//end of self.addComment()
