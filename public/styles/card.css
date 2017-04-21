@@ -68,8 +68,8 @@ ul {
 }
 
 .authImage {
-height: 50px;
-width: 50px;
-border-radius: 30px;
+height: 50px !important;
+width: 50px !important;
+border-radius: 30px !important;
 }
 /*//CHRIS*/

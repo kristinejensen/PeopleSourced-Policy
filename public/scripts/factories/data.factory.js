@@ -99,7 +99,6 @@ console.log(subTopicObject);
         swal("Idea Added To Database", "", "success");
         self.newIdea = {};
       }).catch(function(error) {
-        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
         console.log('error authenticating', error);
       });
     });//end of firebase.auth()

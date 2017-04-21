@@ -24,7 +24,7 @@ router.post('/newidea', function (req, res) {
           res.sendStatus(500);
         });
     });//end of .then
-  }
+  } 
 });//end of router.post
 
 //*****************************************//
