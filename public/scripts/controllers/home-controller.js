@@ -35,9 +35,11 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
     $location.url('/idea');
   }//end of self.createIdea
 
-  var userMatchObject = DataFactory.userMatchObject.list;
 
+// console.log("userMatchObject ",userMatchObject);
   self.addNewIdea = function(idea) {
+    var userMatchObject = DataFactory.userMatchObject.list;
+    console.log(userMatchObject);
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
