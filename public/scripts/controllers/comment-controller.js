@@ -13,7 +13,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 //come form DB
   self.getIdeaIdObject = DataFactory.getIdeaIdObject;
   self.getCommentIdObject = DataFactory.getCommentIdObject;
-
+console.log(self.getCommentIdObject);
 //two lines below do data request to DB for specific idea ID
   var subtopicIdea = $routeParams;
   DataFactory.getIdeaId(subtopicIdea);
@@ -26,22 +26,19 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
 
 //adds new comment to DB (need to add firebase id into the line below)
-  self.addComment = function(comment) {
-    var newComment = {
-            description : comment.description,
-            // idea_id : subtopicIdea.id,
-            idea_id : $routeParams
-            // user_id : need to put the firebase id in here when that works
-          }
-console.log(newComment);
+self.addComment = function(comment) {
+  var newComment = {
+          description : comment.description,
+          idea_id : subtopicIdea.id,
+          user_id : "64"
+        }
 //sents comment from view to DB
-    DataFactory.addComment(newComment);
+  DataFactory.addComment(newComment);
 //empties inputs after submission
-    self.newComment = {};
+  self.newComment = {};
 //redirect after submission
-    $location.url('/comment/');
-  }//end of self.addComment()
-
+  $location.url('/home');
+}//end of self.addComment()
 
 
   self.createIdea = function() {
@@ -53,7 +50,7 @@ console.log(newComment);
   self.showComment = false;
 //sub-comment button click function
   self.showCommentArea = function(){
-    console.log("button clicked");
+    // console.log("button clicked");
     self.showComment = true;
   }
 
@@ -66,15 +63,15 @@ console.log(newComment);
        $location.url('/comment');
      }//end of self.commentRedirect()
 
-   //adds new comment to DB
-     self.addComment = function(newComment) {
-   //sents comment from view to DB
-       DataFactory.addComment(newComment);
-   //empties inputs after submission
-       self.newComment = {};
-   //redirect after submission
-       $location.url('/comment');
-     }//end of self.addComment()
+  //  //adds new comment to DB
+  //    self.addComment = function(newComment) {
+  //  //sents comment from view to DB
+  //      DataFactory.addComment(newComment);
+  //  //empties inputs after submission
+  //      self.newComment = {};
+  //  //redirect after submission
+  //      $location.url('/comment');
+  //    }//end of self.addComment()
 
      self.createIdea = function() {
    //redirect after submission

@@ -141,7 +141,7 @@ router.post('/addComment', function (req, res) {
   pool.connect()
     .then(function (client) {
       client.query('INSERT INTO comments (description, idea_id, user_id) VALUES ($1, $2, $3)',
-        [newComment.description, newComment.idea_id, req.decodedToken.userSQLId])
+        [newComment.description, newComment.idea_id, newComment.user_id ])
         .then(function (result) {
           client.release();
           res.sendStatus(201);
@@ -175,3 +175,6 @@ router.post('/addNewSubcomment', function (req, res) {
 });//end of router.post
 
 module.exports = router;
+
+
+//req.decodedToken.userSQLId

@@ -42,11 +42,12 @@
       *         SUBTOPIC TITLE AND DESCRIPTION MOBILE                                *
       * ============================================================================= */
     -->
+
     <div class="visible-xs-block">
       <div class="col-xs-1"></div>
       <div class="col-xs-10 topicText">
-        <h1>{{stc.subTopic.list[stc.index - 1].title}}</h1>
-        <p>{{stc.subTopic.list[stc.index - 1].description}}</p>
+        <h1>{{stc.individualSubtopic.list[0].title}}</h1>
+        <p>{{stc.individualSubtopic.list[0].description}}</p>
       </div>
       <div class="col-xs-1"></div>
     </div>
@@ -88,7 +89,7 @@
           </div>
           <div class="author_content">
             <div class ="author_img col-xl-3 col-md-3">
-              <p> <img ng-src="{{ideas.photo}}"></p>
+              <p> <img class="authImage" ng-src="{{subtopicIdeas.photo}}"></p>
             </div>
             <div class="author_info col-xl-6 col-md-6">
               <h4> {{subtopicIdeas.name}} </h4>

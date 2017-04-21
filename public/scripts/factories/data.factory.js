@@ -11,6 +11,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var allSubcommentsObject = { list : [] }
   var getIdeaIdObject = { list : [] }
   var getCommentIdObject = { list : [] }
+  var allUsers = { list : [] }
   var userTally = {};
   var ideasTally = {};
   var commentsTally = {};
@@ -23,19 +24,8 @@ console.log(subTopicObject);
   init();
 
   function init() {
-    getUsers();
-    getSubTopics();
-  }
 
-  //function to display user list on manage users admin view
-  function getUsers(){
-    $http({
-      method: 'GET',
-      url: '/admin/manageUsers'
-    }).then(function(response){
-      // allUsers.list = response.data;
-      // console.log(allUsers.list);
-    })
+    getSubTopics();
   }
 
   function deactivateUser(userId) {

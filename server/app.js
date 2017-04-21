@@ -39,6 +39,8 @@ app.use('/login', login);
 
 /* Whatever you do below this is protected by your authentication. */
 app.use(decoder.token);
+
+
 //need to check to make sure the user is an admin before any of these routes can be acces.
 app.use('/admin-topics', adminTopics);
 //need to check to make sure the user is an admin before any of these routes can be accessed.
