@@ -15,7 +15,6 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
      self.email = firebaseUser.email;
      // go reload idea data....
      getUserChart();
-     getIdeaChart();
    } else {
      console.log('boooo');
      // redirect
@@ -25,8 +24,7 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', f
   });
 
 
-  getUserChart();
-  getIdeaChart();
+
 
   function getUserChart() {
     var auth = $firebaseAuth();
