@@ -19,6 +19,11 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: mainTopic
         }).then(function(response) {
           findActiveTopic();
+          swal(
+            'Success!',
+            'The main topic has been updated!',
+            'success'
+          )
         });
       });
     } else {
@@ -78,6 +83,11 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: mainTopic
         }).then(function(response) {
           findUpcomingTopic();
+          swal(
+            'Success!',
+            'The upcoming main topic has been updated!',
+            'success'
+          )
         })
       });
     }
@@ -98,6 +108,11 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: mainTopic
         }).then(function(response){
           findUpcomingTopic();
+          swal(
+            'Success!',
+            'The upcoming subtopic has been added!',
+            'success'
+          )
         });
       });
     }
@@ -127,6 +142,11 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: subTopic
         }).then(function(response) {
           findActiveSubTopics();
+          swal(
+            'Success!',
+            'The subtopic has been updated!',
+            'success'
+          )
         })
       });
     }
@@ -170,6 +190,11 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: subTopic
         }).then(function(response) {
           findUpcomingSubTopics();
+          swal(
+            'Success!',
+            'The upcoming subtopic has been updated!',
+            'success'
+          )
         })
       });
     }
@@ -190,6 +215,11 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: subTopic
         }).then(function(response) {
           findUpcomingSubTopics();
+          swal(
+            'Success!',
+            'The upcoming subtopic has been added!',
+            'success'
+          )
         })
       });
     }
@@ -243,9 +273,14 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
             }
           }).then(function(response) {
             console.log('updated the trimester!');
+            swal(
+              'Success!',
+              'The new trimester has started!',
+              'success'
+            )
           })
         });
-        });
+      });
     }
   }
 

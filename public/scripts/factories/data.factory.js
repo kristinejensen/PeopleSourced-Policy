@@ -24,7 +24,11 @@ console.log(subTopicObject);
   init();
 
   function init() {
-
+    getSubtopicIdeas();
+    getComments();
+    getUserMatch();
+    getTallyInfo();
+    // getLikes();
     getSubTopics();
   }
 
@@ -51,11 +55,11 @@ console.log(subTopicObject);
         init()
       });
     })
-    getSubtopicIdeas();
-    getComments();
-    getUserMatch();
-    getTallyInfo();
-    getLikes();
+    // getSubtopicIdeas();
+    // getComments();
+    // getUserMatch();
+    // getTallyInfo();
+    // getLikes();
   }
 
 
@@ -189,9 +193,11 @@ console.log(subTopicObject);
         }
       }).then(function(response){
         // notyf.confirm('Blank Submitted For Approval');
-        getComments();
+        // getComments();
         swal("Comment Added To Database", "", "success");
         self.addComment = {};
+        // getComments();
+        // getIdeaId();
       }).catch(function(error) {
         swal("Values Are Incorrect", "Try Again!", "error");
         console.log('error authenticating', error);
