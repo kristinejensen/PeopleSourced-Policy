@@ -17,7 +17,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var commentsTally = {};
   var likesTally = {};
   var likes = {};
-console.log(subTopicObject);
+
 
 
   //calls functions at startup

@@ -60,8 +60,8 @@ router.post('/addNewSubcomment', function (req, res) {
   console.log('token: ', token);
   pool.connect()
     .then(function (client) {
-      client.query('INSERT INTO subcomments (description) VALUES ($1)',
-        [newSubComment.description])
+      client.query('INSERT INTO subcomments (description, user_id, comment_id) VALUES ($1, $2, $3)',
+        [newSubComment.description, newSubComment.user_id, newSubComment.comment_id])
         .then(function (result) {
           client.release();
           res.sendStatus(201);

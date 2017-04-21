@@ -69,20 +69,35 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   //shows and hides sun-comment text area
   self.showComment = false;
   //sub-comment button click function
-  self.showCommentArea = function(){
-    // console.log("button clicked");
+  self.showCommentArea = function(comments){
+    console.log("comments ", comments);
     self.showComment = true;
+
   }
 
   //button click to add new sub-comment (need to add firebase id into the line below)
   self.addNewSubComment = function(subComment){
-    //empties sub-comment text area on submit
+
+    var userMatchObject = DataFactory.userMatchObject.list;
+//sources firebaseUser in the function
+    var firebaseUser = auth.$getAuth();
+//container to loop id's through
+    var id = "";
+//loops through all users email to find correct id
+      for (var i = 0; i < userMatchObject.length; i++) {
+        if (userMatchObject[i].email == firebaseUser.email) {
+          var id = userMatchObject[i].id;
+        }//end of if
+      };//end of for loop
+
     var newSubComment = {
       description : subComment.description,
-      comment_id : "12"
-      // user_id : need to put the firebase id in here when that works
+      comment_id : "110",//this is where im stuck
+      user_id : id
     }
+    console.log(newSubComment);
     DataFactory.addNewSubComment(newSubComment);
+//empties sub-comment text area on submit
     self.subComment = {};
   }//end of addNewSubComment()
 
