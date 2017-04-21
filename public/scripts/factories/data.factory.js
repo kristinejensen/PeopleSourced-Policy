@@ -378,7 +378,9 @@ function getIdeaId(subtopicIdea) {
 //specifid idea from DB for comment view
     getIdeaIdObject : getIdeaIdObject,
 //specified comments from DB for comment view
-    getCommentIdObject : getCommentIdObject
+    getCommentIdObject : getCommentIdObject,
+//gets all subcomments
+    getAllSubcomments : getAllSubcomments
 
   }
 

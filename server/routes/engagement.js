@@ -13,7 +13,6 @@ router.post('/newidea', function (req, res) {
   pool.connect()
     .then(function (client) {
       client.query('INSERT INTO ideas (title, description, subtopics_id, user_id) VALUES ($1, $2, $3, $4)',
-        // [newIdea.title, newIdea.description, newIdea.subtopicId, req.decodedToken.userSQLId])
         [newIdea.title, newIdea.description, newIdea.subtopicId, req.decodedToken.userSQLId])
         .then(function (result) {
           client.release();
@@ -24,7 +23,7 @@ router.post('/newidea', function (req, res) {
           res.sendStatus(500);
         });
     });//end of .then
-  } 
+  }
 });//end of router.post
 
 //*****************************************//

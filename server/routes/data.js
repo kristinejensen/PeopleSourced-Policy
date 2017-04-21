@@ -162,6 +162,3 @@ router.get('/getCommentId', function(req, res) {
 });//end of router.get
 
 module.exports = router;
-
-
-//SELECT * FROM comments WHERE idea_id=$1
