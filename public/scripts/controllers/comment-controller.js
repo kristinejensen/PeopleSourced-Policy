@@ -4,7 +4,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   var self = this;
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
-
+// console.log("req.decodedToken.userSQLId ;", decodedToken.userSQLId);
 
   //shows all comments from BD to view(migth not need the two lines below)
   // self.commentsObject = DataFactory.commentsObject;

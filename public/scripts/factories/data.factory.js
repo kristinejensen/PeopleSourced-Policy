@@ -18,7 +18,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var likesTally = {};
   var likes = {};
 
-
+//must have variable for notyf
+  var notyf = new Notyf();
 
   //calls functions at startup
   init();
@@ -74,8 +75,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           // id_token: idToken
         // }
       }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        swal("User Added To Database", "", "success");
+        notyf.confirm('You are now a registered user!');
+        // swal("User Added To Database", "", "success");
         self.newUser = {};
       }).catch(function(error) {
         swal("Sorry, we couldn't process your address.", "Try Again!", "error");
@@ -96,7 +97,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         }
       }).then(function(response){
         // getSubtopicIdeas();
-        swal("Idea Added To Database", "", "success");
+        notyf.confirm('Your idea was added!');
+        // swal("Idea Added To Database", "", "success");
         self.newIdea = {};
       }).catch(function(error) {
         console.log('error authenticating', error);
@@ -191,7 +193,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           id_token: idToken
         }
       }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
+        notyf.confirm('Your comment was added!');
         // getComments();
         swal("Comment Added To Database", "", "success");
         self.addComment = {};
@@ -300,9 +302,9 @@ function addNewSubComment(newSubComment){
         id_token: idToken
       }
     }).then(function(response){
-      // notyf.confirm('Blank Submitted For Approval');
+      notyf.confirm('Your comment was added');
       getAllSubcomments();
-      swal("Comment Added To Database", "", "success");
+      // swal("Comment Added To Database", "", "success");
       self.newSubComment = {};
     }).catch(function(error) {
       swal("Values Are Incorrect", "Try Again!", "error");
