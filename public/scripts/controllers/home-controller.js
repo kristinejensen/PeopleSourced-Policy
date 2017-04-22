@@ -3,7 +3,7 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   var self = this;
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
-  
+
 
   self.mainTopic = TopicsFactory.mainTopic;
   self.subTopic = TopicsFactory.subTopic;
@@ -63,12 +63,19 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
       }
       console.log('new idea?: ', newIdea);
     //sents object to factory
-      DataFactory.addNewIdea(newIdea);
+      DataFactory.addNewIdea(newIdea)
+      redirectToSubtopic(newIdea);
     //empties inputs on submit
       self.idea = {};
     //redirect to correct subtopic page after submit
     //not working :(
       // subView(idea.subtopicId);
     }//end of self.createIdea()
+
+    function redirectToSubtopic(url) {
+      console.log(url.subtopicId);
+      $location.path('/subtopics/' + url.subtopicId);
+      DataFactory.getSubtopicIdeas(self.index);
+    }
 
 }]);//end of app.controller()

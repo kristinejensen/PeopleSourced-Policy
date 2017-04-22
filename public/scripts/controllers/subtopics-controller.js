@@ -16,10 +16,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     TopicsFactory.thisSubtopic(index);
   }
 
-  // self.subtopicIdeas = DataFactory.subtopicIdeas;
-  // console.log('index on load: ', self.index);
-
-
   getIdeas(self.index);
 
   function getIdeas(index){
@@ -34,12 +30,9 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   //redirect to correct subtopic view
   //not working :(
   function redirectToSubtopic(url) {
-    $location.path('/subtopics/' + subtopicIdea.id);
+    console.log(url.subtopicId);
+    $location.path('/subtopics/' + url.subtopicId);
     getIdeas(self.index);
-
-    // getIdeas(url);
-    // console.log('index in redirect: ', self.index);
-    // console.log('url in redirect: ', url);
   }
   //redirect to add idea view
   self.createIdea = function() {
