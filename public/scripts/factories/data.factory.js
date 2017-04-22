@@ -1,9 +1,10 @@
 
 app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($http, $firebaseAuth, $routeParams){
-
+  //must have variable for notyf
+  var notyf = new Notyf();
+  //source in auth
   var auth = $firebaseAuth();
 
-  var subTopicObject = { list : [] };
   var subtopicIdeas = { list : [] };
   var commentsObject = { list : [] };
   var userMatchObject = { list : [] };
@@ -15,18 +16,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var commentsTally = {};
   var likesTally = {};
   var likes = {};
-
-console.log(subTopicObject);
-
-//must have variable for notyf
-  var notyf = new Notyf();
-
-  //calls functions at startup
-  init();
-
-  function init() {
-    getSubTopics();
-  }
 
   function deactivateUser(userId) {
     swal({
@@ -101,16 +90,6 @@ console.log(subTopicObject);
       });
     });//end of firebase.auth()
   }//end of addNewUser()
-
-  //adds subtopics to idea view select element
-  function getSubTopics() {
-    $http({
-      method: 'GET',
-      url: '/public/getSubTopics',
-    }).then(function(response) {
-      subTopicObject.list = response.data;
-    });
-  }//end of getSubTopics()
 
   //adds ideas to subtopic views
   function getSubtopicIdeas(id) {
@@ -357,8 +336,6 @@ function loginView() {
     addNewUser : addNewUser,
 //new idea object from idea button click
     addNewIdea : addNewIdea,
-//sends current subtopics to add idea view option element
-    subTopicObject : subTopicObject,
 //adds ideas to subtopic1 view
     subtopicIdeas : subtopicIdeas,
 //adds comment to DB

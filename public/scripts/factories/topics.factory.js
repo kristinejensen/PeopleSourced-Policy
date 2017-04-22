@@ -1,9 +1,36 @@
 app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
+
+  //The active main topic ---- Home View && Admin Topics View
+  var mainTopic = {list: []};
+  //The upcoming main topic (next trimester) ---- Admin Topics View
+  var upcomingMainTopic = {list: []};
+  //The list of active subtopics ---- Add Idea Forms && Subtopic Navigation
+  var subTopic = {list: []};
+  //The list of upcoming subtopics for the admin view (next trimester)
+  var upcomingSubTopic = {list: []};
+  //One subtopic for subtopic view
+  var individualSubTopic = {list: []};
+
+  var noUpcomingTopic = {list: []};
+
+  function adminTopicInit(){
+    //finds active topic
+    findActiveTopic();
+    //finds upcoming topic
+    findUpcomingTopic();
+    //finds active subtopics
+    findActiveSubTopics();
+    //finds upcoming subtopics
+    findUpcomingSubTopics();
+    // //finds individual subtopic
+    // thisSubtopic();
+  }
+
+ // init();
+
   //********************************************//
   //         UPDATE CURRENT MAIN TOPIC          //
   //********************************************//
-  var mainTopic = {list: []};
-
   function updateTopic(title, description, id){
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth()
@@ -42,8 +69,6 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   //********************************************//
   //        ADD/UPDATE UPCOMING MAIN TOPIC      //
   //********************************************//
-  var upcomingMainTopic = {list: []};
-  var noUpcomingTopic = {list: []};
 
   function findUpcomingTopic(){
     var auth = $firebaseAuth();
@@ -125,7 +150,6 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   //*********************************************//
   //           UPDATE CURRENT SUBTOPICS          //
   //*********************************************//
-  var subTopic = {list: []};
 
   function updateSubTopic(title, description, id){
     var auth = $firebaseAuth();
@@ -172,7 +196,7 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   //*********************************************//
   //          UPDATE UPCOMING SUBTOPICS          //
   //*********************************************//
-  var upcomingSubTopic = {list: []};
+
 
 
   function updateUpcomingSubTopic(title, description, id){
@@ -284,8 +308,6 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     }
   }
 
-  var individualSubTopic = {list: []};
-
   function thisSubtopic(index){
     $http({
       method:'GET',
@@ -301,19 +323,7 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   //*********************************************//
   //          SET NEW CURRENT SUBTOPICS          //
   //*********************************************//
-  function init(){
-    findActiveTopic();
-    findUpcomingTopic();
-    findActiveSubTopics();
-    findUpcomingSubTopics();
-    thisSubtopic();
-  }
 
-  findActiveTopic();
-  findUpcomingTopic();
-  findActiveSubTopics();
-  thisSubtopic();
-  findUpcomingSubTopics();
   //*********************************************//
   //                     API                     //
   //*********************************************//
@@ -341,12 +351,16 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     //adding a new upcoming sub topic
     addUpcomingSubTopic : addUpcomingSubTopic,
     //init
-    init: init,
+    adminTopicInit: adminTopicInit,
     //this subtopic
     thisSubtopic: thisSubtopic,
     //yup
     individualSubTopic: individualSubTopic,
-    setNewTrimester: setNewTrimester
+    setNewTrimester: setNewTrimester,
+    //finds active subtopics ---- Subtopic Navigation
+    findActiveSubTopics: findActiveSubTopics,
+    //finds main topic ---- Home View
+    findActiveTopic: findActiveTopic,
   }
 
 }]); // end of app.factory
