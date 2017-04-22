@@ -137,14 +137,14 @@ router.get('/commentsTally', function(req, res){
 //gets total number of likes on app to display on home page
 router.get('/likesTally', function(req, res){
   pool.connect(function (err, client, done) {
-    client.query('SELECT (SELECT COUNT(*) FROM sublikes) + (SELECT COUNT(*) FROM ideas_likes) + (SELECT COUNT(*) FROM comments_likes) AS SumCount;', function(err, result){
+    client.query('SELECT (SELECT COUNT(*) FROM subcomments_likes) + (SELECT COUNT(*) FROM ideas_likes) + (SELECT COUNT(*) FROM comments_likes) AS SumCount;', function(err, result){
       done();
       if(err){
         ('Error completing likes tally query', err);
         res.sendStatus(500);
       } else {
         res.send(result.rows[0]);
-        console.log(result.rows[0]);
+        console.log('the likes tally is: ', result.rows[0]);
       }
     });
   });
@@ -201,7 +201,7 @@ router.get('/subtopicIdeas', function(req, res){
   var subtopicId = req.headers.id;
   console.log('subtopicID?', subtopicId);
   pool.connect(function (err, client, done) {
-    client.query('SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=$1;',
+    client.query('WITH ideas_likes_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_likes_count FROM ideas_likes JOIN ideas ON ideas_likes.idea_id=ideas.id GROUP BY ideas.id), ideas_loves_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_loves_count FROM ideas_loves JOIN ideas ON ideas_loves.idea_id=ideas.id GROUP BY ideas.id) SELECT ideas.title, ideas.description, ideas.subtopics_id, ideas.user_id, ideas.id, users.name, users.email, users.address, users.ward, users.admin, users.active, users.photo, ideas_likes_count, ideas_loves_count FROM ideas LEFT OUTER JOIN users ON ideas.user_id=users.id LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id WHERE subtopics_id=$1;',
     [subtopicId], function(err, result){
       done();
       if(err){
@@ -209,7 +209,6 @@ router.get('/subtopicIdeas', function(req, res){
         res.sendStatus(500);
       } else {
         res.send(result.rows);
-        console.log(result.rows);
       }
     });
   });

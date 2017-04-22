@@ -124,6 +124,15 @@ console.log(subTopicObject);
       }
     }).then(function(response) {
       subtopicIdeas.list = response.data;
+      console.log(subtopicIdeas.list);
+      for (var i = 0; i < subtopicIdeas.list.length; i++) {
+        if(subtopicIdeas.list[i].ideas_likes_count == null){
+          subtopicIdeas.list[i].ideas_likes_count = 0;
+        }
+        if(subtopicIdeas.list[i].ideas_loves_count == null){
+          subtopicIdeas.list[i].ideas_loves_count = 0;
+        }
+      }
     });
   }//end of getSubTopicIdeas()
 
@@ -247,7 +256,7 @@ getUserMatch()
     }).then(function(response){
       likesTally.count = response.data;
     });
-  };//end of firebase.auth()
+  };
 
 
 //get users to pull id when an idea is Submitted
@@ -271,23 +280,6 @@ getUserMatch()
   //   });
   // }
 
-  //adds like to DB
-  function addLike(ideaId){
-    // console.log(ideaId);
-    firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
-        method: 'POST',
-        url: '/data/addLike/' + ideaId,
-        headers: {
-          id_token: idToken
-        }
-      }).then(function(response){
-        // console.log(response);
-      }).catch(function(error) {
-        console.log('error adding like to database', error);
-      });
-    });
-  }
 
 //adds loved/idea to DB
 function addNewSubComment(newSubComment){
@@ -341,7 +333,21 @@ function getIdeaId(subtopicIdea) {
 
 }//end of getAllUsers()
 
-
+//function to add idea "like" to database
+function addIdeaLike(ideaId, subtopicId){
+firebase.auth().currentUser.getToken().then(function(idToken) {
+  $http({
+    method: 'PUT',
+    url: '/data/addIdeaLike/' + ideaId,
+    headers: {
+      id_token: idToken
+    }
+  }).then(function(response) {
+    console.log('response from server on add idea like :', response);
+    getSubtopicIdeas(subtopicId);
+  });
+});
+}
 
   return {
     userTally: userTally,
@@ -349,7 +355,7 @@ function getIdeaId(subtopicIdea) {
     commentsTally: commentsTally,
     likesTally: likesTally,
     likes: likes,
-    addLike: addLike,
+    addIdeaLike: addIdeaLike,
 //new user object from add address button click
     addNewUser : addNewUser,
 //new idea object from idea button click

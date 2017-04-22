@@ -8,6 +8,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.index = $routeParams.id;
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
+  self.addIdeaLike = DataFactory.addIdeaLike;
 
   thisSubtopic(self.index);
 

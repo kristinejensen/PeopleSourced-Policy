@@ -161,4 +161,35 @@ router.get('/getCommentId', function(req, res) {
     });//end of .then
 });//end of router.get
 
+//adds like to ideas_likes table
+router.put('/addIdeaLike/:id', function(req, res){
+  console.log('add idea like route hit');
+  // var ideaId = req.params.id;
+    // var userId = req.decodedToken.userSQLId;
+  pool.connect(function (err, client, done) {
+    client.query('SELECT * FROM ideas_likes WHERE user_id=4;', function(err, result){
+      done();
+      if(err){
+        ('Error on ideas_likes user check query', err);
+      } else {
+        if (result.rows.length == 0){
+          pool.connect(function (err, client, done) {
+            client.query('INSERT INTO ideas_likes (user_id, idea_id) VALUES (4, 1);', function(err, result){
+              done();
+              if(err){
+                ('Error ideas_likes insert', err);
+                res.sendStatus(500);
+              } else {
+                res.sendStatus(200);
+              }
+            });
+          });
+        }else{
+          res.sendStatus(403);
+        }
+      }
+    });
+  });
+});
+
 module.exports = router;
