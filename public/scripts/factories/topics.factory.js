@@ -189,7 +189,7 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           },
           data: subTopic
         }).then(function(response) {
-          findUpcomingSubTopics();
+          // findUpcomingSubTopics();
           swal(
             'Success!',
             'The upcoming subtopic has been updated!',
@@ -214,7 +214,7 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           },
           data: subTopic
         }).then(function(response) {
-          findUpcomingSubTopics();
+          // findUpcomingSubTopics();
           swal(
             'Success!',
             'The upcoming subtopic has been added!',
