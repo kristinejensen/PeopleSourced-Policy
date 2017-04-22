@@ -139,7 +139,7 @@ router.get('/searchUsers', function (req, res) {
   if(req.decodedToken.admin){
     var userSearch = req.headers
     var newSearchString = "%" + req.headers.searchstring + "%";
-    console.log(newSearchString);
+    // console.log(newSearchString);
     if(req.headers.filter == 'User Name'){
       pool.connect(function (err, client, done) {
         client.query('WITH ideas_flags_count_temp_table AS (SELECT users.id AS user_id, COUNT(users.id) AS ideas_flags_count FROM ideas_flags JOIN users ON ideas_flags.user_id=users.id GROUP BY users.id),' +
@@ -170,7 +170,7 @@ router.get('/searchUsers', function (req, res) {
             res.sendStatus(500);
           } else {
             res.send(result.rows);
-            console.log(result.rows);
+            // console.log(result.rows);
           }
         });
       });
@@ -187,7 +187,7 @@ router.get('/searchUsers', function (req, res) {
             res.sendStatus(500);
           } else {
             res.send(result.rows);
-            console.log(result.rows);
+            // console.log(result.rows);
           }
         });
       });

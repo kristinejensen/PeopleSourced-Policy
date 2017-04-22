@@ -3,7 +3,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   var auth = $firebaseAuth();
 
-
   var subTopicObject = { list : [] };
   var subtopicIdeas = { list : [] };
   var commentsObject = { list : [] };
@@ -19,6 +18,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
 console.log(subTopicObject);
 
+//must have variable for notyf
+  var notyf = new Notyf();
 
   //calls functions at startup
   init();
@@ -69,8 +70,8 @@ console.log(subTopicObject);
           // id_token: idToken
         // }
       }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        swal("User Added To Database", "", "success");
+        notyf.confirm('You are now a registered user!');
+        // swal("User Added To Database", "", "success");
         self.newUser = {};
       }).catch(function(error) {
         swal("Sorry, we couldn't process your address.", "Try Again!", "error");
@@ -84,14 +85,15 @@ console.log(subTopicObject);
     return firebase.auth().currentUser.getToken().then(function(idToken) {
       return $http({
         method: 'POST',
-        url: '/login/newIdea',
+        url: '/engagement/newIdea',
         data: newIdea,
         headers: {
           id_token: idToken
         }
       }).then(function(response){
         // getSubtopicIdeas();
-        swal("Idea Added To Database", "", "success");
+        notyf.confirm('Your idea was added!');
+        // swal("Idea Added To Database", "", "success");
         self.newIdea = {};
       }).catch(function(error) {
         swal("Sorry, we couldn't process your request.", "Try Again!", "error");
@@ -181,15 +183,20 @@ console.log(subTopicObject);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
-        url: '/login/addComment',
+        url: '/engagement/addComment',
         data: newComment,
         headers: {
           id_token: idToken
         }
       }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        getComments();
-        swal("Comment Added To Database", "", "success");
+// <<<<<<< HEAD
+//         // notyf.confirm('Blank Submitted For Approval');
+//         getComments();
+//         swal("Comment Added To Database", "", "success");
+// =======
+        notyf.confirm('Your comment was added!');
+        // swal("Comment Added To Database", "", "success");
+// >>>>>>> remotes/origin/feature-chris-subcomment
         self.addComment = {};
       }).catch(function(error) {
         swal("Values Are Incorrect", "Try Again!", "error");
@@ -267,15 +274,15 @@ function addNewSubComment(newSubComment){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
       method: 'POST',
-      url: '/login/addNewSubComment',
+      url: '/engagement/addNewSubComment',
       data: newSubComment,
       headers: {
         id_token: idToken
       }
     }).then(function(response){
-      // notyf.confirm('Blank Submitted For Approval');
+      notyf.confirm('Your comment was added');
       getAllSubcomments();
-      swal("Comment Added To Database", "", "success");
+      // swal("Comment Added To Database", "", "success");
       self.newSubComment = {};
     }).catch(function(error) {
       swal("Values Are Incorrect", "Try Again!", "error");
@@ -370,15 +377,21 @@ function loginView() {
     allSubcommentsObject : allSubcommentsObject,
 //gets specific idea id from DB
     getIdeaId : getIdeaId,
+//current subtopic ideas
     getSubtopicIdeas : getSubtopicIdeas,
 //specifid idea from DB for comment view
     getIdeaIdObject : getIdeaIdObject,
 //specified comments from DB for comment view
     getCommentIdObject : getCommentIdObject,
+// <<<<<<< HEAD
     //checks to see if the user exists in the database
     checkUserStatus: checkUserStatus,
     email: email,
+// =======
+//gets all subcomments
+    getAllSubcomments : getAllSubcomments
+// >>>>>>> remotes/origin/feature-chris-subcomment
 
-  }
+  }//end of return
 
 }]); // end of app.factory

@@ -199,7 +199,7 @@ router.get('/allComments', function (req, res) {
 //Finds all ideas based on the $routeParams/subtopic id and adds them to the subtopic views
 router.get('/subtopicIdeas', function(req, res){
   var subtopicId = req.headers.id;
-  console.log('subtopicID?', subtopicId);
+  // console.log('subtopicID?', subtopicId);
   pool.connect(function (err, client, done) {
     client.query('SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=$1;',
     [subtopicId], function(err, result){

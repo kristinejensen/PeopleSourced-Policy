@@ -10,6 +10,7 @@
 *         IDEA AREA                                                             *
 * ============================================================================= */
 -->
+
 <div class = "greybackground">
   <div class="row subTopic">
     <div ng-repeat="idea in cc.getIdeaIdObject.list" class="ideaArea">
@@ -25,7 +26,7 @@
             <p> {{cc.subtopicIdeas.photo}} </p>
           </div>
           <div class="author_info cole-xl 9 col-md-9">
-            <h4> <img class="authImage" ng-src="{{idea.photo}}"> Author: {{idea.name}}  </h4>
+            <h4> <img class="authImage" ng-src="{{idea.photo}}"> Author: {{idea.name}} </h4>
             <h5> Ward: {{idea.ward}} </h5>
           </div>
         </div>
@@ -95,9 +96,9 @@
             <span> FLAG </span>
           </li>
         </div>
-        <!-- <div class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc;" ng-click="cc.showCommentArea()"> -->
+        <div class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc;" ng-click="cc.showCommentArea(comments)">
           <li class="love">
-            <!-- <span> COMMENT </span> -->
+            <span> COMMENT </span>
           </li>
         </div>
       </ul>
@@ -110,21 +111,21 @@
 *         SUB-COMMENT INPUT BOX                                                     *
 * ============================================================================= */
 -->
-<!-- <div class="commentArea animate-show-hide" ng-show="cc.showComment">
+<div class="commentArea animate-show-hide" ng-show="cc.showComment">
   <div class="col-md-2 col-lg-2">
   </div>
   <div class="col-md-10 col-lg-10">
     <button ng-click="cc.addNewSubComment(cc.subComment)" type="button"> Submit Sub-Comment </button>
     <textarea ng-model="cc.subComment.description" style="border: 1px solid lightgrey; display: block; margin-left: auto; margin-right: auto;" placeholder="Sub-comment..." name="name" rows="8" cols="80"></textarea>
   </div>
-</div> -->
+</div>
 
 <!--
 /* ============================================================================ *
 *         SUB COMMENT BOX                                                       *
 * ============================================================================= */
 -->
-<!-- <div ng-repeat="subcomments in cc.allSubcommentsObject.list" class="commentDiv">
+<div ng-repeat="subcomments in cc.allSubcommentsObject.list" class="commentDiv">
   <div class="col-md-2 col-lg-2"></div>
   <div class="col-md-9 col-lg-9 topicText" style="padding-bottom: 0px !important;">
     <div class="card_content" style="padding-bottom: 0px; !important">
@@ -150,4 +151,4 @@
           <li class="love">
             <span> FLAG </span>
           </li>
-        </div> -->
+        </div>
