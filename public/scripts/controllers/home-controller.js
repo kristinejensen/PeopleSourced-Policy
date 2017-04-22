@@ -21,7 +21,6 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   *               ADD NEW IDEA                                                     *
   * ============================================================================= */
   -->
-  // console.log("userMatchObject ",userMatchObject);
   self.addNewIdea = function(idea) {
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
@@ -43,7 +42,6 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
     //loads the ideas
     // getIdeas(idea.subtopicId);
   }//end of self.createIdea()
-
 
   function getIdeas(index){
     DataFactory.getSubtopicIdeas(index);

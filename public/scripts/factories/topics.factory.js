@@ -1,5 +1,5 @@
 app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
-
+  var notyf = new Notyf();
   //The active main topic ---- Home View && Admin Topics View
   var mainTopic = {list: []};
   //The upcoming main topic (next trimester) ---- Admin Topics View
@@ -12,6 +12,9 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
   var individualSubTopic = {list: []};
 
   var noUpcomingTopic = {list: []};
+
+  var isAdmin = {list: []};
+
 
   function adminTopicInit(){
     //finds active topic
@@ -26,7 +29,7 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     // thisSubtopic();
   }
 
- // init();
+  // init();
 
   //********************************************//
   //         UPDATE CURRENT MAIN TOPIC          //
@@ -46,15 +49,13 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: mainTopic
         }).then(function(response) {
           findActiveTopic();
-          swal(
-            'Success!',
-            'The main topic has been updated!',
-            'success'
-          )
+          notyf.confirm('The topic has been updated!');
         });
       });
     } else {
       mainTopic.list = [];
+      notyf.alert('There was an error updating the topic!');
+
     }
   }
 
@@ -108,11 +109,9 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: mainTopic
         }).then(function(response) {
           findUpcomingTopic();
-          swal(
-            'Success!',
-            'The upcoming main topic has been updated!',
-            'success'
-          )
+          notyf.confirm('The upcoming topic has been updated!');
+        }).catch(function(e){
+          notyf.alert('There was an error updating the upcoming topic.')
         })
       });
     }
@@ -133,11 +132,9 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: mainTopic
         }).then(function(response){
           findUpcomingTopic();
-          swal(
-            'Success!',
-            'The upcoming subtopic has been added!',
-            'success'
-          )
+          notyf.confirm('The upcoming topic has been added!');
+        }).catch(function(e){
+          notyf.alert('There was an error adding the upcoming topic.')
         });
       });
     }
@@ -166,11 +163,9 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: subTopic
         }).then(function(response) {
           findActiveSubTopics();
-          swal(
-            'Success!',
-            'The subtopic has been updated!',
-            'success'
-          )
+          notyf.confirm('The subtopic has been updated!');
+        }).catch(function(e){
+          notyf.alert('There was an error updating the subtopic.')
         })
       });
     }
@@ -214,11 +209,9 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: subTopic
         }).then(function(response) {
           // findUpcomingSubTopics();
-          swal(
-            'Success!',
-            'The upcoming subtopic has been updated!',
-            'success'
-          )
+          notyf.confirm('The upcoming subtopic has been updated!');
+        }).catch(function(e){
+          notyf.alert('There was an error updating the upcoming subtopic.')
         })
       });
     }
@@ -239,11 +232,9 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
           data: subTopic
         }).then(function(response) {
           // findUpcomingSubTopics();
-          swal(
-            'Success!',
-            'The upcoming subtopic has been added!',
-            'success'
-          )
+          notyf.confirm('The upcoming subtopic has been added!');
+        }).catch(function(e){
+          notyf.alert('There was an error adding the upcoming subtopic.')
         })
       });
     }
@@ -320,6 +311,35 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     });
   }
 
+  // checkAdminStatus();
+
+  function checkAdminStatus(){
+    var auth = $firebaseAuth();
+    var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      return firebase.auth().currentUser.getToken().then(function(idToken) {
+        // console.log(idToken);
+        return $http({
+          method:'GET',
+          url: '/admin/checkAdminStatus',
+          headers: {
+            id_token: idToken,
+          }
+        }).then(function(response){
+            return isAdmin.list = response.data;
+          // console.log(isAdmin.list);
+        });
+      })
+    } else {
+      return $http({
+        method:'GET',
+        url: '/public/checkAdminStatus',
+      }).then(function(response){
+          return isAdmin.list = false;
+      });
+    }
+  }
+
   //*********************************************//
   //          SET NEW CURRENT SUBTOPICS          //
   //*********************************************//
@@ -361,6 +381,8 @@ app.factory('TopicsFactory', ['$http', '$firebaseAuth', function($http, $firebas
     findActiveSubTopics: findActiveSubTopics,
     //finds main topic ---- Home View
     findActiveTopic: findActiveTopic,
+    checkAdminStatus: checkAdminStatus,
+    isAdmin: isAdmin,
   }
 
 }]); // end of app.factory

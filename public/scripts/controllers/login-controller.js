@@ -1,23 +1,33 @@
-app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$location', '$scope', function(DataFactory, $firebaseAuth, $http, $location, $scope){
+app.controller('LoginController', ['DataFactory', 'TopicsFactory', '$firebaseAuth', '$http', '$location', '$scope', function(DataFactory, TopicsFactory, $firebaseAuth, $http, $location, $scope){
 
   //google authenticate bellow
   var auth = $firebaseAuth();
   var self = this;
   var firebaseUser = auth.$getAuth();
-  var userMatchObject = DataFactory.userMatchObject.list;
-  // var notyf = new Notyf();
+    // var notyf = new Notyf();
+
+  TopicsFactory.checkAdminStatus().then(function(response){
+    self.isAdmin = TopicsFactory.isAdmin;
+  });
+  // self.isAdmin = TopicsFactory.isAdmin;
 
   auth.$onAuthStateChanged(function(firebaseUser) {
     console.log('auth state changed');
    if (firebaseUser) {
      console.log('we are still logged in!');
-     self.email = firebaseUser.email;
+     self.email = true;
+     TopicsFactory.checkAdminStatus().then(function(response){
+       self.isAdmin = TopicsFactory.isAdmin;
+     });
      // go reload idea data....
     //  DataFactory.init();
    } else {
      console.log('logged out -> boooo');
      // redirect
      self.email = '';
+     TopicsFactory.checkAdminStatus().then(function(response){
+       self.isAdmin = TopicsFactory.isAdmin;
+     });
     //  self.logout();
    }
   });
@@ -49,7 +59,7 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
       DataFactory.checkUserStatus().then(function(response){
         console.log('?', response.data);
         if(response.data == true){
-          self.email = firebaseUser.email;
+          self.email = true;
           //user is in the database. Don't do anything.
         } else if (response.data == false){
           console.log('EEEY');
@@ -72,6 +82,8 @@ app.controller('LoginController', ['DataFactory', '$firebaseAuth', '$http', '$lo
     // console.log("logout clicked");
     auth.$signOut().then(function() {
       self.email = '';
+      self.isAdmin = '';
+
       //redirects back to home view
       // logoutView();
     });//end of auth.$signOut()

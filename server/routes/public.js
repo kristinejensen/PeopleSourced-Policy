@@ -22,6 +22,11 @@ router.get('/findActiveTopic', function(req, res){
   });
 });
 
+router.get('/checkAdminStatus', function (req, res) {
+    res.send(false);
+    console.log('admin', false);
+});//end of router.get
+
 //**********************************************//
 //           DISPLAY ACTIVE SUBTOPICS           //
 //**********************************************//

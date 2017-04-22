@@ -38,47 +38,35 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.createIdea = function() {
     $location.path('/idea');
   }
-  //get moreComments button click
-  self.moreComments = function() {
-    $location.path('/comment/');
-  }
+  // //get moreComments button click
+  // self.moreComments = function() {
+  //   $location.path('/comment/');
+  // }
 
-  var userMatchObject = DataFactory.userMatchObject.list;
+  // var userMatchObject = DataFactory.userMatchObject.list;
   // console.log('userMatchObject.list: ', userMatchObject);
   self.addNewIdea = function(idea) {
 //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
-
-//container to loop id's through
-    var id = "";
-//loops through all users email to find correct id
-    for (var i = 0; i < userMatchObject.length; i++) {
-      if (userMatchObject[i].email == firebaseUser.email) {
-        var id = userMatchObject[i].id;
-      }//end of if
-    };//end of for loop
-
+    //The new idea object with the user inforamtion attached.
     var newIdea = {
       name : firebaseUser.displayName,
       email : firebaseUser.email,
       subtopicId : idea.subtopicId,
       title : idea.title,
-      description : idea.description,
-      id : id
+      description : idea.description
     }
-//sents object to factory
+    //Sends the new idea object to factory
     DataFactory.addNewIdea(newIdea).then(function(response){
+      // redirect to correct subtopic page after submit
       redirectToSubtopic(newIdea);
     });
-    // redirect to correct subtopic page after submit
-    // getIdeas(newIdea.id);
-
-//empties inputs on submit
+    //empties inputs on submit
     self.idea = {};
   }//end of self.createIdea()
 
-//get moreComments button click
+  //get moreComments button click
   self.moreComments = function(subtopicIdea) {
     $location.path('/comment/' + subtopicIdea.id);
     console.log(subtopicIdea.id);
