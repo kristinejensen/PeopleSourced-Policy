@@ -126,8 +126,6 @@ p {
   background-color: #6fa8dc;
   margin-bottom: 0px;
   height: 130px;
-  /*display: flex;
-  align-items: center;*/
 }
 
 #loginContainer {
@@ -138,6 +136,17 @@ p {
 #logoContainer {
   text-align: left;
   padding-left: 50px;
+  height: 130px;
+  line-height: 130px;
+  padding-top: 32px;
+}
+
+.dashNav {
+  height: 45px;
+  background-color: #dddddd;
+  border-top: 3px solid #6FA8DC;
+  color: black;
+  padding-right: 20px;
 }
 
 .logo, a, a:hover, a:active, a:visited {
