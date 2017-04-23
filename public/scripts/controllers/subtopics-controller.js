@@ -13,7 +13,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
 //displays subtopic main heading?
   thisSubtopic(self.index);
 
-
   function thisSubtopic(index){
     TopicsFactory.thisSubtopic(index);
   }
@@ -38,11 +37,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   function redirectToSubtopic(url) {
     $location.path('/subtopics/' + subtopicIdea.id);
     getIdeas(self.index);
-
-    // getIdeas(url);
-    // console.log('index in redirect: ', self.index);
-    // console.log('url in redirect: ', url);
   }
+
   //redirect to add idea view
   self.createIdea = function() {
     $location.path('/idea');
@@ -59,6 +55,11 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
 //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
+
+//checks to see if user in logged in
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    }
 
 //container to loop id's through
     var id = "";
@@ -77,15 +78,16 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
       description : idea.description,
       id : id
     }
+
 //sents object to factory
     DataFactory.addNewIdea(newIdea)
-//reloads the entire page after submitting an idea    
-    $window.location.reload();
+//reloads the entire page after submitting an idea
+    // $window.location.reload();
     // .then(function(response){
     //   redirectToSubtopic(newIdea);
     // });
     // redirect to correct subtopic page after submit
-    // getIdeas(newIdea.id);
+    getIdeas(newIdea.id);
 
 //empties inputs on submit
     self.idea = {};
@@ -98,10 +100,5 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     console.log(subtopicIdea.id);
   }
 
-//filter submit button
-// self.buttonClick = function() {
-//   console.log("button was clicked");
-//
-// }
 
 }]);//end of my.app

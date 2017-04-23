@@ -50,11 +50,17 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   //*****************************************//
   //adds new comment to DB (need to add firebase id into the line below)
   self.addComment = function(comment) {
+
+//checks to see if user in logged in
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    }
+
     var newComment = {
       description : comment.description,
       idea_id : subtopicIdea.id
     }
-    console.log(newComment);
+
     //sents comment from view to DB
     DataFactory.addComment(newComment);
 //reloads entire page after comment submission
@@ -62,6 +68,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     // $route.reload();
 // empties inputs after submission
     self.comment = {};
+
   }//end of self.addComment()
 
   //*****************************************//

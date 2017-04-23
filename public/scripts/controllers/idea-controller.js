@@ -21,7 +21,7 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
 //redirect to home view
   function homeView() {
     // $location.url('/');
-  
+
   }//end of homeView()
 
 //current subtopics for select option
@@ -32,6 +32,10 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
     var userMatchObject = DataFactory.userMatchObject.list;
 //sources firebaseUser in the function
     var firebaseUser = auth.$getAuth();
+//alert if user in not logged in
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    }
 //container to loop id's through
     var id = "";
 //loops through all users email to find correct id

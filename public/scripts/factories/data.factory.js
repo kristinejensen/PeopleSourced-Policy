@@ -65,14 +65,14 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //add new user to DB from login view button click
   function addNewUser(newUser){
-    // firebase.auth().currentUser.getToken().then(function(idToken) {
+    firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
         url: '/login/newUser',
-        data: newUser
-        // headers: {
-          // id_token: idToken
-        // }
+        data: newUser,
+        headers: {
+          id_token: idToken
+        }
       }).then(function(response){
         notyf.confirm('You are now a registered user!');
         self.newUser = {};
@@ -80,12 +80,12 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         swal("Sorry, we couldn't process your address.", "Try Again!", "error");
         console.log('error authenticating', error);
       });
-    // });//end of firebase.auth()
+    });//end of firebase.auth()
   }//end of addNewUser()
 
   //add new idea to DB from button click from idea view
   function addNewIdea(newIdea){
-    return firebase.auth().currentUser.getToken().then(function(idToken) {
+    firebase.auth().currentUser.getToken().then(function(idToken) {
       return $http({
         method: 'POST',
         url: '/engagement/newIdea',
