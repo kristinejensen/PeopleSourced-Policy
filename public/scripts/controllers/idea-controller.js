@@ -58,7 +58,8 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
 //empties inputs on submit
     self.idea = {};
 //redirect after submit
-    homeView();
+    // homeView();
+      $window.location.reload();
   };//end of addNewIdea()
 
 }]);//end of app.controller()

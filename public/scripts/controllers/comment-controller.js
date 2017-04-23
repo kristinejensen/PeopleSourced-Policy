@@ -64,8 +64,8 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     //sents comment from view to DB
     DataFactory.addComment(newComment);
 //reloads entire page after comment submission
-    // $window.location.reload();
-  
+    $window.location.reload();
+
 // empties inputs after submission
     self.comment = {};
 
@@ -103,6 +103,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
         DataFactory.addNewSubComment(newSubComment);
 //empties sub-comment text area on submit
       self.subComment = {};
+        $window.location.reload();
   }//end of addNewSubComment()
 
 

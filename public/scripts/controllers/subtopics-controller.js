@@ -78,7 +78,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
 //sents object to factory
     DataFactory.addNewIdea(newIdea)
 //reloads the entire page after submitting an idea
-    // $window.location.reload();
+    $window.location.reload();
     // $window.reload();
     // .then(function(response){
     //   redirectToSubtopic(newIdea);
