@@ -195,7 +195,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         self.addComment = {};
       }).catch(function(error) {
         swal("Values Are Incorrect", "Try Again!", "error");
-        console.log('error authenticating', error);
+        console.log('error', error);
       });
     });//end of firebase.auth()
   }//end of addComment()
@@ -274,7 +274,6 @@ function addNewSubComment(newSubComment){
       }
     }).then(function(response){
       notyf.confirm('Your comment was added');
-      getAllSubcomments();
       self.newSubComment = {};
     }).catch(function(error) {
       swal("Values Are Incorrect", "Try Again!", "error");
