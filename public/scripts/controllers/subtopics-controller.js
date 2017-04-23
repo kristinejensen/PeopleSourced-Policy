@@ -17,10 +17,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     TopicsFactory.thisSubtopic(index);
   }
 
-  // self.subtopicIdeas = DataFactory.subtopicIdeas;
-  // console.log('index on load: ', self.index);
-
-
   getIdeas(self.index);
 
   function getIdeas(index){
@@ -52,6 +48,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   var userMatchObject = DataFactory.userMatchObject.list;
   // console.log('userMatchObject.list: ', userMatchObject);
   self.addNewIdea = function(idea) {
+
 //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
@@ -60,7 +57,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     if (firebaseUser === null){
       swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
     }
-
 //container to loop id's through
     var id = "";
 //loops through all users email to find correct id
@@ -83,6 +79,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     DataFactory.addNewIdea(newIdea)
 //reloads the entire page after submitting an idea
     // $window.location.reload();
+    // $window.reload();
     // .then(function(response){
     //   redirectToSubtopic(newIdea);
     // });

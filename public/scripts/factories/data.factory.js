@@ -1,5 +1,5 @@
 
-app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($http, $firebaseAuth, $routeParams){
+app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window', '$location', '$route', function($http, $firebaseAuth, $routeParams, $window, $location, $route){
 
   var auth = $firebaseAuth();
 
@@ -74,7 +74,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           id_token: idToken
         }
       }).then(function(response){
-        notyf.confirm('You are now a registered user!');
+        notyf.confirm('You are now a registered user!')
         self.newUser = {};
       }).catch(function(error) {
         swal("Sorry, we couldn't process your address.", "Try Again!", "error");
@@ -85,7 +85,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //add new idea to DB from button click from idea view
   function addNewIdea(newIdea){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
+    return firebase.auth().currentUser.getToken().then(function(idToken) {
       return $http({
         method: 'POST',
         url: '/engagement/newIdea',
@@ -95,9 +95,11 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         }
       }).then(function(response){
         getSubtopicIdeas();
-        notyf.confirm('Your idea was added!');
-        // swal("Idea Added To Database", "", "success");
-        self.newIdea = {};
+        return $window.location.reload();
+        // $window.location.reload();
+        // self.newIdea = {};
+      }).then(function(){
+        return notyf.confirm('Your idea was added!')
       }).catch(function(error) {
         console.log('error authenticating', error);
       });
