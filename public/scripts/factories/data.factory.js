@@ -190,6 +190,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           id_token: idToken
         }
       }).then(function(response){
+        getComments();
         notyf.confirm('Your comment was added!');
         self.addComment = {};
       }).catch(function(error) {
@@ -206,7 +207,6 @@ getUserMatch()
       url: '/data/getUserMatch',
     }).then(function(response) {
       userMatchObject.list = response.data;
-      // console.log('getusermatch response: ', response);
     }).catch(function(error) {
       console.log('error on get user match', error);
       return 403;

@@ -20,7 +20,8 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
 
 //redirect to home view
   function homeView() {
-    $location.path('/home/');
+    // $location.url('/');
+  
   }//end of homeView()
 
 //current subtopics for select option
@@ -53,7 +54,7 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
 //empties inputs on submit
     self.idea = {};
 //redirect after submit
-    // homeView();
+    homeView();
   };//end of addNewIdea()
 
 }]);//end of app.controller()

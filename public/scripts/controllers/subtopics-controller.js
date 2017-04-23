@@ -1,5 +1,5 @@
 
-app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', '$routeParams', '$location', '$firebaseAuth', function(DataFactory, TopicsFactory, $http, $routeParams, $location, $firebaseAuth) {
+app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', '$routeParams', '$location', '$firebaseAuth', '$window', function(DataFactory, TopicsFactory, $http, $routeParams, $location, $firebaseAuth, $window) {
   var self = this;
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
@@ -79,7 +79,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     }
 //sents object to factory
     DataFactory.addNewIdea(newIdea)
-    getIdeas()
+//reloads the entire page after submitting an idea    
+    $window.location.reload();
     // .then(function(response){
     //   redirectToSubtopic(newIdea);
     // });
@@ -89,6 +90,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
 //empties inputs on submit
     self.idea = {};
   }//end of self.createIdea()
+
 
 //get moreComments button click
   self.moreComments = function(subtopicIdea) {

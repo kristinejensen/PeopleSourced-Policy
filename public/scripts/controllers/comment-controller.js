@@ -1,5 +1,5 @@
 
-app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', '$routeParams', function($firebaseAuth, $http, $location, DataFactory, $routeParams){
+app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'DataFactory', '$routeParams', '$route', '$window', function($firebaseAuth, $http, $location, DataFactory, $routeParams, $route, $window){
 
   var self = this;
   var auth = $firebaseAuth();
@@ -56,10 +56,13 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     }
     //sents comment from view to DB
     DataFactory.addComment(newComment);
+//reloads entire page after comment submission
+    $window.location.reload();
     //empties inputs after submission
     self.comment = {};
     // console.log(subtopicIdea.id);
-    $location.url('/comment/' + subtopicIdea.id );
+    // $location.url('/comment/' + subtopicIdea.id );
+      // $route.reload('/'+$routeParams);
   }//end of self.addComment()
 
   //*****************************************//
