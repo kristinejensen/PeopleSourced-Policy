@@ -24,10 +24,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   function init() {
     getSubtopicIdeas();
-    getComments();
     getUserMatch();
     getTallyInfo();
-    // getLikes();
     getSubTopics();
   }
 
@@ -134,27 +132,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     });
   }//end of getSubTopicIdeas()
 
-  //adds loved/idea to DB
-  function addLoved(subtopicIdeas){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
-        method: 'POST',
-        url: '/login/addLoved',
-        data: subtopicIdeas,
-        headers: {
-          id_token: idToken
-        }
-      }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        swal("Loved Added To Database", "", "success");
-        // self.subtopicIdeas = {};
-      }).catch(function(error) {
-        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
-        console.log('error authenticating', error);
-      });
-    });//end of firebase.auth()
-  }//end of addNewUser()
-
   //adds flag/idea to DB
   function addFlag(subtopicIdeas){
     firebase.auth().currentUser.getToken().then(function(idToken) {
@@ -175,17 +152,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
       });
     });//end of firebase.auth()
   }//end of getSubTopicIdeas
-
-
-  //gets all comments for comment view
-  function getComments() {
-    $http({
-      method: 'GET',
-      url: '/public/allComments'
-    }).then(function(response) {
-      commentsObject.list = response.data;
-    });
-  }//end of getComments()
 
   //adds loved/idea to DB
   function addComment(newComment){
@@ -331,6 +297,25 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   }//end of getAllUsers()
 
+  //gets comments to display on comments page
+  function getComments(ideaId) {
+    console.log('get comments function is being called');
+    console.log(ideaId);
+    $http({
+      method: 'GET',
+      url: '/data/getComments',
+      headers: ideaId
+    }).then(function(response) {
+      commentsObject.list = response.data;
+      console.log(commentsObject.list);
+      for (var i = 0; i < commentsObject.list.length; i++) {
+        if(commentsObject.list[i].comments_likes_count == null){
+          commentsObject.list[i].comments_likes_count = 0;
+        }
+      }
+    });
+  }
+
   //function to add idea "like" to database
   function addIdeaLike(ideaId, subtopicId){
     firebase.auth().currentUser.getToken().then(function(idToken) {
@@ -346,7 +331,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     });
   }
 
-  //function to add idea "like" to database
+  //function to add idea "love" to database
   function addIdeaLove(ideaId, subtopicId){
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
@@ -356,7 +341,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           id_token: idToken
         }
       }).then(function(response) {
-        console.log('response from server on add idea love:', response);
         getSubtopicIdeas(subtopicId);
       });
     });
@@ -370,6 +354,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     likes: likes,
     addIdeaLike: addIdeaLike,
     addIdeaLove: addIdeaLove,
+    getComments: getComments,
     //new user object from add address button click
     addNewUser : addNewUser,
     //new idea object from idea button click

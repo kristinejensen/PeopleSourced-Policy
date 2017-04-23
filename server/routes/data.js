@@ -161,6 +161,24 @@ router.get('/getCommentId', function(req, res) {
     });//end of .then
 });//end of router.get
 
+//gets specific comment by id for comment view (subtopic id)
+router.get('/getComments', function(req, res) {
+  var ideaId = req.headers;
+  pool.connect()
+    .then(function (client) {
+      client.query('WITH comments_likes_count_temp_table AS (SELECT comments.id AS comment_id, COUNT(comments.id) AS comments_likes_count FROM comments_likes JOIN comments ON comments_likes.comment_id=comments.id GROUP BY comments.id) SELECT comments.id AS comments_id, comments.description, comments.idea_id AS comments_idea_id, comments_likes.id AS comments_likes_id, comments_likes.user_id, comments_likes.comment_id, comments_likes_count FROM comments LEFT OUTER JOIN comments_likes ON comments_likes.id=comments.id LEFT JOIN comments_likes_count_temp_table ON comments_likes_count_temp_table.comment_id=comments.id WHERE comments.id=$1;',
+      [ideaId.id])
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on get comments', err);
+          res.sendStatus(500);
+        });
+    });//end of .then
+});//end of router.get
+
 //adds like to ideas_likes table
 router.put('/addIdeaLike/:id', function(req, res){
   console.log('add idea like route hit');
@@ -194,7 +212,6 @@ router.put('/addIdeaLike/:id', function(req, res){
 
 //adds like to ideas_likes table
 router.put('/addIdeaLove/:id', function(req, res){
-  console.log('add idea love route hit');
   var ideaId = req.params.id;
     // var userId = req.decodedToken.userSQLId;
   pool.connect(function (err, client, done) {

@@ -68,11 +68,12 @@
   *         COMMENTS AREA                                                          *
   * ============================================================================= */
 -->
-<div  class="commentDiv" ng-repeat="comments in cc.getCommentIdObject.list">
+<div  class="commentDiv" ng-repeat="comments in cc.commentsObject.list">
   <div class="col-md-1 col-lg-1"></div>
   <div  class="col-md-10 col-lg-10 topicText" style="padding-bottom: 0px !important;">
     <div class="card_content"  style="padding-bottom: 0px; !important">
       <p> {{comments.description}} </p>
+      <p>{{comments}}</p>
     </div>
     <div class="author_content">
       <div class ="author_img col-xl-3 col-md-3">

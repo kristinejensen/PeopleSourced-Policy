@@ -4,6 +4,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   var self = this;
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
+  var subtopicIdea = $routeParams;
 
 
   //shows all comments from BD to view(migth not need the two lines below)
@@ -13,10 +14,13 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   //come form DB
   self.getIdeaIdObject = DataFactory.getIdeaIdObject;
   self.getCommentIdObject = DataFactory.getCommentIdObject;
+
+  DataFactory.getComments(subtopicIdea);
   //shows all comments from BD to view
   self.commentsObject = DataFactory.commentsObject;
+  console.log('this is the updated get comments object: ', self.commentsObject);
   //two lines below do data request to DB for specific idea ID
-  var subtopicIdea = $routeParams;
+
   DataFactory.getIdeaId(subtopicIdea);
 
   // //redirects to home page
