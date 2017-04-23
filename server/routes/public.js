@@ -214,4 +214,26 @@ router.get('/subtopicIdeas', function(req, res){
   });
 });
 
+
+//*****************************************//
+//       GET MOST LIKED IDEA FOR HOME PAGE //
+//*****************************************//
+//gets specific comment by id for comment view (subtopic id)
+router.get('/getMostLikedIdea', function(req, res) {
+  console.log('get most liked idea route hit');
+  pool.connect()
+    .then(function (client) {
+      client.query('WITH ideas_likes_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_likes_count FROM ideas_likes JOIN ideas ON ideas_likes.idea_id=ideas.id GROUP BY ideas.id), ideas_loves_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_loves_count FROM ideas_loves JOIN ideas ON ideas_loves.idea_id=ideas.id GROUP BY ideas.id) SELECT ideas.title, ideas.description, ideas.subtopics_id, ideas.user_id, ideas.id, users.name, users.email, users.address, users.ward, users.admin, users.active, users.photo, ideas_likes_count, ideas_loves_count FROM ideas LEFT OUTER JOIN users ON ideas.user_id=users.id LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id WHERE users.active=true ORDER BY ideas_likes_count DESC LIMIT 1;')
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on get most liked idea', err);
+          res.sendStatus(500);
+        });
+    });
+});
+
+
 module.exports = router;

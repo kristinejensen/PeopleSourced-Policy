@@ -83,15 +83,15 @@
       <!-- START NG REPEAT BELOW HERE -->
       <div class="singleCard cardCenter col-md-5">
         <div class="card_content">
-          <h2>Here is where the title of the idea will go.</h2>
-          <p>Here is where a limited expert from the idea post will go. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <h2>{{hc.mostLikedIdea.list[0].title}}</h2>
+          <p>{{hc.mostLikedIdea.list[0].description}}</p>
           <div class="author_content">
             <div class ="author_img col-xl-3 col-md-3">
-              <p>IMAGE</p>
+              <p>{{hc.mostLikedIdea.list[0].photo}}</p>
             </div>
             <div class="author_info cole-xl 9 col-md-9">
-              <h4>Author Name</h4>
-              <h5>Ward x</h5>
+              <h4>{{hc.mostLikedIdea.list[0].name}}</h4>
+              <h5>{{hc.mostLikedIdea.list[0].ward}}</h5>
             </div>
           </div>
         </div>
@@ -99,12 +99,16 @@
           <ul>
             <div class="col-md-6 col-xs-6 actionBtn" style="border-right: 1px solid #eeeeee;">
               <li class="like">
-                <span>LIKE</span>
+                <span>{{hc.mostLikedIdea.list[0].ideas_likes_count}}</span>
+                <span ng-if="hc.mostLikedIdea.list[0].ideas_likes_count == 1">LIKE</span>
+                <span ng-if="hc.mostLikedIdea.list[0].ideas_likes_count == 0 || hc.mostLikedIdea.list[0].ideas_likes_count >= 2">LIKES</span>
               </li>
             </div>
             <div class="col-md-6 col-xs-6 actionBtn">
               <li class="love">
-                <span>LOVE</span>
+                <span>{{hc.mostLikedIdea.list[0].ideas_loves_count}}</span>
+                <span ng-if="hc.mostLikedIdea.list[0].ideas_loves_count == 1">LOVE</span>
+                <span ng-if="hc.mostLikedIdea.list[0].ideas_loves_count == 0 || hc.mostLikedIdea.list[0].ideas_loves_count >= 2">LOVES</span>
               </li>
             </div>
           </ul>

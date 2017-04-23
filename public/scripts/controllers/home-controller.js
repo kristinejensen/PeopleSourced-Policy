@@ -13,6 +13,7 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   self.commentsTally = DataFactory.commentsTally;
   self.likesTally = DataFactory.likesTally;
 
+  self.mostLikedIdea = DataFactory.mostLikedIdea;
 
 
   self.redirectLogin = function () {
