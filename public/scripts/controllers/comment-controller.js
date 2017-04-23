@@ -99,5 +99,4 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   }//end of addNewSubComment()
 
 
-
 }]);//end of app.controller()

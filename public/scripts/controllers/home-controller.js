@@ -3,7 +3,7 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   var self = this;
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
-  
+
 
   self.mainTopic = TopicsFactory.mainTopic;
   self.subTopic = TopicsFactory.subTopic;
@@ -70,5 +70,14 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
     //not working :(
       // subView(idea.subtopicId);
     }//end of self.createIdea()
+
+
+    self.buttonClicked = function() {
+    console.log("button clicked");
+
+    }
+
+
+
 
 }]);//end of app.controller()

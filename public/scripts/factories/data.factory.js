@@ -95,7 +95,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           id_token: idToken
         }
       }).then(function(response){
-        // getSubtopicIdeas();
+        getSubtopicIdeas();
         notyf.confirm('Your idea was added!');
         // swal("Idea Added To Database", "", "success");
         self.newIdea = {};
@@ -374,7 +374,7 @@ function getIdeaId(subtopicIdea) {
     allSubcommentsObject : allSubcommentsObject,
 //gets specific idea id from DB
     getIdeaId : getIdeaId,
-//current subtopic ideas    
+//current subtopic ideas
     getSubtopicIdeas : getSubtopicIdeas,
 //specifid idea from DB for comment view
     getIdeaIdObject : getIdeaIdObject,

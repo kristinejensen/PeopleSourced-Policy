@@ -10,7 +10,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
 
-  thisSubtopic(self.index);
+  // thisSubtopic(self.index);
+
 
   function thisSubtopic(index){
     TopicsFactory.thisSubtopic(index);
@@ -45,6 +46,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.createIdea = function() {
     $location.path('/idea');
   }
+
   //get moreComments button click
   self.moreComments = function() {
     $location.path('/comment/');
@@ -75,9 +77,11 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
       id : id
     }
 //sents object to factory
-    DataFactory.addNewIdea(newIdea).then(function(response){
-      redirectToSubtopic(newIdea);
-    });
+    DataFactory.addNewIdea(newIdea)
+    getIdeas()
+    // .then(function(response){
+    //   redirectToSubtopic(newIdea);
+    // });
     // redirect to correct subtopic page after submit
     // getIdeas(newIdea.id);
 
@@ -91,5 +95,10 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     console.log(subtopicIdea.id);
   }
 
+//filter submit button
+// self.buttonClick = function() {
+//   console.log("button was clicked");
+//
+// }
 
 }]);//end of my.app
