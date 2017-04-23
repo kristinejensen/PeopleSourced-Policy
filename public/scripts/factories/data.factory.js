@@ -303,6 +303,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //gets comments to display on comments page
   function getComments(ideaId) {
+    console.log('get comments function being called');
+    console.log('idea id from get comments function is', ideaId);
     $http({
       method: 'GET',
       url: '/data/getComments',
@@ -335,9 +337,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //function to add idea "love" to database
   function addIdeaLove(ideaId, subtopicId){
-    console.log('add idea love button clicked');
-    console.log(ideaId);
-    console.log(subtopicId);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'PUT',
@@ -373,7 +372,6 @@ function getMostLikedIdea(){
     url: '/public/getMostLikedIdea',
   }).then(function(response) {
     mostLikedIdea.list = response.data;
-    console.log(mostLikedIdea);
     for (var i = 0; i < mostLikedIdea.list.length; i++) {
       if(mostLikedIdea.list[i].idea_likes_count == null){
         mostLikedIdea.list[i].idea_likes_count = 0;

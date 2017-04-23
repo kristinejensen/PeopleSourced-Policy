@@ -132,10 +132,18 @@ router.get('/getIdeaId', function(req, res) {
   var subtopicIdea = req.headers;
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.user_id = users.id WHERE ideas.id=$1", [subtopicIdea.id])
+      client.query('WITH ideas_likes_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_likes_count FROM ideas_likes JOIN ideas ON ideas_likes.idea_id=ideas.id GROUP BY ideas.id), ' +
+      'ideas_loves_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_loves_count FROM ideas_loves JOIN ideas ON ideas_loves.idea_id=ideas.id GROUP BY ideas.id) ' +
+      'SELECT ideas.title, ideas.description, ideas.subtopics_id, ideas.user_id, ideas.id AS idea_id, users.name, users.email, users.address,users.ward, users.admin, users.active, users.photo, ideas_likes_count, ideas_loves_count, subtopics.active AS subtopics_active FROM ideas ' +
+      'LEFT OUTER JOIN users ON ideas.user_id=users.id ' +
+      'LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id ' +
+      'LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id ' +
+      'LEFT JOIN subtopics ON subtopics.id=ideas.subtopics_id ' +
+      'WHERE ideas.id=$1 AND subtopics.active=true AND users.active=true;', [subtopicIdea.id])
         .then(function (result) {
           client.release();
           res.send(result.rows);
+          console.log(result.rows);
         })
         .catch(function (err) {
           console.log('error on SELECT', err);
@@ -243,7 +251,7 @@ router.put('/addIdeaLove/:id', function(req, res){
 router.put('/addCommentLike/:id', function(req, res){
   var commentId = req.params.id;
   pool.connect(function (err, client, done) {
-    client.query('SELECT * FROM comments_likes WHERE user_id=4;', function(err, result){
+    client.query('SELECT * FROM comments_likes WHERE user_id=4 AND comment_id=$1;', [commentId], function(err, result){
       done();
       if(err){
         ('Error comments_likes user check query', err);
