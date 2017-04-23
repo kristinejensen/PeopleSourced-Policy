@@ -17,14 +17,14 @@
       <button ng-click="hc.createIdea()" class = "btn-80" type="button" name="button"> START A CONVERSATION! </button>
     </div>
     <!--//TOP-SIDE CALL TO ACTION ON MEDIUM AND LARGE SCREEN//-->
-    <div class="visible-md-block visible-lg-block visible-xl-block  col-md-5 callToAction">
+    <div class="visible-md-block visible-lg-block visible-xl-block  col-md-5 callToAction" style="padding-top: 35px;">
       <div class="ctaTitle">
         <h2><i class="fa fa-lightbulb-o" aria-hidden="true"></i> Share your thoughts </h2>
       </div>
       <div>
         <form class="ctaForm" align="center" action="index.html" method="post">
           <select ng-model="hc.idea.subtopicId">
-            <option> Choose a Topic </option>
+            <option selected disabled> Choose a Topic </option>
             <option ng-repeat="subtopic in hc.subTopic.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
           </select>
           <input ng-model="hc.idea.title" type="text" name="" value="" placeholder="Title">
@@ -41,7 +41,7 @@
 * ============================================================================= */
 -->
 <div id="tallyDiv">
-  <div class="row" style="text-align: center; padding-top: 35px;">
+  <div class="row" style="text-align: center;">
     <div class="col-md-3 col-xs-3" style="border-right: 2px solid #B7D4EE;  border-top: 2px solid #B7D4EE; border-bottom: 2px solid #6FA8DC; padding-top: 20px; padding-bottom: 20px;">
       <p> <b>Users</b> </p>
       <span style="font-size: 24px; color: #B7D4EE;"> {{hc.userTally.count.count}} </span>
