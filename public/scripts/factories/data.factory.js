@@ -18,6 +18,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var likesTally = {};
   var likes = {};
   var mostLikedIdea = {list: []};
+  var mostCommentedIdea = {list: []};
 
 
   //calls functions at startup
@@ -29,6 +30,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     getTallyInfo();
     getSubTopics();
     getMostLikedIdea();
+    getMostCommentedIdea();
   }
 
   function deactivateUser(userId) {
@@ -363,13 +365,22 @@ function addCommentLike(commentId, ideaId){
 }
 
 function getMostLikedIdea(){
-  console.log('get most liked idea function is being called');
   $http({
     method: 'GET',
     url: '/public/getMostLikedIdea',
   }).then(function(response) {
     mostLikedIdea.list = response.data;
-    console.log(mostLikedIdea.list);
+  });
+}
+
+function getMostCommentedIdea(){
+  console.log('get most commented idea function is being called');
+  $http({
+    method: 'GET',
+    url: '/public/getMostCommentedIdea',
+  }).then(function(response) {
+    mostCommentedIdea.list = response.data;
+    console.log('the most commented idea is: ', mostCommentedIdea.list);
   });
 }
 
@@ -385,6 +396,7 @@ function getMostLikedIdea(){
     addCommentLike: addCommentLike,
     mostLikedIdea: mostLikedIdea,
     getMostLikedIdea: getMostLikedIdea,
+    getMostCommentedIdea: getMostCommentedIdea,
     //new user object from add address button click
     addNewUser : addNewUser,
     //new idea object from idea button click
