@@ -17,7 +17,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
   var commentsTally = {};
   var likesTally = {};
   var likes = {};
-console.log(subTopicObject);
 
 
   //calls functions at startup
@@ -66,21 +65,21 @@ console.log(subTopicObject);
   //add new user to DB from login view button click
   function addNewUser(newUser){
     // firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
-        method: 'POST',
-        url: '/login/newUser',
-        data: newUser
-        // headers: {
-          // id_token: idToken
-        // }
-      }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        swal("User Added To Database", "", "success");
-        self.newUser = {};
-      }).catch(function(error) {
-        swal("Sorry, we couldn't process your address.", "Try Again!", "error");
-        console.log('error authenticating', error);
-      });
+    $http({
+      method: 'POST',
+      url: '/login/newUser',
+      data: newUser
+      // headers: {
+      // id_token: idToken
+      // }
+    }).then(function(response){
+      // notyf.confirm('Blank Submitted For Approval');
+      swal("User Added To Database", "", "success");
+      self.newUser = {};
+    }).catch(function(error) {
+      swal("Sorry, we couldn't process your address.", "Try Again!", "error");
+      console.log('error authenticating', error);
+    });
     // });//end of firebase.auth()
   }//end of addNewUser()
 
@@ -124,7 +123,6 @@ console.log(subTopicObject);
       }
     }).then(function(response) {
       subtopicIdeas.list = response.data;
-      console.log(subtopicIdeas.list);
       for (var i = 0; i < subtopicIdeas.list.length; i++) {
         if(subtopicIdeas.list[i].ideas_likes_count == null){
           subtopicIdeas.list[i].ideas_likes_count = 0;
@@ -213,7 +211,7 @@ console.log(subTopicObject);
     });//end of firebase.auth()
   }//end of addComment()
 
-getUserMatch()
+  getUserMatch()
   function getUserMatch() {
     $http({
       method: 'GET',
@@ -259,15 +257,15 @@ getUserMatch()
   };
 
 
-//get users to pull id when an idea is Submitted
-// function getUserMatch() {
-//     $http({
-//       method: 'GET',
-//       url: '/public/likesTally'
-//     }).then(function(response){
-//       likesTally.count = response.data;
-//     });
-//   } // end of getTallyInfo function
+  //get users to pull id when an idea is Submitted
+  // function getUserMatch() {
+  //     $http({
+  //       method: 'GET',
+  //       url: '/public/likesTally'
+  //     }).then(function(response){
+  //       likesTally.count = response.data;
+  //     });
+  //   } // end of getTallyInfo function
 
 
   // function getLikes() {
@@ -281,40 +279,40 @@ getUserMatch()
   // }
 
 
-//adds loved/idea to DB
-function addNewSubComment(newSubComment){
-  firebase.auth().currentUser.getToken().then(function(idToken) {
-    $http({
-      method: 'POST',
-      url: '/engagement/addNewSubComment',
-      data: newSubComment,
-      headers: {
-        id_token: idToken
-      }
-    }).then(function(response){
-      // notyf.confirm('Blank Submitted For Approval');
-      getAllSubcomments();
-      swal("Comment Added To Database", "", "success");
-      self.newSubComment = {};
-    }).catch(function(error) {
-      swal("Values Are Incorrect", "Try Again!", "error");
-      console.log('error authenticating', error);
-    });
-  });//end of firebase.auth()
-}//end of addComment()
+  //adds loved/idea to DB
+  function addNewSubComment(newSubComment){
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method: 'POST',
+        url: '/engagement/addNewSubComment',
+        data: newSubComment,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response){
+        // notyf.confirm('Blank Submitted For Approval');
+        getAllSubcomments();
+        swal("Comment Added To Database", "", "success");
+        self.newSubComment = {};
+      }).catch(function(error) {
+        swal("Values Are Incorrect", "Try Again!", "error");
+        console.log('error authenticating', error);
+      });
+    });//end of firebase.auth()
+  }//end of addComment()
 
-//gets all subcomments for comments view
-function getAllSubcomments() {
+  //gets all subcomments for comments view
+  function getAllSubcomments() {
     $http({
       method: 'GET',
       url: '/data/allSubcomments'
     }).then(function(response) {
       allSubcommentsObject.list = response.data;
     });
-}//end of getAllUsers()
+  }//end of getAllUsers()
 
-//gets all subcomments for comments view
-function getIdeaId(subtopicIdea) {
+  //gets all subcomments for comments view
+  function getIdeaId(subtopicIdea) {
     $http({
       method: 'GET',
       url: '/data/getIdeaId',
@@ -331,23 +329,38 @@ function getIdeaId(subtopicIdea) {
       getCommentIdObject.list = response.data;
     });
 
-}//end of getAllUsers()
+  }//end of getAllUsers()
 
-//function to add idea "like" to database
-function addIdeaLike(ideaId, subtopicId){
-firebase.auth().currentUser.getToken().then(function(idToken) {
-  $http({
-    method: 'PUT',
-    url: '/data/addIdeaLike/' + ideaId,
-    headers: {
-      id_token: idToken
-    }
-  }).then(function(response) {
-    console.log('response from server on add idea like :', response);
-    getSubtopicIdeas(subtopicId);
-  });
-});
-}
+  //function to add idea "like" to database
+  function addIdeaLike(ideaId, subtopicId){
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method: 'PUT',
+        url: '/data/addIdeaLike/' + ideaId,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response) {
+        getSubtopicIdeas(subtopicId);
+      });
+    });
+  }
+
+  //function to add idea "like" to database
+  function addIdeaLove(ideaId, subtopicId){
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method: 'PUT',
+        url: '/data/addIdeaLove/' + ideaId,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response) {
+        console.log('response from server on add idea love:', response);
+        getSubtopicIdeas(subtopicId);
+      });
+    });
+  }
 
   return {
     userTally: userTally,
@@ -356,34 +369,35 @@ firebase.auth().currentUser.getToken().then(function(idToken) {
     likesTally: likesTally,
     likes: likes,
     addIdeaLike: addIdeaLike,
-//new user object from add address button click
+    addIdeaLove: addIdeaLove,
+    //new user object from add address button click
     addNewUser : addNewUser,
-//new idea object from idea button click
+    //new idea object from idea button click
     addNewIdea : addNewIdea,
-//sends current subtopics to add idea view option element
+    //sends current subtopics to add idea view option element
     subTopicObject : subTopicObject,
-//adds ideas to subtopic1 view
+    //adds ideas to subtopic1 view
     subtopicIdeas : subtopicIdeas,
-//adds comment to DB
+    //adds comment to DB
     addComment : addComment,
-//gets comments to comment view
+    //gets comments to comment view
     commentsObject : commentsObject,
     // allUsers: allUsers,
     deactivateUser: deactivateUser,
-//checks user for axisting account at login
+    //checks user for axisting account at login
     getUserMatch : getUserMatch,
-//all existing users object
+    //all existing users object
     userMatchObject : userMatchObject,
-//adds sub-comments to DB
+    //adds sub-comments to DB
     addNewSubComment : addNewSubComment,
-//adds sub-comments to view
+    //adds sub-comments to view
     allSubcommentsObject : allSubcommentsObject,
-//gets specific idea id from DB
+    //gets specific idea id from DB
     getIdeaId : getIdeaId,
     getSubtopicIdeas : getSubtopicIdeas,
-//specifid idea from DB for comment view
+    //specifid idea from DB for comment view
     getIdeaIdObject : getIdeaIdObject,
-//specified comments from DB for comment view
+    //specified comments from DB for comment view
     getCommentIdObject : getCommentIdObject
 
   }

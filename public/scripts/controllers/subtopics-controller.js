@@ -9,6 +9,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
   self.addIdeaLike = DataFactory.addIdeaLike;
+  self.addIdeaLove = DataFactory.addIdeaLove;
 
   thisSubtopic(self.index);
 
