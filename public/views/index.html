@@ -51,12 +51,12 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
-  <body ng-app="ConnectApp">
+  <body  ng-app="ConnectApp">
 
     <div ng-include="'/views/templates/admin_bar.html'"></div>
     <div ng-include="'/views/templates/mainNav.html'"></div>
 
-    <main ng-view></main>
+    <main ng-view autoscroll="true"></main>
     <div ng-include="'/views/templates/footer.html'"></div>
 
   </body>

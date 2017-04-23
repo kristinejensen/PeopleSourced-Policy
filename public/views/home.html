@@ -24,7 +24,7 @@
       <div>
         <form class="ctaForm" align="center" action="index.html" method="post">
           <select ng-model="hc.idea.subtopicId">
-            <option selected disabled> Choose a Topic </option>
+            <option value="" ng-show="false"> Select: </option>
             <option ng-repeat="subtopic in hc.subTopic.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
           </select>
           <input ng-model="hc.idea.title" type="text" name="" value="" placeholder="Title">

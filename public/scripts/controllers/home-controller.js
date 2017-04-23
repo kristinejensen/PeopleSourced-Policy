@@ -25,7 +25,12 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
+    var notyf = new Notyf();
+
+    console.log('idea is?', idea);
     //name and email is added to the idea object
+    if(idea.subtopicId) {
+
     var newIdea = {
       name : firebaseUser.displayName,
       email : firebaseUser.email,
@@ -39,6 +44,9 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
     redirectToSubtopic(newIdea);
     //empties inputs on submit
     self.idea = {};
+  } else {
+    notyf.alert('Please select a subtopic from the dropdown.');
+  }
     //loads the ideas
     // getIdeas(idea.subtopicId);
   }//end of self.createIdea()
