@@ -1,36 +1,19 @@
-
-app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($http, $firebaseAuth, $routeParams){
-
+app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window', '$location', '$route', function($http, $firebaseAuth, $routeParams, $window, $location, $route){
+  //must have variable for notyf
+  var notyf = new Notyf();
   var auth = $firebaseAuth();
 
-
-  var subTopicObject = { list : [] };
   var subtopicIdeas = { list : [] };
   var commentsObject = { list : [] };
   var userMatchObject = { list : [] };
   var allSubcommentsObject = { list : [] }
   var getIdeaIdObject = { list : [] }
   var getCommentIdObject = { list : [] }
-  var allUsers = { list : [] }
   var userTally = {};
   var ideasTally = {};
   var commentsTally = {};
   var likesTally = {};
   var likes = {};
-console.log(subTopicObject);
-
-
-  //calls functions at startup
-  init();
-
-  function init() {
-    getSubtopicIdeas();
-    getComments();
-    getUserMatch();
-    getTallyInfo();
-    // getLikes();
-    getSubTopics();
-  }
 
   function deactivateUser(userId) {
     swal({
@@ -55,33 +38,32 @@ console.log(subTopicObject);
         init()
       });
     })
-    // getSubtopicIdeas();
-    // getComments();
+    getSubtopicIdeas();
+    getComments();
     // getUserMatch();
-    // getTallyInfo();
-    // getLikes();
+    getTallyInfo();
+    getLikes();
   }
 
 
   //add new user to DB from login view button click
   function addNewUser(newUser){
-    // firebase.auth().currentUser.getToken().then(function(idToken) {
+    firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
         url: '/login/newUser',
-        data: newUser
-        // headers: {
-          // id_token: idToken
-        // }
+        data: newUser,
+        headers: {
+          id_token: idToken
+        }
       }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        swal("User Added To Database", "", "success");
+        notyf.confirm('You are now a registered user!')
         self.newUser = {};
       }).catch(function(error) {
         swal("Sorry, we couldn't process your address.", "Try Again!", "error");
         console.log('error authenticating', error);
       });
-    // });//end of firebase.auth()
+    });//end of firebase.auth()
   }//end of addNewUser()
 
   //add new idea to DB from button click from idea view
@@ -95,24 +77,18 @@ console.log(subTopicObject);
           id_token: idToken
         }
       }).then(function(response){
-        // getSubtopicIdeas();
-        swal("Idea Added To Database", "", "success");
-        self.newIdea = {};
+        getSubtopicIdeas();
+        return $window.location.reload();
+        // $window.location.reload();
+        // self.newIdea = {};
+      }).then(function(){
+        return notyf.confirm('Your idea was added!')
       }).catch(function(error) {
+        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
         console.log('error authenticating', error);
       });
     });//end of firebase.auth()
   }//end of addNewUser()
-
-  //adds subtopics to idea view select element
-  function getSubTopics() {
-    $http({
-      method: 'GET',
-      url: '/public/getSubTopics',
-    }).then(function(response) {
-      subTopicObject.list = response.data;
-    });
-  }//end of getSubTopics()
 
   //adds ideas to subtopic views
   function getSubtopicIdeas(id) {
@@ -159,7 +135,6 @@ console.log(subTopicObject);
           id_token: idToken
         }
       }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
         swal("flag Added To Database", "", "success");
         // self.subtopicIdeas = {};
       }).catch(function(error) {
@@ -180,7 +155,7 @@ console.log(subTopicObject);
     });
   }//end of getComments()
 
-  //adds loved/idea to DB
+  //adds comment to DB
   function addComment(newComment){
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
@@ -191,32 +166,27 @@ console.log(subTopicObject);
           id_token: idToken
         }
       }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        // getComments();
-        swal("Comment Added To Database", "", "success");
+        notyf.confirm('Your comment was added!');
         self.addComment = {};
-        // getComments();
-        // getIdeaId();
       }).catch(function(error) {
         swal("Values Are Incorrect", "Try Again!", "error");
-        console.log('error authenticating', error);
+        console.log('error', error);
       });
     });//end of firebase.auth()
   }//end of addComment()
 
-getUserMatch()
-  function getUserMatch() {
-    $http({
-      method: 'GET',
-      url: '/data/getUserMatch',
-    }).then(function(response) {
-      userMatchObject.list = response.data;
-      // console.log('getusermatch response: ', response);
-    }).catch(function(error) {
-      console.log('error on get user match', error);
-      return 403;
-    });
-  }//end of getAllUsers()
+// getUserMatch()
+//   function getUserMatch() {
+//     $http({
+//       method: 'GET',
+//       url: '/data/getUserMatch',
+//     }).then(function(response) {
+//       userMatchObject.list = response.data;
+//     }).catch(function(error) {
+//       console.log('error on get user match', error);
+//       return 403;
+//     });
+//   }//end of getAllUsers()
 
   getTallyInfo();
 
@@ -242,34 +212,12 @@ getUserMatch()
       commentsTally.count = response.data;
     });
     $http({
-      method: 'GET',
-      url: '/public/likesTally'
-    }).then(function(response){
-      likesTally.count = response.data;
-    });
+         method: 'GET',
+         url: '/public/likesTally'
+       }).then(function(response){
+         likesTally.count = response.data;
+       });
   };//end of firebase.auth()
-
-
-//get users to pull id when an idea is Submitted
-// function getUserMatch() {
-//     $http({
-//       method: 'GET',
-//       url: '/public/likesTally'
-//     }).then(function(response){
-//       likesTally.count = response.data;
-//     });
-//   } // end of getTallyInfo function
-
-
-  // function getLikes() {
-  //   $http({
-  //     method: 'GET',
-  //     url: '/data/getLikes'
-  //   }).then(function(response) {
-  //     likes.count = response.data;
-  //     console.log(likes.count);
-  //   });
-  // }
 
   //adds like to DB
   function addLike(ideaId){
@@ -289,7 +237,7 @@ getUserMatch()
     });
   }
 
-//adds loved/idea to DB
+//adds sub comment to DB
 function addNewSubComment(newSubComment){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
@@ -300,9 +248,7 @@ function addNewSubComment(newSubComment){
         id_token: idToken
       }
     }).then(function(response){
-      // notyf.confirm('Blank Submitted For Approval');
-      getAllSubcomments();
-      swal("Comment Added To Database", "", "success");
+      notyf.confirm('Your comment was added');
       self.newSubComment = {};
     }).catch(function(error) {
       swal("Values Are Incorrect", "Try Again!", "error");
@@ -321,7 +267,7 @@ function getAllSubcomments() {
     });
 }//end of getAllUsers()
 
-//gets all subcomments for comments view
+//gets specfic idea for comments view
 function getIdeaId(subtopicIdea) {
     $http({
       method: 'GET',
@@ -330,7 +276,7 @@ function getIdeaId(subtopicIdea) {
     }).then(function(response) {
       getIdeaIdObject.list = response.data;
     });
-
+//gets specfic comment for comments view
     $http({
       method: 'GET',
       url: '/data/getCommentId',
@@ -341,6 +287,29 @@ function getIdeaId(subtopicIdea) {
 
 }//end of getAllUsers()
 
+
+var email = {};
+
+function checkUserStatus(){
+  return firebase.auth().currentUser.getToken().then(function(idToken) {
+    var firebaseUser = auth.$getAuth();
+    return $http({
+      method: 'GET',
+      url: '/login/checkUserStatus',
+      headers: {
+        id_token: idToken,
+        user_email: firebaseUser.email,
+      }
+    }).then(function(response){
+      return response;
+    });
+});
+};
+
+//redirection after login
+function loginView() {
+  $location.path('/login');
+}
 
 
   return {
@@ -354,8 +323,6 @@ function getIdeaId(subtopicIdea) {
     addNewUser : addNewUser,
 //new idea object from idea button click
     addNewIdea : addNewIdea,
-//sends current subtopics to add idea view option element
-    subTopicObject : subTopicObject,
 //adds ideas to subtopic1 view
     subtopicIdeas : subtopicIdeas,
 //adds comment to DB
@@ -365,7 +332,7 @@ function getIdeaId(subtopicIdea) {
     // allUsers: allUsers,
     deactivateUser: deactivateUser,
 //checks user for axisting account at login
-    getUserMatch : getUserMatch,
+    // getUserMatch : getUserMatch,
 //all existing users object
     userMatchObject : userMatchObject,
 //adds sub-comments to DB
@@ -374,12 +341,17 @@ function getIdeaId(subtopicIdea) {
     allSubcommentsObject : allSubcommentsObject,
 //gets specific idea id from DB
     getIdeaId : getIdeaId,
+//current subtopic ideas
     getSubtopicIdeas : getSubtopicIdeas,
 //specifid idea from DB for comment view
     getIdeaIdObject : getIdeaIdObject,
 //specified comments from DB for comment view
-    getCommentIdObject : getCommentIdObject
-
-  }
+    getCommentIdObject : getCommentIdObject,
+    //checks to see if the user exists in the database
+    checkUserStatus: checkUserStatus,
+    email: email,
+//gets all subcomments
+    getAllSubcomments : getAllSubcomments
+  }//end of return
 
 }]); // end of app.factory

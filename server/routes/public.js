@@ -22,6 +22,11 @@ router.get('/findActiveTopic', function(req, res){
   });
 });
 
+router.get('/checkAdminStatus', function (req, res) {
+    res.send(false);
+    console.log('admin', false);
+});//end of router.get
+
 //**********************************************//
 //           DISPLAY ACTIVE SUBTOPICS           //
 //**********************************************//
@@ -137,7 +142,7 @@ router.get('/commentsTally', function(req, res){
 //gets total number of likes on app to display on home page
 router.get('/likesTally', function(req, res){
   pool.connect(function (err, client, done) {
-    client.query('SELECT (SELECT COUNT(*) FROM sublikes) + (SELECT COUNT(*) FROM ideas_likes) + (SELECT COUNT(*) FROM comments_likes) AS SumCount;', function(err, result){
+    client.query('SELECT (SELECT COUNT(*) FROM subcomments_likes) + (SELECT COUNT(*) FROM ideas_likes) + (SELECT COUNT(*) FROM comments_likes) AS SumCount;', function(err, result){
       done();
       if(err){
         ('Error completing likes tally query', err);
@@ -199,9 +204,9 @@ router.get('/allComments', function (req, res) {
 //Finds all ideas based on the $routeParams/subtopic id and adds them to the subtopic views
 router.get('/subtopicIdeas', function(req, res){
   var subtopicId = req.headers.id;
-  console.log('subtopicID?', subtopicId);
+  // console.log('subtopicID?', subtopicId);
   pool.connect(function (err, client, done) {
-    client.query('SELECT * FROM users FULL OUTER JOIN ideas ON ideas.user_id = users.id WHERE subtopics_id=$1;',
+    client.query('Select count(ideas_likes.id), ideas.id, ideas.description, ideas.title, ideas.subtopics_id, ideas.user_id, users.name, users.ward, users.photo FROM ideas_likes FULL OUTER JOIN ideas ON ideas.id = ideas_likes.idea_id FULL OUTER JOIN users ON ideas.user_id = users.id WHERE subtopics_id = $1 GROUP BY ideas.id, users.id ORDER BY count desc;',
     [subtopicId], function(err, result){
       done();
       if(err){

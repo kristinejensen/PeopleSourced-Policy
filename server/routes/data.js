@@ -149,7 +149,7 @@ router.get('/getCommentId', function(req, res) {
   var subtopicIdea = req.headers;
   pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM comments WHERE idea_id=$1", [subtopicIdea.id])
+      client.query("SELECT * FROM comments FULL OUTER JOIN users ON user_id = users.id WHERE idea_id=$1", [subtopicIdea.id])
         .then(function (result) {
           client.release();
           res.send(result.rows);
