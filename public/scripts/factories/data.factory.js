@@ -75,7 +75,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         // }
       }).then(function(response){
         notyf.confirm('You are now a registered user!');
-        // swal("User Added To Database", "", "success");
         self.newUser = {};
       }).catch(function(error) {
         swal("Sorry, we couldn't process your address.", "Try Again!", "error");
@@ -160,7 +159,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           id_token: idToken
         }
       }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
         swal("flag Added To Database", "", "success");
         // self.subtopicIdeas = {};
       }).catch(function(error) {
@@ -181,7 +179,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     });
   }//end of getComments()
 
-  //adds loved/idea to DB
+  //adds comment to DB
   function addComment(newComment){
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
@@ -193,10 +191,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         }
       }).then(function(response){
         notyf.confirm('Your comment was added!');
-        // swal("Comment Added To Database", "", "success");
         self.addComment = {};
-        // getComments();
-        // getIdeaId();
       }).catch(function(error) {
         swal("Values Are Incorrect", "Try Again!", "error");
         console.log('error authenticating', error);
@@ -249,28 +244,6 @@ getUserMatch()
     });
   };//end of firebase.auth()
 
-
-//get users to pull id when an idea is Submitted
-// function getUserMatch() {
-//     $http({
-//       method: 'GET',
-//       url: '/public/likesTally'
-//     }).then(function(response){
-//       likesTally.count = response.data;
-//     });
-//   } // end of getTallyInfo function
-
-
-  // function getLikes() {
-  //   $http({
-  //     method: 'GET',
-  //     url: '/data/getLikes'
-  //   }).then(function(response) {
-  //     likes.count = response.data;
-  //     console.log(likes.count);
-  //   });
-  // }
-
   //adds like to DB
   function addLike(ideaId){
     // console.log(ideaId);
@@ -289,7 +262,7 @@ getUserMatch()
     });
   }
 
-//adds loved/idea to DB
+//adds sub comment to DB
 function addNewSubComment(newSubComment){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
@@ -302,7 +275,6 @@ function addNewSubComment(newSubComment){
     }).then(function(response){
       notyf.confirm('Your comment was added');
       getAllSubcomments();
-      // swal("Comment Added To Database", "", "success");
       self.newSubComment = {};
     }).catch(function(error) {
       swal("Values Are Incorrect", "Try Again!", "error");
@@ -321,7 +293,7 @@ function getAllSubcomments() {
     });
 }//end of getAllUsers()
 
-//gets all subcomments for comments view
+//gets specfic idea for comments view
 function getIdeaId(subtopicIdea) {
     $http({
       method: 'GET',
@@ -330,7 +302,7 @@ function getIdeaId(subtopicIdea) {
     }).then(function(response) {
       getIdeaIdObject.list = response.data;
     });
-
+//gets specfic comment for comments view
     $http({
       method: 'GET',
       url: '/data/getCommentId',

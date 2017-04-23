@@ -4,19 +4,17 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   var self = this;
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
-// console.log("req.decodedToken.userSQLId ;", decodedToken.userSQLId);
-
-  //shows all comments from BD to view(migth not need the two lines below)
-  // self.commentsObject = DataFactory.commentsObject;
-  // self.allSubcommentsObject = DataFactory.allSubcommentsObject;
 
   //come form DB
   self.getIdeaIdObject = DataFactory.getIdeaIdObject;
   self.getCommentIdObject = DataFactory.getCommentIdObject;
+
   DataFactory.getAllSubcomments();
+
   //shows all comments from BD to view
   self.commentsObject = DataFactory.commentsObject;
   self.allSubcommentsObject = DataFactory.allSubcommentsObject;
+
   //two lines below do data request to DB for specific idea ID
   var subtopicIdea = $routeParams;
   DataFactory.getIdeaId(subtopicIdea);
@@ -60,6 +58,8 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     DataFactory.addComment(newComment);
     //empties inputs after submission
     self.comment = {};
+    // console.log(subtopicIdea.id);
+    $location.url('/comment/' + subtopicIdea.id );
   }//end of self.addComment()
 
   //*****************************************//
@@ -67,7 +67,6 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   //*****************************************//
   //shows and hides sun-comment text area
   self.showComment = false;
-  //sub-comment button click function
   self.showCommentArea = function(comments){
     console.log("comments ", comments);
     self.showComment = true;
@@ -75,9 +74,8 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
 //button click to add new sub-comment (need to add firebase id into the line below)
   self.addNewSubComment = function(subComment){
-    var userMatchObject = DataFactory.userMatchObject.list;
-//sources firebaseUser in the function
     var firebaseUser = auth.$getAuth();
+    var userMatchObject = DataFactory.userMatchObject.list;
 //container to loop id's through
     var id = "";
 //loops through all users email to find correct id

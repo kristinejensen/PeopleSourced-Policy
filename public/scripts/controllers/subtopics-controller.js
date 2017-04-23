@@ -10,7 +10,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
 
-  // thisSubtopic(self.index);
+//displays subtopic main heading?
+  thisSubtopic(self.index);
 
 
   function thisSubtopic(index){

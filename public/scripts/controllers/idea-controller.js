@@ -12,6 +12,7 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
     });
   };
 
+
   // function to redirect user to home page after logout
   self.redirectHome = function(){
     $location.url('/home');
@@ -19,12 +20,11 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
 
 //redirect to home view
   function homeView() {
-    $location.path('/home');
+    $location.path('/home/');
   }//end of homeView()
+
 //current subtopics for select option
   self.subTopicObject = DataFactory.subTopicObject;
-  // console.log("self.subTopicObject", self.subTopicObject);
-//all user email and id
 
 //function adds new idea to DB
   self.addNewIdea = function(idea) {
@@ -53,7 +53,7 @@ app.controller('IdeaController', ['DataFactory', '$firebaseAuth', '$location', f
 //empties inputs on submit
     self.idea = {};
 //redirect after submit
-    homeView();
+    // homeView();
   };//end of addNewIdea()
 
 }]);//end of app.controller()
