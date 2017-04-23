@@ -15,6 +15,7 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
 
 
   self.addIdeaLike = DataFactory.addIdeaLike;
+  self.addIdeaLove = DataFactory.addIdeaLove;
   self.mostLikedIdea = DataFactory.mostLikedIdea;
   // self.mostCommentedIdea = DataFactory.mostCommentedIdea;
 

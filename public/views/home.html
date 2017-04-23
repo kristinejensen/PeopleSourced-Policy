@@ -104,7 +104,7 @@
                 <span ng-if="idea.ideas_likes_count == 0 || idea.ideas_likes_count >= 2">LIKES</span>
               </li>
             </div>
-            <div class="col-md-6 col-xs-6 actionBtn">
+            <div ng-click="hc.addIdeaLove(idea.idea_id, idea.subtopics_id)" class="col-md-6 col-xs-6 actionBtn">
               <li class="love">
                 <span>{{idea.ideas_loves_count}}</span>
                 <span ng-if="idea.list[0].ideas_loves_count == 1">LOVE</span>

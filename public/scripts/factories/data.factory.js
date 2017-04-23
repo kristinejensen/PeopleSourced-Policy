@@ -319,8 +319,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //function to add idea "like" to database
   function addIdeaLike(ideaId, subtopicId){
-    console.log('idea id', ideaId);
-    console.log('subtopic id', subtopicId);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'PUT',
@@ -337,6 +335,9 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //function to add idea "love" to database
   function addIdeaLove(ideaId, subtopicId){
+    console.log('add idea love button clicked');
+    console.log(ideaId);
+    console.log(subtopicId);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'PUT',
@@ -346,6 +347,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         }
       }).then(function(response) {
         getSubtopicIdeas(subtopicId);
+        getMostLikedIdea();
       });
     });
   }
