@@ -216,6 +216,7 @@ router.get('/subtopicIdeas', function(req, res){
         res.sendStatus(500);
       } else {
         res.send(result.rows);
+        console.log(result.rows);
       }
     });
   });
@@ -236,7 +237,7 @@ router.get('/getMostLikedIdea', function(req, res) {
       'LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id ' +
       'LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id ' +
       'LEFT JOIN subtopics ON subtopics.id=ideas.subtopics_id ' +
-      'WHERE subtopics.active=true AND users.active=true ORDER BY ideas_likes_count DESC LIMIT 1;')
+      'WHERE subtopics.active=true AND users.active=true ORDER BY ideas_likes_count DESC LIMIT 2;')
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -252,8 +253,8 @@ router.get('/getMostLikedIdea', function(req, res) {
 //       GET MOST COMMENTED IDEA FOR HOME PAGE //
 //*****************************************//
 //gets specific comment by id for comment view (subtopic id)
-router.get('/getMostCommentedIdea', function(req, res) {
-  console.log('get most commented idea route hit');
+// router.get('/getMostCommentedIdea', function(req, res) {
+  // console.log('get most commented idea route hit');
   // pool.connect()
   //   .then(function (client) {
   //     client.query('WITH ideas_likes_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_likes_count FROM ideas_likes JOIN ideas ON ideas_likes.idea_id=ideas.id GROUP BY ideas.id), ideas_loves_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_loves_count FROM ideas_loves JOIN ideas ON ideas_loves.idea_id=ideas.id GROUP BY ideas.id) SELECT ideas.title, ideas.description, ideas.subtopics_id, ideas.user_id, ideas.id, users.name, users.email, users.address, users.ward, users.admin, users.active, users.photo, ideas_likes_count, ideas_loves_count FROM ideas LEFT OUTER JOIN users ON ideas.user_id=users.id LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id WHERE users.active=true ORDER BY ideas_likes_count DESC LIMIT 1;')
@@ -266,7 +267,7 @@ router.get('/getMostCommentedIdea', function(req, res) {
   //         res.sendStatus(500);
   //       });
   //   });
-});
+// });
 
 
 module.exports = router;

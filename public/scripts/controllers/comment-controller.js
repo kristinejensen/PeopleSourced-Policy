@@ -18,7 +18,6 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   DataFactory.getComments(subtopicIdea);
   //shows all comments from BD to view
   self.commentsObject = DataFactory.commentsObject;
-  console.log('this is the updated get comments object: ', self.commentsObject);
   self.addCommentLike = DataFactory.addCommentLike;
   //two lines below do data request to DB for specific idea ID
 

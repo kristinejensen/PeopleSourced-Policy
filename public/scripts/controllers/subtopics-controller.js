@@ -89,8 +89,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
 
   // get moreComments button click
   self.moreComments = function(subtopicIdea) {
-    $location.path('/comment/' + subtopicIdea.id);
-    console.log(subtopicIdea.id);
+    $location.path('/comment/' + subtopicIdea.subtopics_id);
+    console.log('the more comments subtopic id is:', subtopicIdea.subtopics_id);
   }
 
 }]);

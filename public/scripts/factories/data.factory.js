@@ -30,7 +30,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     getTallyInfo();
     getSubTopics();
     getMostLikedIdea();
-    getMostCommentedIdea();
+    // getMostCommentedIdea();
   }
 
   function deactivateUser(userId) {
@@ -303,8 +303,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //gets comments to display on comments page
   function getComments(ideaId) {
-    console.log('get comments function is being called');
-    console.log(ideaId);
     $http({
       method: 'GET',
       url: '/data/getComments',
@@ -321,6 +319,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
 
   //function to add idea "like" to database
   function addIdeaLike(ideaId, subtopicId){
+    console.log('idea id', ideaId);
+    console.log('subtopic id', subtopicId);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'PUT',
@@ -330,6 +330,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
         }
       }).then(function(response) {
         getSubtopicIdeas(subtopicId);
+        getMostLikedIdea();
       });
     });
   }
@@ -370,19 +371,27 @@ function getMostLikedIdea(){
     url: '/public/getMostLikedIdea',
   }).then(function(response) {
     mostLikedIdea.list = response.data;
+    console.log(mostLikedIdea);
+    for (var i = 0; i < mostLikedIdea.list.length; i++) {
+      if(mostLikedIdea.list[i].idea_likes_count == null){
+        mostLikedIdea.list[i].idea_likes_count = 0;
+      }
+      if(mostLikedIdea.list[i].ideas_loves_count == null){
+        mostLikedIdea.list[i].ideas_loves_count = 0;
+      }
+    }
   });
 }
 
-function getMostCommentedIdea(){
-  console.log('get most commented idea function is being called');
-  $http({
-    method: 'GET',
-    url: '/public/getMostCommentedIdea',
-  }).then(function(response) {
-    mostCommentedIdea.list = response.data;
-    console.log('the most commented idea is: ', mostCommentedIdea.list);
-  });
-}
+// function getMostCommentedIdea(){
+//   $http({
+//     method: 'GET',
+//     url: '/public/getMostCommentedIdea',
+//   }).then(function(response) {
+//     mostCommentedIdea.list = response.data;
+//     // console.log('the most commented idea is: ', mostCommentedIdea.list);
+//   });
+// }
 
   return {
     userTally: userTally,
@@ -396,7 +405,7 @@ function getMostCommentedIdea(){
     addCommentLike: addCommentLike,
     mostLikedIdea: mostLikedIdea,
     getMostLikedIdea: getMostLikedIdea,
-    getMostCommentedIdea: getMostCommentedIdea,
+    // getMostCommentedIdea: getMostCommentedIdea,
     //new user object from add address button click
     addNewUser : addNewUser,
     //new idea object from idea button click
