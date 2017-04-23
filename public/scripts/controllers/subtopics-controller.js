@@ -1,19 +1,29 @@
-app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', '$routeParams', '$location', '$firebaseAuth', function(DataFactory, TopicsFactory, $http, $routeParams, $location, $firebaseAuth) {
+
+app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', '$routeParams', '$location', '$firebaseAuth', '$window', function(DataFactory, TopicsFactory, $http, $routeParams, $location, $firebaseAuth, $window) {
   var self = this;
+  var auth = $firebaseAuth();
+  var firebaseUser = auth.$getAuth();
   //THESE TWO ARE THE SAME THING?
   self.subTopic = TopicsFactory.subTopic;
   self.subtopicIdeas = DataFactory.subtopicIdeas;
   self.index = $routeParams.id;
-  console.log('index on load: ', self.index);
+  self.subTopicObject = DataFactory.subTopicObject;
+  self.individualSubtopic = TopicsFactory.individualSubTopic;
+
+  //displays subtopic main heading?
+  thisSubtopic(self.index);
+
+  function thisSubtopic(index){
+    TopicsFactory.thisSubtopic(index);
+  }
 
   getIdeas(self.index);
 
   function getIdeas(index){
-    console.log('FUNCTIONS', index);
+    // console.log('FUNCTIONS', index);
     DataFactory.getSubtopicIdeas(index);
   }
 
-  //BEGIN CHRIS' CODE
   //redirect to home view
   function homeView() {
     $location.path('/home');
@@ -21,44 +31,66 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   //redirect to correct subtopic view
   //not working :(
   function redirectToSubtopic(url) {
-    $location.path('/subtopics/' + url);
+    console.log(url.subtopicId);
+    $location.path('/subtopics/' + url.subtopicId);
     getIdeas(self.index);
-
-    // getIdeas(url);
-    console.log('index in redirect: ', self.index);
-    console.log('url in redirect: ', url);
   }
+
   //redirect to add idea view
   self.createIdea = function() {
     $location.path('/idea');
   }
-  //get moreComments button click
-  self.moreComments = function() {
-    $location.path('/comment');
-  }
 
+  // //get moreComments button click
+  // self.moreComments = function() {
+  //   $location.path('/comment/');
+  // }
+
+  // var userMatchObject = DataFactory.userMatchObject.list;
+  // console.log('userMatchObject.list: ', userMatchObject);
   self.addNewIdea = function(idea) {
+
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
-    //creates the new idea object from form/auth
-      var newIdea = {
-        name : firebaseUser.displayName,
-        email : firebaseUser.email,
-        subtopicId : idea.subtopicId,
-        title : idea.title,
-        description : idea.description,
-        id : idea.subtopicId
-      }
-      //sents object to factory
-      DataFactory.addNewIdea(newIdea).then(function(response){
-        redirectToSubtopic(newIdea.id);
-      });
-      //redirect to correct subtopic page after submit
-      // getIdeas(newIdea.id);
-
+    //checks to see if user in logged in
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    }
+    //The new idea object with the user inforamtion attached.
+    var newIdea = {
+      name : firebaseUser.displayName,
+      email : firebaseUser.email,
+      subtopicId : idea.subtopicId,
+      title : idea.title,
+      description : idea.description
+    }
+    //Sends the new idea object to factory
+    DataFactory.addNewIdea(newIdea).then(function(response){
+      // redirect to correct subtopic page after submit
+      redirectToSubtopic(newIdea);
+    });
+    //reloads the entire page after submitting an idea
+    $window.location.reload();
+    // $window.reload();
+    // .then(function(response){
+    //   redirectToSubtopic(newIdea);
+    // });
+    // redirect to correct subtopic page after submit
+    getIdeas(newIdea.id);
     //empties inputs on submit
-      self.idea = {};
-    }//end of self.createIdea()
-  //END CHRIS' CODE
-}]);
+    self.idea = {};
+  }//end of self.createIdea()
+
+
+
+
+
+//get moreComments button click
+self.moreComments = function(subtopicIdea) {
+  $location.path('/comment/' + subtopicIdea.id);
+  console.log(subtopicIdea.id);
+}
+
+
+}]);//end of my.app

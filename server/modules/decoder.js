@@ -1,10 +1,14 @@
+
 var pool = require('../modules/database-config');
 var admin = require("firebase-admin");
 // var logger = require('./logger');
 
+
+
+
 admin.initializeApp({
-  credential: admin.credential.cert("./server/firebase-service-account.json"),
-  databaseURL: "https://psp-group.firebaseio.com/", // replace this line with your URL
+ credential: admin.credential.cert("./server/firebase-service-account.json"),
+ databaseURL: "https://psp-group.firebaseio.com/", // replace this line with your URL
 });
 /* This is where the magic happens. We pull the id_token off of the request,
 verify it against our firebase service account private_key.
@@ -16,7 +20,7 @@ var tokenDecoder = function (req, res, next) {
       req.decodedToken = decodedToken;
       pool.connect(function (err, client, done) {
         var firebaseUserId = req.decodedToken.user_id || req.decodedToken.uid;
-        client.query('SELECT id FROM users WHERE email=$1', [req.decodedToken.email], function (err, userSQLIdResult) {
+        client.query('SELECT id, admin FROM users WHERE email=$1', [req.decodedToken.email], function (err, userSQLIdResult) {
           done();
           if (err) {
             console.log('Error completing user id query task', err);
@@ -29,7 +33,7 @@ var tokenDecoder = function (req, res, next) {
                 // this else is for users that already exist. This should be the most common path
                 // this adds the user's id from the database to the request to simplify future database queries
                 req.decodedToken.userSQLId = userSQLIdResult.rows[0].id;
-                // req.decodedToken.admin = userSQLIdResult.rows[0].admin;
+                req.decodedToken.admin = userSQLIdResult.rows[0].admin;
                 next();
               } else if (userSQLIdResult.rows.length === 0) {
                 console.log('could not find user in DB');
@@ -58,5 +62,5 @@ var tokenDecoder = function (req, res, next) {
 }
 
 module.exports = {
-  token: tokenDecoder,
+ token: tokenDecoder,
 };
