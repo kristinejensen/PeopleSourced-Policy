@@ -240,4 +240,35 @@ router.put('/addIdeaLove/:id', function(req, res){
   });
 });
 
+//adds like to comments_likes table
+router.put('/addCommentLike/:id', function(req, res){
+  var commentId = req.params.id;
+  console.log('add comment like route hit');
+  console.log(commentId);
+  pool.connect(function (err, client, done) {
+    client.query('SELECT * FROM comments_likes WHERE user_id=4;', function(err, result){
+      done();
+      if(err){
+        ('Error comments_likes user check query', err);
+      } else {
+        if (result.rows.length == 0){
+          pool.connect(function (err, client, done) {
+            client.query('INSERT INTO comments_likes (user_id, comment_id) VALUES (4, $1);', [commentId], function(err, result){
+              done();
+              if(err){
+                ('Error comments_likes insert', err);
+                res.sendStatus(500);
+              } else {
+                res.sendStatus(200);
+              }
+            });
+          });
+        }else{
+          res.sendStatus(403);
+        }
+      }
+    });
+  });
+});
+
 module.exports = router;

@@ -307,7 +307,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
       headers: ideaId
     }).then(function(response) {
       commentsObject.list = response.data;
-      console.log(commentsObject.list);
       for (var i = 0; i < commentsObject.list.length; i++) {
         if(commentsObject.list[i].comments_likes_count == null){
           commentsObject.list[i].comments_likes_count = 0;
@@ -346,6 +345,24 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     });
   }
 
+  //function to add comment "like" to database
+function addCommentLike(commentId, ideaId){
+  console.log('add comment like button clicked');
+  console.log(commentId);
+  console.log(ideaId);
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'PUT',
+      url: '/data/addCommentLike/' + commentId,
+      headers: {
+        id_token: idToken
+      }
+    }).then(function(response) {
+      getComments({id: ideaId});
+    });
+  });
+}
+
   return {
     userTally: userTally,
     ideasTally: ideasTally,
@@ -355,6 +372,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
     addIdeaLike: addIdeaLike,
     addIdeaLove: addIdeaLove,
     getComments: getComments,
+    addCommentLike: addCommentLike,
     //new user object from add address button click
     addNewUser : addNewUser,
     //new idea object from idea button click
