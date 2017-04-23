@@ -1,5 +1,5 @@
 app.controller('NavCtrl', ['$firebaseAuth', '$http', '$location', 'TopicsFactory', function($firebaseAuth, $http, $location, TopicsFactory){
-  // var self = this;
+  var self = this;
   // var self = this;
   // var auth = $firebaseAuth();
   //loads the active subtopics onto the nav.

@@ -4,10 +4,14 @@ app.controller('LoginController', ['DataFactory', 'TopicsFactory', '$firebaseAut
   var auth = $firebaseAuth();
   var self = this;
   var firebaseUser = auth.$getAuth();
+
     // var notyf = new Notyf();
 
   TopicsFactory.checkAdminStatus().then(function(response){
     self.isAdmin = TopicsFactory.isAdmin;
+    var name = firebaseUser.displayName;
+    var split = name.split(" ")
+    self.name = split[0];
   });
   // self.isAdmin = TopicsFactory.isAdmin;
 
@@ -18,6 +22,10 @@ app.controller('LoginController', ['DataFactory', 'TopicsFactory', '$firebaseAut
      self.email = true;
      TopicsFactory.checkAdminStatus().then(function(response){
        self.isAdmin = TopicsFactory.isAdmin;
+       var name = firebaseUser.displayName;
+       var split = name.split(" ")
+       self.name = split[0];
+
      });
      // go reload idea data....
     //  DataFactory.init();
@@ -27,6 +35,10 @@ app.controller('LoginController', ['DataFactory', 'TopicsFactory', '$firebaseAut
      self.email = '';
      TopicsFactory.checkAdminStatus().then(function(response){
        self.isAdmin = TopicsFactory.isAdmin;
+           var name = firebaseUser.displayName;
+           var split = name.split(" ")
+           self.name = split[0];
+
      });
     //  self.logout();
    }
@@ -123,8 +135,8 @@ app.controller('LoginController', ['DataFactory', 'TopicsFactory', '$firebaseAut
     $location.path('/home');
   }
   //redirect to admin view
-  function adminView() {
-    $location.path('/admin');
+  self.adminView = function() {
+    $location.path('/admin-reports');
   }
 
 }]);//end of app.controller()

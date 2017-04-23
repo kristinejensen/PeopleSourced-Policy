@@ -1,4 +1,6 @@
 <div ng-controller="LoginController as lc">
-<div ng-show="lc.isAdmin.list == true" style="height: 35px; background-color: #333333; color: white; padding-left: 20px; line-height: 35px;">Yay you're an admin!</div>
-<div ng-show="lc.isAdmin.list == false" style="height: 35px; background-color: #333333; color: white; padding-left: 20px; line-height: 35px;">whoops</div>
+<div ng-show="lc.isAdmin.list == true" class="row" style="height: 45px; background-color: #dddddd; border-top: 3px solid #6FA8DC; color: black; padding-right: 20px; line-height: 45px;">
+  <div class="col-md-6"><button ng-click="lc.adminView()" class="adminDash"><i class="fa fa-tachometer" style="font-size: 20px;"aria-hidden="true"></i> Go to Dashboard</button></div>
+  <div class="col-md-6" style="text-align: right;">Welcome {{lc.name}}!</div>
+</div>
 </div>
