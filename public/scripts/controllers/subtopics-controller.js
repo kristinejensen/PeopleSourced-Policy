@@ -10,7 +10,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
 
-//displays subtopic main heading?
+  //displays subtopic main heading?
   thisSubtopic(self.index);
 
   function thisSubtopic(index){
@@ -31,7 +31,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   //redirect to correct subtopic view
   //not working :(
   function redirectToSubtopic(url) {
-    $location.path('/subtopics/' + subtopicIdea.id);
+    console.log(url.subtopicId);
+    $location.path('/subtopics/' + url.subtopicId);
     getIdeas(self.index);
   }
 
@@ -40,44 +41,36 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     $location.path('/idea');
   }
 
-  //get moreComments button click
-  self.moreComments = function() {
-    $location.path('/comment/');
-  }
+  // //get moreComments button click
+  // self.moreComments = function() {
+  //   $location.path('/comment/');
+  // }
 
-  var userMatchObject = DataFactory.userMatchObject.list;
+  // var userMatchObject = DataFactory.userMatchObject.list;
   // console.log('userMatchObject.list: ', userMatchObject);
   self.addNewIdea = function(idea) {
 
-//sources firebaseUser in the function
+    //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
-
-//checks to see if user in logged in
+    //checks to see if user in logged in
     if (firebaseUser === null){
       swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
     }
-//container to loop id's through
-    var id = "";
-//loops through all users email to find correct id
-    for (var i = 0; i < userMatchObject.length; i++) {
-      if (userMatchObject[i].email == firebaseUser.email) {
-        var id = userMatchObject[i].id;
-      }//end of if
-    };//end of for loop
-
+    //The new idea object with the user inforamtion attached.
     var newIdea = {
       name : firebaseUser.displayName,
       email : firebaseUser.email,
       subtopicId : idea.subtopicId,
       title : idea.title,
-      description : idea.description,
-      id : id
+      description : idea.description
     }
-
-//sents object to factory
-    DataFactory.addNewIdea(newIdea)
-//reloads the entire page after submitting an idea
+    //Sends the new idea object to factory
+    DataFactory.addNewIdea(newIdea).then(function(response){
+      // redirect to correct subtopic page after submit
+      redirectToSubtopic(newIdea);
+    });
+    //reloads the entire page after submitting an idea
     $window.location.reload();
     // $window.reload();
     // .then(function(response){
@@ -85,17 +78,19 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     // });
     // redirect to correct subtopic page after submit
     getIdeas(newIdea.id);
-
-//empties inputs on submit
+    //empties inputs on submit
     self.idea = {};
   }//end of self.createIdea()
 
 
+
+
+
 //get moreComments button click
-  self.moreComments = function(subtopicIdea) {
-    $location.path('/comment/' + subtopicIdea.id);
-    console.log(subtopicIdea.id);
-  }
+self.moreComments = function(subtopicIdea) {
+  $location.path('/comment/' + subtopicIdea.id);
+  console.log(subtopicIdea.id);
+}
 
 
 }]);//end of my.app

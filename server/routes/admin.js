@@ -26,6 +26,17 @@ router.get('/userChart', function (req, res) {
   }
 });//end of router.get
 
+router.get('/checkAdminStatus', function (req, res) {
+  console.log('get here?');
+  if(req.decodedToken.admin){
+    res.send(true);
+    console.log('admin', true);
+  } else{
+    res.send(false);
+    console.log('admin', false);
+  }
+});//end of router.get
+
 //gets all users name and id for idea and comment view
 router.get('/ideaChart', function (req, res) {
   if(req.decodedToken.admin){

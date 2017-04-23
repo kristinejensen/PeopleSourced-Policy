@@ -38,9 +38,12 @@
       <script src="https://use.fontawesome.com/32179b6885.js"></script>
       <script src="../vendors/angular-animate.js" charset="utf-8"></script>
       <script src="../vendors/notyf.min.js" type="text/javascript"></script>
+      <script src="../vendors/angular-tooltips.js" type="text/javascript"></script>
+
 
       <link rel="stylesheet" href="../vendors/sweetalert2.css">
       <link rel="stylesheet" href="../vendors/bootstrap.min.css">
+      <link rel="stylesheet" href="../vendors/angular-tooltips.css">
       <link rel="stylesheet" type="text/css" href="../vendors/notyf.min.css">
       <link rel="stylesheet" href="../styles/styles.css">
       <link rel="stylesheet" href="../styles/card.css">
@@ -48,10 +51,12 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
-  <body ng-app="ConnectApp">
+  <body  ng-app="ConnectApp">
 
+    <div ng-include="'/views/templates/admin_bar.html'"></div>
     <div ng-include="'/views/templates/mainNav.html'"></div>
-    <main ng-view></main>
+
+    <main ng-view autoscroll="true"></main>
     <div ng-include="'/views/templates/footer.html'"></div>
 
   </body>
