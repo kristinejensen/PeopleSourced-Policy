@@ -2,6 +2,10 @@
 /* ============================================================================= *
 *           MAIN TOPIC                                                           *
 * ============================================================================== */
+.active {
+  color: white !important;
+  background-color: #666666 !important;
+}
 
 .adminDash{
   height: 45px;
@@ -9,10 +13,10 @@
   border: none;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: #eeeeee;
+  background-color: #cccccc;
 }
 
-.adminDash:hover{
+.adminDash{
   background-color: #B7D4EE;
   border: none;
 }
@@ -626,7 +630,7 @@ th {
   background-color: #666666 !important;
 }
 
-.sub-nav:hover > li {
+.sub-nav:hover > li > a {
   height: 85px;
   style: none;
   background-color: #666666 !important;
