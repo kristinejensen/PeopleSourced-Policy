@@ -168,14 +168,8 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', function($
           id_token: idToken
         }
       }).then(function(response){
-// <<<<<<< HEAD
-//         // notyf.confirm('Blank Submitted For Approval');
-//         getComments();
-//         swal("Comment Added To Database", "", "success");
-// =======
+
         notyf.confirm('Your comment was added!');
-        // swal("Comment Added To Database", "", "success");
-// >>>>>>> remotes/origin/feature-chris-subcomment
         self.addComment = {};
       }).catch(function(error) {
         swal("Values Are Incorrect", "Try Again!", "error");
