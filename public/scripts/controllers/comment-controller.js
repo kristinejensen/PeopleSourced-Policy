@@ -84,5 +84,9 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     $window.location.reload();
   }//end of addNewSubComment()
 
+  //redirect to add idea view
+  self.flagIdea = function() {
+    $location.path('/flag');
+  }
 
 }]);//end of app.controller()

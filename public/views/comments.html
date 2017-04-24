@@ -97,7 +97,7 @@
             <span ng-if="comments.comments_likes_count == 0 || comments.comments_likes_count >= 2">LIKES</span>
           </li>
         </div>
-        <div class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
+        <div ng-click="cc.flagIdea()" class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
           <li class="love">
             <span> FLAG </span>
           </li>

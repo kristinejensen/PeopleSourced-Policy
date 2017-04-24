@@ -9,8 +9,15 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.index = $routeParams.id;
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
-  self.addIdeaLike = DataFactory.addIdeaLike;
   self.addIdeaLove = DataFactory.addIdeaLove;
+
+  self.addIdeaLike = function(ideaId, subtopicsId){
+    if (firebaseUser === null){
+      swal("You must be logged in!", "Try Again!", "error");
+    }
+    console.log('got clicked');
+    DataFactory.addIdeaLike(ideaId, subtopicsId);
+  }
 
   //displays subtopic main heading?
   thisSubtopic(self.index);
@@ -41,6 +48,11 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   //redirect to add idea view
   self.createIdea = function() {
     $location.path('/idea');
+  }
+
+  //redirect to add idea view
+  self.flagIdea = function() {
+    $location.path('/flag');
   }
 
   // //get moreComments button click
