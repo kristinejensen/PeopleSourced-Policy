@@ -131,6 +131,7 @@ p {
   background-color: #6fa8dc;
   margin-bottom: 0px;
   height: 130px;
+  width: 100%;
 }
 
 #loginContainer {
@@ -548,7 +549,6 @@ th {
   padding-bottom: 30px;
 }
 
-<<<<<<< HEAD
 .navbar-form input, .form-inline input {
 	width:auto;
 }

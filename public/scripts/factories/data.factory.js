@@ -301,7 +301,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'PUT',
-        url: '/data/addIdeaLike/' + ideaId,
+        url: '/engagement/addIdeaLike/' + ideaId,
         headers: {
           id_token: idToken
         }
@@ -317,7 +317,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'PUT',
-        url: '/data/addIdeaLove/' + ideaId,
+        url: '/engagement/addIdeaLove/' + ideaId,
         headers: {
           id_token: idToken
         }
@@ -333,7 +333,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'PUT',
-        url: '/data/addCommentLike/' + commentId,
+        url: '/engagement/addCommentLike/' + commentId,
         headers: {
           id_token: idToken
         }

@@ -91,7 +91,7 @@
             </div>
             <div class="author_info cole-xl 9 col-md-9">
               <h4>{{idea.name}}</h4>
-              <h5>{{idea.ward}}</h5>
+              <h5>Ward {{idea.ward}}</h5>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@
               </li>
             </div>
             <div ng-click="hc.addIdeaLove(idea.idea_id, idea.subtopics_id)" class="col-md-6 col-xs-6 actionBtn">
-              <li class="love">
+              <li tooltips tooltip-template="Are you sure you love this? If you are, we'll keep you informed!" tooltip-size="large" class="love">
                 <span>{{idea.ideas_loves_count}}</span>
                 <span ng-if="idea.ideas_loves_count == 1">LOVE</span>
                 <span ng-if="idea.ideas_loves_count == 0 || idea.ideas_loves_count >= 2">LOVES</span>
