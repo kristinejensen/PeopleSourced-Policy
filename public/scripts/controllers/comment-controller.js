@@ -11,12 +11,24 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.getCommentIdObject = DataFactory.getCommentIdObject;
   self.commentsObject = DataFactory.commentsObject;
   self.addCommentLike = DataFactory.addCommentLike;
-  self.addIdeaLike = DataFactory.addIdeaLike;
-  self.addIdeaLove = DataFactory.addIdeaLove;
 
   DataFactory.getAllSubcomments();
   DataFactory.getComments(subtopicIdea);
   DataFactory.getIdeaId(subtopicIdea);
+
+  self.addIdeaLike = function(ideaId,subTopicId){
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    }
+    DataFactory.addIdeaLike(ideaId,subTopicId);
+  }
+
+  self.addIdeaLove = function(ideaId,subTopicId){
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    }
+    DataFactory.addIdeaLove(ideaId,subTopicId);
+  }
 
 
 
