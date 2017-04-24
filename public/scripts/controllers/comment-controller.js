@@ -4,54 +4,32 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   var self = this;
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
+  var subtopicIdea = $routeParams;
 
   //come form DB
   self.getIdeaIdObject = DataFactory.getIdeaIdObject;
   self.getCommentIdObject = DataFactory.getCommentIdObject;
+  self.commentsObject = DataFactory.commentsObject;
+  self.addCommentLike = DataFactory.addCommentLike;
+  self.addIdeaLike = DataFactory.addIdeaLike;
+  self.addIdeaLove = DataFactory.addIdeaLove;
 
   DataFactory.getAllSubcomments();
+  DataFactory.getComments(subtopicIdea);
+  DataFactory.getIdeaId(subtopicIdea);
+
+
 
   //shows all comments from BD to view
   self.commentsObject = DataFactory.commentsObject;
   self.allSubcommentsObject = DataFactory.allSubcommentsObject;
-
-  //two lines below do data request to DB for specific idea ID
-  var subtopicIdea = $routeParams;
-  DataFactory.getIdeaId(subtopicIdea);
-
-  // //redirects to home page
-  // self.commentRedirect = function() {
-  //   //redirect after submission
-  //   $location.url('/home');
-  // }//end of self.commentRedirect()
-  // //Redirects to idea page.
-  // self.createIdea = function() {
-  //   //redirect after submission
-  //   $location.path('/idea');
-  // }
-  // //redirect to comment page?
-  // self.commentRedirect = function() {
-  //   //redirect after submission
-  //   $location.url('/comment');
-  // }//end of self.commentRedirect()
-
-  //  //adds new comment to DB
-  //    self.addComment = function(newComment) {
-  //  //sents comment from view to DB
-  //      DataFactory.addComment(newComment);
-  //  //empties inputs after submission
-  //      self.newComment = {};
-  //  //redirect after submission
-  //      $location.url('/comment');
-  //    }//end of self.addComment()
 
   //*****************************************//
   //            COMMENT CREATION             //
   //*****************************************//
   //adds new comment to DB (need to add firebase id into the line below)
   self.addComment = function(comment) {
-
-//checks to see if user in logged in
+    //checks to see if user in logged in
     if (firebaseUser === null){
       swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
     }
@@ -63,10 +41,10 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
     //sents comment from view to DB
     DataFactory.addComment(newComment);
-//reloads entire page after comment submission
+    //reloads entire page after comment submission
     $window.location.reload();
 
-// empties inputs after submission
+    // empties inputs after submission
     self.comment = {};
 
   }//end of self.addComment()
@@ -75,35 +53,35 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   //           SUBCOMMENT CREATION           //
   //*****************************************//
   //shows and hides sun-comment text area
-    self.showComment = false;
-    self.showCommentArea = function(comments){
-      console.log("comments ", comments);
-      self.showComment = true;
+  self.showComment = false;
+  self.showCommentArea = function(comments){
+    console.log("comments ", comments);
+    self.showComment = true;
+  }
+
+  //button click to add new sub-comment (need to add firebase id into the line below)
+  self.addNewSubComment = function(subComment){
+    var firebaseUser = auth.$getAuth();
+    var userMatchObject = DataFactory.userMatchObject.list;
+    //container to loop id's through
+    var id = "";
+    //loops through all users email to find correct id
+    for (var i = 0; i < userMatchObject.length; i++) {
+      if (userMatchObject[i].email == firebaseUser.email) {
+        var id = userMatchObject[i].id;
+      }//end of if
+    };//end of for loop
+
+    var newSubComment = {
+      description : subComment.description,
+      comment_id : "257",//this is where im stuck
+      user_id : id
     }
 
-//button click to add new sub-comment (need to add firebase id into the line below)
-    self.addNewSubComment = function(subComment){
-      var firebaseUser = auth.$getAuth();
-      var userMatchObject = DataFactory.userMatchObject.list;
-//container to loop id's through
-      var id = "";
-//loops through all users email to find correct id
-        for (var i = 0; i < userMatchObject.length; i++) {
-          if (userMatchObject[i].email == firebaseUser.email) {
-            var id = userMatchObject[i].id;
-          }//end of if
-        };//end of for loop
-
-      var newSubComment = {
-          description : subComment.description,
-          comment_id : "257",//this is where im stuck
-          user_id : id
-        }
-
-        DataFactory.addNewSubComment(newSubComment);
-//empties sub-comment text area on submit
-      self.subComment = {};
-        $window.location.reload();
+    DataFactory.addNewSubComment(newSubComment);
+    //empties sub-comment text area on submit
+    self.subComment = {};
+    $window.location.reload();
   }//end of addNewSubComment()
 
 

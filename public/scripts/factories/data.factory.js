@@ -14,6 +14,22 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
   var commentsTally = {};
   var likesTally = {};
   var likes = {};
+  var email = {};
+  var mostLikedIdea = {list: []};
+  var mostCommentedIdea = {list: []};
+
+
+  // //calls functions at startup
+  // init();
+  //
+  // function init() {
+  //   // getSubtopicIdeas();
+  //   // getUserMatch();
+  //   // getTallyInfo();
+  //   // getSubTopics();
+  //   getMostLikedIdea();
+  //   // getMostCommentedIdea();
+  // }
 
   function deactivateUser(userId) {
     swal({
@@ -100,29 +116,16 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
       }
     }).then(function(response) {
       subtopicIdeas.list = response.data;
+      for (var i = 0; i < subtopicIdeas.list.length; i++) {
+        if(subtopicIdeas.list[i].ideas_likes_count == null){
+          subtopicIdeas.list[i].ideas_likes_count = 0;
+        }
+        if(subtopicIdeas.list[i].ideas_loves_count == null){
+          subtopicIdeas.list[i].ideas_loves_count = 0;
+        }
+      }
     });
   }//end of getSubTopicIdeas()
-
-  //adds loved/idea to DB
-  function addLoved(subtopicIdeas){
-    firebase.auth().currentUser.getToken().then(function(idToken) {
-      $http({
-        method: 'POST',
-        url: '/login/addLoved',
-        data: subtopicIdeas,
-        headers: {
-          id_token: idToken
-        }
-      }).then(function(response){
-        // notyf.confirm('Blank Submitted For Approval');
-        swal("Loved Added To Database", "", "success");
-        // self.subtopicIdeas = {};
-      }).catch(function(error) {
-        swal("Sorry, we couldn't process your request.", "Try Again!", "error");
-        console.log('error authenticating', error);
-      });
-    });//end of firebase.auth()
-  }//end of addNewUser()
 
   //adds flag/idea to DB
   function addFlag(subtopicIdeas){
@@ -144,18 +147,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
     });//end of firebase.auth()
   }//end of getSubTopicIdeas
 
-
-  //gets all comments for comment view
-  function getComments() {
-    $http({
-      method: 'GET',
-      url: '/public/allComments'
-    }).then(function(response) {
-      commentsObject.list = response.data;
-    });
-  }//end of getComments()
-
-  //adds comment to DB
   function addComment(newComment){
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
@@ -174,19 +165,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
       });
     });//end of firebase.auth()
   }//end of addComment()
-
-// getUserMatch()
-//   function getUserMatch() {
-//     $http({
-//       method: 'GET',
-//       url: '/data/getUserMatch',
-//     }).then(function(response) {
-//       userMatchObject.list = response.data;
-//     }).catch(function(error) {
-//       console.log('error on get user match', error);
-//       return 403;
-//     });
-//   }//end of getAllUsers()
 
   getTallyInfo();
 
@@ -212,105 +190,176 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
       commentsTally.count = response.data;
     });
     $http({
-         method: 'GET',
-         url: '/public/likesTally'
-       }).then(function(response){
-         likesTally.count = response.data;
-       });
+      method: 'GET',
+      url: '/public/likesTally'
+    }).then(function(response){
+      likesTally.count = response.data;
+    });
   };//end of firebase.auth()
 
-  //adds like to DB
-  function addLike(ideaId){
-    // console.log(ideaId);
+  //adds sub comment to DB
+  function addNewSubComment(newSubComment){
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'POST',
-        url: '/data/addLike/' + ideaId,
+        url: '/engagement/addNewSubComment',
+        data: newSubComment,
         headers: {
           id_token: idToken
         }
       }).then(function(response){
-        // console.log(response);
+        notyf.confirm('Your comment was added');
+        self.newSubComment = {};
       }).catch(function(error) {
-        console.log('error adding like to database', error);
+        swal("Values Are Incorrect", "Try Again!", "error");
+        console.log('error authenticating', error);
       });
-    });
-  }
+    });//end of firebase.auth()
+  }//end of addComment()
 
-//adds sub comment to DB
-function addNewSubComment(newSubComment){
-  firebase.auth().currentUser.getToken().then(function(idToken) {
-    $http({
-      method: 'POST',
-      url: '/engagement/addNewSubComment',
-      data: newSubComment,
-      headers: {
-        id_token: idToken
-      }
-    }).then(function(response){
-      notyf.confirm('Your comment was added');
-      self.newSubComment = {};
-    }).catch(function(error) {
-      swal("Values Are Incorrect", "Try Again!", "error");
-      console.log('error authenticating', error);
-    });
-  });//end of firebase.auth()
-}//end of addComment()
-
-//gets all subcomments for comments view
-function getAllSubcomments() {
+  //gets all subcomments for comments view
+  function getAllSubcomments() {
     $http({
       method: 'GET',
       url: '/data/allSubcomments'
     }).then(function(response) {
       allSubcommentsObject.list = response.data;
     });
-}//end of getAllUsers()
+  }//end of getAllUsers()
 
-//gets specfic idea for comments view
-function getIdeaId(subtopicIdea) {
+
+  function getIdeaId(subtopicIdea) {
     $http({
       method: 'GET',
       url: '/data/getIdeaId',
       headers: subtopicIdea
     }).then(function(response) {
       getIdeaIdObject.list = response.data;
+      for (var i = 0; i < getIdeaIdObject.list.length; i++) {
+        if(getIdeaIdObject.list[i].ideas_likes_count == null){
+          getIdeaIdObject.list[i].ideas_likes_count = 0;
+        }
+        if(getIdeaIdObject.list[i].ideas_loves_count == null){
+          getIdeaIdObject.list[i].ideas_loves_count = 0;
+        }
+      }
     });
-//gets specfic comment for comments view
     $http({
       method: 'GET',
       url: '/data/getCommentId',
       headers: subtopicIdea
     }).then(function(response) {
       getCommentIdObject.list = response.data;
-    });
-
-}//end of getAllUsers()
-
-
-var email = {};
-
-function checkUserStatus(){
-  return firebase.auth().currentUser.getToken().then(function(idToken) {
-    var firebaseUser = auth.$getAuth();
-    return $http({
-      method: 'GET',
-      url: '/login/checkUserStatus',
-      headers: {
-        id_token: idToken,
-        user_email: firebaseUser.email,
+      for (var i = 0; i < getCommentIdObject.list.length; i++) {
+        if(getCommentIdObject.list[i].comments_likes_count == null){
+          getCommentIdObject.list[i].comments_likes_count = 0;
+        }
       }
-    }).then(function(response){
-      return response;
     });
-});
-};
+  }
 
-//redirection after login
-function loginView() {
-  $location.path('/login');
-}
+  //gets comments to display on comments page
+  function getComments(ideaId) {
+    console.log('get comments function being called');
+    console.log('idea id from get comments function is', ideaId);
+    $http({
+      method: 'GET',
+      url: '/data/getComments',
+      headers: ideaId
+    }).then(function(response) {
+      commentsObject.list = response.data;
+      for (var i = 0; i < commentsObject.list.length; i++) {
+        if(commentsObject.list[i].comments_likes_count == null){
+          commentsObject.list[i].comments_likes_count = 0;
+        }
+      }
+    });
+  }
 
+
+  function checkUserStatus(){
+    return firebase.auth().currentUser.getToken().then(function(idToken) {
+      var firebaseUser = auth.$getAuth();
+      return $http({
+        method: 'GET',
+        url: '/login/checkUserStatus',
+        headers: {
+          id_token: idToken,
+          user_email: firebaseUser.email,
+        }
+      }).then(function(response){
+        return response;
+      });
+    });
+  };
+
+  //function to add idea "like" to database
+  function addIdeaLike(ideaId, subtopicId){
+    console.log('add idea like called');
+    console.log('ideaId', ideaId);
+    console.log('subtopicId', subtopicId);
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method: 'PUT',
+        url: '/data/addIdeaLike/' + ideaId,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response) {
+        getSubtopicIdeas(subtopicId);
+        getMostLikedIdea();
+      });
+    });
+  }
+
+  //function to add idea "love" to database
+  function addIdeaLove(ideaId, subtopicId){
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method: 'PUT',
+        url: '/data/addIdeaLove/' + ideaId,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response) {
+        getSubtopicIdeas(subtopicId);
+        getMostLikedIdea();
+      });
+    });
+  }
+
+  //function to add comment "like" to database
+  function addCommentLike(commentId, ideaId){
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method: 'PUT',
+        url: '/data/addCommentLike/' + commentId,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response) {
+        getComments({id: ideaId});
+      });
+    });
+  }
+
+  function getMostLikedIdea(){
+    $http({
+      method: 'GET',
+      url: '/public/getMostLikedIdea',
+    }).then(function(response) {
+      mostLikedIdea.list = response.data;
+      console.log('this is the most like idea list', mostLikedIdea.list);
+      for (var i = 0; i < mostLikedIdea.list.length; i++) {
+        if(mostLikedIdea.list[i].ideas_likes_count == null){
+          mostLikedIdea.list[i].ideas_likes_count = 0;
+        }
+        if(mostLikedIdea.list[i].ideas_loves_count == null){
+          mostLikedIdea.list[i].ideas_loves_count = 0;
+        }
+      }
+    });
+  }
 
   return {
     userTally: userTally,
@@ -318,40 +367,44 @@ function loginView() {
     commentsTally: commentsTally,
     likesTally: likesTally,
     likes: likes,
-    addLike: addLike,
-//new user object from add address button click
+    addIdeaLike: addIdeaLike,
+    addIdeaLove: addIdeaLove,
+    getComments: getComments,
+    addCommentLike: addCommentLike,
+    mostLikedIdea: mostLikedIdea,
+    getMostLikedIdea: getMostLikedIdea,
+    //new user object from add address button click
     addNewUser : addNewUser,
-//new idea object from idea button click
+    //new idea object from idea button click
     addNewIdea : addNewIdea,
-//adds ideas to subtopic1 view
+    //adds ideas to subtopic1 view
     subtopicIdeas : subtopicIdeas,
-//adds comment to DB
+    //adds comment to DB
     addComment : addComment,
-//gets comments to comment view
+    //gets comments to comment view
     commentsObject : commentsObject,
     // allUsers: allUsers,
     deactivateUser: deactivateUser,
-//checks user for axisting account at login
-    // getUserMatch : getUserMatch,
-//all existing users object
+    //all existing users object
     userMatchObject : userMatchObject,
-//adds sub-comments to DB
+    //adds sub-comments to DB
     addNewSubComment : addNewSubComment,
-//adds sub-comments to view
+    //adds sub-comments to view
     allSubcommentsObject : allSubcommentsObject,
-//gets specific idea id from DB
+    //gets specific idea id from DB
     getIdeaId : getIdeaId,
-//current subtopic ideas
+    //current subtopic ideas
     getSubtopicIdeas : getSubtopicIdeas,
-//specifid idea from DB for comment view
+    //specifid idea from DB for comment view
     getIdeaIdObject : getIdeaIdObject,
-//specified comments from DB for comment view
+    //specified comments from DB for comment view
     getCommentIdObject : getCommentIdObject,
     //checks to see if the user exists in the database
     checkUserStatus: checkUserStatus,
+    //gets email
     email: email,
-//gets all subcomments
-    getAllSubcomments : getAllSubcomments
-  }//end of return
+    //gets all subcomments
+    getAllSubcomments : getAllSubcomments,
+  }
 
 }]); // end of app.factory

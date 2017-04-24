@@ -9,6 +9,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.index = $routeParams.id;
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
+  self.addIdeaLike = DataFactory.addIdeaLike;
+  self.addIdeaLove = DataFactory.addIdeaLove;
 
   //displays subtopic main heading?
   thisSubtopic(self.index);
@@ -82,14 +84,10 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     self.idea = {};
   }//end of self.createIdea()
 
-
-
-
-
 //get moreComments button click
 self.moreComments = function(subtopicIdea) {
-  $location.path('/comment/' + subtopicIdea.id);
-  console.log(subtopicIdea.id);
+  $location.path('/comment/' + subtopicIdea.idea_id);
+  console.log(subtopicIdea);
 }
 
 
