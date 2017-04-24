@@ -122,4 +122,12 @@ self.moreComments = function(subtopicIdea) {
   }
 
 
+  self.flagIdeaClick = function (subtopicIdeas){
+    // console.log("this is subtopicIdeas on flag IDEA click",subtopicIdeas);
+    $routeParams.idea_id = subtopicIdeas.idea_id;
+    $routeParams.user_id = subtopicIdeas.user_id;
+      $location.path('flag/'+$routeParams.idea_id+'/'+$routeParams.user_id);
+  };//end of flagCommentClick
+
+
 }]);//end of my.app

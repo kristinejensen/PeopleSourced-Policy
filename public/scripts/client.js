@@ -27,7 +27,7 @@ app.config(['$routeProvider', function($routeProvider) {
     controllerAs: 'ic',
     onEnter: scrollContent
   })
-  .when('/flag', {
+  .when('/flag/:id?/:user_id?/:idea_id?', {
     templateUrl: 'views/flag.html',
     controller: 'FlagController',
     controllerAs: 'fc',
