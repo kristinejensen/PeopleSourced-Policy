@@ -9,14 +9,19 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.index = $routeParams.id;
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
-  self.addIdeaLove = DataFactory.addIdeaLove;
 
-  self.addIdeaLike = function(ideaId, subtopicsId){
+  self.addIdeaLike = function(ideaId,subTopicId){
     if (firebaseUser === null){
-      swal("You must be logged in!", "Try Again!", "error");
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
     }
-    console.log('got clicked');
-    DataFactory.addIdeaLike(ideaId, subtopicsId);
+    DataFactory.addIdeaLike(ideaId,subTopicId);
+  }
+
+  self.addIdeaLove = function(ideaId,subTopicId){
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    }
+    DataFactory.addIdeaLove(ideaId,subTopicId);
   }
 
   //displays subtopic main heading?
@@ -29,7 +34,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   getIdeas(self.index);
 
   function getIdeas(index){
-    // console.log('FUNCTIONS', index);
     DataFactory.getSubtopicIdeas(index);
   }
 
@@ -63,7 +67,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   // var userMatchObject = DataFactory.userMatchObject.list;
   // console.log('userMatchObject.list: ', userMatchObject);
   self.addNewIdea = function(idea) {
-
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
@@ -86,11 +89,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     });
     //reloads the entire page after submitting an idea
     $window.location.reload();
-    // $window.reload();
-    // .then(function(response){
-    //   redirectToSubtopic(newIdea);
-    // });
-    // redirect to correct subtopic page after submit
+    //loads ideas
     getIdeas(newIdea.id);
     //empties inputs on submit
     self.idea = {};
@@ -101,6 +100,26 @@ self.moreComments = function(subtopicIdea) {
   $location.path('/comment/' + subtopicIdea.idea_id);
   console.log(subtopicIdea);
 }
+  //redirect to add idea view
+  self.createIdea = function() {
+    $location.path('/idea');
+  }
+  //redirect to add idea view
+  self.flagIdea = function() {
+    $location.path('/flag');
+  }
+
+  //redirect to home view
+  function homeView() {
+    $location.path('/home');
+  }
+  //redirect to correct subtopic view
+  //not working :(
+  function redirectToSubtopic(url) {
+    console.log(url.subtopicId);
+    $location.path('/subtopics/' + url.subtopicId);
+    getIdeas(self.index);
+  }
 
 
 }]);//end of my.app

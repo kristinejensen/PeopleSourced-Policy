@@ -117,7 +117,7 @@ router.put('/addIdeaLove/:id', function(req, res){
       } else {
         if (result.rows.length == 0){
           pool.connect(function (err, client, done) {
-            client.query('INSERT INTO ideas_loves (user_id, idea_id) VALUES (4, $1);', [ideaId], function(err, result){
+            client.query('INSERT INTO ideas_loves (user_id, idea_id) VALUES ($1, $2);', [req.decodedToken.userSQLId, ideaId], function(err, result){
               done();
               if(err){
                 ('Error ideas_loves insert', err);
@@ -146,7 +146,7 @@ router.put('/addCommentLike/:id', function(req, res){
       } else {
         if (result.rows.length == 0){
           pool.connect(function (err, client, done) {
-            client.query('INSERT INTO comments_likes (user_id, comment_id) VALUES (4, $1);', [commentId], function(err, result){
+            client.query('INSERT INTO comments_likes (user_id, comment_id) VALUES ($1, $2);', [req.decodedToken.userSQLId, commentId], function(err, result){
               done();
               if(err){
                 ('Error comments_likes insert', err);
