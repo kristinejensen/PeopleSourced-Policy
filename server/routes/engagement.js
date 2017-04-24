@@ -8,6 +8,7 @@ var pool = require('../modules/database-config');
 
 //adds new idea to DB
 router.post('/newidea', function (req, res) {
+  console.log('outside of new idea');
   if(req.decodedToken.userSQLId) {
   var newIdea = req.body;
   pool.connect()
@@ -15,6 +16,7 @@ router.post('/newidea', function (req, res) {
       client.query('INSERT INTO ideas (title, description, subtopics_id, user_id) VALUES ($1, $2, $3, $4)',
         [newIdea.title, newIdea.description, newIdea.subtopicId, req.decodedToken.userSQLId])
         .then(function (result) {
+          console.log('made it into new idea');
           client.release();
           res.sendStatus(201);
         })

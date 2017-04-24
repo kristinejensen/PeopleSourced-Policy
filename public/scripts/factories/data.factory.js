@@ -93,6 +93,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
           id_token: idToken
         }
       }).then(function(response){
+        console.log('response', response);
         getSubtopicIdeas();
         return $window.location.reload();
         // $window.location.reload();

@@ -67,6 +67,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   // var userMatchObject = DataFactory.userMatchObject.list;
   // console.log('userMatchObject.list: ', userMatchObject);
   self.addNewIdea = function(idea) {
+    ('clicking inside of add new idea', idea)
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
@@ -82,6 +83,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
       title : idea.title,
       description : idea.description
     }
+
+    console.log('newIdea', newIdea);
     //Sends the new idea object to factory
     DataFactory.addNewIdea(newIdea).then(function(response){
       // redirect to correct subtopic page after submit
