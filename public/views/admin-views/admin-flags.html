@@ -29,15 +29,16 @@
       <div ng-repeat="flags in afc.ideaToFlagObject.list" class="singleCard cardCenter col-md-5">
         <div class="card_content">
           <h2>Title:<textarea placeholder="{{flags.title}}"></textarea></h2>
-          <p> Description: <textarea placeholder="{{flags.ideas_description}}{{flags.comments_description}}"></textarea> </p>
+          <p> Description: <textarea placeholder="{{flags.description}}"></textarea> </p>
           <div class="author_content">
-            <div class ="author_img col-xl-3 col-md-3">
+            <!-- <div class ="author_img col-xl-3 col-md-3">
               <p> <img ng-src="{{flags.photo}}"></p>
-            </div>
+            </div> -->
             <div class="author_info cole-xl 9 col-md-9">
               <h4> {{flags.name}} </h4>
               <h5> Ward {{flags.ward}} </h5>
             </div>
+            <br><br><br><br>
             <h3>Flag Comment:</h3> <p>{{flags.flag_comment}} {{flags.idea_flag_description}}</p>
           </div>
           <td class="col-xl-4 col-md-3" ng-show="flag.active">
