@@ -1,12 +1,12 @@
 
 app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebaseAuth){
 
-
   var allUsers = {list: []};
   var filterList = {list: []};
   var userFilter = {};
   var userResults = {list: []};
   var ideaToFlagObject = {list: []};
+  var commentToFlagObject = {list: []};
 
   // init(); //run
 
@@ -162,9 +162,9 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
       }
   }
 
-  getAllFlaggedItems();
+  // getAllFlaggedItems();
 
-  function getAllFlaggedItems() {
+  function getAllFlaggedComments() {
   console.log("gets all flags");
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
@@ -172,17 +172,38 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'GET',
-        url: '/admin/allFlags',
+        url: '/admin/allCommentFlags',
         headers: {
           id_token: idToken
         }
         // headers:flagObject
       }).then(function(response) {
-        ideaToFlagObject.list = response.data;
+        commentToFlagObject.list = response.data;
         console.log("this is the response from get all flags",response.data);
       });
     });
   }
+}//end of getComments()
+
+function getAllFlaggedIdeas() {
+console.log("gets all flags");
+var auth = $firebaseAuth();
+var firebaseUser = auth.$getAuth();
+if(firebaseUser){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'GET',
+      url: '/admin/allIdeaFlags',
+      headers: {
+        id_token: idToken
+      }
+      // headers:flagObject
+    }).then(function(response) {
+      ideaToFlagObject.list = response.data;
+      console.log("this is the response from get all flags",response.data);
+    });
+  });
+}
 }//end of getComments()
 
 
@@ -195,8 +216,10 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
     userFilter: userFilter,
     userResults: userResults,
     init: init,
-    getAllFlaggedItems: getAllFlaggedItems,
+    getAllFlaggedComments: getAllFlaggedComments,
+    getAllFlaggedIdeas: getAllFlaggedIdeas,
     ideaToFlagObject: ideaToFlagObject,
+    commentToFlagObject: commentToFlagObject,
   }
 
 }]); // end of app.factory

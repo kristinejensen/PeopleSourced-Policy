@@ -1,29 +1,29 @@
 app.controller('AdminFlaggedController', ['$firebaseAuth','$http', '$location',"$routeParams",'AdminFactory', function($firebaseAuth, $http, $location,$routeParams,AdminFactory){
   var self = this;
   var auth = $firebaseAuth();
-self.ideaToFlagObject = AdminFactory.ideaToFlagObject;
-self.allUsers = AdminFactory.allUsers;
 
-self.deleteFlaggedItem = function(flags) {
+  auth.$onAuthStateChanged(function(firebaseUser) {
+    console.log('auth state changed');
+    if (firebaseUser) {
+      AdminFactory.getAllFlaggedComments();
+      self.commentToFlagObject = AdminFactory.commentToFlagObject;
+      AdminFactory.getAllFlaggedIdeas();
+      self.ideaToFlagObject = AdminFactory.ideaToFlagObject;
+    } else {
 
-  AdminFactory.deleteFlaggedItem(flags);
-};
+    }
+  });
 
-self.deleteItem = function(flags) {
-console.log("this is the flag on delete item",flags);
-  AdminFactory.deleteItem(flags);
-};
+  self.deleteFlaggedItem = function(flags) {
+    AdminFactory.deleteFlaggedItem(flags);
+  };
 
-self.updateFlaggedItem = function(flags) {
-  console.log(flags);
-  AdminFactory.updateFlaggedItem (flags);
-};
-// self.getAllFlaggedItems = function(){
-//   AdminFactory.getAllFlaggedItems();
-// }
+  self.deleteItem = function(flags) {
+    AdminFactory.deleteItem(flags);
+  };
 
-AdminFactory.getAllFlaggedItems();
-
-
+  self.updateFlaggedItem = function(flags) {
+    AdminFactory.updateFlaggedItem (flags);
+  };
 
 }]);
