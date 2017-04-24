@@ -259,4 +259,36 @@ pool.connect( function (err, client, done) {
         });
       })
     });
+
+    router.delete('/deleteFlaggedIdea/:id', function(req,res){
+      console.log(req.params.id);
+    pool.connect( function (err, client, done) {
+      client.query('DELETE FROM ideas WHERE id=$1;',[req.params.id], function(err, result){
+        done();
+        if(err){
+          console.log('Error completing manage users query', err);
+          res.sendStatus(501);
+        } else {
+              res.send(result.rows);
+              console.log("this si RRRRREEESSSULT",result.rows);
+            }
+          });
+        })
+      });
+
+      router.delete('/deleteFlaggedComment/:id', function(req,res){
+        console.log(req.params.id);
+      pool.connect( function (err, client, done) {
+        client.query('DELETE FROM comments WHERE id=$1;',[req.params.id], function(err, result){
+          done();
+          if(err){
+            console.log('Error completing manage users query', err);
+            res.sendStatus(501);
+          } else {
+                res.send(result.rows);
+                console.log("this si RRRRREEESSSULT",result.rows);
+              }
+            });
+          })
+        });
 module.exports = router;

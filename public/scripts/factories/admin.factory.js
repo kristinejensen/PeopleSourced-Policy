@@ -206,6 +206,41 @@ if(firebaseUser){
 }
 }//end of getComments()
 
+function deleteItemComment(flag) {
+console.log("gets all flags", flag);
+var auth = $firebaseAuth();
+var firebaseUser = auth.$getAuth();
+if(firebaseUser){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'DELETE',
+      url: '/admin/deleteFlaggedComment/' + flag.comment_id,
+      headers: {
+        id_token: idToken,
+      }
+    }).then(function(response) {
+    });
+  });
+}
+}//end of getComments()
+
+function deleteItemIdea(flag) {
+console.log("gets all flags", flag);
+var auth = $firebaseAuth();
+var firebaseUser = auth.$getAuth();
+if(firebaseUser){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'DELETE',
+      url: '/admin/deleteFlaggedIdea/' + flag.comment_id,
+      headers: {
+        id_token: idToken,
+      }
+    }).then(function(response) {
+    });
+  });
+}
+}//end of getComments()
 
   return {
     allUsers: allUsers,
@@ -220,6 +255,8 @@ if(firebaseUser){
     getAllFlaggedIdeas: getAllFlaggedIdeas,
     ideaToFlagObject: ideaToFlagObject,
     commentToFlagObject: commentToFlagObject,
+    deleteItemIdea: deleteItemIdea,
+    deleteItemComment: deleteItemComment,
   }
 
 }]); // end of app.factory
