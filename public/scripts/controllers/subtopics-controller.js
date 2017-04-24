@@ -31,6 +31,35 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     DataFactory.getSubtopicIdeas(index);
   }
 
+  //redirect to home view
+  function homeView() {
+    $location.path('/home');
+  }
+  //redirect to correct subtopic view
+  //not working :(
+  function redirectToSubtopic(url) {
+    console.log(url.subtopicId);
+    $location.path('/subtopics/' + url.subtopicId);
+    getIdeas(self.index);
+  }
+
+  //redirect to add idea view
+  self.createIdea = function() {
+    $location.path('/idea');
+  }
+
+  //redirect to add idea view
+  self.flagIdea = function() {
+    $location.path('/flag');
+  }
+
+  // //get moreComments button click
+  // self.moreComments = function() {
+  //   $location.path('/comment/');
+  // }
+
+  // var userMatchObject = DataFactory.userMatchObject.list;
+  // console.log('userMatchObject.list: ', userMatchObject);
   self.addNewIdea = function(idea) {
     //sources firebaseUser in the function
     var auth = $firebaseAuth();

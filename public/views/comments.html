@@ -23,10 +23,10 @@
         </div>
         <div class="author_content">
           <div class ="author_img col-xl-3 col-md-3">
-            <p> {{cc.subtopicIdeas.photo}} </p>
+            <p> <img class="authImage" ng-src="{{idea.photo}}"></p>
           </div>
           <div class="author_info cole-xl 9 col-md-9">
-            <h4> <img class="authImage" ng-src="{{idea.photo}}"> Author: {{idea.name}} </h4>
+            <h4>Author: {{idea.name}} </h4>
             <h5> Ward: {{idea.ward}} </h5>
           </div>
         </div>
@@ -81,7 +81,7 @@
     </div>
     <div class="author_content">
       <div class ="author_img col-xl-3 col-md-3">
-        <p><img class="authImage" ng-src="{{comments.photo}}" alt=""></p>
+        <p> <img class="authImage" ng-src="{{comments.photo}}"></p>
       </div>
       <div class="author_info cole-xl 9 col-md-9">
         <h4> {{comments.name}} </h4>
@@ -97,7 +97,7 @@
             <span ng-if="comments.comments_likes_count == 0 || comments.comments_likes_count >= 2">LIKES</span>
           </li>
         </div>
-        <div class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
+        <div ng-click="cc.flagIdea()" class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
           <li class="love">
             <span> FLAG </span>
           </li>
