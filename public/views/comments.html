@@ -32,14 +32,18 @@
         </div>
         <div class="love_like row">
           <ul>
-            <div class="col-md-4 col-xs-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
+            <div ng-click="cc.addIdeaLike(idea.idea_id, idea.subtopics_id)" class="col-md-4 col-xs-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
               <li class="like">
-                <span> LIKE </span>
+                <span>{{idea.ideas_likes_count}}</span>
+                <span ng-if="idea.ideas_likes_count == 1">LIKE</span>
+                <span ng-if="idea.ideas_likes_count == 0 || idea.ideas_likes_count >= 2">LIKES</span>
               </li>
             </div>
-            <div class="col-md-4 col-xs-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
+            <div ng-click="cc.addIdeaLove(idea.idea_id, idea.subtopics_id)" class="col-md-4 col-xs-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
               <li class="love">
-                <span style> LOVE </span>
+                <span>{{idea.ideas_loves_count}}</span>
+                <span ng-if="idea.ideas_loves_count == 1">LOVE</span>
+                <span ng-if="idea.ideas_loves_count == 0 || idea.ideas_loves_count >= 2">LOVES</span>
               </li>
             </div>
             <div class="col-md-4 col-xs-4 actionBtn" style="background-color: #6fa8dc;">
@@ -69,7 +73,7 @@
   *         COMMENTS AREA                                                          *
   * ============================================================================= */
 -->
-<div  class="commentDiv" ng-repeat="comments in cc.getCommentIdObject.list">
+<div  class="commentDiv" ng-repeat="comments in cc.commentsObject.list">
   <div class="col-md-1 col-lg-1"></div>
   <div  class="col-md-10 col-lg-10 topicText" style="padding-bottom: 0px !important;">
     <div class="card_content"  style="padding-bottom: 0px; !important">
@@ -86,9 +90,11 @@
     </div>
     <div class="love_like row">
       <ul>
-        <div class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
+        <div ng-click="cc.addCommentLike(comments.comments_id, comments.comments_idea_id)" class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
           <li class="like">
-            <span> LIKE </span>
+            <span>{{comments.comments_likes_count}}</span>
+            <span ng-if="comments.comments_likes_count == 1">LIKE</span>
+            <span ng-if="comments.comments_likes_count == 0 || comments.comments_likes_count >= 2">LIKES</span>
           </li>
         </div>
         <div class="col-md-4 col-lg-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
