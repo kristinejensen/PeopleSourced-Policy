@@ -160,7 +160,7 @@
           </li>
         </div>
         <div ng-click="stc.addIdeaLove(subtopicIdeas.idea_id, subtopicIdeas.subtopics_id)" class="col-md-6 col-xs-6 actionBtn">
-          <li class="love">
+          <li tooltips tooltip-template="Are you sure you love this? If you are, we'll keep you informed!" tooltip-size="large"  class="love" style="width: 100%;">
             <span>{{subtopicIdeas.ideas_loves_count}}</span>
             <span ng-if="subtopicIdeas.ideas_loves_count == 1">LOVE</span>
             <span ng-if="subtopicIdeas.ideas_loves_count == 0 || subtopicIdeas.ideas_loves_count >= 2">LOVES</span>

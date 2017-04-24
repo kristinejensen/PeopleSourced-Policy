@@ -213,7 +213,7 @@ router.get('/subtopicIdeas', function(req, res){
     'LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id ' +
     'LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id ' +
     'LEFT JOIN subtopics ON subtopics.id=ideas.subtopics_id ' +
-    'WHERE subtopics_id=$1 AND subtopics.active=true AND users.active=true ORDER BY ideas_likes_count ASC;',
+    'WHERE subtopics_id=$1 AND subtopics.active=true AND users.active=true ORDER BY ideas_likes_count DESC;',
     [subtopicId], function(err, result){
       done();
       if(err){
@@ -221,7 +221,6 @@ router.get('/subtopicIdeas', function(req, res){
         res.sendStatus(500);
       } else {
         res.send(result.rows);
-        console.log('zoop', result.rows);
       }
     });
   });
@@ -243,7 +242,7 @@ router.get('/getMostLikedIdea', function(req, res) {
       'LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id ' +
       'LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id ' +
       'LEFT JOIN subtopics ON subtopics.id=ideas.subtopics_id ' +
-      'WHERE subtopics.active=true AND users.active=true ORDER BY ideas_likes_count ASC LIMIT 2;')
+      'WHERE subtopics.active=true AND users.active=true AND ideas_likes_count IS NOT NULL ORDER BY ideas_likes_count DESC LIMIT 2;')
         .then(function (result) {
           client.release();
           res.send(result.rows);
