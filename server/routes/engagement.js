@@ -195,12 +195,12 @@ router.post('/flagReport', function(req, res) {
   var flagData = req.body;
   console.log('zeep', flagData);
   if (!flagData.$routeParams.idea_id) {
-    ideaId = req.body.$routeParams.user_id;
-    userId = req.body.$routeParams.idea_id;
+    userId = req.body.$routeParams.user_id;
+    ideaId = req.body.$routeParams.id;
     console.log('got inside of correct route');
   pool.connect()
   .then(function (client) {
-    client.query('INSERT INTO ideas_flags (user_id, idea_id, idea_flag_description) VALUES ($1,$2,$3)',[userId,ideaId,flagData.flagObject.description])
+    client.query('INSERT INTO ideas_flags (user_id, idea_id, idea_flag_description) VALUES ($1,$2,$3)',[ideaId,userId,flagData.flagObject.description])
     .then(function (result) {
       client.release();
       res.sendStatus(201);

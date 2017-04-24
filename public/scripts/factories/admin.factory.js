@@ -6,6 +6,7 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
   var filterList = {list: []};
   var userFilter = {};
   var userResults = {list: []};
+  var ideaToFlagObject = {list: []};
 
   // init(); //run
 
@@ -161,6 +162,29 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
       }
   }
 
+  getAllFlaggedItems();
+
+  function getAllFlaggedItems() {
+  console.log("gets all flags");
+  var auth = $firebaseAuth();
+  var firebaseUser = auth.$getAuth();
+  if(firebaseUser){
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method: 'GET',
+        url: '/admin/allFlags',
+        headers: {
+          id_token: idToken
+        }
+        // headers:flagObject
+      }).then(function(response) {
+        ideaToFlagObject.list = response.data;
+        console.log("this is the response from get all flags",response.data);
+      });
+    });
+  }
+}//end of getComments()
+
 
   return {
     allUsers: allUsers,
@@ -170,7 +194,9 @@ app.factory('AdminFactory', ['$http', '$firebaseAuth', function($http, $firebase
     searchUsers: searchUsers,
     userFilter: userFilter,
     userResults: userResults,
-    init: init
+    init: init,
+    getAllFlaggedItems: getAllFlaggedItems,
+    ideaToFlagObject: ideaToFlagObject,
   }
 
 }]); // end of app.factory
