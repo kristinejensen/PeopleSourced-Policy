@@ -104,9 +104,10 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.flagCommentClick = function (comments){
 
     console.log('what is comment', comments);
-    $routeParams.id = comments.comment_id;
+    console.log('comment id', comments.comments_id, 'idea id', comments.comments_idea_id, 'user id', comments.id);
+    $routeParams.id = comments.comments_id;
     $routeParams.idea_id = comments.comments_idea_id;
-    $routeParams.user_id = comments.user_id;
+    $routeParams.user_id = comments.id;
       $location.path('flag/'+$routeParams.id+'/'+$routeParams.idea_id+'/'+$routeParams.user_id);
   };//end of flagCommentClick
 
