@@ -18,9 +18,9 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   }
 
   self.addIdeaLove = function(ideaId,subTopicId){
-    if (firebaseUser === null){
-      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
-    }
+    // if (firebaseUser === null){
+    //   swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    // }
     DataFactory.addIdeaLove(ideaId,subTopicId);
   }
 
@@ -127,6 +127,8 @@ self.moreComments = function(subtopicIdea) {
 
   self.flagIdeaClick = function (subtopicIdeas){
     // console.log("this is subtopicIdeas on flag IDEA click",subtopicIdeas);
+    console.log(subtopicIdeas);
+    console.log('id', subtopicIdeas.idea_id, 'user', subtopicIdeas.user_id);
     $routeParams.idea_id = subtopicIdeas.idea_id;
     $routeParams.user_id = subtopicIdeas.user_id;
       $location.path('flag/'+$routeParams.idea_id+'/'+$routeParams.user_id);
