@@ -25,16 +25,16 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   * ============================================================================= */
   -->
   self.addIdeaLike = function(ideaId,subTopicId){
-    if (firebaseUser === null){
-      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
-    }
+    // if (firebaseUser === null){
+    //   swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    // }
     DataFactory.addIdeaLike(ideaId,subTopicId);
   }
 
   self.addIdeaLove = function(ideaId,subTopicId){
-    if (firebaseUser === null){
-      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
-    }
+    // if (firebaseUser === null){
+    //   swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    // }
     DataFactory.addIdeaLove(ideaId,subTopicId);
   }
   <!--

@@ -18,9 +18,9 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   }
 
   self.addIdeaLove = function(ideaId,subTopicId){
-    if (firebaseUser === null){
-      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
-    }
+    // if (firebaseUser === null){
+    //   swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    // }
     DataFactory.addIdeaLove(ideaId,subTopicId);
   }
 
@@ -67,6 +67,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   // var userMatchObject = DataFactory.userMatchObject.list;
   // console.log('userMatchObject.list: ', userMatchObject);
   self.addNewIdea = function(idea) {
+    ('clicking inside of add new idea', idea)
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
@@ -82,6 +83,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
       title : idea.title,
       description : idea.description
     }
+
+    console.log('newIdea', newIdea);
     //Sends the new idea object to factory
     DataFactory.addNewIdea(newIdea).then(function(response){
       // redirect to correct subtopic page after submit
@@ -120,6 +123,15 @@ self.moreComments = function(subtopicIdea) {
     $location.path('/subtopics/' + url.subtopicId);
     getIdeas(self.index);
   }
+
+
+  self.flagIdeaClick = function (subtopicIdeas){
+    // console.log("this is subtopicIdeas on flag IDEA click",subtopicIdeas);
+
+    $routeParams.idea_id = subtopicIdeas.idea_id;
+    $routeParams.user_id = subtopicIdeas.user_id;
+      $location.path('flag/'+$routeParams.idea_id+'/'+$routeParams.user_id);
+  };//end of flagCommentClick
 
 
 }]);//end of my.app
