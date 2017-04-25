@@ -9,13 +9,19 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.index = $routeParams.id;
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
-  self.addIdeaLove = DataFactory.addIdeaLove;
 
   self.addIdeaLike = function(ideaId,subTopicId){
     if (firebaseUser === null){
       swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
     }
     DataFactory.addIdeaLike(ideaId,subTopicId);
+  }
+
+  self.addIdeaLove = function(ideaId,subTopicId){
+    // if (firebaseUser === null){
+    //   swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    // }
+    DataFactory.addIdeaLove(ideaId,subTopicId);
   }
 
   //displays subtopic main heading?
@@ -31,7 +37,37 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     DataFactory.getSubtopicIdeas(index);
   }
 
+  //redirect to home view
+  function homeView() {
+    $location.path('/home');
+  }
+  //redirect to correct subtopic view
+  //not working :(
+  function redirectToSubtopic(url) {
+    console.log(url.subtopicId);
+    $location.path('/subtopics/' + url.subtopicId);
+    getIdeas(self.index);
+  }
+
+  //redirect to add idea view
+  self.createIdea = function() {
+    $location.path('/idea');
+  }
+
+  //redirect to add idea view
+  self.flagIdea = function() {
+    $location.path('/flag');
+  }
+
+  // //get moreComments button click
+  // self.moreComments = function() {
+  //   $location.path('/comment/');
+  // }
+
+  // var userMatchObject = DataFactory.userMatchObject.list;
+  // console.log('userMatchObject.list: ', userMatchObject);
   self.addNewIdea = function(idea) {
+    ('clicking inside of add new idea', idea)
     //sources firebaseUser in the function
     var auth = $firebaseAuth();
     var firebaseUser = auth.$getAuth();
@@ -47,6 +83,8 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
       title : idea.title,
       description : idea.description
     }
+
+    console.log('newIdea', newIdea);
     //Sends the new idea object to factory
     DataFactory.addNewIdea(newIdea).then(function(response){
       // redirect to correct subtopic page after submit
@@ -85,6 +123,15 @@ self.moreComments = function(subtopicIdea) {
     $location.path('/subtopics/' + url.subtopicId);
     getIdeas(self.index);
   }
+
+
+  self.flagIdeaClick = function (subtopicIdeas){
+    // console.log("this is subtopicIdeas on flag IDEA click",subtopicIdeas);
+
+    $routeParams.idea_id = subtopicIdeas.idea_id;
+    $routeParams.user_id = subtopicIdeas.user_id;
+      $location.path('flag/'+$routeParams.idea_id+'/'+$routeParams.user_id);
+  };//end of flagCommentClick
 
 
 }]);//end of my.app

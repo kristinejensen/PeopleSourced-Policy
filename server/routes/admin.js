@@ -63,13 +63,33 @@ router.get('/ideaChart', function (req, res) {
 //**********************************************//
 //       GET ALL USERS TO DISPLAY ON VIEW       //
 //**********************************************//
+// router.get('/manageUsers', function(req, res){
+//   if(req.decodedToken.admin){
+//     pool.connect( function (err, client, done) {
+//       client.query('WITH ideas_flags_count_temp_table AS (SELECT users.id AS user_id, COUNT(users.id) AS ideas_flags_count FROM ideas_flags JOIN users ON ideas_flags.user_id=users.id GROUP BY users.id),' +
+//       'comments_flags_count_temp_table AS (SELECT users.id AS user_id, COUNT(users.id) AS comments_flags_count FROM comments_flags JOIN users ON comments_flags.user_id=users.id GROUP BY users.id),' +
+//       ' subflags_count_temp_table AS (SELECT users.id AS user_id, COUNT(users.id) AS subflags_count FROM subflags JOIN users ON subflags.user_id=users.id GROUP BY users.id)' +
+//       'SELECT users.name, users.email, users.ward, users.active, users.id, ideas_flags_count, comments_flags_count, subflags_count FROM users LEFT OUTER JOIN ideas_flags_count_temp_table ON ideas_flags_count_temp_table.user_id=users.id LEFT JOIN comments_flags_count_temp_table ON comments_flags_count_temp_table.user_id=users.id LEFT JOIN subflags_count_temp_table ON subflags_count_temp_table.user_id=users.id WHERE ideas_flags_count IS NOT NULL OR comments_flags_count IS NOT NULL OR subflags_count IS NOT NULL;', function(err, result){
+//         done();
+//         if(err){
+//           console.log('Error completing manage users query', err);
+//           res.sendStatus(500);
+//         } else {
+//           res.send(result.rows);
+//           console.log(result.rows);
+//         }
+//       });
+//     });
+//   }
+// });
+
 router.get('/manageUsers', function(req, res){
   if(req.decodedToken.admin){
     pool.connect( function (err, client, done) {
       client.query('WITH ideas_flags_count_temp_table AS (SELECT users.id AS user_id, COUNT(users.id) AS ideas_flags_count FROM ideas_flags JOIN users ON ideas_flags.user_id=users.id GROUP BY users.id),' +
       'comments_flags_count_temp_table AS (SELECT users.id AS user_id, COUNT(users.id) AS comments_flags_count FROM comments_flags JOIN users ON comments_flags.user_id=users.id GROUP BY users.id),' +
       ' subflags_count_temp_table AS (SELECT users.id AS user_id, COUNT(users.id) AS subflags_count FROM subflags JOIN users ON subflags.user_id=users.id GROUP BY users.id)' +
-      'SELECT users.name, users.email, users.ward, users.active, users.id, ideas_flags_count, comments_flags_count, subflags_count FROM users LEFT OUTER JOIN ideas_flags_count_temp_table ON ideas_flags_count_temp_table.user_id=users.id LEFT JOIN comments_flags_count_temp_table ON comments_flags_count_temp_table.user_id=users.id LEFT JOIN subflags_count_temp_table ON subflags_count_temp_table.user_id=users.id WHERE ideas_flags_count IS NOT NULL OR comments_flags_count IS NOT NULL OR subflags_count IS NOT NULL;', function(err, result){
+      'SELECT users.name, users.email, users.ward, users.active, users.id, ideas_flags_count, comments_flags_count, subflags_count FROM users LEFT OUTER JOIN ideas_flags_count_temp_table ON ideas_flags_count_temp_table.user_id=users.id LEFT JOIN comments_flags_count_temp_table ON comments_flags_count_temp_table.user_id=users.id LEFT JOIN subflags_count_temp_table ON subflags_count_temp_table.user_id=users.id LIMIT 20;', function(err, result){
         done();
         if(err){
           console.log('Error completing manage users query', err);
@@ -206,4 +226,89 @@ router.get('/searchUsers', function (req, res) {
   }
 });
 
+// router.get('/allFlags', function(req, res){
+//   console.log("hits all flags");
+//   pool.connect( function (err, client, done) {
+//     client.query('SELECT * FROM ideas_flags LEFT JOIN ideas ON ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id;', function(err, result){
+//       done();
+//       if(err){
+//         console.log('Error completing manage users query', err);
+//         res.sendStatus(501);
+//       } else {
+//         client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id;', function(err, result){
+//           done();
+//           if(err){
+//             console.log('Error completing manage users query', err);
+//             res.sendStatus(501);
+//           } else {
+//             res.send(result.rows);
+//             console.log("this si RRRRREEESSSULT",result.rows);
+//           }
+//         });
+//       }
+//     });
+//   });
+// });
+
+router.get('/allCommentFlags', function(req,res){
+pool.connect( function (err, client, done) {
+  client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id;', function(err, result){
+    done();
+    if(err){
+      console.log('Error completing manage users query', err);
+      res.sendStatus(501);
+    } else {
+          res.send(result.rows);
+          console.log("this si RRRRREEESSSULT",result.rows);
+        }
+      });
+    })
+  });
+
+  router.get('/allIdeaFlags', function(req,res){
+  pool.connect( function (err, client, done) {
+    client.query('SELECT * FROM ideas_flags LEFT JOIN ideas ON ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id;', function(err, result){
+      done();
+      if(err){
+        console.log('Error completing manage users query', err);
+        res.sendStatus(501);
+      } else {
+            res.send(result.rows);
+            console.log("this si RRRRREEESSSULT",result.rows);
+          }
+        });
+      })
+    });
+
+    router.delete('/deleteFlaggedIdea/:id', function(req,res){
+      console.log(req.params.id);
+    pool.connect( function (err, client, done) {
+      client.query('DELETE FROM ideas WHERE id=$1;',[req.params.id], function(err, result){
+        done();
+        if(err){
+          console.log('Error completing manage users query', err);
+          res.sendStatus(501);
+        } else {
+              res.send(result.rows);
+              console.log("this si RRRRREEESSSULT",result.rows);
+            }
+          });
+        })
+      });
+
+      router.delete('/deleteFlaggedComment/:id', function(req,res){
+        console.log(req.params.id);
+      pool.connect( function (err, client, done) {
+        client.query('DELETE FROM comments WHERE id=$1;',[req.params.id], function(err, result){
+          done();
+          if(err){
+            console.log('Error completing manage users query', err);
+            res.sendStatus(501);
+          } else {
+                res.send(result.rows);
+                console.log("this si RRRRREEESSSULT",result.rows);
+              }
+            });
+          })
+        });
 module.exports = router;

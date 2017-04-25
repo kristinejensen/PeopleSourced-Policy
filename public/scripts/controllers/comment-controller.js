@@ -11,12 +11,24 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.getCommentIdObject = DataFactory.getCommentIdObject;
   self.commentsObject = DataFactory.commentsObject;
   self.addCommentLike = DataFactory.addCommentLike;
-  self.addIdeaLike = DataFactory.addIdeaLike;
-  self.addIdeaLove = DataFactory.addIdeaLove;
 
   DataFactory.getAllSubcomments();
   DataFactory.getComments(subtopicIdea);
   DataFactory.getIdeaId(subtopicIdea);
+
+  self.addIdeaLike = function(ideaId,subTopicId){
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    }
+    DataFactory.addIdeaLike(ideaId,subTopicId);
+  }
+
+  self.addIdeaLove = function(ideaId,subTopicId){
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    }
+    DataFactory.addIdeaLove(ideaId,subTopicId);
+  }
 
 
 
@@ -84,5 +96,19 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     $window.location.reload();
   }//end of addNewSubComment()
 
+  //redirect to add idea view
+  self.flagIdea = function() {
+    $location.path('/flag');
+  }
+
+  self.flagCommentClick = function (comments){
+
+    console.log('what is comment', comments);
+    console.log('comment id', comments.comments_id, 'idea id', comments.comments_idea_id, 'user id', comments.id);
+    $routeParams.id = comments.comments_id;
+    $routeParams.idea_id = comments.comments_idea_id;
+    $routeParams.user_id = comments.id;
+      $location.path('flag/'+$routeParams.id+'/'+$routeParams.idea_id+'/'+$routeParams.user_id);
+  };//end of flagCommentClick
 
 }]);//end of app.controller()
