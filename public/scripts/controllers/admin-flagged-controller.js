@@ -34,4 +34,11 @@ app.controller('AdminFlaggedController', ['$firebaseAuth','$http', '$location',"
     AdminFactory.deleteItemComment(flag);
   }
 
+  self.resolveFlag = false;
+
+  self.resolveFlags = function(){
+    console.log('getsome');
+    self.resolveFlag = true;
+  }
+
 }]);
