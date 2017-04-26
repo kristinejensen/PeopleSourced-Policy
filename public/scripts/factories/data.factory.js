@@ -96,7 +96,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
         console.log('response', response);
         getSubtopicIdeas()
         // return $window.location.reload();
-        $route.reload()
+        $route.reload();
         // self.newIdea = {};
       }).then(function(){
         return notyf.confirm('Your idea was added!')
@@ -160,6 +160,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
       }).then(function(response){
         notyf.confirm('Your comment was added!');
         self.addComment = {};
+        $route.reload()
       }).catch(function(error) {
         swal("Values Are Incorrect", "Try Again!", "error");
         console.log('error', error);
@@ -275,7 +276,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
           commentsObject.list[i].comments_likes_count = 0;
         }
       }
-    });
+    })
   }
 
 
