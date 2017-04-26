@@ -11,7 +11,9 @@ var countIdeaChart = [];
 var ideaChart = [];
 //populates subtopic select dropdown on admin reports view
   self.subTopicObject = DataFactory.subTopicObject;
+
 self.subtopic = subtopic;
+
   auth.$onAuthStateChanged(function(firebaseUser) {
    if (firebaseUser) {
      console.log('we are still logged in!');
@@ -132,47 +134,6 @@ new Chartist.Bar('#chart2', {
 
 
 
-//               new Chartist.Line('.ct-chart', {
-//                 // labels: subtopic,
-//                 series: countIdeaChart
-//               }, {
-//                 showArea: true,
-//                 axisY: {
-//                   onlyInteger: false
-//                 }
-//               });
-// console.log(countIdeaChart);
-//
-//               self.labels = ["idea1","idea2","idea3","idea4"];
-//               self.series = ['Price TimeStamp', 'Series B'];
-//               self.data = countIdeaChart;
-//               self.onClick = function (points, evt) {
-//                 console.log(points, evt);
-//
-//                 self.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
-//                 self.options = {
-//                   scales: {
-//                     yAxes: [
-//                       {
-//                         id: 'y-axis-1',
-//                         type: 'linear',
-//                         display: true,
-//                         position: 'left'
-//                       },
-//                       {
-//                         id: 'y-axis-2',
-//                         type: 'linear',
-//                         display: true,
-//                         position: 'right'
-//                       }
-//                     ]
-//                   }
-//                 };
-//               };
-//
-// })
-// })
-// }
-// }
+
 
 }]);

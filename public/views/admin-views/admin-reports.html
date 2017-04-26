@@ -56,7 +56,8 @@
     <div class=" col-md-3">
       <select name="Subtopics">
         <option> </option>
-        <option ng-repeat="subtopic in arc.subTopic" value="{{subtopic.subtopics_id}}"> subtopic {{subtopic.subtopics_id}} </option>
+        <option ng-repeat="subtopic in arc.subTopic.list" value="{{subtopic.subtopics_id}}"> subtopic {{subtopic.subtopics_id}} </option>
+
       </select>
     </div>
 
