@@ -245,6 +245,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
         }
       }
     });
+    
     $http({
       method: 'GET',
       url: '/data/getCommentId',
