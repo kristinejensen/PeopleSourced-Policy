@@ -53,6 +53,7 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
 
     //sents comment from view to DB
     DataFactory.addComment(newComment);
+    
     //reloads entire page after comment submission
     $window.location.reload();
 
