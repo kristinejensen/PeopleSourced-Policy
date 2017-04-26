@@ -206,14 +206,14 @@ if(firebaseUser){
 }
 }//end of getComments()
 
-function deleteItemComment(flag) {
+function deleteFlaggedComment(flag) {
 console.log("gets all flags", flag);
 var auth = $firebaseAuth();
 var firebaseUser = auth.$getAuth();
 if(firebaseUser){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
-      method: 'DELETE',
+      method: 'PUT',
       url: '/admin/deleteFlaggedComment/' + flag.comment_id,
       headers: {
         id_token: idToken,
@@ -231,7 +231,7 @@ var firebaseUser = auth.$getAuth();
 if(firebaseUser){
   firebase.auth().currentUser.getToken().then(function(idToken) {
     $http({
-      method: 'DELETE',
+      method: 'PUT',
       url: '/admin/deleteFlaggedIdea/' + flag.comment_id,
       headers: {
         id_token: idToken,
@@ -256,7 +256,7 @@ if(firebaseUser){
     ideaToFlagObject: ideaToFlagObject,
     commentToFlagObject: commentToFlagObject,
     deleteItemIdea: deleteItemIdea,
-    deleteItemComment: deleteItemComment,
+    deleteFlaggedComment: deleteFlaggedComment,
   }
 
 }]); // end of app.factory

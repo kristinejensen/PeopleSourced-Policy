@@ -269,7 +269,7 @@ router.get('/searchUsers', function (req, res) {
 
 router.get('/allCommentFlags', function(req,res){
 pool.connect( function (err, client, done) {
-  client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id;', function(err, result){
+  client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id WHERE comments_flags.active = true;', function(err, result){
     done();
     if(err){
       console.log('Error completing manage users query', err);
@@ -284,7 +284,7 @@ pool.connect( function (err, client, done) {
 
   router.get('/allIdeaFlags', function(req,res){
   pool.connect( function (err, client, done) {
-    client.query('SELECT * FROM ideas_flags LEFT JOIN ideas ON ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id;', function(err, result){
+    client.query('SELECT * FROM ideas_flags LEFT JOIN comments on ideas_flags.ideas_id = comments.id LEFT JOIN users ON users.id = comments.user_id WHERE ideas_flags.active = true;', function(err, result){
       done();
       if(err){
         console.log('Error completing manage users query', err);
@@ -297,7 +297,7 @@ pool.connect( function (err, client, done) {
       })
     });
 
-    router.delete('/deleteFlaggedIdea/:id', function(req,res){
+    router.put('/deleteFlaggedIdea/:id', function(req,res){
       console.log(req.params.id);
     pool.connect( function (err, client, done) {
       client.query('DELETE FROM ideas WHERE id=$1;',[req.params.id], function(err, result){
@@ -313,10 +313,10 @@ pool.connect( function (err, client, done) {
         })
       });
 
-      router.delete('/deleteFlaggedComment/:id', function(req,res){
-        console.log(req.params.id);
+      router.put('/deleteFlaggedComment/:id', function(req,res){
+        console.log(".............",req.params.id);
       pool.connect( function (err, client, done) {
-        client.query('DELETE FROM comments WHERE id=$1;',[req.params.id], function(err, result){
+        client.query('UPDATE comments_flags SET active = false WHERE comments_flags.comment_id =$1;',[req.params.id], function(err, result){
           done();
           if(err){
             console.log('Error completing manage users query', err);

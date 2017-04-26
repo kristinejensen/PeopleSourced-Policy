@@ -14,8 +14,8 @@ app.controller('AdminFlaggedController', ['$firebaseAuth','$http', '$location',"
     }
   });
 
-  self.deleteFlaggedItem = function(flags) {
-    AdminFactory.deleteFlaggedItem(flags);
+  self.deleteFlaggedComment = function(flags) {
+    AdminFactory.deleteFlaggedComment(flags);
   };
 
   self.deleteItem = function(flags) {
