@@ -96,7 +96,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
         console.log('response', response);
         getSubtopicIdeas();
         return $window.location.reload();
-        // $window.location.reload();
         // self.newIdea = {};
       }).then(function(){
         return notyf.confirm('Your idea was added!')
@@ -245,7 +244,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
         }
       }
     });
-    
+
     $http({
       method: 'GET',
       url: '/data/getCommentId',
