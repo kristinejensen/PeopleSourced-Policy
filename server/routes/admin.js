@@ -26,6 +26,23 @@ router.get('/userChart', function (req, res) {
   }
 });//end of router.get
 
+router.get('/userChartIdeas', function (req, res) {
+  if(req.decodedToken.admin){
+    pool.connect()
+    .then(function (client) {
+      client.query("SELECT subtopics_id, count(subtopics_id) FROM ideas GROUP BY subtopics_id ORDER BY subtopics_id ASC;")
+      .then(function (result) {
+        client.release();
+        res.send(result.rows);
+      })
+      .catch(function (err) {
+        console.log('error on SELECT', err);
+        res.sendStatus(500);
+      });
+    });//end of .then
+  }
+});//end of router.get
+
 router.get('/checkAdminStatus', function (req, res) {
   console.log('get here?');
   if(req.decodedToken.admin){
