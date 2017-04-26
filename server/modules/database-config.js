@@ -1,7 +1,7 @@
 
 var pg = require('pg');
 var config = {
-  database: 'new_psp_database',
+  database: 'psp_database',
   host: 'localhost',
   port: 5432,
   max: 10,
