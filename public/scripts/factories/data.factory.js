@@ -94,8 +94,9 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
         }
       }).then(function(response){
         console.log('response', response);
-        getSubtopicIdeas();
-        return $window.location.reload();
+        getSubtopicIdeas()
+        // return $window.location.reload();
+        $route.reload()
         // self.newIdea = {};
       }).then(function(){
         return notyf.confirm('Your idea was added!')
