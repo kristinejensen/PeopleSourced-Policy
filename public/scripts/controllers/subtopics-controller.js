@@ -12,14 +12,14 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
 
   self.addIdeaLike = function(ideaId,subTopicId){
     if (firebaseUser === null){
-      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+      swal("Please sign up or login to engage with the community.", "Try Again!", "error");
     }
     DataFactory.addIdeaLike(ideaId,subTopicId);
   }
 
   self.addIdeaLove = function(ideaId,subTopicId){
     if (firebaseUser === null){
-      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+      swal("Please sign up or login to engage with the community.", "Try Again!", "error");
     }
     DataFactory.addIdeaLove(ideaId,subTopicId);
   }
@@ -66,18 +66,22 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
     self.idea = {};
   }//end of self.createIdea()
 
-//get moreComments button click
-self.moreComments = function(subtopicIdea) {
-  $location.path('/comment/' + subtopicIdea.idea_id);
-  console.log(subtopicIdea);
-}
+  //get moreComments button click
+  self.moreComments = function(subtopicIdea) {
+    $location.path('/comment/' + subtopicIdea.idea_id);
+    console.log(subtopicIdea);
+  }
   //redirect to add idea view
   self.createIdea = function() {
     $location.path('/idea');
   }
   //redirect to add idea view
   self.flagIdea = function() {
-    $location.path('/flag');
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    } else {
+      $location.path('/flag');
+    }
   }
 
   //redirect to home view
