@@ -74,6 +74,38 @@
     </div>
 
   </div>
+
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th> User Name </th>
+          <th> User Email </th>
+          <th> Idea Title </th>
+          <th> Idea description </th>
+          <th> Total Likes </th>
+          <th> Total Loves </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="dbFilterObject in arc.dbFilterObject.list">
+          <td>{{dbFilterObject.name}}</td>
+          <td>{{dbFilterObject.email}}</td>
+          <td>{{dbFilterObject.title}}</td>
+          <td>{{dbFilterObject.description}}</td>
+          <td>{{dbFilterObject.ward}}</td>
+          <td>{{dbFilterObject.loves}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+
+
     <!--//DATA//-->
     <!--//GRAPH//-->
 

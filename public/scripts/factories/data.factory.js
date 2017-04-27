@@ -369,7 +369,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
   function getFilteredResult(filterObject){
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
-        method:'GET',
+        method:'POST',
         url: '/admin/getFilteredResult',
         data: filterObject,
         headers: {

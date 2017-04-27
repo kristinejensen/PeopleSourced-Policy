@@ -331,14 +331,14 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
 
 
 //gets filter results for admin-reports view
-  router.get('/getFilteredResult', function (req, res) {
-    // var filterObject = req.body;
+  router.post('/getFilteredResult', function (req, res) {
+    var filterObject = req.body;
+    console.log("filterObject", filterObject);
     pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM users")
+      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.user_id=users.id WHERE ward=$1;",[filterObject.ward])
       .then(function (result) {
         client.release();
-        // console.log(result.rows[0]);
         res.send(result.rows);
       })
       .catch(function (err) {

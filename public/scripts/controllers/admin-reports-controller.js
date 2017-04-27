@@ -16,7 +16,7 @@ var ideaChart = [];
   self.subTopic = TopicsFactory.subTopic;
 //object from db based on filterUsers
   self.dbFilterObject = DataFactory.dbFilterObject;
-console.log(self.dbFilterObject);
+console.log("line 19: ", self.dbFilterObject);
 // self.subtopic = subtopic;
 
 //sends filter results to factory
@@ -117,34 +117,34 @@ self.getFilteredResult = function(filterObject){
   });
   }
   }//end of getAllUsers()
-getUserChartIdea();
-  function getUserChartIdea() {
-    var auth = $firebaseAuth();
-    var firebaseUser = auth.$getAuth();
-    if(firebaseUser){
-      firebase.auth().currentUser.getToken().then(function(idToken) {
-    $http({
-      method: 'GET',
-      url: '/admin/userChartIdeas',
-      headers: {
-        id_token: idToken
-      }
-    }).then(function(response) {
-      // console.log(response.data,"__________");
-      for (var i = 0; i < 5; i++) {
-        subtopic.push('subtopics_id ' + response.data[i].subtopics_title);
-        ideaChart.push(response.data[i].subtopics_id);
-        countIdeaChart.push(Number(response.data[i].count));
-      }
-
-new Chartist.Bar('#chart2', {
-  labels: ["Infrastructure","Housing","Healthcare","Workforce","Innovation"],
-  series: [countIdeaChart]
-});
-})
-})
-}
-}
+// getUserChartIdea();
+//   function getUserChartIdea() {
+//     var auth = $firebaseAuth();
+//     var firebaseUser = auth.$getAuth();
+//     if(firebaseUser){
+//       firebase.auth().currentUser.getToken().then(function(idToken) {
+//     $http({
+//       method: 'GET',
+//       url: '/admin/userChartIdeas',
+//       headers: {
+//         id_token: idToken
+//       }
+//     }).then(function(response) {
+//       // console.log(response.data,"__________");
+//       for (var i = 0; i < 5; i++) {
+//         subtopic.push('subtopics_id ' + response.data[i].subtopics_title);
+//         ideaChart.push(response.data[i].subtopics_id);
+//         countIdeaChart.push(Number(response.data[i].count));
+//       }
+//
+// new Chartist.Bar('#chart2', {
+//   labels: ["Infrastructure","Housing","Healthcare","Workforce","Innovation"],
+//   series: [countIdeaChart]
+// });
+// })
+// })
+// }
+// }
 
 
 
