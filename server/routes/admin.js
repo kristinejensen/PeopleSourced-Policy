@@ -284,7 +284,7 @@ pool.connect( function (err, client, done) {
 
   router.get('/allIdeaFlags', function(req,res){
   pool.connect( function (err, client, done) {
-    client.query('SELECT * FROM ideas_flags LEFT JOIN comments on ideas_flags.ideas_id = comments.id LEFT JOIN users ON users.id = comments.user_id WHERE ideas_flags.active = true;', function(err, result){
+    client.query(' SELECT * FROM ideas_flags LEFT JOIN ideas on ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id WHERE ideas_flags.active = true;', function(err, result){
       done();
       if(err){
         console.log('Error completing manage users query', err);
@@ -297,10 +297,10 @@ pool.connect( function (err, client, done) {
       })
     });
 
-    router.put('/deleteFlaggedIdea/:id', function(req,res){
+    router.put('/deleteFlaggedIdeaFlag/:id', function(req,res){
       console.log(req.params.id);
     pool.connect( function (err, client, done) {
-      client.query('DELETE FROM ideas WHERE id=$1;',[req.params.id], function(err, result){
+      client.query('UPDATE ideas_flags SET active = false WHERE ideas_flags.idea_id =$1;',[req.params.id], function(err, result){
         done();
         if(err){
           console.log('Error completing manage users query', err);
@@ -328,4 +328,36 @@ pool.connect( function (err, client, done) {
             });
           })
         });
+
+        router.put('/deleteComment/:id', function(req,res){
+          console.log(".............",req.params.id);
+        pool.connect( function (err, client, done) {
+          client.query('UPDATE comments SET active = false WHERE comments.id =$1;',[req.params.id], function(err, result){
+            done();
+            if(err){
+              console.log('Error completing manage users query', err);
+              res.sendStatus(501);
+            } else {
+                  res.send(result.rows);
+                  console.log("this si RRRRREEESSSULT",result.rows);
+                }
+              });
+            })
+          });
+
+          router.put('/deleteIdea/:id', function(req,res){
+            console.log(".............",req.params.id);
+          pool.connect( function (err, client, done) {
+            client.query('UPDATE ideas SET active = false WHERE ideas.id =$1;',[req.params.id], function(err, result){
+              done();
+              if(err){
+                console.log('Error completing manage users query', err);
+                res.sendStatus(501);
+              } else {
+                    res.send(result.rows);
+                    console.log("this si RRRRREEESSSULT",result.rows);
+                  }
+                });
+              })
+            });
 module.exports = router;
