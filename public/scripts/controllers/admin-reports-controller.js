@@ -1,5 +1,5 @@
 
-app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', 'DataFactory', function ($firebaseAuth, $http, $location, DataFactory){
+app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', 'DataFactory', 'TopicsFactory', function ($firebaseAuth, $http, $location, DataFactory, TopicsFactory){
   var self = this;
   var auth = $firebaseAuth();
   var ctx = document.getElementById("myChart");
@@ -9,10 +9,21 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', '
 var subtopic =[];
 var countIdeaChart = [];
 var ideaChart = [];
-//populates subtopic select dropdown on admin reports view
-  self.subTopicObject = DataFactory.subTopicObject;
 
-self.subtopic = subtopic;
+//calls function at factory when controller is active
+  TopicsFactory.findActiveSubTopics();
+//populates subtopic select dropdown on admin reports view(dynamically changes when topic change)
+  self.subTopic = TopicsFactory.subTopic;
+
+// self.subtopic = subtopic;
+
+self.getFilteredResult = function(filterObject){
+  console.log('filterObject' , filterObject);
+  // DataFactory.getFilteredResult(filterObject);
+}
+
+
+
 
   auth.$onAuthStateChanged(function(firebaseUser) {
    if (firebaseUser) {
@@ -136,4 +147,4 @@ new Chartist.Bar('#chart2', {
 
 
 
-}]);
+}]);//end of app.controller

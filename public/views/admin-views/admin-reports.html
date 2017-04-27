@@ -36,7 +36,7 @@
     <!--//FILTERS//-->
     <div class="filters" style="padding-top: 30px; padding-bottom: 30px;">
     <div class="col-md-3">
-      <select name="Wards">
+      <select ng-model="arc.filterObject.ward" name="Wards">
         <option value="1"> Ward 1 </option>
         <option value="2"> Ward 2 </option>
         <option value="3"> Ward 3 </option>
@@ -49,27 +49,28 @@
         <option value="10"> Ward 10 </option>
         <option value="11"> Ward 11 </option>
         <option value="12"> Ward 12 </option>
-        <option value="0"> other </option>
+        <option value="13"> Ward 13 </option>
+        <option value="0"> Other </option>
       </select>
     </div>
 
     <div class=" col-md-3">
-      <select name="Subtopics">
-        <option> </option>
-        <option ng-repeat="subtopic in arc.subTopic.list" value="{{subtopic.subtopics_id}}"> subtopic {{subtopic.subtopics_id}} </option>
+      <select ng-model="arc.filterObject.subtopic" name="Subtopics">
+        <option ng-repeat="subtopic in arc.subTopic.list"> {{subtopic.title}} </option>
+        <!-- <option value="{{subtopic.subtopics_id}}"> subtopic {{subtopic.title}} </option> -->
       </select>
     </div>
 
     <div class=" col-md-3">
-      <select name="Actions">
-        <option> </option>
-        <option value="liked"> Most Liked </option>
-        <option value="loved"> Most Loved </option>
+      <select ng-model="arc.filterObject.liked_loved">
+        <option name="Actions">
+        <option> Most Liked </option>
+        <option> Most Loved </option>
       </select>
     </div>
 
     <div class=" col-md-3">
-      <button class = "btn-flt"> Filter </button>
+      <button ng-click="arc.getFilteredResult(arc.filterObject)" class = "btn-flt"> Filter </button>
     </div>
 
   </div>
