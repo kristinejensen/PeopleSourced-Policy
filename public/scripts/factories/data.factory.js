@@ -17,6 +17,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
   var email = {};
   var mostLikedIdea = {list: []};
   var mostCommentedIdea = {list: []};
+  var dbFilterObject = { list : [] }
 
 
   // //calls functions at startup
@@ -364,6 +365,24 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
     });
   }
 
+//DB request for filter object from admin-reports view
+  function getFilteredResult(filterObject){
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method:'GET',
+        url: '/admin/getFilteredResult',
+        data: filterObject,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response){
+        dbFilterObject.list = response.data;
+      });
+    });//end of firebase.auth()
+  }//end of getFilteredResult()
+
+
+
   return {
     userTally: userTally,
     ideasTally: ideasTally,
@@ -408,6 +427,10 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
     email: email,
     //gets all subcomments
     getAllSubcomments : getAllSubcomments,
+    //sends filter results to db
+    getFilteredResult : getFilteredResult,
+    //results form DB for admin-reports view
+    dbFilterObject : dbFilterObject
   }
 
 }]); // end of app.factory

@@ -14,12 +14,15 @@ var ideaChart = [];
   TopicsFactory.findActiveSubTopics();
 //populates subtopic select dropdown on admin reports view(dynamically changes when topic change)
   self.subTopic = TopicsFactory.subTopic;
-
+//object from db based on filterUsers
+  self.dbFilterObject = DataFactory.dbFilterObject;
+console.log(self.dbFilterObject);
 // self.subtopic = subtopic;
 
+//sends filter results to factory
 self.getFilteredResult = function(filterObject){
-  console.log('filterObject' , filterObject);
-  // DataFactory.getFilteredResult(filterObject);
+  // console.log('filterObject' , filterObject);
+  DataFactory.getFilteredResult(filterObject);
 }
 
 
@@ -127,7 +130,7 @@ getUserChartIdea();
         id_token: idToken
       }
     }).then(function(response) {
-      console.log(response.data,"__________");
+      // console.log(response.data,"__________");
       for (var i = 0; i < 5; i++) {
         subtopic.push('subtopics_id ' + response.data[i].subtopics_title);
         ideaChart.push(response.data[i].subtopics_id);

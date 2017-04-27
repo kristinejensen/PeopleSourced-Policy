@@ -268,21 +268,21 @@ router.get('/searchUsers', function (req, res) {
 // });
 
 router.get('/allCommentFlags', function(req,res){
-pool.connect( function (err, client, done) {
-  client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id;', function(err, result){
-    done();
-    if(err){
-      console.log('Error completing manage users query', err);
-      res.sendStatus(501);
-    } else {
-          res.send(result.rows);
-          console.log("this si RRRRREEESSSULT",result.rows);
-        }
-      });
-    })
-  });
+  pool.connect( function (err, client, done) {
+    client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id;', function(err, result){
+      done();
+      if(err){
+        console.log('Error completing manage users query', err);
+        res.sendStatus(501);
+      } else {
+        res.send(result.rows);
+        console.log("this si RRRRREEESSSULT",result.rows);
+      }
+    });
+  })
+});
 
-  router.get('/allIdeaFlags', function(req,res){
+router.get('/allIdeaFlags', function(req,res){
   pool.connect( function (err, client, done) {
     client.query('SELECT * FROM ideas_flags LEFT JOIN ideas ON ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id;', function(err, result){
       done();
@@ -290,42 +290,65 @@ pool.connect( function (err, client, done) {
         console.log('Error completing manage users query', err);
         res.sendStatus(501);
       } else {
-            res.send(result.rows);
-            console.log("this si RRRRREEESSSULT",result.rows);
-          }
-        });
-      })
+        res.send(result.rows);
+        console.log("this si RRRRREEESSSULT",result.rows);
+      }
     });
+  })
+});
 
-    router.delete('/deleteFlaggedIdea/:id', function(req,res){
-      console.log(req.params.id);
-    pool.connect( function (err, client, done) {
-      client.query('DELETE FROM ideas WHERE id=$1;',[req.params.id], function(err, result){
-        done();
-        if(err){
-          console.log('Error completing manage users query', err);
-          res.sendStatus(501);
-        } else {
-              res.send(result.rows);
-              console.log("this si RRRRREEESSSULT",result.rows);
-            }
-          });
-        })
+router.delete('/deleteFlaggedIdea/:id', function(req,res){
+  console.log(req.params.id);
+  pool.connect( function (err, client, done) {
+    client.query('DELETE FROM ideas WHERE id=$1;',[req.params.id], function(err, result){
+      done();
+      if(err){
+        console.log('Error completing manage users query', err);
+        res.sendStatus(501);
+      } else {
+        res.send(result.rows);
+        console.log("this si RRRRREEESSSULT",result.rows);
+      }
+    });
+  })
+});
+
+router.delete('/deleteFlaggedComment/:id', function(req,res){
+  console.log(req.params.id);
+  pool.connect( function (err, client, done) {
+    client.query('DELETE FROM comments WHERE id=$1;',[req.params.id], function(err, result){
+      done();
+      if(err){
+        console.log('Error completing manage users query', err);
+        res.sendStatus(501);
+      } else {
+        res.send(result.rows);
+        console.log("this si RRRRREEESSSULT",result.rows);
+      }
+    });
+  })
+});
+
+
+//gets filter results for admin-reports view
+  router.get('/getFilteredResult', function (req, res) {
+    // var filterObject = req.body;
+    pool.connect()
+    .then(function (client) {
+      client.query("SELECT * FROM users")
+      .then(function (result) {
+        client.release();
+        // console.log(result.rows[0]);
+        res.send(result.rows);
+      })
+      .catch(function (err) {
+        console.log('error on SELECT', err);
+        res.sendStatus(500);
       });
+    });//end of .then
+  });//end of router.get
 
-      router.delete('/deleteFlaggedComment/:id', function(req,res){
-        console.log(req.params.id);
-      pool.connect( function (err, client, done) {
-        client.query('DELETE FROM comments WHERE id=$1;',[req.params.id], function(err, result){
-          done();
-          if(err){
-            console.log('Error completing manage users query', err);
-            res.sendStatus(501);
-          } else {
-                res.send(result.rows);
-                console.log("this si RRRRREEESSSULT",result.rows);
-              }
-            });
-          })
-        });
+
 module.exports = router;
+
+//,[filterObject.ward, filterObject.subtopic, filterObject.liked_loved]

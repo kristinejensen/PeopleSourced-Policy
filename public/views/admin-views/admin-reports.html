@@ -56,7 +56,7 @@
 
     <div class=" col-md-3">
       <select ng-model="arc.filterObject.subtopic" name="Subtopics">
-        <option ng-repeat="subtopic in arc.subTopic.list"> {{subtopic.title}} </option>
+        <option ng-repeat="subtopic in arc.subTopic.list" value="{{subtopic.id}}"> {{subtopic.title}} </option>
         <!-- <option value="{{subtopic.subtopics_id}}"> subtopic {{subtopic.title}} </option> -->
       </select>
     </div>
@@ -64,15 +64,15 @@
     <div class=" col-md-3">
       <select ng-model="arc.filterObject.liked_loved">
         <option name="Actions">
-        <option> Most Liked </option>
-        <option> Most Loved </option>
+        <option value="liked"> Most Liked </option>
+        <option value="loved"> Most Loved </option>
       </select>
     </div>
 
     <div class=" col-md-3">
       <button ng-click="arc.getFilteredResult(arc.filterObject)" class = "btn-flt"> Filter </button>
     </div>
-
+{{arc.dbFilterObject}}
   </div>
     <!--//DATA//-->
     <!--//GRAPH//-->
