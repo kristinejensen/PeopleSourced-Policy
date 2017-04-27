@@ -51,6 +51,7 @@
         <option value="12"> Ward 12 </option>
         <option value="13"> Ward 13 </option>
         <option value="0"> Other </option>
+        <option value="is not null"> All Wards </option>
       </select>
     </div>
 
@@ -89,12 +90,12 @@
       </thead>
       <tbody>
         <tr ng-repeat="dbFilterObject in arc.dbFilterObject.list">
-          <td>{{dbFilterObject.name}}</td>
-          <td>{{dbFilterObject.email}}</td>
-          <td>{{dbFilterObject.title}}</td>
-          <td>{{dbFilterObject.description}}</td>
-          <td>{{dbFilterObject.ward}}</td>
-          <td>{{dbFilterObject.loves}}</td>
+          <td> {{dbFilterObject.name}} </td>
+          <td> {{dbFilterObject.email}} </td>
+          <td> {{dbFilterObject.title}} </td>
+          <td> {{dbFilterObject.description}} </td>
+          <td> {{dbFilterObject.ward}} </td>
+          <td> {{dbFilterObject.loves}} </td>
         </tr>
       </tbody>
     </table>

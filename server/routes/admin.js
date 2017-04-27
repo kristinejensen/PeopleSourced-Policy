@@ -336,7 +336,7 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
     console.log("filterObject", filterObject);
     pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.user_id=users.id WHERE ward=$1;",[filterObject.ward])
+      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.user_id=users.id WHERE ward=$1 and subtopics_id=$2;",[filterObject.ward, filterObject.subtopic])
       .then(function (result) {
         client.release();
         res.send(result.rows);
