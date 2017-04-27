@@ -9,13 +9,19 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.index = $routeParams.id;
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
-  self.addIdeaLove = DataFactory.addIdeaLove;
 
   self.addIdeaLike = function(ideaId,subTopicId){
     if (firebaseUser === null){
       swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
     }
     DataFactory.addIdeaLike(ideaId,subTopicId);
+  }
+
+  self.addIdeaLove = function(ideaId,subTopicId){
+    if (firebaseUser === null){
+      swal("Sorry, we couldn't process your request.  You must be logged in!", "Try Again!", "error");
+    }
+    DataFactory.addIdeaLove(ideaId,subTopicId);
   }
 
   //displays subtopic main heading?
