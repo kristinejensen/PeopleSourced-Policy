@@ -269,7 +269,7 @@ router.get('/searchUsers', function (req, res) {
 
 router.get('/allCommentFlags', function(req,res){
 pool.connect( function (err, client, done) {
-  client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id WHERE comments_flags.active = true;', function(err, result){
+  client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id WHERE comments_flags.active = true AND comments.active = true;', function(err, result){
     done();
     if(err){
       console.log('Error completing manage users query', err);
@@ -284,7 +284,7 @@ pool.connect( function (err, client, done) {
 
   router.get('/allIdeaFlags', function(req,res){
   pool.connect( function (err, client, done) {
-    client.query(' SELECT * FROM ideas_flags LEFT JOIN ideas on ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id WHERE ideas_flags.active = true;', function(err, result){
+    client.query(' SELECT * FROM ideas_flags LEFT JOIN ideas on ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id WHERE ideas_flags.active = true AND ideas.active = true;', function(err, result){
       done();
       if(err){
         console.log('Error completing manage users query', err);

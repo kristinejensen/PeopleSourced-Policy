@@ -100,15 +100,19 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.flagIdea = function() {
     $location.path('/flag');
   }
+  self.flagIdeaClick = function (subtopicIdeas){
+    // console.log("this is subtopicIdeas on flag IDEA click",subtopicIdeas);
+
+    $routeParams.idea_id = subtopicIdeas.idea_id;
+    $routeParams.user_id = subtopicIdeas.user_id;
+    $location.path('flag/'+$routeParams.idea_id+'/'+$routeParams.user_id);
+  };//end of flagCommentClick
 
   self.flagCommentClick = function (comments){
-
-    console.log('what is comment', comments);
-    console.log('comment id', comments.comments_id, 'idea id', comments.comments_idea_id, 'user id', comments.id);
     $routeParams.id = comments.comments_id;
     $routeParams.idea_id = comments.comments_idea_id;
     $routeParams.user_id = comments.id;
-      $location.path('flag/'+$routeParams.id+'/'+$routeParams.idea_id+'/'+$routeParams.user_id);
+    $location.path('flag/'+$routeParams.id+'/'+$routeParams.idea_id+'/'+$routeParams.user_id);
   };//end of flagCommentClick
 
 }]);//end of app.controller()

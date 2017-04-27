@@ -1,5 +1,5 @@
 
-app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth', '$http', '$location', function(DataFactory, TopicsFactory, $firebaseAuth, $http, $location){
+app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth','$routeParams', '$http', '$location', function(DataFactory, TopicsFactory, $firebaseAuth, $routeParams, $http, $location){
   var self = this;
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth();
@@ -93,11 +93,21 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   self.redirectLogin = function () {
     $location.url('/login');
   }//end of redirectLogin()
+  self.moreComments = function(subtopicIdea) {
+    $location.path('/comment/' + subtopicIdea.idea_id);
 
+  }
   //redirect to add idea view
   self.createIdea = function() {
     //redirect after submission
     $location.url('/idea');
   }//end of self.createIdea
+  self.flagIdeaClick = function (subtopicIdeas){
+    // console.log("this is subtopicIdeas on flag IDEA click",subtopicIdeas);
+
+    $routeParams.idea_id = subtopicIdeas.idea_id;
+    $routeParams.user_id = subtopicIdeas.user_id;
+      $location.path('flag/'+$routeParams.idea_id+'/'+$routeParams.user_id);
+  };//end of flagCommentClick
 
 }]);//end of app.controller()
