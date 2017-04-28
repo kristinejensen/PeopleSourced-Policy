@@ -10,18 +10,18 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   self.subTopicObject = DataFactory.subTopicObject;
   self.individualSubtopic = TopicsFactory.individualSubTopic;
 
-  self.addIdeaLike = function(ideaId,subTopicId){
+  self.addIdeaLike = function(ideaId, subTopicId){
     if (firebaseUser === null){
-      swal("Please sign up or login to engage with the community.", "Try Again!", "error");
+      swal("Please login to engage with the community.", "Try Again!", "error");
     }
-    DataFactory.addIdeaLike(ideaId,subTopicId);
+    DataFactory.addIdeaLike(ideaId, subTopicId);
   }
 
-  self.addIdeaLove = function(ideaId,subTopicId){
+  self.addIdeaLove = function(ideaId, subTopicId){
     if (firebaseUser === null){
-      swal("Please sign up or login to engage with the community.", "Try Again!", "error");
+      swal("Please login to engage with the community.", "Try Again!", "error");
     }
-    DataFactory.addIdeaLove(ideaId,subTopicId);
+    DataFactory.addIdeaLove(ideaId, subTopicId);
   }
 
   //displays subtopic main heading?
