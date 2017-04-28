@@ -81,7 +81,7 @@ self.getFilteredResult = function(filterObject){
             "#36A2EB",
             "#36A2EB",
           ],
-          label: 'My dataset' // for legend
+          label: 'Total Users' // for legend
         }],
         labels: wardChart
       }

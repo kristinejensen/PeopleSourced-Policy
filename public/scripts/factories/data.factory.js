@@ -238,13 +238,11 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
       headers: subtopicIdea
     }).then(function(response) {
       getIdeaIdObject.list = response.data;
+      console.log('getIdeaIdObject.list: ', getIdeaIdObject.list);
       for (var i = 0; i < getIdeaIdObject.list.length; i++) {
         if(getIdeaIdObject.list[i].ideas_likes_count == null){
           getIdeaIdObject.list[i].ideas_likes_count = 0;
-        }
-        if(getIdeaIdObject.list[i].ideas_loves_count == null){
-          getIdeaIdObject.list[i].ideas_loves_count = 0;
-        }
+        }  
       }
     });
 
