@@ -243,29 +243,6 @@ router.get('/searchUsers', function (req, res) {
   }
 });
 
-// router.get('/allFlags', function(req, res){
-//   console.log("hits all flags");
-//   pool.connect( function (err, client, done) {
-//     client.query('SELECT * FROM ideas_flags LEFT JOIN ideas ON ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id;', function(err, result){
-//       done();
-//       if(err){
-//         console.log('Error completing manage users query', err);
-//         res.sendStatus(501);
-//       } else {
-//         client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id;', function(err, result){
-//           done();
-//           if(err){
-//             console.log('Error completing manage users query', err);
-//             res.sendStatus(501);
-//           } else {
-//             res.send(result.rows);
-//             console.log("this si RRRRREEESSSULT",result.rows);
-//           }
-//         });
-//       }
-//     });
-//   });
-// });
 
 router.get('/allCommentFlags', function(req,res){
 pool.connect( function (err, client, done) {
