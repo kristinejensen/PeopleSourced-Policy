@@ -334,18 +334,33 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
   router.post('/getFilteredResult', function (req, res) {
     var filterObject = req.body;
     console.log("filterObject", filterObject);
-    pool.connect()
-    .then(function (client) {
-      client.query("SELECT * FROM ideas_likes FULL OUTER JOIN users ON ideas_likes.user_id=users.id FULL OUTER JOIN ideas ON ideas_likes.idea_id=ideas.id WHERE ward=$1 and subtopics_id=$2;",[filterObject.ward, filterObject.subtopic])
-      .then(function (result) {
-        client.release();
-        res.send(result.rows);
-      })
-      .catch(function (err) {
-        console.log('error on SELECT', err);
-        res.sendStatus(500);
-      });
-    });//end of .then
+    if(req.body.liked_loved == 'ideas_likes'){
+      pool.connect()
+      .then(function (client) {
+        client.query("SELECT * FROM ideas_likes FULL OUTER JOIN users ON ideas_likes.user_id=users.id FULL OUTER JOIN ideas ON ideas_likes.idea_id=ideas.id WHERE ward=$1 and subtopics_id=$2;",[filterObject.ward, filterObject.subtopic])
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+      });//end of .then
+    } else {
+      pool.connect()
+      .then(function (client) {
+        client.query("SELECT * FROM ideas_loves FULL OUTER JOIN users ON ideas_loves.user_id=users.id FULL OUTER JOIN ideas ON ideas_loves.idea_id=ideas.id WHERE ward=$1 and subtopics_id=$2;",[filterObject.ward, filterObject.subtopic])
+        .then(function (result) {
+          client.release();
+          res.send(result.rows);
+        })
+        .catch(function (err) {
+          console.log('error on SELECT', err);
+          res.sendStatus(500);
+        });
+      });//end of .then
+    }//end of else
   });//end of router.get
 
 
