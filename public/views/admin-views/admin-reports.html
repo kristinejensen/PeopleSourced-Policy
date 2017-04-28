@@ -90,13 +90,15 @@
           <th> User Email </th>
           <th> Idea Title </th>
           <th> Idea description </th>
-          <th> Total Likes </th>
+          <th> Ward </th>
+          <th> Total LIkes </th>
         </tr>
         <tr ng-if="arc.filterObject.liked_loved == 'ideas_loves'">
           <th> User Name </th>
           <th> User Email </th>
           <th> Idea Title </th>
           <th> Idea description </th>
+          <th> Ward </th>
           <th> Total Loves </th>
         </tr>
       </thead>
@@ -107,7 +109,8 @@
           <td> {{dbFilterObject.title}} </td>
           <td> {{dbFilterObject.description}} </td>
           <td> {{dbFilterObject.ward}} </td>
-          <td> {{dbFilterObject.loves}} </td>
+          <td ng-if="arc.filterObject.liked_loved == 'ideas_likes'"> {{dbFilterObject.ideas_likes_count}} </td>
+          <td ng-if="arc.filterObject.liked_loved == 'ideas_loves'"> {{dbFilterObject.ideas_loves_count}} </td>
         </tr>
       </tbody>
     </table>

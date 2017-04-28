@@ -337,7 +337,14 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
     if(req.body.liked_loved == 'ideas_likes' && req.body.ward !== 'allWards'){
       pool.connect()
       .then(function (client) {
-        client.query("SELECT * FROM ideas_likes FULL OUTER JOIN users ON ideas_likes.user_id=users.id FULL OUTER JOIN ideas ON ideas_likes.idea_id=ideas.id WHERE ward=$1 and subtopics_id=$2;",[filterObject.ward, filterObject.subtopic])
+        client.query('WITH ideas_likes_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_likes_count FROM ideas_likes JOIN ideas ON ideas_likes.idea_id=ideas.id GROUP BY ideas.id), ' +
+        'ideas_loves_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_loves_count FROM ideas_loves JOIN ideas ON ideas_loves.idea_id=ideas.id GROUP BY ideas.id) ' +
+        'SELECT ideas.title, ideas.description, ideas.subtopics_id, ideas.user_id, ideas.id AS idea_id, users.name, users.email, users.address,users.ward, users.admin, users.active, users.photo, ideas_likes_count, ideas_loves_count, subtopics.active AS subtopics_active FROM ideas ' +
+        'LEFT OUTER JOIN users ON ideas.user_id=users.id ' +
+        'LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id ' +
+        'LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id ' +
+        'LEFT JOIN subtopics ON subtopics.id=ideas.subtopics_id ' +
+        'WHERE ward=$1 AND subtopics_id=$2;',[filterObject.ward, filterObject.subtopic])
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -350,7 +357,14 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
     } else if (req.body.liked_loved == 'ideas_loves' && req.body.ward !== 'allWards'){
       pool.connect()
       .then(function (client) {
-        client.query("SELECT * FROM ideas_loves FULL OUTER JOIN users ON ideas_loves.user_id=users.id FULL OUTER JOIN ideas ON ideas_loves.idea_id=ideas.id WHERE ward=$1 and subtopics_id=$2;",[filterObject.ward, filterObject.subtopic])
+        client.query('WITH ideas_likes_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_likes_count FROM ideas_likes JOIN ideas ON ideas_likes.idea_id=ideas.id GROUP BY ideas.id), ' +
+        'ideas_loves_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_loves_count FROM ideas_loves JOIN ideas ON ideas_loves.idea_id=ideas.id GROUP BY ideas.id) ' +
+        'SELECT ideas.title, ideas.description, ideas.subtopics_id, ideas.user_id, ideas.id AS idea_id, users.name, users.email, users.address,users.ward, users.admin, users.active, users.photo, ideas_likes_count, ideas_loves_count, subtopics.active AS subtopics_active FROM ideas ' +
+        'LEFT OUTER JOIN users ON ideas.user_id=users.id ' +
+        'LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id ' +
+        'LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id ' +
+        'LEFT JOIN subtopics ON subtopics.id=ideas.subtopics_id ' +
+        'WHERE ward=$1 AND subtopics_id=$2;',[filterObject.ward, filterObject.subtopic])
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -361,10 +375,17 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
         });
       });//end of .then
       console.log(filterObject);
-    } else if (filterObject.ward == 'allWards' && req.body.liked_loved !== 'ideas_loves' && req.body.liked_loved !== 'ideas_likes'){
+    } else if (filterObject.ward == 'allWards' && req.body.liked_loved !== 'ideas_likes' && req.body.liked_loved !== 'ideas_loves'){
       pool.connect()
       .then(function (client) {
-        client.query("SELECT * FROM ideas_loves FULL OUTER JOIN users ON ideas_loves.user_id=users.id FULL OUTER JOIN ideas ON ideas_loves.idea_id=ideas.id WHERE subtopics_id=$1;",[filterObject.subtopic])
+        client.query('WITH ideas_likes_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_likes_count FROM ideas_likes JOIN ideas ON ideas_likes.idea_id=ideas.id GROUP BY ideas.id), ' +
+        'ideas_loves_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_loves_count FROM ideas_loves JOIN ideas ON ideas_loves.idea_id=ideas.id GROUP BY ideas.id) ' +
+        'SELECT ideas.title, ideas.description, ideas.subtopics_id, ideas.user_id, ideas.id AS idea_id, users.name, users.email, users.address,users.ward, users.admin, users.active, users.photo, ideas_likes_count, ideas_loves_count, subtopics.active AS subtopics_active FROM ideas ' +
+        'LEFT OUTER JOIN users ON ideas.user_id=users.id ' +
+        'LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id ' +
+        'LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id ' +
+        'LEFT JOIN subtopics ON subtopics.id=ideas.subtopics_id ' +
+        'WHERE subtopics_id=$1;',[filterObject.subtopic])
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -377,7 +398,14 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
     } else if (req.body.liked_loved == 'ideas_loves' && req.body.ward == 'allWards'){
       pool.connect()
       .then(function (client) {
-        client.query("SELECT * FROM ideas_loves FULL OUTER JOIN users ON ideas_loves.user_id=users.id FULL OUTER JOIN ideas ON ideas_loves.idea_id=ideas.id WHERE subtopics_id=$1;",[filterObject.subtopic])
+        client.query('WITH ideas_likes_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_likes_count FROM ideas_likes JOIN ideas ON ideas_likes.idea_id=ideas.id GROUP BY ideas.id), ' +
+        'ideas_loves_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_loves_count FROM ideas_loves JOIN ideas ON ideas_loves.idea_id=ideas.id GROUP BY ideas.id) ' +
+        'SELECT ideas.title, ideas.description, ideas.subtopics_id, ideas.user_id, ideas.id AS idea_id, users.name, users.email, users.address,users.ward, users.admin, users.active, users.photo, ideas_likes_count, ideas_loves_count, subtopics.active AS subtopics_active FROM ideas ' +
+        'LEFT OUTER JOIN users ON ideas.user_id=users.id ' +
+        'LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id ' +
+        'LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id ' +
+        'LEFT JOIN subtopics ON subtopics.id=ideas.subtopics_id ' +
+        'WHERE subtopics_id=$1;',[filterObject.subtopic])
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -390,7 +418,14 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
     } else if (req.body.liked_loved == 'ideas_likes' && req.body.ward == 'allWards'){
       pool.connect()
       .then(function (client) {
-        client.query("SELECT * FROM ideas_likes FULL OUTER JOIN users ON ideas_likes.user_id=users.id FULL OUTER JOIN ideas ON ideas_likes.idea_id=ideas.id WHERE subtopics_id=$1;",[filterObject.subtopic])
+        client.query('WITH ideas_likes_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_likes_count FROM ideas_likes JOIN ideas ON ideas_likes.idea_id=ideas.id GROUP BY ideas.id), ' +
+        'ideas_loves_count_temp_table AS (SELECT ideas.id AS idea_id, COUNT(ideas.id) AS ideas_loves_count FROM ideas_loves JOIN ideas ON ideas_loves.idea_id=ideas.id GROUP BY ideas.id) ' +
+        'SELECT ideas.title, ideas.description, ideas.subtopics_id, ideas.user_id, ideas.id AS idea_id, users.name, users.email, users.address,users.ward, users.admin, users.active, users.photo, ideas_likes_count, ideas_loves_count, subtopics.active AS subtopics_active FROM ideas ' +
+        'LEFT OUTER JOIN users ON ideas.user_id=users.id ' +
+        'LEFT JOIN ideas_likes_count_temp_table ON ideas_likes_count_temp_table.idea_id=ideas.id ' +
+        'LEFT JOIN ideas_loves_count_temp_table ON ideas_loves_count_temp_table.idea_id=ideas.id ' +
+        'LEFT JOIN subtopics ON subtopics.id=ideas.subtopics_id ' +
+        'WHERE subtopics_id=$1;',[filterObject.subtopic])
         .then(function (result) {
           client.release();
           res.send(result.rows);
@@ -412,3 +447,6 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
 
 
 module.exports = router;
+
+
+//"SELECT * FROM ideas_likes FULL OUTER JOIN users ON ideas_likes.user_id=users.id FULL OUTER JOIN ideas ON ideas_likes.idea_id=ideas.id WHERE subtopics_id=$1;",[filterObject.subtopic]
