@@ -336,7 +336,7 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
     console.log("filterObject", filterObject);
     pool.connect()
     .then(function (client) {
-      client.query("SELECT * FROM ideas FULL OUTER JOIN users ON ideas.user_id=users.id WHERE ward=$1 and subtopics_id=$2;",[filterObject.ward, filterObject.subtopic])
+      client.query("SELECT * FROM ideas_likes FULL OUTER JOIN users ON ideas_likes.user_id=users.id FULL OUTER JOIN ideas ON ideas_likes.idea_id=ideas.id WHERE ward=$1 and subtopics_id=$2;",[filterObject.ward, filterObject.subtopic])
       .then(function (result) {
         client.release();
         res.send(result.rows);
@@ -349,6 +349,11 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
   });//end of router.get
 
 
+
+
+
 module.exports = router;
 
 //,[filterObject.ward, filterObject.subtopic, filterObject.liked_loved]
+///SELECT * FROM ideas FULL OUTER JOIN users ON ideas.user_id=users.id WHERE ward=$1 and subtopics_id=$2;
+//"SELECT * FROM ideas_likes FULL OUTER JOIN users ON ideas_likes.user_id=users.id FULL OUTER JOIN ideas ON ideas_likes.idea_id=ideas.id  WHERE ward=$1 and subtopics_id=$2;",[filterObject.ward, filterObject.subtopic]

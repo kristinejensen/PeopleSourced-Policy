@@ -12,12 +12,11 @@ var ideaChart = [];
 
 //calls function at factory when controller is active
   TopicsFactory.findActiveSubTopics();
-//populates subtopic select dropdown on admin reports view(dynamically changes when topic change)
+// populates subtopic select dropdown on admin reports view(dynamically changes when topic change)
   self.subTopic = TopicsFactory.subTopic;
 //object from db based on filterUsers
   self.dbFilterObject = DataFactory.dbFilterObject;
-console.log("line 19: ", self.dbFilterObject);
-// self.subtopic = subtopic;
+
 
 //sends filter results to factory
 self.getFilteredResult = function(filterObject){
@@ -136,10 +135,13 @@ self.getFilteredResult = function(filterObject){
 //         ideaChart.push(response.data[i].subtopics_id);
 //         countIdeaChart.push(Number(response.data[i].count));
 //       }
-//
+
+//object from db based on filterUsers
+//   var dbFilterObject = DataFactory.dbFilterObject;
 // new Chartist.Bar('#chart2', {
+//
 //   labels: ["Infrastructure","Housing","Healthcare","Workforce","Innovation"],
-//   series: [countIdeaChart]
+//   series: [dbFilterObject]
 // });
 // })
 // })
