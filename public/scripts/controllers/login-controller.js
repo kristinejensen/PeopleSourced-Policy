@@ -20,6 +20,7 @@ app.controller('LoginController', ['DataFactory', 'TopicsFactory', '$firebaseAut
    if (firebaseUser) {
      console.log('we are still logged in!');
      self.email = true;
+     $scope.$apply();
      TopicsFactory.checkAdminStatus().then(function(response){
        self.isAdmin = TopicsFactory.isAdmin;
        var name = firebaseUser.displayName;
@@ -30,6 +31,7 @@ app.controller('LoginController', ['DataFactory', 'TopicsFactory', '$firebaseAut
     //  DataFactory.init();
    } else {
      console.log('logged out -> boooo');
+     $scope.$apply();
      // redirect
      self.email = '';
      TopicsFactory.checkAdminStatus().then(function(response){
@@ -37,7 +39,6 @@ app.controller('LoginController', ['DataFactory', 'TopicsFactory', '$firebaseAut
            var name = firebaseUser.displayName;
            var split = name.split(" ")
            self.name = split[0];
-
      });
     //  self.logout();
    }
