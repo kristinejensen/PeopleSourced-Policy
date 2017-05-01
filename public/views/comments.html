@@ -48,7 +48,7 @@
               </li>
             </div>
             <div  ng-click="cc.addIdeaLove(idea.idea_id, idea.subtopics_id)" class="col-md-4 col-lg-4 col-xl-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
-              <li tooltips tooltip-template="Are you sure you love this? If you are, we'll keep you informed!" tooltip-size="large" class="love">
+              <li class="love">
                 <span>{{idea.ideas_loves_count}}</span>
                 <span ng-if="idea.ideas_loves_count == 1">LOVE</span>
                 <span ng-if="idea.ideas_loves_count == 0 || idea.ideas_loves_count >= 2">LOVES</span>
@@ -83,7 +83,7 @@
 -->
 <div  class="commentDiv" ng-repeat="comments in cc.commentsObject.list">
   <!-- <div class="col-md-1 col-lg-1"></div> -->
-  <div  class="col-md-8 col-lg-8 topicText" style="padding-bottom: 0px !important; margin-left: 25% !important;">
+  <div  class="col-md-9 col-lg-9 topicText" style="padding-bottom: 0px !important; margin-left: 15% !important;">
     <div class="card_content"  style="padding-bottom: 0px; !important">
       <p> {{comments.description}} </p>
     </div>
@@ -211,7 +211,7 @@
               </li>
             </div>
             <div  ng-click="cc.addIdeaLove(idea.idea_id, idea.subtopics_id)" class="col-md-4 col-xs-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
-              <li tooltips tooltip-template="Are you sure you love this? If you are, we'll keep you informed!" tooltip-size="large" class="love">
+              <li class="love">
                 <i class="fa fa-heart" aria-hidden="true"></i>
               </li>
             </div>
