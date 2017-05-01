@@ -331,7 +331,7 @@ pool.connect( function (err, client, done) {
               console.log(".............",req.params.id);
               console.log(">>>>>>>>>>>>>body",req.body);
             pool.connect( function (err, client, done) {
-              client.query('UPDATE comments SET description = $1 WHERE ideas.id =$2;',[req.body.description,req.params.id], function(err, result){
+              client.query('UPDATE comments SET description = $1 WHERE comments.id =$2;',[req.body.description,req.params.id], function(err, result){
                 done();
                 if(err){
                   console.log('Error completing manage users query', err);
