@@ -83,6 +83,23 @@
       <!-- START NG REPEAT BELOW HERE -->
       <div ng-repeat="idea in hc.mostLikedIdea.list" class="singleCard cardCenter col-md-5">
         <div class="card_content">
+          <div class="row">
+            <div class="col-md-8">
+              <h2> {{subtopicIdeas.title}} </h2>
+            </div>
+            <div class="col-md-2">
+              <span ng-click="hc.moreComments(idea)" class="fa-stack fa-lg click" style="cursor: pointer !important;">
+                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                <i class="fa fa-comment fa-stack-1x"></i>
+              </span>
+            </div>
+            <div class="col-md-2">
+              <span ng-click="hc.flagIdeaClick(idea)" class="fa-stack fa-lg" style="cursor: pointer !important;">
+                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                <i class="fa fa-flag fa-stack-1x"></i>
+              </span>
+            </div>
+          </div>
           <h2>{{idea.title}}</h2>
           <p>{{idea.description}}</p>
           <div class="author_content">
