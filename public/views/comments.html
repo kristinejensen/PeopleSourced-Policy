@@ -48,7 +48,7 @@
               </li>
             </div>
             <div  ng-click="cc.addIdeaLove(idea.idea_id, idea.subtopics_id)" class="col-md-4 col-lg-4 col-xl-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
-              <li tooltips tooltip-template="Are you sure you love this? If you are, we'll keep you informed!" tooltip-size="large" class="love">
+              <li class="love">
                 <span>{{idea.ideas_loves_count}}</span>
                 <span ng-if="idea.ideas_loves_count == 1">LOVE</span>
                 <span ng-if="idea.ideas_loves_count == 0 || idea.ideas_loves_count >= 2">LOVES</span>
@@ -73,7 +73,7 @@
     <div class="col-md-2 col-lg-2"></div>
     <div class="col-md-10 col-lg-10">
       <textarea ng-model="cc.comment.description" style="border: 1px solid lightgrey; display: block; margin-left: auto; margin-right: auto;" placeholder="Comment..." name="name" rows="8" cols="80"></textarea>
-      <button ng-click="cc.addComment(cc.comment)" type="button"> Submit Comment </button>
+            <button ng-click="cc.addComment(cc.comment)" type="button" class="btn-log" style="float: right; margin-right: 12%; margin-top: 5px !important;"> Submit Comment </button>
     </div>
   </div>
   <!--
@@ -82,8 +82,8 @@
   * ============================================================================= */
 -->
 <div  class="commentDiv" ng-repeat="comments in cc.commentsObject.list">
-  <div class="col-md-1 col-lg-1"></div>
-  <div  class="col-md-10 col-lg-10 topicText" style="padding-bottom: 0px !important;">
+  <!-- <div class="col-md-1 col-lg-1"></div> -->
+  <div  class="col-md-9 col-lg-9 topicText" style="padding-bottom: 0px !important; margin-left: 15% !important;">
     <div class="card_content"  style="padding-bottom: 0px; !important">
       <p> {{comments.description}} </p>
     </div>
@@ -211,7 +211,7 @@
               </li>
             </div>
             <div  ng-click="cc.addIdeaLove(idea.idea_id, idea.subtopics_id)" class="col-md-4 col-xs-4 actionBtn" style="background-color: #6fa8dc; border-right: 1px solid #eeeeee;">
-              <li tooltips tooltip-template="Are you sure you love this? If you are, we'll keep you informed!" tooltip-size="large" class="love">
+              <li class="love">
                 <i class="fa fa-heart" aria-hidden="true"></i>
               </li>
             </div>
@@ -232,7 +232,7 @@
     <div class="col-md-2 col-lg-2"></div>
     <div class="col-md-10 col-lg-10">
       <textarea ng-model="cc.comment.description" style="border: 1px solid lightgrey; display: block; margin-left: auto; margin-right: auto;" placeholder="Comment..." name="name" rows="8" cols="80"></textarea>
-      <button ng-click="cc.addComment(cc.comment)" type="button"> Submit Comment </button>
+      <button ng-click="cc.addComment(cc.comment)" type="button" class="btn-log" style="float: right; overflow:auto;"> Submit Comment </button>
     </div>
   </div>
   <!--

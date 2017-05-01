@@ -666,7 +666,7 @@ th {
 .sub-nav:hover > li > a {
   height: 85px;
   style: none;
-
+  background-color: #666666 !important;
 }
 
 .sub-nav > li {
@@ -679,6 +679,7 @@ th {
   padding-top: 35px;
   /*font-style: bold;*/
   font-size: 18px;
+}
 
 /*home view add idea div*/
 .haveIdeaHome {
