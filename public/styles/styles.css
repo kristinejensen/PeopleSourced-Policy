@@ -278,6 +278,10 @@ background-color: #333333;
 .cardContainer {
   padding-top: 50px;
   background-color: #eeeeee;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
   padding-bottom: 50px;
 }
 
@@ -286,6 +290,10 @@ background-color: #333333;
   border-radius: 2px;
   background-color: white;
   padding-top: 160px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto; !important;
+  overflow-x: hidden !important;
   padding-bottom: 160px;
   display: inline-block;
   margin-bottom: 20px;
@@ -547,6 +555,8 @@ th {
 .col-md-3 > select {
   margin-top: 5px !important;
   width: 80% !important;
+  overflow-y: auto !important;
+ overflow-x: hidden !important;
 }
 
 
@@ -656,7 +666,7 @@ th {
 .sub-nav:hover > li > a {
   height: 85px;
   style: none;
-
+  background-color: #666666 !important;
 }
 
 .sub-nav > li {
@@ -669,6 +679,7 @@ th {
   padding-top: 35px;
   /*font-style: bold;*/
   font-size: 18px;
+}
 
 /*home view add idea div*/
 .haveIdeaHome {

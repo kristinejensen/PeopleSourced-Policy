@@ -14,24 +14,27 @@ app.controller('AdminFlaggedController', ['$firebaseAuth','$http', '$location',"
     }
   });
 
-  self.deleteFlaggedItem = function(flags) {
-    AdminFactory.deleteFlaggedItem(flags);
+  self.deleteFlaggedComment = function(flags) {
+    AdminFactory.deleteFlaggedComment(flags);
   };
 
-  self.deleteItem = function(flags) {
+  self.deleteFlaggedIdeaFlag = function(flags) {
     console.log(flags);
-    AdminFactory.deleteItem(flags);
+    AdminFactory.deleteFlaggedIdeaFlag(flags);
   };
 
-  self.updateFlaggedItem = function(flags) {
-    AdminFactory.updateFlaggedItem (flags);
+  self.updateFlaggedIdea = function(flags) {
+    AdminFactory.updateFlaggedIdea(flags);
+  };
+  self.updateFlaggedComment = function(flags) {
+    AdminFactory.updateFlaggedComment (flags);
   };
 
-  self.deleteItemIdea = function(flag){
-    AdminFactory.deleteItemIdea(flag);
+  self.deleteIdea = function(flag){
+    AdminFactory.deleteIdea(flag);
   }
-  self.deleteItemComment= function(flag){
-    AdminFactory.deleteItemComment(flag);
+  self.deleteComment= function(flag){
+    AdminFactory.deleteComment(flag);
   }
 
   self.resolveFlag = false;

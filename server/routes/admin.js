@@ -243,59 +243,38 @@ router.get('/searchUsers', function (req, res) {
   }
 });
 
-// router.get('/allFlags', function(req, res){
-//   console.log("hits all flags");
-//   pool.connect( function (err, client, done) {
-//     client.query('SELECT * FROM ideas_flags LEFT JOIN ideas ON ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id;', function(err, result){
-//       done();
-//       if(err){
-//         console.log('Error completing manage users query', err);
-//         res.sendStatus(501);
-//       } else {
-//         client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id;', function(err, result){
-//           done();
-//           if(err){
-//             console.log('Error completing manage users query', err);
-//             res.sendStatus(501);
-//           } else {
-//             res.send(result.rows);
-//             console.log("this si RRRRREEESSSULT",result.rows);
-//           }
-//         });
-//       }
-//     });
-//   });
-// });
 
 router.get('/allCommentFlags', function(req,res){
-  pool.connect( function (err, client, done) {
-    client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id;', function(err, result){
-      done();
-      if(err){
-        console.log('Error completing manage users query', err);
-        res.sendStatus(501);
-      } else {
-        res.send(result.rows);
-        console.log("this si RRRRREEESSSULT",result.rows);
-      }
-    });
-  })
-});
+pool.connect( function (err, client, done) {
+  client.query('SELECT * FROM comments_flags LEFT JOIN comments on comments_flags.comment_id = comments.id LEFT JOIN users ON users.id = comments.user_id WHERE comments_flags.active = true AND comments.active = true;', function(err, result){
+    done();
+    if(err){
+      console.log('Error completing manage users query', err);
+      res.sendStatus(501);
+    } else {
+          res.send(result.rows);
+        }
+      });
+    })
+  });
+
 
 router.get('/allIdeaFlags', function(req,res){
   pool.connect( function (err, client, done) {
-    client.query('SELECT * FROM ideas_flags LEFT JOIN ideas ON ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id;', function(err, result){
+    client.query(' SELECT * FROM ideas_flags LEFT JOIN ideas on ideas_flags.idea_id = ideas.id LEFT JOIN users ON users.id = ideas.user_id WHERE ideas_flags.active = true AND ideas.active = true;', function(err, result){
       done();
       if(err){
         console.log('Error completing manage users query', err);
         res.sendStatus(501);
       } else {
-        res.send(result.rows);
-        console.log("this si RRRRREEESSSULT",result.rows);
-      }
+            res.send(result.rows);
+           }
+       });
+     })
+
     });
-  })
-});
+
+
 
 router.delete('/deleteFlaggedIdea/:id', function(req,res){
   console.log(req.params.id);
@@ -442,11 +421,92 @@ router.delete('/deleteFlaggedComment/:id', function(req,res){
 
   });//end of router.get
 
+    router.put('/deleteFlaggedIdeaFlag/:id', function(req,res){
+    pool.connect( function (err, client, done) {
+      client.query('UPDATE ideas_flags SET active = false WHERE ideas_flags.idea_id =$1;',[req.params.id], function(err, result){
+        done();
+        if(err){
+          console.log('Error completing manage users query', err);
+          res.sendStatus(501);
+        } else {
+              res.send(result.rows);
+            }
+          });
+        })
+      });
 
+      router.put('/deleteFlaggedComment/:id', function(req,res){
+      pool.connect( function (err, client, done) {
+        client.query('UPDATE comments_flags SET active = false WHERE comments_flags.comment_id =$1;',[req.params.id], function(err, result){
+          done();
+          if(err){
+            console.log('Error completing manage users query', err);
+            res.sendStatus(501);
+          } else {
+                res.send(result.rows);
+              }
+            });
+          })
+        });
 
+        router.put('/deleteComment/:id', function(req,res){
+        pool.connect( function (err, client, done) {
+          client.query('UPDATE comments SET active = false WHERE comments.id =$1;',[req.params.id], function(err, result){
+            done();
+            if(err){
+              console.log('Error completing manage users query', err);
+              res.sendStatus(501);
+            } else {
+                  res.send(result.rows);
+                }
+              });
+            })
+          });
 
+          router.put('/deleteIdea/:id', function(req,res){
+          pool.connect( function (err, client, done) {
+            client.query('UPDATE ideas SET active = false WHERE ideas.id =$1;',[req.params.id], function(err, result){
+              done();
+              if(err){
+                console.log('Error completing manage users query', err);
+                res.sendStatus(501);
+              } else {
+                    res.send(result.rows);
+                  }
+                });
+              })
+            });
+            router.put('/updateComment/:id', function(req,res){
+              console.log(".............",req.params.id);
+              console.log(">>>>>>>>>>>>>body",req.body);
+            pool.connect( function (err, client, done) {
+              client.query('UPDATE comments SET description = $1 WHERE comments.id =$2;',[req.body.description,req.params.id], function(err, result){
+                done();
+                if(err){
+                  console.log('Error completing manage users query', err);
+                  res.sendStatus(501);
+                } else {
+                      res.send(result.rows);
+                      console.log("this si RRRRREEESSSULT",result.rows);
+                    }
+                  });
+                })
+              });
 
+              router.put('/updateIdea/:id', function(req,res){
+                console.log(".............",req.params.id);
+                console.log(">>>>>>>>>>>>>body",req.body,"TTTTTTTTT");
+              pool.connect( function (err, client, done) {
+                client.query('UPDATE ideas SET title = $1,description = $2  WHERE ideas.id =$3;;',[req.body.title,req.body.description,req.params.id], function(err, result){
+                  done();
+                  if(err){
+                    console.log('Error completing manage users query', err);
+                    res.sendStatus(501);
+                  } else {
+                        res.send(result.rows);
+                        console.log("this is RRRRREEESSSULT",result.rows);
+                      }
+                    });
+                  })
+                });
 module.exports = router;
-
-
-//"SELECT * FROM ideas_likes FULL OUTER JOIN users ON ideas_likes.user_id=users.id FULL OUTER JOIN ideas ON ideas_likes.idea_id=ideas.id WHERE subtopics_id=$1;",[filterObject.subtopic]
