@@ -11,6 +11,8 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   self.getCommentIdObject = DataFactory.getCommentIdObject;
   self.commentsObject = DataFactory.commentsObject;
   self.addCommentLike = DataFactory.addCommentLike;
+  self.allSubcommentsObject = DataFactory.allSubcommentsObject;
+
 
   self.addIdeaLike = function(ideaId, subTopicId){
     if (firebaseUser === null){
@@ -26,15 +28,11 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     DataFactory.addIdeaLove(ideaId, subTopicId);
   }
 
+
   DataFactory.getAllSubcomments();
   DataFactory.getComments(subtopicIdea);
   DataFactory.getIdeaId(subtopicIdea);
 
-
-
-  //shows all comments from BD to view
-  self.commentsObject = DataFactory.commentsObject;
-  self.allSubcommentsObject = DataFactory.allSubcommentsObject;
 
   //*****************************************//
   //            COMMENT CREATION             //
@@ -96,5 +94,23 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
     $window.location.reload();
   }//end of addNewSubComment()
 
+  //redirect to add idea view
+  self.flagIdea = function() {
+    $location.path('/flag');
+  }
+  self.flagIdeaClick = function (subtopicIdeas){
+    // console.log("this is subtopicIdeas on flag IDEA click",subtopicIdeas);
+
+    $routeParams.idea_id = subtopicIdeas.idea_id;
+    $routeParams.user_id = subtopicIdeas.user_id;
+    $location.path('flag/'+$routeParams.idea_id+'/'+$routeParams.user_id);
+  };//end of flagCommentClick
+
+  self.flagCommentClick = function (comments){
+    $routeParams.id = comments.comments_id;
+    $routeParams.idea_id = comments.comments_idea_id;
+    $routeParams.user_id = comments.id;
+    $location.path('flag/'+$routeParams.id+'/'+$routeParams.idea_id+'/'+$routeParams.user_id);
+  };//end of flagCommentClick
 
 }]);//end of app.controller()

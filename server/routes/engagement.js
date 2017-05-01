@@ -8,6 +8,7 @@ var pool = require('../modules/database-config');
 
 //adds new idea to DB
 router.post('/newidea', function (req, res) {
+  console.log('outside of new idea');
   if(req.decodedToken.userSQLId) {
   var newIdea = req.body;
   pool.connect()
@@ -15,6 +16,7 @@ router.post('/newidea', function (req, res) {
       client.query('INSERT INTO ideas (title, description, subtopics_id, user_id) VALUES ($1, $2, $3, $4)',
         [newIdea.title, newIdea.description, newIdea.subtopicId, req.decodedToken.userSQLId])
         .then(function (result) {
+          console.log('made it into new idea');
           client.release();
           res.sendStatus(201);
         })
@@ -33,6 +35,7 @@ router.post('/newidea', function (req, res) {
 //adds comments to DB
 router.post('/addComment', function (req, res) {
   if(req.decodedToken.userSQLId) {
+    console.log('sqlid', req.decodedToken.userSQLId );
   var newComment = req.body;
   // console.log('newComment: ', newComment);
   pool.connect()
@@ -118,7 +121,7 @@ router.put('/addIdeaLove/:id', function(req, res){
       } else {
         if (result.rows.length == 0){
           pool.connect(function (err, client, done) {
-            client.query('INSERT INTO ideas_loves (user_id, idea_id) VALUES (4, $1);', [ideaId], function(err, result){
+            client.query('INSERT INTO ideas_loves (user_id, idea_id) VALUES ($1, $2);', [req.decodedToken.userSQLId, ideaId], function(err, result){
               done();
               if(err){
                 ('Error ideas_loves insert', err);
@@ -147,7 +150,7 @@ router.put('/addCommentLike/:id', function(req, res){
       } else {
         if (result.rows.length == 0){
           pool.connect(function (err, client, done) {
-            client.query('INSERT INTO comments_likes (user_id, comment_id) VALUES (4, $1);', [commentId], function(err, result){
+            client.query('INSERT INTO comments_likes (user_id, comment_id) VALUES ($1, $2);', [req.decodedToken.userSQLId, commentId], function(err, result){
               done();
               if(err){
                 ('Error comments_likes insert', err);
@@ -165,4 +168,69 @@ router.put('/addCommentLike/:id', function(req, res){
   });
 });
 
+
+//*****************************************//
+//               COMMENTING                //
+//*****************************************//
+
+
+router.get('/toFlagComments', function (req, res) {
+  var flagObject = req.headers;
+  pool.connect()
+  .then(function (client) {
+    client.query("SELECT * FROM comments WHERE id = $1",[flagObject.user_id])
+    .then(function (result) {
+      client.release();
+      // console.log(result.rows[0]);
+      res.send(result.rows[0]);
+    })
+    .catch(function (err) {
+      console.log('error on SELECT', err);
+      res.sendStatus(500);
+    });
+  });//end of .then
+});//end of router.get
+
+
+//function to deactivate user
+router.post('/flagReport', function(req, res) {
+  console.log('flag report');
+  var flagData = req.body;
+  console.log('zeep', flagData);
+  if (!flagData.$routeParams.idea_id) {
+    userId = req.body.$routeParams.user_id;
+    ideaId = req.body.$routeParams.id;
+    console.log('userid', userId, 'ideaId', ideaId);
+    console.log('got inside of correct route');
+  pool.connect()
+  .then(function (client) {
+    client.query('INSERT INTO ideas_flags (user_id, idea_id, idea_flag_description) VALUES ($1,$2,$3)',[userId,ideaId,flagData.flagObject.description])
+    .then(function (result) {
+      client.release();
+      res.sendStatus(201);
+    })
+    .catch(function (err) {
+      console.log('error on INSERT', err);
+      res.sendStatus(501);
+    });
+  });//end of .then
+  }else {
+
+    commentId = req.body.$routeParams.id;
+    ideaId = req.body.$routeParams.user_id;
+    userId = req.body.$routeParams.idea_id;
+    pool.connect()
+    .then(function (client) {
+      client.query('INSERT INTO comments_flags (user_id, comment_id, flag_comment) VALUES ($1,$2,$3)',[userId,commentId, flagData.flagObject.description])
+      .then(function (result) {
+        client.release();
+        res.sendStatus(201);
+      })
+      .catch(function (err) {
+        console.log('error on INSERT', err);
+        res.sendStatus(500);
+      });
+    });//end of .then
+  }
+});//end of router.post
 module.exports = router;

@@ -14,7 +14,6 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   self.ideasTally = DataFactory.ideasTally;
   self.commentsTally = DataFactory.commentsTally;
   self.likesTally = DataFactory.likesTally;
-
   self.mostLikedIdea = DataFactory.mostLikedIdea;
 
   self.addIdeaLike = function(ideaId, subTopicId){
@@ -34,7 +33,6 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   TopicsFactory.findActiveTopic();
   DataFactory.getMostLikedIdea();
 
-  <!--
   /* ============================================================================= *
   *               ADD NEW IDEA                                                     *
   * ============================================================================= */

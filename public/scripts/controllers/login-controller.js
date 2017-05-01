@@ -135,7 +135,7 @@ app.controller('LoginController', ['DataFactory', 'TopicsFactory', '$firebaseAut
   }
   //redirect to admin view
   self.adminView = function() {
-    $location.path('/admin-reports');
+    $location.path('/admin-flags');
   }
 
 }]);//end of app.controller()

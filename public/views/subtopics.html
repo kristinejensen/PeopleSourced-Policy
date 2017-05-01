@@ -80,7 +80,6 @@
 * ============================================================================== */
 -->
 
-<!-- <<<<<<< HEAD -->
 <!--//IDEACARDS SECTION//-->
 <div class="row" >
   <div ng-repeat="subtopicIdeas in stc.subtopicIdeas.list" class="singleCard cardCenter col-md-5 clearfix" style="margin-left: 20px !important;">
@@ -95,37 +94,9 @@
             <i class="fa fa-circle-thin fa-stack-2x"></i>
             <i class="fa fa-comment fa-stack-1x"></i>
           </span>
-<!-- =======
-<div class = 'cardContainer'>
-  <div class = 'container'> -->
-    <!--//IDEACARDS SECTION//-->
-    <!-- <div class="row">
-      <div ng-repeat="subtopicIdeas in stc.subtopicIdeas.list" class="singleCard cardCenter col-md-6 clearfix">
-        <div class="card_content">
-          <div style="height: 200px;">
-            <h2> {{subtopicIdeas.title}} </h2>
-            <p> {{subtopicIdeas.description}} </p>
-            <p>{{subtopicIdeas.subtopics_id}}</p>
-          </div>
-          <div class="author_content">
-            <div class ="author_img col-xl-3 col-md-3">
-              <p> <img class="authImage" ng-src="{{subtopicIdeas.photo}}"></p>
-            </div>
-            <div class="author_info col-xl-6 col-md-6">
-              <h4> {{subtopicIdeas.name}} </h4>
-              <h5> {{subtopicIdeas.ward}} </h5>
-            </div>
-            <div class="col-xl-6 col-md-3">
-              <button ng-click="stc.moreComments(subtopicIdeas)" type="button" name="Comments"> Comments </button>
-            </div>
-          </div>
-        </div> -->
-        <!-- <div class="love_like row">
-
->>>>>>> remotes/origin/kris-merge-branch -->
         </div>
         <div class="col-md-2">
-          <span ng-click="stc.flagIdea()" class="fa-stack fa-lg" style="cursor: pointer !important;">
+          <span ng-click="stc.flagIdeaClick(subtopicIdeas)" class="fa-stack fa-lg" style="cursor: pointer !important;">
             <i class="fa fa-circle-thin fa-stack-2x"></i>
             <i class="fa fa-flag fa-stack-1x"></i>
           </span>
