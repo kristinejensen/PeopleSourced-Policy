@@ -262,8 +262,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
 
   //gets comments to display on comments page
   function getComments(ideaId) {
-    console.log('get comments function being called');
-    console.log('idea id from get comments function is', ideaId);
     $http({
       method: 'GET',
       url: '/data/getComments',
@@ -297,9 +295,9 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
 
   //function to add idea "like" to database
   function addIdeaLike(ideaId, subtopicId){
-    console.log('add idea like called');
-    console.log('ideaId', ideaId);
-    console.log('subtopicId', subtopicId);
+    console.log('add idea like function being called');
+    console.log(ideaId);
+    console.log(subtopicId);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'PUT',
@@ -351,7 +349,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
       url: '/public/getMostLikedIdea',
     }).then(function(response) {
       mostLikedIdea.list = response.data;
-      console.log('this is the most like idea list', mostLikedIdea.list);
       for (var i = 0; i < mostLikedIdea.list.length; i++) {
         if(mostLikedIdea.list[i].ideas_likes_count == null){
           mostLikedIdea.list[i].ideas_likes_count = 0;
