@@ -91,7 +91,7 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
       redirectToSubtopic(newIdea);
     });
     //reloads the entire page after submitting an idea
-    $window.location.reload();
+    // $window.location.reload();
     //loads ideas
     getIdeas(newIdea.id);
     //empties inputs on submit

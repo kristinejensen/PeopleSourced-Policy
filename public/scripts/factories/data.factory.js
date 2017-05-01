@@ -17,6 +17,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
   var email = {};
   var mostLikedIdea = {list: []};
   var mostCommentedIdea = {list: []};
+  var dbFilterObject = { list : [] }
 
 
   // //calls functions at startup
@@ -94,9 +95,9 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
         }
       }).then(function(response){
         console.log('response', response);
-        getSubtopicIdeas();
-        return $window.location.reload();
-        // $window.location.reload();
+        getSubtopicIdeas()
+        // return $window.location.reload();
+        $route.reload();
         // self.newIdea = {};
       }).then(function(){
         return notyf.confirm('Your idea was added!')
@@ -160,6 +161,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
       }).then(function(response){
         notyf.confirm('Your comment was added!');
         self.addComment = {};
+        $route.reload()
       }).catch(function(error) {
         swal("Values Are Incorrect", "Try Again!", "error");
         console.log('error', error);
@@ -236,15 +238,14 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
       headers: subtopicIdea
     }).then(function(response) {
       getIdeaIdObject.list = response.data;
+      console.log('getIdeaIdObject.list: ', getIdeaIdObject.list);
       for (var i = 0; i < getIdeaIdObject.list.length; i++) {
         if(getIdeaIdObject.list[i].ideas_likes_count == null){
           getIdeaIdObject.list[i].ideas_likes_count = 0;
-        }
-        if(getIdeaIdObject.list[i].ideas_loves_count == null){
-          getIdeaIdObject.list[i].ideas_loves_count = 0;
-        }
+        }  
       }
     });
+
     $http({
       method: 'GET',
       url: '/data/getCommentId',
@@ -274,7 +275,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
           commentsObject.list[i].comments_likes_count = 0;
         }
       }
-    });
+    })
   }
 
 
@@ -362,6 +363,24 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
     });
   }
 
+//DB request for filter object from admin-reports view
+  function getFilteredResult(filterObject){
+    firebase.auth().currentUser.getToken().then(function(idToken) {
+      $http({
+        method:'POST',
+        url: '/admin/getFilteredResult',
+        data: filterObject,
+        headers: {
+          id_token: idToken
+        }
+      }).then(function(response){
+        dbFilterObject.list = response.data;
+      });
+    });//end of firebase.auth()
+  }//end of getFilteredResult()
+
+
+
   return {
     userTally: userTally,
     ideasTally: ideasTally,
@@ -406,6 +425,10 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
     email: email,
     //gets all subcomments
     getAllSubcomments : getAllSubcomments,
+    //sends filter results to db
+    getFilteredResult : getFilteredResult,
+    //results form DB for admin-reports view
+    dbFilterObject : dbFilterObject
   }
 
 }]); // end of app.factory
