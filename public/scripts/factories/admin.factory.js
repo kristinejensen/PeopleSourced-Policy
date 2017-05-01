@@ -243,28 +243,8 @@ if(firebaseUser){
 }//end of getIdeaFlags()
 
 
-// function deleteItemIdea(flag) {
-// console.log("gets all flags", flag);
-// var auth = $firebaseAuth();
-// var firebaseUser = auth.$getAuth();
-// if(firebaseUser){
-//   firebase.auth().currentUser.getToken().then(function(idToken) {
-//     $http({
-//       method: 'PUT',
-//       url: '/admin/deleteFlaggedIdea/' + flag.comment_id,
-//       headers: {
-//         id_token: idToken,
-//       }
-//     }).then(function(response) {
-//       getAllFlaggedIdeas()
-//     });
-//   });
-// }
-// }//end of getComments()
-
 
 function deleteIdea(flag) {
-console.log("gets all flags", flag);
 var auth = $firebaseAuth();
 var firebaseUser = auth.$getAuth();
 if(firebaseUser){
@@ -300,8 +280,51 @@ if(firebaseUser){
 }
 }//end of getComments()
 
+function updateFlaggedComment(flag) {
+var auth = $firebaseAuth();
+var firebaseUser = auth.$getAuth();
+if(firebaseUser){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'PUT',
+      url: '/admin/updateComment/' + flag.comment_id,
+      headers: {
+        id_token: idToken,
+      },
+      data:flag
+    }).then(function(response) {
+      getAllFlaggedComments();
+    });
+  });
+}
+}//end of updateComments()
+
+function updateFlaggedIdea(flag) {
+var auth = $firebaseAuth();
+console.log(flag);
+var firebaseUser = auth.$getAuth();
+console.log(firebaseUser);
+if(firebaseUser){
+  firebase.auth().currentUser.getToken().then(function(idToken) {
+    $http({
+      method: 'PUT',
+      url: '/admin/updateIdea/' + flag.idea_id,
+      headers: {
+        id_token: idToken,
+      },
+      data:flag
+    }).then(function(response) {
+      getAllFlaggedIdeas();
+    });
+  });
+}
+}//end of updateIdea()
+
+
   return {
     allUsers: allUsers,
+    updateFlaggedComment:updateFlaggedComment,
+    updateFlaggedIdea:updateFlaggedIdea,
     deactivateUser: deactivateUser,
     reactivateUser: reactivateUser,
     filterList: filterList,

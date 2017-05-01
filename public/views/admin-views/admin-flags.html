@@ -56,8 +56,8 @@ By the way, you spelled accommodations incorrectly!</span> -->
       <!-- START NG REPEAT BELOW HERE -->
       <div ng-repeat="flags in afc.ideaToFlagObject.list" style="margin-left: 65px !important;"class="singleCard cardCenter col-md-5">
         <div class="card_content">
-          <h2>Title: {{flags.title}}</h2>
-          <p> Description: <textarea placeholder="{{flags.description}}"></textarea> </p>
+          <h2>Title:<textarea ng-model="flags.title"> {{flags.title}} </textarea></h2>
+          <p> Description: <textarea ng-model="flags.description">{{flags.description}}</textarea> </p>
           <div class="author_content">
             <div class ="author_img col-xl-3 col-md-3">
               <!-- <p> <img ng-src="{{flags.photo}}"></p> -->
@@ -74,7 +74,7 @@ By the way, you spelled accommodations incorrectly!</span> -->
             <button ng-click="afc.deleteIdea(flags)" class="btn btn-danger btn-xs">DELETE ITEM </button>
           </td>
           <td class="col-xl-4 col-md-3" ng-hide="flags.active">
-            <button ng-click="afc.reactivateUser(flags)" class="btn btn-primary btn-xs">SAVE EDIT</button>
+            <button ng-click="afc.updateFlaggedIdea(flags)" class="btn btn-primary btn-xs">SAVE EDIT</button>
           </td>
           <td class="col-xl-4 col-md-3" ng-hide="flags.active">
           <button ng-click="afc.deleteFlaggedIdeaFlag(flags)" class="btn btn-okay btn-xs">RESOLVED FLAG</button>
@@ -109,7 +109,7 @@ By the way, you spelled accommodations incorrectly!</span> -->
      <div ng-repeat="flags in afc.commentToFlagObject.list" style="margin-left: 65px !important;"class="singleCard cardCenter col-md-5">
         <div class="card_content">
           <h2><textarea placeholder="{{flags.title}}"></textarea></h2>
-          <p>Comment Description: <textarea placeholder="{{flags.description}}"></textarea> </p>
+          <p>Comment Description: <textarea ng-model="flags.description">{{flags.description}}</textarea> </p>
           <div class="author_content">
             <div class ="author_img col-xl-3 col-md-3">
               <!-- <p> <img ng-src="{{flags.photo}}"></p> -->
@@ -125,7 +125,7 @@ By the way, you spelled accommodations incorrectly!</span> -->
             <button ng-click="afc.deleteComment(flags)" class="btn btn-danger btn-xs">DELETE ITEM </button>
           </td>
           <td class="col-xl-4 col-md-3" ng-hide="flag.active">
-            <button ng-click="afc.reactivateUser(flags)" class="btn btn-primary btn-xs">SAVE EDIT</button>
+            <button ng-click="afc.updateFlaggedComment(flags)" class="btn btn-primary btn-xs">SAVE EDIT</button>
           </td>
       <td class="col-xl-4 col-md-3" ng-hide="flag.active">
           <button ng-click="afc.deleteFlaggedComment(flags)" class="btn btn-okay btn-xs">RESOLVED FLAG</button>
