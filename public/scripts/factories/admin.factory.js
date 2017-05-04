@@ -7,8 +7,11 @@ app.factory('AdminFactory', ['$http','$route', '$firebaseAuth', function($http,$
   var userResults = {list: []};
   var ideaToFlagObject = {list: []};
   var commentToFlagObject = {list: []};
+  var userLoves = {list: []};
 
   // init(); //run
+
+  getUserLoves();
 
   //startup functions
   function init() {
@@ -320,6 +323,26 @@ if(firebaseUser){
 }
 }//end of updateIdea()
 
+//function to search users on admin manage users view
+function getUserLoves() {
+  console.log('get user loves function being called');
+  var auth = $firebaseAuth();
+  var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        $http({
+          method: 'GET',
+          url: '/admin/getUserLoves',
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          allUsers.list = response.data;
+          console.log(allUsers.list);
+        })
+      });
+    }
+} //end of get user loves
 
   return {
     allUsers: allUsers,
@@ -340,6 +363,8 @@ if(firebaseUser){
     ideaToFlagObject: ideaToFlagObject,
     commentToFlagObject: commentToFlagObject,
     deleteFlaggedComment: deleteFlaggedComment,
+    userLoves: userLoves,
+    getUserLoves: getUserLoves
   }
 
 }]); // end of app.factory
