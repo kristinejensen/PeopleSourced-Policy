@@ -325,7 +325,6 @@ if(firebaseUser){
 
 //function to search users on admin manage users view
 function getUserLoves() {
-  console.log('get user loves function being called');
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth()
     if(firebaseUser){
@@ -337,12 +336,11 @@ function getUserLoves() {
             id_token: idToken
           }
         }).then(function(response){
-          allUsers.list = response.data;
-          console.log(allUsers.list);
+          userLoves.list = response.data;
         })
       });
     }
-} //end of get user loves
+} //end of get user loves function
 
   return {
     allUsers: allUsers,

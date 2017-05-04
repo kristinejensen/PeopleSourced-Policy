@@ -158,21 +158,23 @@
 
 <div style="background-color:#F8F8F8; padding-top: 15px; padding-bottom: 30px">
   <div class="container" style="text-align: center; padding-top:40px; padding-bottom:40px; background-color: white; border: 1px solid #eeeeee;d">
-    <h3 style="text-align: left;"> User Loves </h3>
+    <h3 style="text-align: left;"> User Loves List </h3>
     <div>
       <table>
         <thead>
           <tr>
             <th> User Name </th>
             <th> User Email </th>
-            <th> Idea Title</th>
+            <th> Idea </th>
+            <th> Subtopic </th>
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="dbFilterObject in arc.dbFilterObject.list">
-            <td> {{arc.userLoves.list.name}} </td>
-            <td> {{arc.userLoves.list.email}} </td>
-            <td> {{arc.userLoves.list.title}} </td>
+          <tr ng-repeat="user in arc.userLoves.list">
+            <td> {{user.user_name}} </td>
+            <td> {{user.user_email}} </td>
+            <td> {{user.idea_title}} </td>
+            <td> {{user.subtopic_title}} </td>
           </tr>
         </tbody>
       </table>

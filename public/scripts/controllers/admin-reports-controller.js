@@ -11,7 +11,6 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', '
   var ideaChart = [];
 
   self.userLoves = AdminFactory.userLoves;
-
   //calls function at factory when controller is active
   TopicsFactory.findActiveSubTopics();
   // populates subtopic select dropdown on admin reports view(dynamically changes when topic change)
