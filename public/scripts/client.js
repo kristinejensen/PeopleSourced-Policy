@@ -1,5 +1,5 @@
 
-var app = angular.module('ConnectApp', ['ngRoute','firebase', 'ui.bootstrap', '720kb.tooltips']);
+var app = angular.module('ConnectApp', ['ngRoute','firebase', 'ui.bootstrap', 'ngMaterial', 'material.svgAssetsCache', '720kb.tooltips']);
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -68,6 +68,12 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'AdminTopicsController',
     controllerAs: 'atc',
     onEnter: scrollContent
+  })
+  .when('/403', {
+    templateUrl: 'views/templates/403.html'
+    // controller: 'AdminTopicsController',
+    // controllerAs: 'atc',
+    // onEnter: scrollContent
   })
   .otherwise({
     redirectTo: 'home',
