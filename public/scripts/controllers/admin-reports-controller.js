@@ -29,12 +29,10 @@ self.getFilteredResult = function(filterObject){
 
   auth.$onAuthStateChanged(function(firebaseUser) {
    if (firebaseUser) {
-     console.log('we are still logged in!');
      self.email = firebaseUser.email;
      // go reload idea data....
      getUserChart();
    } else {
-     console.log('boooo');
      // redirect
      self.email = '';
     //  self.logout();

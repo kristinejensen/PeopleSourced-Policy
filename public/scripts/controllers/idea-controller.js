@@ -38,7 +38,6 @@ app.controller('IdeaController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
 // }//end of self.createIdea()
 
 function redirectToSubtopic(url) {
-  console.log(url.subtopicId);
   $location.path('/subtopics/' + url.subtopicId);
   DataFactory.getSubtopicIdeas(self.index);
 }

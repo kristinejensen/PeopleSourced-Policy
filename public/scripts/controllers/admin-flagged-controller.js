@@ -3,7 +3,6 @@ app.controller('AdminFlaggedController', ['$firebaseAuth','$http', '$location',"
   var auth = $firebaseAuth();
 
   auth.$onAuthStateChanged(function(firebaseUser) {
-    console.log('auth state changed');
     if (firebaseUser) {
       AdminFactory.getAllFlaggedComments();
       self.commentToFlagObject = AdminFactory.commentToFlagObject;
@@ -19,7 +18,6 @@ app.controller('AdminFlaggedController', ['$firebaseAuth','$http', '$location',"
   };
 
   self.deleteFlaggedIdeaFlag = function(flags) {
-    console.log(flags);
     AdminFactory.deleteFlaggedIdeaFlag(flags);
   };
 
@@ -40,7 +38,6 @@ app.controller('AdminFlaggedController', ['$firebaseAuth','$http', '$location',"
   self.resolveFlag = false;
 
   self.resolveFlags = function(){
-    console.log('getsome');
     self.resolveFlag = true;
   }
 

@@ -51,7 +51,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   //redirect to correct subtopic view
   //not working :(
   function redirectToSubtopic(url) {
-    console.log(url.subtopicId);
     $location.path('/subtopics/' + url.subtopicId);
     getIdeas(self.index);
   }
@@ -91,7 +90,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
       description : idea.description
     }
 
-    console.log('newIdea', newIdea);
     //Sends the new idea object to factory
     DataFactory.addNewIdea(newIdea).then(function(response){
       // redirect to correct subtopic page after submit
@@ -108,7 +106,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   //get moreComments button click
   self.moreComments = function(subtopicIdea) {
     $location.path('/comment/' + subtopicIdea.idea_id);
-    console.log(subtopicIdea);
   }
   //redirect to add idea view
   self.createIdea = function() {
@@ -130,7 +127,6 @@ app.controller('SubtopicsController', ['DataFactory', 'TopicsFactory', '$http', 
   //redirect to correct subtopic view
   //not working :(
   function redirectToSubtopic(url) {
-    console.log(url.subtopicId);
     $location.path('/subtopics/' + url.subtopicId);
     getIdeas(self.index);
   }

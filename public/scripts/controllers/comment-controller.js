@@ -65,7 +65,6 @@ app.controller('CommentController', ['$firebaseAuth', '$http', '$location', 'Dat
   //shows and hides sun-comment text area
   self.showComment = false;
   self.showCommentArea = function(comments){
-    console.log("comments ", comments);
     self.showComment = true;
   }
 

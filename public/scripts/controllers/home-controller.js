@@ -76,7 +76,6 @@ app.controller('HomeController', ['DataFactory', 'TopicsFactory', '$firebaseAuth
   * ============================================================================= */
   -->
   function redirectToSubtopic(url) {
-    console.log(url.subtopicId);
     $location.path('/subtopics/' + url.subtopicId);
     DataFactory.getSubtopicIdeas(self.index);
   }
