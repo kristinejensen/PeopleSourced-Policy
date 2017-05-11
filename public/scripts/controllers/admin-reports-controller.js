@@ -6,9 +6,9 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', '
   var wardChart = [];
   var countChart = [];
   var allUsers = {list:[]};
-var subtopic =[];
-var countIdeaChart = [];
-var ideaChart = [];
+  var subtopic =[];
+  var countIdeaChart = [];
+  var ideaChart = [];
 
 //calls function at factory when controller is active
   TopicsFactory.findActiveSubTopics();
