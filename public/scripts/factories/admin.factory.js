@@ -7,8 +7,11 @@ app.factory('AdminFactory', ['$http','$route', '$firebaseAuth', function($http,$
   var userResults = {list: []};
   var ideaToFlagObject = {list: []};
   var commentToFlagObject = {list: []};
+  var userLoves = {list: []};
 
   // init(); //run
+
+  getUserLoves();
 
   //startup functions
   function init() {
@@ -320,6 +323,24 @@ if(firebaseUser){
 }
 }//end of updateIdea()
 
+//function to display list of users who loved an idea
+function getUserLoves() {
+  var auth = $firebaseAuth();
+  var firebaseUser = auth.$getAuth()
+    if(firebaseUser){
+      firebase.auth().currentUser.getToken().then(function(idToken) {
+        $http({
+          method: 'GET',
+          url: '/admin/getUserLoves',
+          headers: {
+            id_token: idToken
+          }
+        }).then(function(response){
+          userLoves.list = response.data;
+        })
+      });
+    }
+} //end of get user loves function
 
   return {
     allUsers: allUsers,
@@ -340,6 +361,8 @@ if(firebaseUser){
     ideaToFlagObject: ideaToFlagObject,
     commentToFlagObject: commentToFlagObject,
     deleteFlaggedComment: deleteFlaggedComment,
+    userLoves: userLoves,
+    getUserLoves: getUserLoves
   }
 
 }]); // end of app.factory
