@@ -25,9 +25,6 @@ app.controller('AdminReportsController', ['$firebaseAuth','$http','$location', '
     DataFactory.getFilteredResult(filterObject);
   }
 
-
-
-
   auth.$onAuthStateChanged(function(firebaseUser) {
     if (firebaseUser) {
       console.log('we are still logged in!');

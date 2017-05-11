@@ -510,7 +510,6 @@ router.put('/updateIdea/:id', function(req,res){
 });
 
 router.get('/getUserLoves', function(req,res){
-  console.log('get user loves route hit');
   pool.connect( function (err, client, done) {
     client.query('SELECT users.name AS user_name, users.email AS user_email, ideas.title AS idea_title, subtopics.title AS subtopic_title FROM users JOIN ideas_loves ON ideas_loves.user_id = users.id JOIN ideas ON ideas.id = ideas_loves.idea_id JOIN subtopics ON subtopics.id = ideas.subtopics_id WHERE users.active = true AND subtopics.active = true;', function(err, result){
       done();

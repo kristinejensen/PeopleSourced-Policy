@@ -323,7 +323,7 @@ if(firebaseUser){
 }
 }//end of updateIdea()
 
-//function to search users on admin manage users view
+//function to display list of users who loved an idea
 function getUserLoves() {
   var auth = $firebaseAuth();
   var firebaseUser = auth.$getAuth()
