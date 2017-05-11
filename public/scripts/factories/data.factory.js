@@ -242,7 +242,7 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
       for (var i = 0; i < getIdeaIdObject.list.length; i++) {
         if(getIdeaIdObject.list[i].ideas_likes_count == null){
           getIdeaIdObject.list[i].ideas_likes_count = 0;
-        }  
+        }
       }
     });
 
@@ -295,9 +295,6 @@ app.factory('DataFactory', ['$http', '$firebaseAuth', '$routeParams', '$window',
 
   //function to add idea "like" to database
   function addIdeaLike(ideaId, subtopicId){
-    console.log('add idea like function being called');
-    console.log(ideaId);
-    console.log(subtopicId);
     firebase.auth().currentUser.getToken().then(function(idToken) {
       $http({
         method: 'PUT',

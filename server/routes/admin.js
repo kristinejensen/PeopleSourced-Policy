@@ -271,7 +271,6 @@ router.get('/allIdeaFlags', function(req,res){
       }
     });
   })
-
 });
 
 
@@ -418,7 +417,6 @@ router.post('/getFilteredResult', function (req, res) {
     return
   }//end of else
 
-
 });//end of router.get
 
 router.put('/deleteFlaggedIdeaFlag/:id', function(req,res){
@@ -468,6 +466,7 @@ router.put('/deleteIdea/:id', function(req,res){
     client.query('UPDATE ideas SET active = false WHERE ideas.id =$1;',[req.params.id], function(err, result){
       done();
       if(err){
+
         console.log('Error completing deleting idea', err);
         res.sendStatus(501);
       } else {
@@ -476,6 +475,7 @@ router.put('/deleteIdea/:id', function(req,res){
     });
   })
 });
+
 router.put('/updateComment/:id', function(req,res){
   pool.connect( function (err, client, done) {
     client.query('UPDATE comments SET description = $1 WHERE comments.id =$2;',[req.body.description,req.params.id], function(err, result){
@@ -483,6 +483,38 @@ router.put('/updateComment/:id', function(req,res){
       if(err){
         console.log('Error completing manage users query', err);
         res.sendStatus(501);
+      } else {
+        res.send(result.rows);
+        console.log("this si RRRRREEESSSULT",result.rows);
+      }
+    });
+  })
+});
+
+router.put('/updateIdea/:id', function(req,res){
+  console.log(".............",req.params.id);
+  console.log(">>>>>>>>>>>>>body",req.body,"TTTTTTTTT");
+  pool.connect( function (err, client, done) {
+    client.query('UPDATE ideas SET title = $1,description = $2  WHERE ideas.id =$3;;',[req.body.title,req.body.description,req.params.id], function(err, result){
+      done();
+      if(err){
+        console.log('Error completing manage users query', err);
+        res.sendStatus(501);
+      } else {
+        res.send(result.rows);
+        console.log("this is RRRRREEESSSULT",result.rows);
+      }
+    });
+  })
+});
+
+router.get('/getUserLoves', function(req,res){
+  pool.connect( function (err, client, done) {
+    client.query('SELECT users.name AS user_name, users.email AS user_email, ideas.title AS idea_title, subtopics.title AS subtopic_title FROM users JOIN ideas_loves ON ideas_loves.user_id = users.id JOIN ideas ON ideas.id = ideas_loves.idea_id JOIN subtopics ON subtopics.id = ideas.subtopics_id WHERE users.active = true AND subtopics.active = true;', function(err, result){
+      done();
+      if(err){
+        console.log('Error completing get user loves query', err);
+        res.sendStatus(500);
       } else {
         res.send(result.rows);
       }
@@ -503,4 +535,5 @@ router.put('/updateIdea/:id', function(req,res){
     });
   })
 });
+
 module.exports = router;
