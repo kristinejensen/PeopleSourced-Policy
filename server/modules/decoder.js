@@ -3,28 +3,12 @@ var pool = require('../modules/database-config');
 var admin = require("firebase-admin");
 // var logger = require('./logger');
 
-if(FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY){
-  admin.initializeApp({
-   credential: admin.credential.cert({
-       "type": process.env.FIREBASE_SERVICE_ACCOUNT_TYPE,
-       "project_id": process.env.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID,
-       "private_key_id": process.env.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY_ID,
-       "private_key": process.env.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY,
-       "client_email": process.env.FIREBASE_SERVICE_ACCOUNT_CLIENT_EMAIL,
-       "client_id": process.env.FIREBASE_SERVICE_ACCOUNT_CLIENT_ID,
-       "auth_uri": process.env.FIREBASE_SERVICE_ACCOUNT_AUTH_URI,
-       "token_uri": process.env.FIREBASE_SERVICE_ACCOUNT_TOKEN_URI,
-       "auth_provider_x509_cert_url": process.env.FIREBASE_SERVICE_ACCOUNT_AUTH_PROVIDER_CERT_URL,
-       "client_x509_cert_url": process.env.FIREBASE_SERVICE_ACCOUNT_CLIENT_CERT_URL
-   }),
-   databaseURL: "https://psp-group.firebaseio.com/", // replace this line with your URL
-  });
-}else{
-  admin.initializeApp({
-   credential: admin.credential.cert("./server/firebase-service-account.json"),
-   databaseURL: "https://psp-group.firebaseio.com/", // replace this line with your URL
-  });
-}
+
+admin.initializeApp({
+  credential: admin.credential.cert("./server/firebase-service-account.json"),
+  databaseURL: "https://psp-group.firebaseio.com/", // replace this line with your URL
+});
+
 
 /* This is where the magic happens. We pull the id_token off of the request,
 verify it against our firebase service account private_key.
@@ -63,12 +47,12 @@ var tokenDecoder = function (req, res, next) {
         });
       });
     })
-      .catch(function (error) {
-        // If the id_token isn't right, you end up in this callback function
-        // Here we are returning a forbidden error
-        console.error('User token could not be verified:', error);
-        res.sendStatus(403);
-      });
+    .catch(function (error) {
+      // If the id_token isn't right, you end up in this callback function
+      // Here we are returning a forbidden error
+      console.error('User token could not be verified:', error);
+      res.sendStatus(403);
+    });
   } else {
     // Seems to be hit when chrome makes request for map files
     // Will also be hit when user does not send back an idToken in the header
@@ -78,5 +62,5 @@ var tokenDecoder = function (req, res, next) {
 }
 
 module.exports = {
- token: tokenDecoder,
+  token: tokenDecoder,
 };
