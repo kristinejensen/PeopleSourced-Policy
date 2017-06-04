@@ -6,7 +6,6 @@ var admin = require("firebase-admin");
 if(FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY){
   admin.initializeApp({
    credential: admin.credential.cert({
-     {
        "type": process.env.FIREBASE_SERVICE_ACCOUNT_TYPE,
        "project_id": process.env.FIREBASE_SERVICE_ACCOUNT_PROJECT_ID,
        "private_key_id": process.env.FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY_ID,
@@ -17,7 +16,6 @@ if(FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY){
        "token_uri": process.env.FIREBASE_SERVICE_ACCOUNT_TOKEN_URI,
        "auth_provider_x509_cert_url": process.env.FIREBASE_SERVICE_ACCOUNT_AUTH_PROVIDER_CERT_URL,
        "client_x509_cert_url": process.env.FIREBASE_SERVICE_ACCOUNT_CLIENT_CERT_URL
-     }
    }),
    databaseURL: "https://psp-group.firebaseio.com/", // replace this line with your URL
   });
