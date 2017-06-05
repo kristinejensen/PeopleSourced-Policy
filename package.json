@@ -37,12 +37,7 @@
     "svg-assets-cache": "^1.0.0",
     "underscore": "^1.8.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chris-stanton/psp-group-project.git"
+  "engines": {
+    "node": "8.0.0"
   },
-  "bugs": {
-    "url": "https://github.com/chris-stanton/psp-group-project/issues"
-  },
-  "homepage": "https://github.com/chris-stanton/psp-group-project#readme"
 }
