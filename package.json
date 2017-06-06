@@ -4,7 +4,7 @@
   "description": "// Create an instance of Notyf var notyf = new Notyf();",
   "main": "web.js",
   "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/app.js",
   },
   "author": "PSP-Group from Prime Digital Academy",
   "license": "MIT",
