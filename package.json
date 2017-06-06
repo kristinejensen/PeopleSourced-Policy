@@ -45,4 +45,8 @@
     "url": "https://github.com/chris-stanton/psp-group-project/issues"
   },
   "homepage": "https://github.com/chris-stanton/psp-group-project#readme"
+  },
+  "engines:" {
+    "node": "8.0.0"
+  }
 }
