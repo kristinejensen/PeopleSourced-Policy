@@ -2,7 +2,7 @@
   "name": "nodefire-attempt2",
   "version": "1.0.0",
   "description": "// Create an instance of Notyf var notyf = new Notyf();",
-  "main": "index.js",
+  "main": "web.js",
   "scripts": {
     "start": "node server/app.js",
     "test": "nodemon server/app.js"
